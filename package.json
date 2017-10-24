@@ -4,7 +4,7 @@
   "description": "API for Gilgamech.",
   "repository": {
 	"type": "git",
-	"url": "https://github.com/Gilgamech/GilAPI/issues"
+	"url": "https://github.com/Gilgamech/GilAPI/issues",
 	"email": "GilAPI@Gilgamech.com"
   },
   "main": {
