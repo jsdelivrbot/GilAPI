@@ -1,0 +1,13 @@
+{
+  "name": "GilAPI",
+  "version": "0.0.1",
+  "description": ".travis.yml playground",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Gilgamech/GilAPI.git"
+  },
+  "dependencies": {
+  },
+  "scripts": {
+  }
+}
