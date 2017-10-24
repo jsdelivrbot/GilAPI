@@ -3,14 +3,13 @@
   "version": "0.0.1",
   "description": "API for Gilgamech.",
   "repository": {
-	"type": "git",
-	"url": "https://github.com/Gilgamech/GilAPI/issues",
-	"email": "GilAPI@Gilgamech.com"
+    "type": "git",
+    "url": "https://github.com/Gilgamech/GilAPI/issues",
+    "email": "GilAPI@Gilgamech.com"
   },
-  "main": "index.js"
-  "dependencies": {
-  },
+  "main": "index.js",
+  "dependencies": {},
   "scripts": {
     "start": "node ./index.js"
-  },
+  }
 }
