@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.2.6",
-  "description": "A sample Node.js app using Express 4",
+  "name": "GilAPI",
+  "version": "0.0.1",
+  "description": "API for Gilgamech, based on a sample Node.js app using Express 4",
   "engines": {
     "node": "6.11.1"
   },
@@ -20,7 +20,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/Gilgamech/GilAPI/issues",
+    "email": "GilAPI@Gilgamech.com"
   },
   "keywords": [
     "node",
