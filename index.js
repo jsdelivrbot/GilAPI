@@ -18,8 +18,8 @@ app.get('/port', function(request, response) {
 app.get('/fruitbot', function(request, response) {
   response.render('pages/fruitbot');
 });
-app.get('/arkdata', function(request, response) {
-  response.render('pages/arkdata');
+app.get('/Arkdata', function(request, response) {
+  response.render('pages/Arkdata');
 });
 
 app.listen(app.get('port'), function() {
