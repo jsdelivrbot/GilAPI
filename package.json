@@ -1,6 +1,6 @@
 {
   "name": "GilAPI",
-  "version": "0.0.1",
+  "version": "1.1.1",
   "description": "API for Gilgamech, based on a sample Node.js app using Express 4",
   "engines": {
     "node": "6.11.1"
