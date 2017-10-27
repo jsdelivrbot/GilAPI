@@ -35,6 +35,9 @@ app.get('/fruitbottie', function(request, response) {
   fruitbottie++
   response.json(fruitbottie);
 });
+app.get('/fruitbottie', function(request, response) {
+  response.json(fruitbotwin,fruitbotloss,fruitbottie);
+});
 
 app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
