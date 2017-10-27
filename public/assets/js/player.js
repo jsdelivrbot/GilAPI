@@ -97,15 +97,28 @@ var GamePlay = {
 				   console.log("You win!");
 				   console.log("You win!");
 				   console.log("You win!");
-				document.getElementById("wins").innerHTML = ((document.getElementById("wins").innerHTML++)+1);                   
+				//document.getElementById("wins").innerHTML = ((document.getElementById("wins").innerHTML++)+1);
+				    loadJSON("https://gil-api.herokuapp.com/fruitbotwin", function(response) {
+						var actual_JSON = JSON.parse(response);
+						document.getElementById("wins").innerHTML = actual_JSON
+					}); // end loadJSON
 				console.log("You win!");
                } //end if score
                if (score < 0) {
-				document.getElementById("losses").innerHTML = ((document.getElementById("losses").innerHTML++)+1);
+				//document.getElementById("losses").innerHTML = ((document.getElementById("losses").innerHTML++)+1);
+				    loadJSON("https://gil-api.herokuapp.com/fruitbotloss", function(response) {
+						var actual_JSON = JSON.parse(response);
+						document.getElementById("losses").innerHTML = actual_JSON
+					}); // end loadJSON
 				console.log("You lose!");
                } //end if score
                if (score == 0) {
-				document.getElementById("ties").innerHTML = ((document.getElementById("ties").innerHTML++)+1);
+				//document.getElementById("ties").innerHTML = ((document.getElementById("ties").innerHTML++)+1);
+					loadJSON("https://gil-api.herokuapp.com/fruitbottie", function(response) {
+						var actual_JSON = JSON.parse(response);
+						document.getElementById("ties").innerHTML = actual_JSON
+					}); // end loadJSON
+
 				console.log("You tie!");
                } //end if score
 			   GamePlay.init();
