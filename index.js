@@ -36,7 +36,7 @@ app.get('/fruitbottie', function(request, response) {
   response.json(fruitbottie);
 });
 app.get('/fruitbottotals', function(request, response) {
-  response.json([fruitbotwin,fruitbotloss,fruitbottie[);
+  response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
 app.get('/Arkdata', function(request, response) {
