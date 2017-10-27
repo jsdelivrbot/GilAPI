@@ -25,8 +25,7 @@ app.get('/fruitbot', function(request, response) {
 });
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
-  res.send('OK');
-  //response.send(fruitbotwin);
+  response.json(fruitbotwin);
 });
 app.get('/fruitbotloss', function(request, response) {
   fruitbotloss++
@@ -34,7 +33,7 @@ app.get('/fruitbotloss', function(request, response) {
 });
 app.get('/fruitbottie', function(request, response) {
   fruitbottie++
-  response.send('fruitbottie');
+  response.json(fruitbottie);
 });
 
 app.get('/Arkdata', function(request, response) {
