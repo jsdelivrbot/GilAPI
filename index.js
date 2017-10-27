@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
 
+fruitbotwin = 0
+fruitbotloss = 0
+fruitbottie = 0
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -15,9 +19,23 @@ app.get('/', function(request, response) {
 app.get('/port', function(request, response) {
   response.render('pages/port');
 });
+
 app.get('/fruitbot', function(request, response) {
   response.render('pages/fruitbot');
 });
+app.get('/fruitbotwin', function(request, response) {
+  fruitbotwin++
+  fruitbotwin
+});
+app.get('/fruitbotloss', function(request, response) {
+  fruitbotloss++
+  fruitbotloss
+});
+app.get('/fruitbottie', function(request, response) {
+  fruitbottie++
+  fruitbottie
+});
+
 app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
