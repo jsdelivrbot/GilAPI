@@ -35,7 +35,7 @@ app.get('/fruitbottie', function(request, response) {
   fruitbottie++
   response.json(fruitbottie);
 });
-app.get('/fruitbottie', function(request, response) {
+app.get('/fruitbottotals', function(request, response) {
   response.json(fruitbotwin,fruitbotloss,fruitbottie);
 });
 
