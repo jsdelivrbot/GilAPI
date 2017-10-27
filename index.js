@@ -25,15 +25,16 @@ app.get('/fruitbot', function(request, response) {
 });
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
-  response.send(fruitbotwin);
+  res.send('OK');
+  //response.send(fruitbotwin);
 });
 app.get('/fruitbotloss', function(request, response) {
   fruitbotloss++
-  response.send(fruitbotloss);
+  response.json(fruitbotloss);
 });
 app.get('/fruitbottie', function(request, response) {
   fruitbottie++
-  response.send(fruitbottie);
+  response.send('fruitbottie');
 });
 
 app.get('/Arkdata', function(request, response) {
