@@ -25,7 +25,7 @@ app.get('/fruitbot', function(request, response) {
 });
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
-  fruitbotwin
+  response.render(fruitbotwin);
 });
 app.get('/fruitbotloss', function(request, response) {
   fruitbotloss++
