@@ -23,6 +23,18 @@ test('responds to requests', (t) => {
       // Assert content checks
       t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1);
       t.notEqual(body.indexOf("Gilgamech Technologies"), -1);
-    });
-  });
-});
+    }); //end request
+    request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
+      // stop the server
+      child.kill();
+
+      // No error
+      t.false(error);
+      // Successful response
+      t.equal(response.statusCode, 200);
+      // Assert content checks
+      t.notEqual(body.indexOf("1"), -1);
+      t.notEqual(body.indexOf("1"), -1);
+    }); //end request
+  }); //end child
+}); //end test
