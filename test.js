@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(15);
+  t.plan(19);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -17,12 +17,12 @@ test('responds to requests', (t) => {
       //child.kill();
 
       // No error
-      t.false(error);
+      t.false(error); // test 1
       // Successful response
-      t.equal(response.statusCode, 200);
+      t.equal(response.statusCode, 200); // test 2
       // Assert content checks
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1);
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1);
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 3
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 4
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbot', (error, response, body) => {
@@ -30,12 +30,12 @@ test('responds to requests', (t) => {
       //child.kill();
 
       // No error
-      t.false(error);
+      t.false(error); // test 5
       // Successful response
-      //t.equal(response.statusCode, 200);
+      t.equal(response.statusCode, 200); // test 6
       // Assert content checks
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1);
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1);
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
@@ -43,11 +43,11 @@ test('responds to requests', (t) => {
       //child.kill();
 
       // No error
-      t.false(error);
+      t.false(error); // test 9
       // Successful response
-      //t.equal(response.statusCode, 200);
+      t.equal(response.statusCode, 200); // test 10
       // Assert content checks
-      t.notEqual(body.indexOf("1"), -1);
+      t.notEqual(body.indexOf("1"), -1); // test 11
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbotloss', (error, response, body) => {
@@ -55,11 +55,11 @@ test('responds to requests', (t) => {
       //child.kill();
 
       // No error
-      t.false(error);
+      t.false(error); // test 12
       // Successful response
-      //t.equal(response.statusCode, 200);
+      t.equal(response.statusCode, 200); // test 13
       // Assert content checks
-      t.notEqual(body.indexOf("1"), -1);
+      t.notEqual(body.indexOf("1"), -1); // test 14
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbottie', (error, response, body) => {
@@ -67,11 +67,11 @@ test('responds to requests', (t) => {
       //child.kill();
 
       // No error
-      t.false(error);
+      t.false(error); // test 15
       // Successful response
-      //t.equal(response.statusCode, 200);
+      t.equal(response.statusCode, 200); // test 16
       // Assert content checks
-      t.notEqual(body.indexOf("1"), -1);
+      t.notEqual(body.indexOf("1"), -1); // test 17
     }); //end request
 	
     request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
@@ -79,9 +79,9 @@ test('responds to requests', (t) => {
       child.kill();
 
       // No error
-      t.false(error);
+      t.false(error); // test 18
       // Successful response
-      t.equal(response.statusCode, 200);
+      t.equal(response.statusCode, 200); // test 19
       // Assert content checks
       //t.notEqual(body.indexOf("1"), -1);
     }); //end request
