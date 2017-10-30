@@ -86,6 +86,9 @@ var GamePlay = {
         GamePlay.drawPlayerTwo(ctx, Board.board);
         GamePlay.drawPlayerOne(ctx, Board.board);
         GamePlay.displayScore(ctx, Board.board);
+				//document.getElementById("wins").innerHTML = ((document.getElementById("wins").innerHTML++)+1);
+				//document.getElementById("ties").innerHTML = ((document.getElementById("ties").innerHTML++)+1);
+				//document.getElementById("losses").innerHTML = ((document.getElementById("losses").innerHTML++)+1);
         if (GamePlay.mode == "play") {
            var score = Board.checkGameOver();
 			var div = document.getElementById('fruitbottext');
@@ -97,28 +100,21 @@ var GamePlay = {
 				   console.log("You win!");
 				   console.log("You win!");
 				   console.log("You win!");
-				//document.getElementById("wins").innerHTML = ((document.getElementById("wins").innerHTML++)+1);
 				    loadJSON("https://gil-api.herokuapp.com/fruitbotwin", function(response) {
-						var actual_JSON = JSON.parse(response);
-						document.getElementById("wins").innerHTML = actual_JSON
+						document.getElementById("wins").innerHTML = JSON.parse(response);
 					}); // end loadJSON
 				console.log("You win!");
                } //end if score
                if (score < 0) {
-				//document.getElementById("losses").innerHTML = ((document.getElementById("losses").innerHTML++)+1);
 				    loadJSON("https://gil-api.herokuapp.com/fruitbotloss", function(response) {
-						var actual_JSON = JSON.parse(response);
-						document.getElementById("losses").innerHTML = actual_JSON
+						document.getElementById("losses").innerHTML = JSON.parse(response);
 					}); // end loadJSON
 				console.log("You lose!");
                } //end if score
                if (score == 0) {
-				//document.getElementById("ties").innerHTML = ((document.getElementById("ties").innerHTML++)+1);
 					loadJSON("https://gil-api.herokuapp.com/fruitbottie", function(response) {
-						var actual_JSON = JSON.parse(response);
-						document.getElementById("ties").innerHTML = actual_JSON
+						document.getElementById("ties").innerHTML = JSON.parse(response);
 					}); // end loadJSON
-
 				console.log("You tie!");
                } //end if score
 			   GamePlay.init();
