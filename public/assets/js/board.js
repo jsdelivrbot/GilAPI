@@ -9,7 +9,7 @@ var Board = {
 			var actual_JSON = JSON.parse(response);
 		}); // end loadJSON
 			document.getElementById("wins").innerHTML = actual_JSON[0]
-\			document.getElementById("losses").innerHTML = actual_JSON[1]
+			document.getElementById("losses").innerHTML = actual_JSON[1]
 			document.getElementById("ties").innerHTML = actual_JSON[2]
 		
 
