@@ -5,15 +5,12 @@ var Board = {
         Board.max_size = 15;
         Board.move_num = 0;
 		
-		loadJSON("https://gil-api.herokuapp.com/fruitbotwin", function(response) {
-			document.getElementById("wins").innerHTML = JSON.parse(response);
+		loadJSON("https://gil-api.herokuapp.com/fruitbottotals", function(response) {
+			var actual_JSON = JSON.parse(response);
 		}); // end loadJSON
-		loadJSON("https://gil-api.herokuapp.com/fruitbotloss", function(response) {
-			document.getElementById("losses").innerHTML = JSON.parse(response);
-		}); // end loadJSON
-		loadJSON("https://gil-api.herokuapp.com/fruitbottie", function(response) {
-			document.getElementById("ties").innerHTML = JSON.parse(response);
-		}); // end loadJSON
+			document.getElementById("wins").innerHTML = actual_JSON[0]
+\			document.getElementById("losses").innerHTML = actual_JSON[1]
+			document.getElementById("ties").innerHTML = actual_JSON[2]
 		
 
         if (typeof(localStorage) != 'undefined' ) {
