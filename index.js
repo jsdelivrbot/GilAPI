@@ -46,8 +46,8 @@ app.get('/fruitbottotals', function(request, response) {
   response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
-app.get('/fizzbuzz', function(request, response) {
-  outstring = fbnum
+app.get('/fizzbuzz/:fizzbuzznumber', function(request, response) {
+  outstring = fizzbuzznumber
   // if (!(outstring % 3)) {
   // }; //end if 15  
   response.json(outstring);
