@@ -1,12 +1,19 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
+app.set('port', (process.env.PORT || 5000));
+
+// Config body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Fruitbot scores
 fruitbotwin = 0
 fruitbotloss = 0
 fruitbottie = 0
 
-app.set('port', (process.env.PORT || 5000));
-
+// Comments are fundamental
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
@@ -37,6 +44,21 @@ app.get('/fruitbottie', function(request, response) {
 });
 app.get('/fruitbottotals', function(request, response) {
   response.json([fruitbotwin,fruitbotloss,fruitbottie]);
+});
+
+app.get('/fizzbuzz/:number', function(request, response) {
+  fbnum = request.params.number
+  outstring = ""
+  if (!(fbnum % 3)) {
+    outstring += ("Fizz" * [int](fbnum/3))
+  } 
+  if (!(fbnum % 5)) {
+    outstring += ("Buzz" * [int](fbnum/5))
+  } 
+  if (!(outstring)) {
+    outstring = fbnum
+  }; #end if 15  
+  response.json(outstring);
 });
 
 app.get('/Arkdata', function(request, response) {
