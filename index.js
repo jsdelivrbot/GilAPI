@@ -48,16 +48,12 @@ app.get('/fruitbottotals', function(request, response) {
 
 app.get('/fizzbuzz/:number', function(request, response) {
   fbnum = request.params.number
-  outstring = ""
   if (!(fbnum % 3)) {
-    outstring += ("Fizz" * [int](fbnum/3))
+    outstring = "Fizz"
   } 
   if (!(fbnum % 5)) {
-    outstring += ("Buzz" * [int](fbnum/5))
+    outstring = "Buzz"
   } 
-  if (!(outstring)) {
-    outstring = fbnum
-  }; #end if 15  
   response.json(outstring);
 });
 
