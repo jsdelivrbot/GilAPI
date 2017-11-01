@@ -47,7 +47,11 @@ app.get('/fruitbottotals', function(request, response) {
 });
 
 app.get('/fizzbuzz', function(request, response) {
-  response.json([fruitbotwin,fruitbotloss,fruitbottie]);
+  outstring = fbnum
+  // if (!(outstring % 3)) {
+  // }; //end if 15  
+  response.json(outstring);
+  // response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
 app.get('/Arkdata', function(request, response) {
