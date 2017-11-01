@@ -16,11 +16,8 @@ test('responds to requests', (t) => {
       // stop the server
       //child.kill();
 
-      // No error
       t.false(error); // test 1
-      // Successful response
       t.equal(response.statusCode, 200); // test 2
-      // Assert content checks
       t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 3
       t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 4
     }); //end request
@@ -29,11 +26,8 @@ test('responds to requests', (t) => {
       // stop the server
       //child.kill();
 
-      // No error
       t.false(error); // test 5
-      // Successful response
       t.equal(response.statusCode, 200); // test 6
-      // Assert content checks
       t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
       t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
     }); //end request
@@ -42,11 +36,8 @@ test('responds to requests', (t) => {
       // stop the server
       //child.kill();
 
-      // No error
       t.false(error); // test 9
-      // Successful response
       t.equal(response.statusCode, 200); // test 10
-      // Assert content checks
       t.notEqual(body.indexOf("1"), -1); // test 11
     }); //end request
 	
@@ -54,11 +45,8 @@ test('responds to requests', (t) => {
       // stop the server
       //child.kill();
 
-      // No error
       t.false(error); // test 12
-      // Successful response
       t.equal(response.statusCode, 200); // test 13
-      // Assert content checks
       t.notEqual(body.indexOf("1"), -1); // test 14
     }); //end request
 	
@@ -66,11 +54,8 @@ test('responds to requests', (t) => {
       // stop the server
       //child.kill();
 
-      // No error
       t.false(error); // test 15
-      // Successful response
       t.equal(response.statusCode, 200); // test 16
-      // Assert content checks
       t.notEqual(body.indexOf("1"), -1); // test 17
     }); //end request
 	
@@ -78,11 +63,8 @@ test('responds to requests', (t) => {
       // stop the server
       child.kill();
 
-      // No error
       t.false(error); // test 18
-      // Successful response
       t.equal(response.statusCode, 200); // test 19
-      // Assert content checks
       //t.notEqual(body.indexOf("1"), -1);
     }); //end request
 	

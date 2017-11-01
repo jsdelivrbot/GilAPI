@@ -46,16 +46,8 @@ app.get('/fruitbottotals', function(request, response) {
   response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
-app.get('/fizzbuzz/:number', function(request, response) {
-  fbnum = request.params.number
-  //if (!(fbnum % 3)) {
-    //outstring = "Fizz"
-  //} 
-  //if (!(fbnum % 5)) {
-    //outstring = "Buzz"
-  //} 
-  //response.json(outstring);
-  response.json(fbnum);
+app.get('/fizzbuzz', function(request, response) {
+  response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
 app.get('/Arkdata', function(request, response) {
