@@ -47,6 +47,7 @@ app.get('/fruitbottotals', function(request, response) {
 });
 
 app.get('/fizzbuzz/:fizzbuzznumber', function(request, response) {
+  fizzbuzznumber = request.params.fizzbuzznumber
   outstring = fizzbuzznumber
   // if (!(outstring % 3)) {
   // }; //end if 15  
