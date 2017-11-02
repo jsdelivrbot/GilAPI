@@ -46,8 +46,8 @@ app.get('/fruitbottotals', function(request, response) {
   response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
-app.get('/fizzbuzz/:fizzbuzznumber', function(request, response) {
-  fizzbuzznumber = request.params.fizzbuzznumber
+app.get('/fizzbuzz', function(request, response) {
+  fizzbuzznumber = request.query.n
   outstring = fizzbuzznumber
   if (!(outstring % 3)) {
   outstring = "Fizz"
@@ -59,7 +59,7 @@ app.get('/fizzbuzz/:fizzbuzznumber', function(request, response) {
 });
 
 app.get('/nfs', function(request, response) {
-  outstring = "app.get('/nfs', function(request, response) { \r\n response.json(outstring); \r\n }); "
+  outstring = "app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); "
   response.json(outstring);
 });
 
@@ -76,7 +76,7 @@ app.get('/nfs', function(request, response) {
 app.get('/newappget', function(request, response) {
   functionName = req.query.name
   functionParams = req.query.params
-  response.send("app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); ");
+  response.send("app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; ");
 });
 
 app.get('/Arkdata', function(request, response) {
