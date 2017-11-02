@@ -67,6 +67,18 @@ app.get('/test', function(request, response) {
   response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
 });
 
+app.get('/nfs', function(request, response) {
+  functionName = req.query.name
+  functionParams = req.query.params
+  response.send("function " + functionName + "(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; ");
+});
+
+app.get('/newappget', function(request, response) {
+  functionName = req.query.name
+  functionParams = req.query.params
+  response.send("app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); ");
+});
+
 app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
