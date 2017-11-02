@@ -58,11 +58,6 @@ app.get('/fizzbuzz', function(request, response) {
   response.json(outstring);
 });
 
-app.get('/nfs', function(request, response) {
-  outstring = "app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); "
-  response.json(outstring);
-});
-
 app.get('/test', function(request, response) {
   response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
 });
@@ -70,13 +65,15 @@ app.get('/test', function(request, response) {
 app.get('/nfs', function(request, response) {
   functionName = req.query.name
   functionParams = req.query.params
-  response.send("function " + functionName + "(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; ");
+  nfsreturn = "function " + functionName + "(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
+  response.send(nfsreturn);
 });
 
 app.get('/newappget', function(request, response) {
   functionName = req.query.name
   functionParams = req.query.params
-  response.send("app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; ");
+  newappgetreturn = "app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
+  response.send(newappgetreturn);
 });
 
 app.get('/Arkdata', function(request, response) {
