@@ -63,6 +63,10 @@ app.get('/nfs', function(request, response) {
   response.json(outstring);
 });
 
+app.get('/test', function(request, response) {
+  response.send('pages/Arkdata');
+});
+
 app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
