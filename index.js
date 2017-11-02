@@ -64,7 +64,7 @@ app.get('/nfs', function(request, response) {
 });
 
 app.get('/test', function(request, response) {
-  response.send("app.get('/nfs', function(request, response) { \r\n response.json(outstring); \r\n }); ");
+  response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
 });
 
 app.get('/Arkdata', function(request, response) {
