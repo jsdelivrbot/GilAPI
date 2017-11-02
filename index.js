@@ -63,15 +63,15 @@ app.get('/test', function(request, response) {
 });
 
 app.get('/nfs', function(request, response) {
-  functionName = req.query.name
-  functionParams = req.query.params
+  functionName = request.query.name
+  functionParams = request.query.params
   nfsreturn = "function " + functionName + "(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
   response.send(nfsreturn);
 });
 
 app.get('/newappget', function(request, response) {
-  functionName = req.query.name
-  functionParams = req.query.params
+  functionName = request.query.name
+  functionParams = request.query.params
   newappgetreturn = "app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
   response.send(newappgetreturn);
 });
