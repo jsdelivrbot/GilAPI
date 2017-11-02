@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(19);
+  t.plan(21);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -59,12 +59,21 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf("1"), -1); // test 17
     }); //end request
 	
+    request('http://127.0.0.1:5000/demo', (error, response, body) => {
+      // stop the server
+      //child.kill();
+
+      t.false(error); // test 18
+      t.equal(response.statusCode, 200); // test 19
+      // t.notEqual(body.indexOf("1"), -1); // test 
+    }); //end request
+	
     request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
       // stop the server
       child.kill();
 
-      t.false(error); // test 18
-      t.equal(response.statusCode, 200); // test 19
+      t.false(error); // test 20
+      t.equal(response.statusCode, 200); // test 21
       //t.notEqual(body.indexOf("1"), -1);
     }); //end request
 	
