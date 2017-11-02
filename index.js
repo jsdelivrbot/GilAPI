@@ -51,12 +51,16 @@ app.get('/fizzbuzz/:fizzbuzznumber', function(request, response) {
   outstring = fizzbuzznumber
   if (!(outstring % 3)) {
   outstring = "Fizz"
-  }; //end if 15  
+  }; //end if 3  
   if (!(outstring % 5)) {
   outstring = "Buzz"
-  }; //end if 15  
+  }; //end if 5  
   response.json(outstring);
-  // response.json([fruitbotwin,fruitbotloss,fruitbottie]);
+});
+
+app.get('/nfs', function(request, response) {
+  outstring = "app.get('/nfs', function(request, response) { \r\n response.json(outstring); \r\n }); "
+  response.json(outstring);
 });
 
 app.get('/Arkdata', function(request, response) {
