@@ -14,6 +14,21 @@ First Name: <input type = "text" name = "first_name">  <br>
 Last Name: <input type = "text" name = "last_name">
 <input type = "submit" value = "Submit">
 </form>
+<form action="#" method="post" class="demoForm" id="demoForm">
+    <fieldset>
+        <legend>Demo: Get Value Onclick</legend>
+    
+    <p>Select your size:&nbsp;
+        <label><input type="radio" name="size" value="5" /> Small</label>
+        <label><input type="radio" name="size" value="8" checked="checked" /> Medium</label>
+        <label><input type="radio" name="size" value="12" /> Large</label>
+    </p>
+    
+    <p>
+        <label>Total: $ <input type="text" name="total" class="num" value="8" readonly="readonly" /></label>
+    </p>
+    </fieldset>
+</form>
 
   <% include ../partials/footer.ejs %>
 </body>
