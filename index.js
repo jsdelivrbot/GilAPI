@@ -63,6 +63,16 @@ app.get('/test', function(request, response) {
 });
 
 app.get('/nfs', function(request, response) {
+  functionType = request.query.type
+  functionName = request.query.name
+  functionParams = request.query.params
+  nfsreturn = functionType + " (" + functionName + ") { <br> " + functionParams + "; <br> }; "
+  "if (!(fizzbuzznumber % 3)) { <br> outstring = 'Fizz' <br> }; //end if 3 " 
+
+  response.send(nfsreturn);
+});
+
+app.get('/newfunction', function(request, response) {
   functionName = request.query.name
   functionParams = request.query.params
   nfsreturn = "function " + functionName + "(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
