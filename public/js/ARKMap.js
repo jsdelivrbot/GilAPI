@@ -4,6 +4,9 @@
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 
+document.getElementById("txtJob").value = "Hello World!"
+// var jobValue = document.getElementsByName('txtJob')[0].value 
+
 canvas.width  = window.innerWidth;
 //canvas.width = 600;
 // console.log(bgImage.width);
