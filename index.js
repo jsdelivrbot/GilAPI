@@ -49,11 +49,11 @@ app.get('/fruitbottotals', function(request, response) {
 app.get('/fizzbuzz', function(request, response) {
   fizzbuzznumber = request.query.n
   outstring = fizzbuzznumber
-  if (!(outstring % 3)) {
-  outstring = "Fizz"
+  if (!(fizzbuzznumber % 3)) {
+    outstring = "Fizz"
   }; //end if 3  
-  if (!(outstring % 5)) {
-  outstring = "Buzz"
+  if (!(fizzbuzznumber % 5)) {
+    outstring = "Buzz"
   }; //end if 5  
   response.json(outstring);
 });
@@ -70,9 +70,10 @@ app.get('/nfs', function(request, response) {
 });
 
 app.get('/newappget', function(request, response) {
-  functionName = request.query.name
+  newAppName = request.query.name
   functionParams = request.query.params
-  newappgetreturn = "app.get('/newappget', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
+  newappgetreturn = "index.js <br> app.get('/" + newAppName + "', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> };  <br>  <br> test.js  <br> request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => {  <br>  t.false(error); <br> t.equal(response.statusCode, 200);  <br> t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  <br> t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  <br> });"
+
   response.send(newappgetreturn);
 });
 
