@@ -70,11 +70,11 @@ app.get('/nfs', function(request, response) {
   OpenParens = "("
   CloseParens = ")"
   LineBreak = "<br>"
-  OpenCurlBracket = "}"
-  CloseCurlBracket = "{"
+  OpenCurlBracket = "{"
+  CloseCurlBracket = "}"
   SemiColon = ";"
   EndComment = "//end"
-  nfsreturn = functionType + spaceChar + OpenParens + functionName + CloseParens + spaceChar + OpenCurlBracket + LineBreak + functionParams + SemiColon + LineBreak + CloseCurlBracket + SemiColon + spaceChar + EndComment + spaceChar + functionType + functionName
+  nfsreturn = functionType + spaceChar + OpenParens + functionName + CloseParens + spaceChar + OpenCurlBracket + LineBreak + functionParams + SemiColon + LineBreak + CloseCurlBracket + SemiColon + spaceChar + EndComment + spaceChar + functionType + spaceChar + functionName
   // "if (!(fizzbuzznumber % 3)) { <br> outstring = 'Fizz' <br> }; //end if 3 " 
 
   response.send(nfsreturn);
