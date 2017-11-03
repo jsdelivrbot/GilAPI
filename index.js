@@ -89,7 +89,7 @@ app.get('/newfunction', function(request, response) {
 
 app.get('/newappget', function(request, response) {
   newAppName = request.query.name
-  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render('pages/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\n    request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n      t.false(error); \r\n      t.equal(response.statusCode, 200);  \r\n      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n    });"
+  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render('pages/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
 
   response.send(newappgetreturn);
 });
@@ -104,8 +104,8 @@ app.get('/demo', function(request, response) {
 
 app.get('/process_get', function (request, response) {
    res = {
-      first_name:req.query.first_name,
-      last_name:req.query.last_name
+      first_name:request.query.first_name,
+      last_name:request.query.last_name
    };
    response.end(JSON.stringify(res));
 })
