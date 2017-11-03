@@ -102,10 +102,10 @@ app.get('/demo', function(request, response) {
   response.render('pages/demo');
 });
 
-app.get('/textarea', function (request, response) { 
-  response.render('pages/textarea'); 
-};  
- 
+app.get('/textarea', function(request, response) {
+  response.render('pages/textarea');
+});
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
