@@ -91,7 +91,7 @@ app.get('/newappget', function(request, response) {
   newAppName = request.query.name
   newappgetreturn = "index.js <br> app.get('/" + newAppName + "', function (request, response) { <br> response.render('pages/" + newAppName + "'); <br> };  <br>  <br> test.js  <br> request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => {  <br>  t.false(error); <br> t.equal(response.statusCode, 200);  <br> t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  <br> t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  <br> });"
 
-  response.json(newappgetreturn);
+  response.send(newappgetreturn);
 });
 
 app.get('/Arkdata', function(request, response) {
