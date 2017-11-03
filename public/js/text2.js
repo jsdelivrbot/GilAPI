@@ -1,14 +1,4 @@
 
-// get list of radio buttons with name 'size'
-var sz = document.forms['demoForm'].elements['size'];
-
-// loop through list
-for (var i=0, len=sz.length; i<len; i++) {
-    sz[i].onclick = function() { // assign onclick handler function to each
-        // put clicked radio button's value in total field
-        this.form.elements.total.value = this.value;
-    };
-}
 
 // Load JSON
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
@@ -30,3 +20,10 @@ loadJSON("https://gil-api.herokuapp.com/newappget?name=test", function(response)
   document.getElementById("txtJob").value = response //actual_JSON
 }); // end loadJSON
 
+function updateForm(nfstype) {
+	nfsurl = "https://gil-api.herokuapp.com/newappget?name=" + nfstype
+loadJSON(nfsurl, function(response) {
+  document.getElementById("txtJob").value = response //actual_JSON
+}); // end loadJSON
+	
+}; // end updateForm
