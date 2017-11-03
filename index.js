@@ -107,7 +107,13 @@ app.get('/process_get', function (request, response) {
       first_name:request.query.first_name,
       last_name:request.query.last_name
    };
-   response.end(JSON.stringify(res));
+  first_name_query = request.query.first_name,
+  last_name_query = request.query.last_name
+  if (first_name_query == "Hello") {
+    response.render('pages/Arkdata');
+  } else {
+    response.end(JSON.stringify(res));
+  }; //end if first_name
 })
 
 app.get('/text2', function(request, response) {
