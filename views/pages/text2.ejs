@@ -7,8 +7,13 @@
 <body>
   <% include ../partials/nav.ejs %>
 <script src="/js/text2.js" Content-Type="text/javascript" charset="UTF-8"></script>
-<textarea id="txtJob" cols="40" rows="5" value="software engineer"></textarea>
+<textarea id="txtJob" cols="40" rows="25" value="Code goes here."></textarea>
 
+<form action = "/process_get" method = "GET">
+First Name: <input type = "text" name = "first_name">  <br>
+Last Name: <input type = "text" name = "last_name">
+<input type = "submit" value = "Submit">
+</form>
 
   <% include ../partials/footer.ejs %>
 </body>
