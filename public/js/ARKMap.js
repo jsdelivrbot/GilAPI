@@ -4,8 +4,6 @@
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 
-document.getElementById("txtJob").value = "Hello World!"
-// var jobValue = document.getElementsByName('txtJob')[0].value 
 
 canvas.width  = window.innerWidth;
 //canvas.width = 600;
@@ -85,6 +83,17 @@ function loadJSON(file, callback) {
 // Load...stuff?
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 function loadARKMap() {
+	
+	// document.getElementById("txtJob").value = "Hello World!"
+	// var jobValue = document.getElementsByName('txtJob')[0].value 
+
+    
+    loadJSON("https://gil-api.herokuapp.com/newappget?name=test", function(response) {
+    // loadJSON("http://gilgamech.com:65530/?API=map", function(response) {
+  
+        var actual_JSON = JSON.parse(response);
+		document.getElementById("txtJob").value = actual_JSON
+    }); // end loadJSON
     
     loadJSON("http://gilgamech.com/ARKData/ARKMap.json", function(response) {
     // loadJSON("http://gilgamech.com:65530/?API=map", function(response) {
