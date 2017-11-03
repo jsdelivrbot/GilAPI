@@ -49,10 +49,10 @@ test('responds to requests', (t) => {
       t.equal(response.statusCode, 200); // test 19
     }); //end request
 	
-    request('http://127.0.0.1:5000/newappget?name=test&params=testing', (error, response, body) => {
+    request('http://127.0.0.1:5000/newappget?name=test', (error, response, body) => {
       t.false(error); // test 20
       t.equal(response.statusCode, 200); // test 21
-      t.notEqual(body.indexOf("app.get('/test', function(testing) { "), -1); // test 22
+      t.notEqual(body.indexOf("app.get('/test', function () { "), -1); // test 22
     }); //end request
 	
     request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
