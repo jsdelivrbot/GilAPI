@@ -89,8 +89,7 @@ app.get('/newfunction', function(request, response) {
 
 app.get('/newappget', function(request, response) {
   newAppName = request.query.name
-  functionParams = request.query.params
-  newappgetreturn = "index.js <br> app.get('/" + newAppName + "', function(" + functionParams + ") { <br> response.render('pages/" + newAppName + "'); <br> };  <br>  <br> test.js  <br> request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => {  <br>  t.false(error); <br> t.equal(response.statusCode, 200);  <br> t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  <br> t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  <br> });"
+  newappgetreturn = "index.js <br> app.get('/" + newAppName + "', function () { <br> response.render('pages/" + newAppName + "'); <br> };  <br>  <br> test.js  <br> request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => {  <br>  t.false(error); <br> t.equal(response.statusCode, 200);  <br> t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  <br> t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  <br> });"
 
   response.send(newappgetreturn);
 });
