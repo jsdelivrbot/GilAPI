@@ -84,19 +84,13 @@ function loadJSON(file, callback) {
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 function loadARKMap() {
 	
-	// document.getElementById("txtJob").value = "Hello World!"
-	// var jobValue = document.getElementsByName('txtJob')[0].value 
-
-    
-    loadJSON("https://gil-api.herokuapp.com/newappget?name=test", function(response) {
-    // loadJSON("http://gilgamech.com:65530/?API=map", function(response) {
-  
-        // var actual_JSON = JSON.parse(response);
-		document.getElementById("txtJob").value = response //actual_JSON
-    }); // end loadJSON
+    request('https://gil-api.herokuapp.com/newappget?name=test', function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			document.getElementById("txtJob").value = body //actual_JSON
+		 }
+	})
     
     loadJSON("http://gilgamech.com/ARKData/ARKMap.json", function(response) {
-    // loadJSON("http://gilgamech.com:65530/?API=map", function(response) {
   
         var actual_JSON = JSON.parse(response);
 		ARKMapJSON = actual_JSON
