@@ -98,10 +98,6 @@ app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
 
-app.get('/textarea', function (request, response) { 
-  response.render('pages/textarea'); 
-};  
- 
 app.get('/demo', function(request, response) {
   response.render('pages/demo');
 });

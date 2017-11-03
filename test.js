@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(28);
+  t.plan(24);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -55,13 +55,7 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf("app.get('/test', function (request, response) { "), -1); // test 22
     }); //end request
 	
-    request('http://127.0.0.1:5000/textarea', (error, response, body) => { 
-      t.false(error); 
-      t.equal(response.statusCode, 200);  
-      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  
-      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  
-    });
-      request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
+    request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
       // stop the server
       child.kill();
 
