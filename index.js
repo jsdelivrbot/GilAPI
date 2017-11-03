@@ -66,8 +66,16 @@ app.get('/nfs', function(request, response) {
   functionType = request.query.type
   functionName = request.query.name
   functionParams = request.query.params
-  nfsreturn = functionType + " (" + functionName + ") { <br> " + functionParams + "; <br> }; "
-  "if (!(fizzbuzznumber % 3)) { <br> outstring = 'Fizz' <br> }; //end if 3 " 
+  spaceChar = " "
+  OpenParens = "("
+  CloseParens = ")"
+  LineBreak = "<br>"
+  OpenCurlBracket = "}"
+  CloseCurlBracket = "{"
+  SemiColon = ";"
+  EndComment = "//end"
+  nfsreturn = functionType + spaceChar + OpenParens + functionName + CloseParens + spaceChar + OpenCurlBracket + LineBreak + functionParams + SemiColon + LineBreak + CloseCurlBracket + SemiColon + spaceChar + EndComment + spaceChar + functionType + functionName
+  // "if (!(fizzbuzznumber % 3)) { <br> outstring = 'Fizz' <br> }; //end if 3 " 
 
   response.send(nfsreturn);
 });
