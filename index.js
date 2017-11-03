@@ -89,7 +89,7 @@ app.get('/newfunction', function(request, response) {
 
 app.get('/newappget', function(request, response) {
   newAppName = request.query.name
-  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function (request, response) { \r\n  response.render('pages/" + newAppName + "'); \r\n};  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
+  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render('pages/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
 
   response.send(newappgetreturn);
 });
@@ -102,8 +102,8 @@ app.get('/demo', function(request, response) {
   response.render('pages/demo');
 });
 
-app.get('/textarea', function(request, response) {
-  response.render('pages/textarea');
+app.get('/text2', function(request, response) {
+  response.render('pages/text2');
 });
 
 app.listen(app.get('port'), function() {
