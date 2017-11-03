@@ -1,6 +1,8 @@
 var express = require('express');
 // var bodyParser = require('body-parser');
 var app = express();
+var hellobot = require('./hellobot');
+var dicebot = require('./dicebot');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -57,6 +59,12 @@ app.get('/fizzbuzz', function(request, response) {
   }; //end if 5  
   response.json(outstring);
 });
+
+// hellobot
+app.post('/hello', hellobot);
+
+// dicebot
+app.post('/roll', dicebot);
 
 app.get('/test', function(request, response) {
   response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
