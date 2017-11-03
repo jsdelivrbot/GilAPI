@@ -75,8 +75,8 @@ app.get('/nfs', function(request, response) {
   SemiColon = ";"
   EndComment = "//end"
   nfsreturn = functionType + spaceChar + OpenParens + functionName + CloseParens + spaceChar + OpenCurlBracket + LineBreak + functionParams + SemiColon + LineBreak + CloseCurlBracket + SemiColon + spaceChar + EndComment + spaceChar + functionType + spaceChar + functionName
-  // "if (!(fizzbuzznumber % 3)) { <br> outstring = 'Fizz' <br> }; //end if 3 " 
-
+  // https://gil-api.herokuapp.com/nfs?type=if&name=fizzbuzznumber&params=outstring%20=%20%27Fizz%27
+  // "if (fizzbuzznumber) { <br> outstring = 'Fizz' <br> }; //end if fizzbuzznumber " 
   response.send(nfsreturn);
 });
 
@@ -90,7 +90,7 @@ app.get('/newfunction', function(request, response) {
 app.get('/newappget', function(request, response) {
   newAppName = request.query.name
   functionParams = request.query.params
-  newappgetreturn = "index.js <br> app.get('/" + newAppName + "', function(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> };  <br>  <br> test.js  <br> request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => {  <br>  t.false(error); <br> t.equal(response.statusCode, 200);  <br> t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  <br> t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  <br> });"
+  newappgetreturn = "index.js <br> app.get('/" + newAppName + "', function(" + functionParams + ") { <br> response.render('pages/" + newAppName + "'); <br> };  <br>  <br> test.js  <br> request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => {  <br>  t.false(error); <br> t.equal(response.statusCode, 200);  <br> t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  <br> t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  <br> });"
 
   response.send(newappgetreturn);
 });
