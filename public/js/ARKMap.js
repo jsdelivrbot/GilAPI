@@ -91,8 +91,8 @@ function loadARKMap() {
     loadJSON("https://gil-api.herokuapp.com/newappget?name=test", function(response) {
     // loadJSON("http://gilgamech.com:65530/?API=map", function(response) {
   
-        var actual_JSON = JSON.parse(response);
-		document.getElementById("txtJob").value = actual_JSON
+        // var actual_JSON = JSON.parse(response);
+		document.getElementById("txtJob").value = response //actual_JSON
     }); // end loadJSON
     
     loadJSON("http://gilgamech.com/ARKData/ARKMap.json", function(response) {
