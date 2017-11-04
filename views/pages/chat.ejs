@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+<script src="/js/chat.js" Content-Type="text/javascript" charset="UTF-8"></script>
+  <br>
+  <br>
+  User Name: <input type = "text" id = "chatUser"> <br>
+  <br>
+  File Name: <input type = "text" id = "chatMessage" onchange="updateChat()"> <br>
+
+<div id="chatRoomName">General</div> Chat<br>
+<textarea id="chatMainBox" cols="400" rows="100" value="Chat goes here.">Chat goes here.</textarea> <br>
+
+
+  <% include ../partials/footer.ejs %>
+</body>
+</html>

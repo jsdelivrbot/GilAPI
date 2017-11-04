@@ -3,6 +3,7 @@ var cookieParser = require('cookie-parser')
  
 // var bodyParser = require('body-parser');
 var app = express();
+var chatGeneral = ""
 
 app.use(cookieParser())
 app.set('port', (process.env.PORT || 5000));
@@ -29,6 +30,21 @@ app.get('/', function(request, response) {
 app.get('/port', function(request, response) {
   response.render('pages/port');
 });
+
+app.get('/chat', function(request, response) { 
+  response.render('pages/chat'); 
+});  
+
+app.get('/chatpost', function(request, response) { 
+// /chatpost?user=user&message=message&chatroom=General
+  chatMessage = request.query.message
+  chatUser = request.query.user
+  chatRoom = request.query.chatroom
+
+  chatGeneral = chatGeneral + chatUser + ": " + chatMessage + "\r\n"
+  
+  response.send(chatGeneral);
+});  
 
 app.get('/fruitbot', function(request, response) {
   response.render('pages/fruitbot');
