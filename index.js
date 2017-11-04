@@ -104,15 +104,15 @@ app.get('/demo', function(request, response) {
 
 app.get('/login', function (request, response) {
    res = {
-      userName:request.query.userName,
+      gilPass:request.query.gilPass,
       last_name:request.query.userPassword
    };
-  userName_query = request.query.userName,
+  gilPass_query = request.query.gilPass,
   userPassword_query = request.query.userPassword
   if (userPassword_query == "Hello") {
     response.render('pages/Arkdata');
   } else {
-    response.end(JSON.stringify(res));
+    response.render('pages/demo');
   }; //end if first_name
 })
 
