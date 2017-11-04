@@ -17,8 +17,8 @@ function loadJSON(file, callback) {
 };// end loadJSON
 
 function updateGitPage() {
-  gitFileName = document.getElementById(gitFileName).value
-  gitRepoUrl = document.getElementById(gitRepoUrl).value + "/" + gitFileName
+  gitFileName = document.getElementById("gitFileName").value
+  gitRepoUrl = document.getElementById("gitRepoUrl").value + "/" + gitFileName
   loadJSON(nfsurl, function(response) {
     document.getElementById(gitFileTextArea).value = response //actual_JSON
   }); // end loadJSON
