@@ -16,9 +16,12 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
-function updateChat(chatUser, chatMessage, chatRoom) {
+function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
   // Post API with user:chat JSON and write reply to textbox.
+  chatUser = document.getElementById("chatUser").value
+  chatMessage = document.getElementById("chatMessage").value
+  chatRoom = document.getElementById("chatRoom").value
   chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
   document.getElementById("chatRoomName").value = chatRoom
   loadJSON(chatUrl, function(response) {
