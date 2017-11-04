@@ -17,7 +17,8 @@ function loadJSON(file, callback) {
 };// end loadJSON
 
 function updateForm(nfsCall, nfsName, nfsTextArea) {
-  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName
+  nfsInput = document.getElementById(nfsName).value
+  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
   loadJSON(nfsurl, function(response) {
     document.getElementById(nfsTextArea).value = response //actual_JSON
   }); // end loadJSON

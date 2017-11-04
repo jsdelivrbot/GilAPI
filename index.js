@@ -69,7 +69,7 @@ app.get('/nfs', function(request, response) {
   spaceChar = " "
   OpenParens = "("
   CloseParens = ")"
-  LineBreak = "<br>"
+  LineBreak = "\r\n"
   OpenCurlBracket = "{"
   CloseCurlBracket = "}"
   SemiColon = ";"
@@ -83,7 +83,7 @@ app.get('/nfs', function(request, response) {
 app.get('/newfunction', function(request, response) {
   functionName = request.query.name
   functionParams = request.query.params
-  nfsreturn = "function " + functionName + "(" + functionParams + ") { <br> response.json(" + functionParams + "); <br> }; "
+  nfsreturn = "function " + functionName + "(" + functionParams + ") { \r\n  response.json(" + functionParams + "); \r\n}; "
   response.send(nfsreturn);
 });
 
