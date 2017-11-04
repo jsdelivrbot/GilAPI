@@ -22,7 +22,7 @@ function updateGitPage() {
   if (gitFileName) {
     res.cookie('gitFileName',gitFileName, { maxAge: 900000, httpOnly: true });
   } else {
-    gitFileName = req.cookies.gitFileName
+    gitFileName = request.cookies.gitFileName
     gitFileName = document.getElementById("gitFileName").value
   }; //end if gitFileName
   gitFileName = document.getElementById("gitFileNameItem").value
