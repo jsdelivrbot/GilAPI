@@ -19,7 +19,7 @@ function loadJSON(file, callback) {
 function updateGitPage() {
   gitFileName = document.getElementById("gitFileName").value
   gitRepoUrl = document.getElementById("gitRepoUrl").value + "/" + gitFileName
-  loadJSON(nfsurl, function(response) {
+  loadJSON(gitRepoUrl, function(response) {
     document.getElementById(gitFileTextArea).value = response //actual_JSON
   }); // end loadJSON
 }; // end updateForm
