@@ -102,14 +102,14 @@ app.get('/demo', function(request, response) {
   response.render('pages/demo');
 });
 
-app.get('/process_get', function (request, response) {
+app.get('/login', function (request, response) {
    res = {
-      first_name:request.query.first_name,
-      last_name:request.query.last_name
+      userName:request.query.userName,
+      last_name:request.query.userPassword
    };
-  first_name_query = request.query.first_name,
-  last_name_query = request.query.last_name
-  if (first_name_query == "Hello") {
+  userName_query = request.query.userName,
+  userPassword_query = request.query.userPassword
+  if (userPassword_query == "Hello") {
     response.render('pages/Arkdata');
   } else {
     response.end(JSON.stringify(res));

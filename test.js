@@ -55,7 +55,7 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 22
     }); //end request
 	
-    request('http://127.0.0.1:5000/process_get', (error, response, body) => { 
+    request('http://127.0.0.1:5000/login', (error, response, body) => { 
       t.false(error);  // test 23
       t.equal(response.statusCode, 200);   // test 24
     });
