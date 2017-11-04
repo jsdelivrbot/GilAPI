@@ -25,8 +25,8 @@ function updateForm(nfsCall, nfsName, nfsTextArea) {
 }; // end updateForm
 
 function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
-  nfsName = document.getElementById(NFSpageName).value
-  nfsParams = document.getElementById(NFSInput).value
+  nfsName = document.getElementById("NFSpageName").value
+  nfsParams = document.getElementById("NFSInput").value
   nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName + "&params=" + nfsParams + "&type=" + nfsType
   loadJSON(nfsurl, function(response) {
     document.getElementById(nfsTextArea).value = response //actual_JSON
