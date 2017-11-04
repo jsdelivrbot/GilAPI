@@ -108,10 +108,10 @@ app.get('/git', function(request, response) {
 
 app.get('/login', function (request, response) {
    res = {
-      gilPass:request.query.gilPass,
+      userName:request.query.userName,
       last_name:request.query.userPassword
    };
-  gilPass_query = request.query.gilPass,
+  userName_query = request.query.userName,
   userPassword_query = request.query.userPassword
   if (userPassword_query == "Hello") {
     response.render('pages/Arkdata');
