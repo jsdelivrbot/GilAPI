@@ -6,6 +6,15 @@
 
 <body>
   <% include ../partials/nav.ejs %>
+<script src="/js/git.js" Content-Type="text/javascript" charset="UTF-8"></script>
+  <br>
+  <br>
+  Git repo URL: <input type = "text" id = "gitRepoUrl" onchange="updateGitPage()"> <br>
+  <br>
+  File Name: <input type = "text" id = "gitFileName" onchange="updateGitPage()"> <br>
+  Index.JS: <br>
+  <textarea id="gitFileTextArea" cols="40" rows="25" value="Code goes here."></textarea> <br>
+
 
 
 
