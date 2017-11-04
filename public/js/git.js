@@ -34,3 +34,13 @@ function updateGitPage() {
   }); // end loadJSON
   
 }; // end updateForm
+
+
+function uEle(element, response) {
+  document.getElementById(element).value = response //actual_JSON
+}; // end updateForm
+
+function gEle(element, response) {
+  response = document.getElementById(element).value //actual_JSON
+}; // end updateForm
+
