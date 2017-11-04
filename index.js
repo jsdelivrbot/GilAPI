@@ -102,6 +102,10 @@ app.get('/demo', function(request, response) {
   response.render('pages/demo');
 });
 
+app.get('/git', function(request, response) { 
+  response.render('pages/git'); 
+});  
+
 app.get('/login', function (request, response) {
    res = {
       gilPass:request.query.gilPass,
