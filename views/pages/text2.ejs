@@ -7,28 +7,21 @@
 <body>
   <% include ../partials/nav.ejs %>
 <script src="/js/text2.js" Content-Type="text/javascript" charset="UTF-8"></script>
-<textarea id="txtJob" cols="40" rows="25" value="Code goes here."></textarea>
 
-<form action = "/process_get" method = "GET">
-First Name: <input type = "text" name = "first_name">  <br>
-Last Name: <input type = "text" name = "last_name">
-<input type = "submit" value = "Submit">
-</form>
-<form action="#" method="post" class="demoForm" id="demoForm">
-    <fieldset>
-        <legend>Demo: Get Value Onclick</legend>
-    
-    <p>Select your size:&nbsp;
-        <label><input type="radio" name="size" value="If" onchange="updateForm('if')"/> If</label>
-        <label><input type="radio" name="size" value="For" checked="checked" onchange="updateForm('for')" /> For</label>
-        <label><input type="radio" name="size" value="While" onchange="updateForm('while')"/> While</label>
-    </p>
-    
-    <p>
-        <label>Total: $ <input type="text" name="total" class="num" value="8" readonly="readonly" /></label>
-    </p>
-    </fieldset>
-</form>
+Page Name: <input type = "text" name = "name" onchange="updateForm('newappget', 'test', 'IndexJS')">
+Index.JS: <br>
+<textarea id="IndexJS" cols="40" rows="25" value="Code goes here."></textarea> <br>
+
+Test.JS: <br>
+<textarea id="TestJS" cols="40" rows="25" value="Code goes here."></textarea> <br>
+
+New Function Statement: <br>
+<p>Select your type:&nbsp;
+<label><input type="radio" name="size" value="If" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','if')"/> If</label>
+<label><input type="radio" name="size" value="For" checked="checked" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','for')" /> For</label>
+<label><input type="radio" name="size" value="While" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','while')"/> While</label>
+</p>
+<textarea id="NFSJS" cols="40" rows="25" value="Code goes here."></textarea> <br>
 
   <% include ../partials/footer.ejs %>
 </body>

@@ -15,15 +15,20 @@ function loadJSON(file, callback) {
     };
     xobj.send(null);  
 };// end loadJSON
- 
-loadJSON("https://gil-api.herokuapp.com/newappget?name=test", function(response) {
-  document.getElementById("txtJob").value = response //actual_JSON
-}); // end loadJSON
 
-function updateForm(nfstype) {
-	nfsurl = "https://gil-api.herokuapp.com/newappget?name=" + nfstype
-loadJSON(nfsurl, function(response) {
-  document.getElementById("txtJob").value = response //actual_JSON
-}); // end loadJSON
-	
+function updateForm(nfsCall, nfsName, nfsTextArea) {
+  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName
+  loadJSON(nfsurl, function(response) {
+    document.getElementById(nfsTextArea).value = response //actual_JSON
+  }); // end loadJSON
 }; // end updateForm
+
+function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
+  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName + "&params=" + nfsParams + "&type=" + nfsType
+  loadJSON(nfsurl, function(response) {
+    document.getElementById(nfsTextArea).value = response //actual_JSON
+  }); // end loadJSON
+}; // end updateForm
+
+updateForm('newappget', 'test', 'IndexJS')
+updateForm('newappget', 'test', 'TestJS')
