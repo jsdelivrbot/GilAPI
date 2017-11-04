@@ -1,16 +1,24 @@
 var express      = require('express')
 var cookieParser = require('cookie-parser')
+var auth = require('http-auth');
  
-// var bodyParser = require('body-parser');
+var basic = auth.basic({
+    realm: "GILTech.",
+    file: __dirname + "/../data/users.htpasswd"
+});
+ 
+var bodyParser = require('body-parser');
 var app = express();
 var chatGeneral = ""
 
+app.use(auth.connect(basic));
+ 
 app.use(cookieParser())
 app.set('port', (process.env.PORT || 5000));
 
 // Config body-parser
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Fruitbot scores
 fruitbotwin = 0
