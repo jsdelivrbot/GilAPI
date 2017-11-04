@@ -46,6 +46,12 @@ app.get('/chatpost', function(request, response) {
   response.send(chatGeneral);
 });  
 
+app.get('/chatload', function(request, response) { 
+// /chatpost?user=user&message=message&chatroom=General
+  chatRoom = request.query.chatroom
+  response.send(chatGeneral);
+});  
+
 app.get('/fruitbot', function(request, response) {
   response.render('pages/fruitbot');
 });

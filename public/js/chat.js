@@ -28,6 +28,12 @@ function updateChat() {
     document.getElementById("chatMainBox").value = response
   }); // end loadJSON
   
+  document.getElementById("chatMessage").value = ""
 }; // end updateForm
 
+chatRoom = "General"
+chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
+loadJSON(chatUrl, function(response) {
+  document.getElementById("chatMainBox").value = response
+}); // end loadJSON
 

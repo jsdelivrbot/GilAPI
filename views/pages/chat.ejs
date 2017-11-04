@@ -9,12 +9,13 @@
 <script src="/js/chat.js" Content-Type="text/javascript" charset="UTF-8"></script>
   <br>
   <br>
-  User Name: <input type = "text" id = "chatUser"> <br>
-  <br>
-  File Name: <input type = "text" id = "chatMessage" onchange="updateChat()"> <br>
-
-<div id="chatRoomName">General</div> Chat<br>
-<textarea id="chatMainBox" cols="400" rows="100" value="Chat goes here.">Chat goes here.</textarea> <br>
+  User Name: <input type = "text" name = "chatUser"> <br>
+  Chat Room: <input type = "text" name = "chatRoom" value="General"> <br>
+  Message: <input type = "text" name = "chatMessage" value="Hello World!"> 
+<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
+  
+<div id="chatRoomName">All</div> Chat<br>
+<textarea id="chatMainBox" cols="50" rows="100" value="Chat goes here.">Chat goes here.</textarea> <br>
 
 
   <% include ../partials/footer.ejs %>
