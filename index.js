@@ -1,5 +1,6 @@
-var express      = require('express')
-var cookieParser = require('cookie-parser')
+var express      = require('express');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var auth = require('http-auth');
 
 var app = express();
