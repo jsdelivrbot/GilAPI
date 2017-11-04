@@ -1,7 +1,10 @@
-var express = require('express');
+var express      = require('express')
+var cookieParser = require('cookie-parser')
+ 
 // var bodyParser = require('body-parser');
 var app = express();
 
+app.use(cookieParser())
 app.set('port', (process.env.PORT || 5000));
 
 // Config body-parser
