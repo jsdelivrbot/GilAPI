@@ -17,9 +17,20 @@ function loadJSON(file, callback) {
 };// end loadJSON
 
 function updateGitPage() {
+  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
   gitFileName = document.getElementById("gitFileName").value
+  if (gitFileName) {
+    res.cookie('gitFileName',gitFileName, { maxAge: 900000, httpOnly: true });
+  } else {
+    gitFileName = req.cookies.gitFileName
+    gitFileName = document.getElementById("gitFileName").value
+  }; //end if gitFileName
+  gitFileName = document.getElementById("gitFileNameItem").value
+  
+  // Load file from repo into gitFileTextArea.
   gitRepoUrl = document.getElementById("gitRepoUrl").value + "/" + gitFileName
   loadJSON(gitRepoUrl, function(response) {
     document.getElementById("gitFileTextArea").value = response //actual_JSON
   }); // end loadJSON
+  
 }; // end updateForm
