@@ -20,9 +20,7 @@ function updateGitPage() {
   // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
   gitFileName = document.getElementById("gitFileName").value
   if (gitFileName) {
-    res.cookie('gitFileName',gitFileName, { maxAge: 900000, httpOnly: true });
   } else {
-    gitFileName = request.cookies.gitFileName
     gitFileName = document.getElementById("gitFileName").value
   }; //end if gitFileName
   gitFileName = document.getElementById("gitFileNameItem").value

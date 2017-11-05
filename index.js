@@ -2,12 +2,30 @@ var express      = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
+var MongoClient = require('mongodb').MongoClient
+  , assert = require('assert');
 
 var app = express();
 var chatGeneral = ""
 
 app.set('port', (process.env.PORT || 5000));
 
+
+dbuser = process.env.DBUSER
+dbpassword = process.env.DBPASS
+// Connection mongoUrl
+var mongoUrl = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
+
+// Use connect method to connect to the server
+MongoClient.connect(mongoUrl, function(err, db) {
+  assert.equal(null, err);
+chatRoom = chatRoom + "Connected successfully to server\n\r"
+
+  db.close();
+});
+
+    // response.cookie('gitFileName',gitFileName, { maxAge: 900000, httpOnly: true });
+    // gitFileName = request.cookies.gitFileName
 
 // Fruitbot scores
 fruitbotwin = 0
