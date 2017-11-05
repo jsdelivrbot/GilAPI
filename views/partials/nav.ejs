@@ -25,11 +25,14 @@
     <ul class="nav navbar-nav navbar-right">
 	  <li class="navbar-right">
 	  <a href="#">
-		<form action = "/login2" method = "GET">
-			GILTech User: <input type = "text" name = "userName">
-			Password: <input type = "password" name = "userPassword">
-			<input type = "submit" value = "Submit">
+		<form action="/login" method="post">
+			<label>GILTech User:</label>
+			<input type="text" name="username"/>
+			<label>Password:</label>
+			<input type="password" name="password"/>
+			<input type="submit" value="Log In"/>
 		</form>
+
 		</a>
       </li>
     </ul>

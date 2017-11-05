@@ -1,17 +1,19 @@
-var express      = require('express');
+var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require("express-session");
 const { Client } = require('pg');
 
 var app = express();
-var chatGeneral = "";
 
+var chatGeneral = "";
 // Fruitbot scores
-fruitbotwin = 0
-fruitbotloss = 0
-fruitbottie = 0
+var fruitbotwin = 0;
+var fruitbotloss = 0;
+var fruitbottie = 0;
 
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
@@ -21,6 +23,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 
+// PostGre SQL stuff.
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
@@ -41,13 +44,11 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.post('/login', 
-  passport.authenticate('local'),
-  function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    res.redirect('/users/' + req.user.username);
-}); // end app get login
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
 
 app.get('/login2', function (request, response) {
    res = {
@@ -62,7 +63,6 @@ app.get('/login2', function (request, response) {
     response.render('pages/demo');
   }; //end if first_name
 })
-
 
 //region WIP
 app.get('/Arkdata', function(request, response) {
