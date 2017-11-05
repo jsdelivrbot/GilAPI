@@ -47,6 +47,7 @@ var seedData = [
 var mongoUri = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
 
 // Use connect method to connect to the server
+mongodb.MongoClient.connect(mongoUri, function(err, db) {
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
 }); // end MongoClient
 
