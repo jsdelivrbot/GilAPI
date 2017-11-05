@@ -28,7 +28,12 @@ var mongoUri = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:493
  // Use connect method to connect to the server
 mongodb.MongoClient.connect(mongoUri, function(err, db) {
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-  mongodb.MongoClient.db.close();
+  var collection = db.collection('foods')
+  collection.insert({name: 'taco', tasty: true}, function(err, result) {
+    collection.find({name: 'taco'}).toArray(function(err, docs) {
+      chatGeneral = chatGeneral + docs.name
+    }); // end collection.find
+  }); // end collection.insert
 }); // end MongoClient
 
 
