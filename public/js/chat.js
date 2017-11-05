@@ -23,7 +23,7 @@ function updateChat() {
   chatMessage = document.getElementById("chatMessage").value
   chatRoom = document.getElementById("chatRoom").value
   chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
-  document.getElementById("chatRoomName").value = chatRoom
+  document.getElementById("chatRoomName").innerHTML = chatRoom
   loadJSON(chatUrl, function(response) {
     document.getElementById("chatMainBox").value = response
   }); // end loadJSON

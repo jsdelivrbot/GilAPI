@@ -2,7 +2,7 @@ var express      = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
-var mongodb = require('mongodb');
+const { Client } = require('pg');
 
 var app = express();
 var chatGeneral = "";
@@ -19,24 +19,21 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-dbuser = process.env.DBUSER;
-dbpassword = process.env.DBPASS;
 
- // Connection mongoUrl
-var mongoUri = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
 
- // Use connect method to connect to the server
-mongodb.MongoClient.connect(mongoUri, function(err, db) {
+client.connect();
+
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-  var collection = db.collection('foods')
-  collection.insert({name: 'taco', tasty: true}, function(err, result) {
-    collection.find({name: 'taco'}).toArray(function(err, docs) {
-      chatGeneral = chatGeneral + docs.name
-    }); // end collection.find
-  }); // end collection.insert
-}); // end MongoClient
-
-
+  for (let row of res.rows) {
+    chatGeneral = chatGeneral + JSON.stringify(row);
+  }
+  client.end();
+});
 
 app.get('/', function(request, response) {
   response.render('pages/index');
