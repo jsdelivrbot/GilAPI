@@ -2,34 +2,55 @@ var express      = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
-var MongoClient = require('mongodb').MongoClient;
+var mongodb = require('mongodb');
 
 var app = express();
 var chatGeneral = "";
 
-app.set('port', (process.env.PORT || 5000));
-
-
-dbuser = process.env.DBUSER;
-dbpassword = process.env.DBPASS;
-// Connection mongoUrl
-var mongoUrl = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
-
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, db) {
-  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-}); // end MongoClient
 // Fruitbot scores
 fruitbotwin = 0
 fruitbotloss = 0
 fruitbottie = 0
 
 // Comments are fundamental
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
+// views directory where all template files live
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+dbuser = process.env.DBUSER;
+dbpassword = process.env.DBPASS;
+
+var seedData = [
+  {
+    decade: '1970s',
+    artist: 'Debby Boone',
+    song: 'You Light Up My Life',
+    weeksAtOne: 10
+  },
+  {
+    decade: '1980s',
+    artist: 'Olivia Newton-John',
+    song: 'Physical',
+    weeksAtOne: 10
+  },
+  {
+    decade: '1990s',
+    artist: 'Mariah Carey',
+    song: 'One Sweet Day',
+    weeksAtOne: 16
+  }
+];
+
+// Connection mongoUrl
+var mongoUri = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
+
+// Use connect method to connect to the server
+  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
+}); // end MongoClient
+
+
 
 app.get('/', function(request, response) {
   response.render('pages/index');
