@@ -14,6 +14,11 @@ dbpassword = process.env.DBPASS
 // Connection mongoUrl
 var mongoUrl = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
 
+// Use connect method to connect to the server
+MongoClient.connect(mongoUrl, function(err, db) {
+  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
+  db.close();
+});
 // Fruitbot scores
 fruitbotwin = 0
 fruitbotloss = 0
