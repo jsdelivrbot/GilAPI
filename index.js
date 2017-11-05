@@ -28,6 +28,7 @@ const client = new Client({
 client.connect();
 
 client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
   for (let row of res.rows) {
     chatGeneral = chatGeneral + JSON.stringify(row);
