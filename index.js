@@ -37,6 +37,10 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
   client.end();
 });
 
+    // response.cookie('gitFileName',gitFileName, { maxAge: 900000, httpOnly: true });
+    // gitFileName = request.cookies.gitFileName
+
+
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
