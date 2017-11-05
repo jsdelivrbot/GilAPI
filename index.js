@@ -4,18 +4,6 @@ var bodyParser = require('body-parser');
 var auth = require('http-auth');
 var mongodb = require('mongodb');
 
-var Db = require('mongodb').Db,
-    MongoClient = require('mongodb').MongoClient,
-    Server = require('mongodb').Server,
-    ReplSetServers = require('mongodb').ReplSetServers,
-    ObjectID = require('mongodb').ObjectID,
-    Binary = require('mongodb').Binary,
-    GridStore = require('mongodb').GridStore,
-    Grid = require('mongodb').Grid,
-    Code = require('mongodb').Code,
-    BSON = require('mongodb').pure().BSON,
-    assert = require('assert');
-
 var app = express();
 var chatGeneral = "";
 
@@ -34,82 +22,13 @@ app.set('view engine', 'ejs');
 dbuser = process.env.DBUSER;
 dbpassword = process.env.DBPASS;
 
-// Set up the connection to the local db
-var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser: true});
-  // Open the connection to the server
-  mongoclient.open(function(err, mongoclient) {
+ // Connection mongoUrl
+var mongoUri = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
 
-    // Get the first db and do an update document on it
-    var db = mongoclient.db("integration_tests");
-    db.collection('mongoclient_test').update({a:1}, {b:1}, {upsert:true}, function(err, result) {
-      assert.equal(null, err);
-      assert.equal(1, result);
-
-      // Get another db and do an update document on it
-      var db2 = mongoclient.db("integration_tests2");
-      db2.collection('mongoclient_test').update({a:1}, {b:1}, {upsert:true}, function(err, result) {
-        assert.equal(null, err);
-        assert.equal(1, result);
-
-        // Close the connection
-        mongoclient.close();
-      });
-    });
-  });
-  
-  /*
-   * First we'll add a few songs. Nothing is required to create the 
-   * songs collection; it is created automatically when we insert.
-   */
-
-  var songs = db.collection('songs');
-
-   // Note that the insert method can take either an array or a dict.
-
-  songs.insert(seedData, function(err, result) {
-    
-    if(err) chatGeneral = chatGeneral + err;
-
-    /*
-     * Then we need to give Boyz II Men credit for their contribution
-     * to the hit "One Sweet Day".
-     */
-
-    songs.update(
-      { song: 'One Sweet Day' }, 
-      { $set: { artist: 'Mariah Carey ft. Boyz II Men' } },
-      function (err, result) {
-        
-        if(err) chatGeneral = chatGeneral + err;
-
-        /*
-         * Finally we run a query which returns all the hits that spend 10 or
-         * more weeks at number 1.
-         */
-
-        songs.find({ weeksAtOne : { $gte: 10 } }).sort({ decade: 1 }).toArray(function (err, docs) {
-
-          if(err) chatGeneral = chatGeneral +  err;
-
-          docs.forEach(function (doc) {
-            chatGeneral = chatGeneral + 
-              'In the ' + doc['decade'] + ', ' + doc['song'] + ' by ' + doc['artist'] + 
-              ' topped the charts for ' + doc['weeksAtOne'] + ' straight weeks.';
-          });
-         
-          // Since this is an example, we'll clean up after ourselves.
-          songs.drop(function (err) {
-            if(err) chatGeneral = chatGeneral +  err;
-           
-            // Only close the connection when your app is terminating.
-            db.close(function (err) {
-              if(err) chatGeneral = chatGeneral +  err;
-            }); // end db.close
-          }); // end songs.drop
-		}); // end insertDocuments
-      } // end function
-    ); // end songs.update
-  }; // end songs.insert
+ // Use connect method to connect to the server
+mongodb.MongoClient.connect(mongoUri, function(err, db) {
+  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
+  mongodb.MongoClient.db.close();
 }); // end MongoClient
 
 
