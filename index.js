@@ -2,6 +2,7 @@ var express      = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
+var passport = require('passport');
 const { Client } = require('pg');
 
 var app = express();
@@ -27,10 +28,10 @@ const client = new Client({
 
 client.connect();
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-  for (let row of res.rows) {
+  for (let row of queryOutput.rows) {
     chatGeneral = chatGeneral + JSON.stringify(row);
   }
   client.end();
@@ -143,7 +144,15 @@ app.get('/git', function(request, response) {
   response.render('pages/git'); 
 });  
 
-app.get('/login', function (request, response) {
+app.get('/login', 
+  passport.authenticate('local'),
+  function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+}); // end app get login
+
+app.get('/login2', function (request, response) {
    res = {
       userName:request.query.userName,
       last_name:request.query.userPassword
