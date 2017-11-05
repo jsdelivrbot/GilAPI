@@ -60,6 +60,7 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
   client.end();
 });
 
+    chatGeneral = chatGeneral + row.table_name + "\r\n";
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
