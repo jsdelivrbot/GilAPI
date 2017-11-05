@@ -98,12 +98,12 @@ mongodb.MongoClient.connect(mongoUri, function(err, db) {
             // Only close the connection when your app is terminating.
             db.close(function (err) {
               if(err) throw err;
-            });
-          });
+            }); // end db.close
+          }); // end songs.drop
 		}); // end insertDocuments
-      }
-    );
-  }); // end indexCollection
+      } // end function
+    ); // end songs.update
+  }; // end songs.insert
 }); // end MongoClient
 
 
