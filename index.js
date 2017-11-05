@@ -4,6 +4,18 @@ var bodyParser = require('body-parser');
 var auth = require('http-auth');
 var mongodb = require('mongodb');
 
+var Db = require('mongodb').Db,
+    MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server,
+    ReplSetServers = require('mongodb').ReplSetServers,
+    ObjectID = require('mongodb').ObjectID,
+    Binary = require('mongodb').Binary,
+    GridStore = require('mongodb').GridStore,
+    Grid = require('mongodb').Grid,
+    Code = require('mongodb').Code,
+    BSON = require('mongodb').pure().BSON,
+    assert = require('assert');
+
 var app = express();
 var chatGeneral = "";
 
@@ -22,34 +34,28 @@ app.set('view engine', 'ejs');
 dbuser = process.env.DBUSER;
 dbpassword = process.env.DBPASS;
 
-var seedData = [
-  {
-    decade: '1970s',
-    artist: 'Debby Boone',
-    song: 'You Light Up My Life',
-    weeksAtOne: 10
-  },
-  {
-    decade: '1980s',
-    artist: 'Olivia Newton-John',
-    song: 'Physical',
-    weeksAtOne: 10
-  },
-  {
-    decade: '1990s',
-    artist: 'Mariah Carey',
-    song: 'One Sweet Day',
-    weeksAtOne: 16
-  }
-];
+// Set up the connection to the local db
+var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser: true});
+  // Open the connection to the server
+  mongoclient.open(function(err, mongoclient) {
 
-// Connection mongoUrl
-var mongoUri = 'mongodb://' + dbuser + ':' + dbpassword +'@ds249325.mlab.com:49325/gilapi';
+    // Get the first db and do an update document on it
+    var db = mongoclient.db("integration_tests");
+    db.collection('mongoclient_test').update({a:1}, {b:1}, {upsert:true}, function(err, result) {
+      assert.equal(null, err);
+      assert.equal(1, result);
 
-// Use connect method to connect to the server
-mongodb.MongoClient.connect(mongoUri, function(err, db) {
-  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-  if(err) chatGeneral = chatGeneral + err;
+      // Get another db and do an update document on it
+      var db2 = mongoclient.db("integration_tests2");
+      db2.collection('mongoclient_test').update({a:1}, {b:1}, {upsert:true}, function(err, result) {
+        assert.equal(null, err);
+        assert.equal(1, result);
+
+        // Close the connection
+        mongoclient.close();
+      });
+    });
+  });
   
   /*
    * First we'll add a few songs. Nothing is required to create the 
