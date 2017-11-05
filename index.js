@@ -28,11 +28,11 @@ const client = new Client({
 
 client.connect();
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, queryOutput) => {
+client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + JSON.stringify(row);
+    chatGeneral = chatGeneral + row;
   }
   client.end();
 });
@@ -40,10 +40,53 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
-app.get('/port', function(request, response) {
-  response.render('pages/port');
+
+app.post('/login', 
+  passport.authenticate('local'),
+  function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+}); // end app get login
+
+app.get('/login2', function (request, response) {
+   res = {
+      userName:request.query.userName,
+      last_name:request.query.userPassword
+   };
+  userName_query = request.query.userName,
+  userPassword_query = request.query.userPassword
+  if (userPassword_query == "Hello") {
+    response.render('pages/Arkdata');
+  } else {
+    response.render('pages/demo');
+  }; //end if first_name
+})
+
+
+//region WIP
+app.get('/Arkdata', function(request, response) {
+  response.render('pages/Arkdata');
 });
 
+app.get('/demo', function(request, response) {
+  response.render('pages/demo');
+});
+
+app.get('/git', function(request, response) { 
+  response.render('pages/git'); 
+});  
+
+app.get('/text2', function(request, response) {
+  response.render('pages/text2');
+});
+
+app.get('/test', function(request, response) {
+  response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
+});
+
+
+//region chat 
 app.get('/chat', function(request, response) { 
   response.render('pages/chat'); 
 });  
@@ -64,7 +107,9 @@ app.get('/chatload', function(request, response) {
   chatRoom = request.query.chatroom
   response.send(chatGeneral);
 });  
+//endregion
 
+//region Fruitbot
 app.get('/fruitbot', function(request, response) {
   response.render('pages/fruitbot');
 });
@@ -84,6 +129,7 @@ app.get('/fruitbottotals', function(request, response) {
   response.json([fruitbotwin,fruitbotloss,fruitbottie]);
 });
 
+//region FizzBuzz
 app.get('/fizzbuzz', function(request, response) {
   fizzbuzznumber = request.query.n
   outstring = fizzbuzznumber
@@ -96,10 +142,7 @@ app.get('/fizzbuzz', function(request, response) {
   response.json(outstring);
 });
 
-app.get('/test', function(request, response) {
-  response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
-});
-
+//region ModuleBuilding
 app.get('/nfs', function(request, response) {
   functionType = request.query.type
   functionName = request.query.name
@@ -132,43 +175,6 @@ app.get('/newappget', function(request, response) {
   response.send(newappgetreturn);
 });
 
-app.get('/Arkdata', function(request, response) {
-  response.render('pages/Arkdata');
-});
-
-app.get('/demo', function(request, response) {
-  response.render('pages/demo');
-});
-
-app.get('/git', function(request, response) { 
-  response.render('pages/git'); 
-});  
-
-app.get('/login', 
-  passport.authenticate('local'),
-  function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    res.redirect('/users/' + req.user.username);
-}); // end app get login
-
-app.get('/login2', function (request, response) {
-   res = {
-      userName:request.query.userName,
-      last_name:request.query.userPassword
-   };
-  userName_query = request.query.userName,
-  userPassword_query = request.query.userPassword
-  if (userPassword_query == "Hello") {
-    response.render('pages/Arkdata');
-  } else {
-    response.render('pages/demo');
-  }; //end if first_name
-})
-
-app.get('/text2', function(request, response) {
-  response.render('pages/text2');
-});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
