@@ -10,6 +10,7 @@ const { Client } = require('pg');
 var app = express();
 
 var chatGeneral = "";
+var errgoLogic = "Variable Initialized.";
 // Fruitbot scores
 var fruitbotwin = 0;
 var fruitbotloss = 0;
@@ -52,13 +53,42 @@ const client = new Client({
 client.connect();
 
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
-  if (err) chatGeneral = chatGeneral + err;
+  if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
+  client.end();
+});
+
+client.query('SELECT top 100 * FROM chatroom_General;', (err, queryOutput) => {
+  if (err) errgoLogic = errgoLogic + err;
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + row.table_name + "\r\n";
+    chatGeneral = chatGeneral + row.message + "\r\n";
   }
   client.end();
 });
+
+function invokeGilSQL(CRUD,ColumnName,CRUDAdjuster,Table,WhereCondition,Query) {
+	chatGeneral = chatGeneral + Query + "\n\r";
+	
+	if (CRUD != "Select") {
+		ColumnName = ""
+	// } else {
+		// ColumnName = "*"
+	}; //end if CRUD
+	
+	if (Query = "") {
+		Query = "CRUD ColumnName CRUDAdjuster Table WhereCondition"
+	}; //end if CRUD
+	
+	
+	//This check is made in the Init region above, during module loading.
+	
+  client.query(Query, (err, queryOutput) => {
+  if (err) errgoLogic = errgoLogic + err;
+  for (row in queryOutput.rows) {output += row}
+  // for (let row of queryOutput.rows) {chatGeneral = chatGeneral + row.table_name;}
+  client.end();
+}; // end invokeGilSQL
+
 
 app.get('/', function(request, response) {
   response.render('pages/index');
