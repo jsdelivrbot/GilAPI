@@ -40,7 +40,6 @@ passport.use(new LocalStrategy(
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
-app.use(flash()); // use connect-flash for flash messages stored in session
     });
   }
 ));
