@@ -1,33 +1,3 @@
-var flash    = require('connect-flash'); // store and retrieve messages in session store
-// var morgan       = require('morgan'); // logger
-
-require('./config/passport')(passport); // pass passport for configuration
-
-// set up our express application
-// app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
-
-// required for passport
-app.use(session({ secret: process.env.PASSPORT_SECRET })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
-// routes
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
-// launch
-app.listen(port);
-console.log('The magic happens on port ' + port);
-
-
-
-
-
-
-
-
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -57,43 +27,6 @@ app.use(session({ secret: "cats" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'pass'
-  },
-  (username, password, done) => {
-  // log.debug("Login process:", username);
-  return db.one("SELECT user_id, user_name, user_email, user_role " +
-      "FROM users " +
-      "WHERE user_email=$1 AND user_pass=$2", [username, password])
-    .then((result)=> {
-      return done(null, result);
-    })
-    .catch((err) => {
-      log.error("/login: " + err);
-      return done(null, false, {message:'Wrong user name or password'});
-    });
-}));
-  
-passport.serializeUser((user, done)=>{
-    // log.debug("serialize ", user);
-    done(null, user.user_id);
-  });
-
-passport.deserializeUser((id, done)=>{
-  // log.debug("deserualize ", id);
-  db.one("SELECT user_id, user_name, user_email, user_role FROM users " +
-          "WHERE user_id = $1", [id])
-  .then((user)=>{
-    //log.debug("deserializeUser ", user);
-    done(null, user);
-  })
-  .catch((err)=>{
-    done(new Error(`User with the id ${id} does not exist`));
-  })
-});
 
 // PostGre SQL stuff.
 const client = new Client({
