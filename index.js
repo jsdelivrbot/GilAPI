@@ -25,7 +25,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.use(session({ secret: process.env.PASSPORT_SECRET })); // session secret
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser());
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(passport.initialize());
 app.use(passport.session());
