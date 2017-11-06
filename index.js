@@ -6,7 +6,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
-var flash = require('connect-flash'); // store and retrieve messages in session store
 
 var app = express();
 
@@ -25,11 +24,10 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.use(session({ secret: process.env.PASSPORT_SECRET })); // session secret
-app.use(bodyParser());
 app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 passport.use(new LocalStrategy(
