@@ -71,6 +71,12 @@ app.post('/login',
                                    failureFlash: true })
 );
 
+app.get('/logout', function(request, response){
+  // console.log('logging out');
+  request.logout();
+  response.redirect('/');
+});
+
 app.get('/login2', function (request, response) {
    res = {
       userName:request.query.userName,
@@ -195,6 +201,30 @@ app.get('/newappget', function(request, response) {
 
   response.send(newappgetreturn);
 });
+
+
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handlers
+
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
+
 
 
 app.listen(app.get('port'), function() {
