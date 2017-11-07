@@ -9,7 +9,6 @@ const { Client } = require('pg');
 
 var app = express();
 
-var sessionSecret = process.env.PASSPORT_SECRET || 'aSecretToEverybody';
 var chatGeneral = "";
 var errgoLogic = "Variable Initialized.";
 // Fruitbot scores
@@ -17,7 +16,7 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
-app.use(require('express-session')({ (secret: sessionSecret), resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
