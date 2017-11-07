@@ -27,8 +27,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -49,49 +47,9 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
   client.end();
 });
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
-
-app.get('/login', function(request, response) {
-  response.sendfile('views/pages/login.html');
-});
-
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
-
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loginSuccess',
-    failureRedirect: '/loginFailure'
-  })
-);
-
-app.get('/loginFailure', function(request, response, next) {
-  response.send('Failed to authenticate');
-});
-
-app.get('/loginSuccess', function(request, response, next) {
-  response.send('Successfully authenticated');
-});  
 
 // PROFILE SECTION =========================
 app.get('/profile', isLoggedIn, function(request, response) {
@@ -99,7 +57,7 @@ app.get('/profile', isLoggedIn, function(request, response) {
 		user : request.user
 	});
 });
-
+  
 app.get('/logout', function(request, response){
   // console.log('logging out');
   request.logout();
