@@ -25,6 +25,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('cookie-parser')());
 app.use(passport.initialize());
 app.use(passport.session());
 
