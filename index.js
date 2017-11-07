@@ -28,7 +28,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
 
-app.use(app.router);
 
 app.use(passport.initialize());
 app.use(passport.session());
