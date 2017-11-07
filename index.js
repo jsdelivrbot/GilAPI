@@ -71,8 +71,8 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-app.get('/login', function(req, res) {
-  res.sendfile('views/pages/login.html');
+app.get('/login', function(request, response) {
+  response.sendfile('views/pages/login.html');
 });
 
 app.get('/', function(request, response) {
@@ -86,12 +86,12 @@ app.post('/login',
   })
 );
 
-app.get('/loginFailure', function(req, res, next) {
-  res.send('Failed to authenticate');
+app.get('/loginFailure', function(request, response, next) {
+  response.send('Failed to authenticate');
 });
 
-app.get('/loginSuccess', function(req, res, next) {
-  res.send('Successfully authenticated');
+app.get('/loginSuccess', function(request, response, next) {
+  response.send('Successfully authenticated');
 });  
 
 // PROFILE SECTION =========================
@@ -108,7 +108,7 @@ app.get('/logout', function(request, response){
 });
 
 app.get('/login2', function (request, response) {
-   res = {
+   response = {
       userName:request.query.userName,
       last_name:request.query.userPassword
    };
@@ -236,7 +236,7 @@ app.get('/newappget', function(request, response) {
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(request, response, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -247,9 +247,9 @@ app.use(function(req, res, next) {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
+app.use(function(err, request, response, next) {
+    response.status(err.status || 500);
+    response.render('error', {
         message: err.message,
         error: {}
     });
