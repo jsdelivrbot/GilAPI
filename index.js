@@ -75,6 +75,9 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+app.get('/login', function(request, response) {
+  response.render('pages/login');
+});
 app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/loginSuccess',
