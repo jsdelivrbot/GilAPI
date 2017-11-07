@@ -75,8 +75,8 @@ app.get('/', function(request, response) {
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
+  function(request, response) {
+    response.redirect('/');
 });
   
 app.get('/logout', function(request, response){
