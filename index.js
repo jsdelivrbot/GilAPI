@@ -81,7 +81,16 @@ app.post('/login',
     failureRedirect: '/loginFailure'
   })
 );
+
+app.get('/loginFailure', function(request, response, next) {
+  response.send('Failed to authenticate');
+});
   
+
+app.get('/loginSuccess', function(request, response, next) {
+  response.send('Successfully authenticated');
+});  
+
 app.get('/logout', function(request, response){
   // console.log('logging out');
   request.logout();
