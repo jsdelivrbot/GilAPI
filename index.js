@@ -94,6 +94,13 @@ app.get('/loginSuccess', function(req, res, next) {
   res.send('Successfully authenticated');
 });  
 
+// PROFILE SECTION =========================
+app.get('/profile', isLoggedIn, function(request, response) {
+	response.render('pages/profile', {
+		user : request.user
+	});
+});
+
 app.get('/logout', function(request, response){
   // console.log('logging out');
   request.logout();
