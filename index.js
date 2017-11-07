@@ -75,11 +75,12 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(request, response) {
-    response.redirect('/');
-});
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/loginSuccess',
+    failureRedirect: '/loginFailure'
+  })
+);
   
 app.get('/logout', function(request, response){
   // console.log('logging out');
