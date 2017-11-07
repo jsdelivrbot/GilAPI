@@ -17,6 +17,10 @@ var fruitbotloss = 0;
 var fruitbottie = 0;
 
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
