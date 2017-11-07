@@ -6,7 +6,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
-require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 var app = express();
 
