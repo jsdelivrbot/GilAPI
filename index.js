@@ -51,11 +51,10 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-// PROFILE SECTION =========================
-app.get('/profile', isLoggedIn, function(request, response) {
-	response.render('pages/profile', {
-		user : request.user
-	});
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(request, response) {
+    response.redirect('/');
 });
   
 app.get('/logout', function(request, response){
@@ -65,7 +64,7 @@ app.get('/logout', function(request, response){
 });
 
 app.get('/login2', function (request, response) {
-   response = {
+   res = {
       userName:request.query.userName,
       last_name:request.query.userPassword
    };
@@ -193,7 +192,7 @@ app.get('/newappget', function(request, response) {
 
 
 // catch 404 and forward to error handler
-app.use(function(request, response, next) {
+app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -204,9 +203,9 @@ app.use(function(request, response, next) {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, request, response, next) {
-    response.status(err.status || 500);
-    response.render('error', {
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
         message: err.message,
         error: {}
     });
