@@ -25,7 +25,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(passport.initialize());
 app.use(passport.session());
