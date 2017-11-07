@@ -17,7 +17,6 @@ var fruitbotloss = 0;
 var fruitbottie = 0;
 
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
-app.use(express.compress()); // gzip all the things. If possible.
 
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
