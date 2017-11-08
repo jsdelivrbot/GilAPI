@@ -10,6 +10,8 @@ const { Client } = require('pg');
 var Sequelize = require('sequelize');
 var pg = require('pg').native;
 var pghstore = require('pg-hstore');
+var User = sequelize.import('./user'); // ???
+User.sync();
 
 var app = express();
 
