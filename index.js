@@ -11,11 +11,7 @@ var Sequelize = require('sequelize');
 var pg = require('pg').native;
 var pghstore = require('pg-hstore');
 var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
-var User = sequelize.define('User', 
-{
-  username: DataTypes.STRING,
-  password: DataTypes.STRING
-})
+var User = sequelize.import('./app/user');
 
 var app = express();
 
@@ -45,9 +41,7 @@ const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true
 });
-
 client.connect();
-
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
