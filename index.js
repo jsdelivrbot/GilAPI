@@ -57,7 +57,7 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 
 //Passport stuff
 // LOCAL LOGIN
-passport.use('local-login', new LocalStrategy({
+passport.use('local', new LocalStrategy({
 	// by default, local strategy uses username and password, we will override with email
 	usernameField : 'email',
 	passwordField : 'password',
@@ -140,7 +140,7 @@ app.get('/login', function(request, response) {
   response.render('pages/login');
 });
 app.post('/login', 
-  passport.authenticate('local-login', {
+  passport.authenticate('local', {
 	successRedirect : '/loginSuccess',
 	failureRedirect : '/loginFailure'
   })
