@@ -12,6 +12,7 @@ var pg = require('pg').native;
 var pghstore = require('pg-hstore');
 var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
 var User = sequelize.import('./User');
+User.sync();
 
 var app = express();
 
