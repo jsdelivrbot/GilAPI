@@ -58,19 +58,13 @@ passport.use(new LocalStrategy({ passReqToCallback : true },
 	// allows us to pass in the request from our route (lets us check if a user is logged in or not)
 function(req, username, password, done) {        
 	User.findOne({ username: username })
-        .then(function(user) {
-            if (!user) {
-                done(null, false, {message:'Unknown user.'});
-            } else if (!user.validPassword(password)) {
-                done(null, false, {message:'Bad password'});
-            } else {
-                done(null, user);
-            }
-        })
-        .catch(function(e) { 
-            done(null, false, {message:'loginMessage',e.name + " " + e.message});
-        });                
-}));
+ 	  if (err) { return done(err); }
+	  if (!user) { return done(null, false); }
+	  if (!user.verifyPassword(password)) { return done(null, false); }
+	  return done(null, user);
+	});
+  }
+));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
