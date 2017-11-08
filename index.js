@@ -10,7 +10,6 @@ const { Client } = require('pg');
 var Sequelize = require('sequelize');
 var pg = require('pg').native;
 var pghstore = require('pg-hstore');
-var sequelize = new Sequelize(process.env.DATABASE_URL);
 
 var app = express();
 
