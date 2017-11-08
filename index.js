@@ -43,16 +43,16 @@ const client = new Client({
   ssl: true
 });
 client.connect();
-client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
+client.query("INSERT INTO users (localemail, localpassword) VALUES ('i@i.com', 'p');", (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + row.table_name + "\r\n";
+    chatGeneral = chatGeneral + row + "\r\n";
   }
 });
 client.query('SELECT * FROM users;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
-  chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
+  chatGeneral = chatGeneral + 'SELECT FROM users\n\r';
   for (let row of queryOutput.rows) {
     chatGeneral = chatGeneral + row + "\r\n";
   }
