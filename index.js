@@ -83,10 +83,10 @@ app.get('/', function(request, response) {
 app.get('/login', function(request, response) {
   response.render('pages/login');
 });
-app.post('/login', 
+app.post('/login',
   passport.authenticate('local', {
-	successRedirect : '/loginSuccess',
-	failureRedirect : '/loginFailure'
+    successRedirect: '/loginSuccess',
+    failureRedirect: '/loginFailure'
   })
 );
 
