@@ -52,7 +52,7 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 });
 client.query('SELECT * FROM Users;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
-  chatGeneral = chatGeneral + 'SELECT * FROM Users;\n\r';
+  chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
   for (let row of queryOutput.rows) {
     chatGeneral = chatGeneral + row.table_name + "\r\n";
   }
@@ -61,7 +61,7 @@ client.query('SELECT * FROM Users;', (err, queryOutput) => {
 
 client.query('SELECT * FROM users;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
-  chatGeneral = chatGeneral + 'SELECT * FROM users;\n\r';
+  chatGeneral = chatGeneral + 'SELECT FROM users\n\r';
   for (let row of queryOutput.rows) {
     chatGeneral = chatGeneral + row.table_name + "\r\n";
   }
