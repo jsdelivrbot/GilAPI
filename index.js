@@ -43,16 +43,16 @@ const client = new Client({
   ssl: true
 });
 client.connect();
-client.query("INSERT INTO users (localemail, localpassword) VALUES ('i@i.com', 'p');", (err, queryOutput) => {
+client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + row + "\r\n";
+    chatGeneral = chatGeneral + row.table_name + "\r\n";
   }
 });
 client.query('SELECT * FROM users;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
-  chatGeneral = chatGeneral + 'SELECT FROM users\n\r';
+  chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
   for (let row of queryOutput.rows) {
     chatGeneral = chatGeneral + row + "\r\n";
   }
@@ -64,12 +64,15 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
+      if (err) {
+		chatGeneral = chatGeneral + err;
+        return done(err);
+      }
       if (!user) {
-        return done(null, true, { message: 'Incorrect username.' });
+        return done(null, false, { message: 'Incorrect username.' });
       }
       if (!user.validPassword(password)) {
-        return done(null, true, { message: 'Incorrect password.' });
+        return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
     });
