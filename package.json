@@ -17,6 +17,8 @@
     "http-auth": "3.2.3",
     "pg": "7.4.0",
     "passport": "0.4.0",
+    "sequelize": "4.22.5",
+    "pg-hstore": "2.3.2",
     "body-parser": "1.18.2",
     "passport-local": "1.0.0",
     "express-session": "1.15.6"

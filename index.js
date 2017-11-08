@@ -7,6 +7,10 @@ var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
 
+var Sequelize = require('sequelize');
+var pg = require('pg').native;
+var pghstore = require('pg-hstore');
+
 var app = express();
 
 var chatGeneral = "";
@@ -88,7 +92,6 @@ app.post('/login',
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
 });
-  
 
 app.get('/loginSuccess', function(request, response, next) {
   response.send('Successfully authenticated');
