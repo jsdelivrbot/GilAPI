@@ -53,16 +53,28 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 });
 
 //Passport stuff
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
+// LOCAL LOGIN
+passport.use('local', new LocalStrategy({
+    // by default, local strategy uses username and password, we will override with email
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true // allows us to pass in the request from our route (lets us check if a user is logged in or not)
+},
+function(req, email, password, done) {        
+    User.findOne({ where: { localemail: email }})
+        .then(function(user) {
+            if (!user) {
+                done(null, false, {message:'Unknown user.'});
+            } else if (!user.validPassword(password)) {
+                done(null, false, {message:'Bad password'});
+            } else {
+                done(null, user);
+            }
+        })
+        .catch(function(e) { 
+            done(null, false, {message:'loginMessage',e.name + " " + e.message});
+        });                
+}));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -84,7 +96,7 @@ app.get('/login', function(request, response) {
   response.render('pages/login');
 });
 app.post('/login',
-  passport.authenticate('local-login', {
+  passport.authenticate('local', {
     successRedirect: '/loginSuccess',
     failureRedirect: '/loginFailure'
   })
