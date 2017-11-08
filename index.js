@@ -53,69 +53,16 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 });
 
 //Passport stuff
-// LOCAL LOGIN
-passport.use('local', new LocalStrategy({
-	// by default, local strategy uses username and password, we will override with email
-	usernameField : 'email',
-	passwordField : 'password',
-	passReqToCallback : true // allows us to pass in the request from our route (lets us check if a user is logged in or not)
-},
-function(req, email, password, done) {		
-	User.findOne({ where: { localemail: email }})
-		.then(function(user) {
-			if (!user) {
-				done(null, false, {message:'Unknown user.'});
-			} else if (!user.validPassword(password)) {
-				done(null, false, {message:'Bad password'});
-			} else {
-				done(null, user);
-			}
-		})
-		.catch(function(e) { 
-			done(null, false, {message:'loginMessage',e.name + " " + e.message});
-		});				
-}));
-
-// LOCAL SIGNUP ============================================================
-passport.use('local-signup', new LocalStrategy({
-	// by default, local strategy uses username and password, we will override with email
-	usernameField : 'email',
-	passwordField : 'password',
-	passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-},
-function(req, email, password, done) {        
-	//  Whether we're signing up or connecting an account, we'll need
-	//  to know if the email address is in use.
-	
-	User.findOne({ where: { localemail: email }})
-		.then(function(existingUser) {
-		
-			// check to see if there's already a user with that email
-			if (existingUser) 
-				return done(null, false, {message:'loginMessage', 'That email is already taken.'});
-
-			//  If we're logged in, we're connecting a new local account.
-			if(req.user) {
-				var user            = req.user;
-				user.localemail    = email;
-				user.localpassword = User.generateHash(password);
-				user.save().catch(function (err) {
-					throw err;
-				}).then (function() {
-					done(null, user);
-				});
-			} 
-			//  We're not logged in, so we're creating a brand new user.
-			else {
-				// create the user
-				var newUser = User.build ({localemail: email, localpassword: User.generateHash(password)});	
-				newUser.save().then(function() {done (null, newUser);}).catch(function(err) { done(null, false, {message:'loginMessage', err});
-			}
-		})
-		.catch(function (e) {
-			done(null, false, {message:'loginMessage',e.name + " " + e.message});
-		})
-}));
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
