@@ -54,14 +54,10 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 
 //Passport stuff
 // LOCAL LOGIN
-passport.use('local', new LocalStrategy({
-    // by default, local strategy uses username and password, we will override with email
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true // allows us to pass in the request from our route (lets us check if a user is logged in or not)
-},
-function(req, email, password, done) {        
-    User.findOne({ where: { localemail: email }})
+passport.use(new LocalStrategy({ passReqToCallback : true },
+	// allows us to pass in the request from our route (lets us check if a user is logged in or not)
+function(req, username, password, done) {        
+	User.findOne({ username: username })
         .then(function(user) {
             if (!user) {
                 done(null, false, {message:'Unknown user.'});
