@@ -49,6 +49,13 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
   for (let row of queryOutput.rows) {
     chatGeneral = chatGeneral + row.table_name + "\r\n";
   }
+});
+client.query('SELECT * FROM Users;', (err, queryOutput) => {
+  if (err) chatGeneral = chatGeneral + err;
+  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
+  for (let row of queryOutput.rows) {
+    chatGeneral = chatGeneral + row.table_name + "\r\n";
+  }
   client.end();
 });
 
