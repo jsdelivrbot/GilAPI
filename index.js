@@ -54,7 +54,7 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
   if (err) chatGeneral = chatGeneral + err;
   chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + row.table_name + "\r\n";
+    chatGeneral = chatGeneral + row + "\r\n";
   }
   client.end();
 });
