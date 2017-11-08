@@ -63,9 +63,7 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 // LOCAL LOGIN
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      return done(null, user);
-    });
+      return done(null, user);    
   }
 ));
 
