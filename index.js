@@ -54,15 +54,14 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 
 //Passport stuff
 // LOCAL LOGIN
-passport.use(new LocalStrategy({ passReqToCallback : true },
-	// allows us to pass in the request from our route (lets us check if a user is logged in or not)
-function(req, username, password, done) {        
-	User.findOne({ username: username })
- 	  if (err) { return done(err); }
-	  if (!user) { return done(null, false); }
-	  if (!user.verifyPassword(password)) { return done(null, false); }
-	  return done(null, user);
-	});
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    });
   }
 ));
 
