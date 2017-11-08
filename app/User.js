@@ -1,4 +1,4 @@
-// file app/models/user.js
+// file app/user.js
 // define the model for User 
 
 
