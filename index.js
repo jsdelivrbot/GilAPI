@@ -125,7 +125,7 @@ app.get('/login', function(request, response) {
   response.render('pages/login');
 });
 app.post('/login',
-  passport.authenticate('local', {
+  passport.authenticate('local-login', {
     successRedirect: '/loginSuccess',
     failureRedirect: '/loginFailure'
   })
