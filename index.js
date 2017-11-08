@@ -13,6 +13,9 @@ var pghstore = require('pg-hstore');
 var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
 var User = sequelize.import('./User');
 User.sync();
+// load the auth variables
+var configAuth = require('./auth'); 
+// use this one for testing // FB, Windows, Google oAuth vars, use env vars instead.
 
 var app = express();
 
