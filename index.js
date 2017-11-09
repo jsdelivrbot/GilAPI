@@ -127,9 +127,9 @@ app.get('/login2', function (request, response) {
   userName_query = request.query.userName,
   userPassword_query = request.query.userPassword
   if (userPassword_query == "Hello") {
-    response.render('/loginSuccess');
+    response.redirect('/loginSuccess');
   } else {
-    response.render('/loginFailure');
+    response.redirect('/loginFailure');
   }; //end if first_name
 })
 
