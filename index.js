@@ -127,9 +127,9 @@ app.get('/login2', function (request, response) {
   userName_query = request.query.userName,
   userPassword_query = request.query.userPassword
   if (userPassword_query == "Hello") {
-    response.render('pages/Arkdata');
+    response.render('/loginSuccess');
   } else {
-    response.render('pages/demo');
+    response.render('/loginFailure');
   }; //end if first_name
 })
 
@@ -178,7 +178,7 @@ app.get('/chatpost', function(request, response) {
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
     if (err) chatGeneral = chatGeneral + err;
-    chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
+    chatGeneral = chatGeneral + 'SELECT FROM chatroom_General\n\r';
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
     }
