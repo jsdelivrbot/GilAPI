@@ -168,6 +168,22 @@ app.get('/chatpost', function(request, response) {
 
   chatGeneral = chatGeneral + chatUser + ": " + chatMessage + "\r\n"
   
+  client.connect();
+  client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
+    if (err) chatGeneral = chatGeneral + err;
+    chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
+    for (let row of queryOutput.rows) {
+      chatGeneral = chatGeneral + row + "\r\n";
+    }
+  });
+  client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
+    if (err) chatGeneral = chatGeneral + err;
+    chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
+    for (let row of queryOutput.rows) {
+      chatGeneral = chatGeneral + row + "\r\n";
+    }
+  });
+  client.end();
   response.send(chatGeneral);
 });  
 
