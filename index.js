@@ -119,7 +119,7 @@ app.get('/logout', function(request, response){
   response.redirect('/');
 });
 
-app.get('/login2', function (request, response) {
+app.post('/login2', function (request, response) {
    res = {
       userName:request.query.userName,
       last_name:request.query.userPassword
