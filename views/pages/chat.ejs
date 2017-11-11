@@ -14,9 +14,19 @@
 <div id="chatRoomName">All</div> Chat<br>
   <textarea id="chatMainBox" cols="100" rows="25" value="Chat goes here.">Chat goes here.</textarea> <br>
 </div>
-<input type = "text" id = "chatUser" value="User">
-<input type = "text" id = "chatMessage" value="Hello World!"> 
-<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
+    <form action="/chatpost" method="post">
+      <div>
+        <input type="text" name="user" value="Username"/>
+        <br/>
+      </div>
+      <div>
+        <label>Password:</label>
+		<input type = "text" name = "message" value="Hello World!"> 
+      </div>
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
 
 
   <% include ../partials/footer.ejs %>
