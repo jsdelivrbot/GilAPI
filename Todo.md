@@ -4,3 +4,10 @@
 - Database
 - Passport
 - Chat
+
+New page steps:
+- index.js get
+- test.js increment
+- test.js test
+- Copy template EJS
+- Copy template JS
