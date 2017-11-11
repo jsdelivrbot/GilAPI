@@ -1,6 +1,6 @@
 # Todo
-- Admin page
-- Passport
 - Git page
+- Admin page
 - Database
+- Passport
 - Chat
