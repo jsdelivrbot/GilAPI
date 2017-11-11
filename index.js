@@ -3,6 +3,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
 var passport = require('passport');
+var passporthttp = require('passport-http');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
@@ -79,44 +80,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-passport.use('signup', new LocalStrategy({
-    passReqToCallback : true 
-  },
-  function(req, username, password, done) {
-    findOrCreateUser = function(){
-      User.findOne({'username':username},function(err, user) {
-        if (err){
-  		  chatGeneral = chatGeneral + err;
-          return done(err);
-        }
-        if (user) {
-          console.log('User already exists');
-          return done(null, false, 
-             req.flash('message','User Already Exists'));
-        } else {
-          var newUser = new User();
-          newUser.username = username;
-          newUser.password = createHash(password);
-          newUser.email = req.param('email');
-          newUser.firstName = req.param('firstName');
-          newUser.lastName = req.param('lastName');
-
-          newUser.save(function(err) {
-            if (err){
-              console.log('Error in Saving user: '+err);  
-              throw err;  
-            }
-            console.log('User Registration succesful');    
-            return done(null, newUser);
-          });
-        }
-      });
-    };
-    
-    process.nextTick(findOrCreateUser);
-  });
-);
-
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -173,6 +136,23 @@ app.post('/login2', function (request, response) {
     response.redirect('/');
   }; //end if first_name
 })
+
+app.get('/signup', function(request, response) {
+  response.render('pages/signup');
+});
+app.post('/signup', function (request, response) {
+  userEmail_query = request.query.userEmail,
+  userPassword_query = request.query.userPassword
+  
+  client.query("INSERT INTO Users (localemail, localpassword) VALUES (userEmail_query, userPassword_query);", (err, queryOutput) => {
+    if (err) chatGeneral = chatGeneral + err;
+    chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
+    for (let row of queryOutput.rows) {
+      chatGeneral = chatGeneral + row + "\r\n";
+    }
+  });
+    response.redirect('/chat');
+});
 
 //region WIP
 app.get('/Arkdata', function(request, response) {
