@@ -29,6 +29,8 @@ function updateChat() {
   }); // end loadJSON
   
   document.getElementById("chatMessage").value = ""
+  
+  document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight 
 }; // end updateForm
 
 chatRoom = "General"

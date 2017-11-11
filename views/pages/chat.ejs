@@ -9,13 +9,14 @@
 <script src="/js/chat.js" Content-Type="text/javascript" charset="UTF-8"></script>
   <br>
   <br>
-  User Name: <input type = "text" id = "chatUser"> <br>
   Chat Room: <input type = "text" id = "chatRoom" value="General"> <br>
-  Message: <input type = "text" id = "chatMessage" value="Hello World!"> 
-<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
   
 <div id="chatRoomName">All</div> Chat<br>
-<textarea id="chatMainBox" cols="50" rows="100" value="Chat goes here.">Chat goes here.</textarea> <br>
+  <textarea id="chatMainBox" cols="100" rows="25" value="Chat goes here.">Chat goes here.</textarea> <br>
+</div>
+<input type = "text" id = "chatUser" value="User">
+<input type = "text" id = "chatMessage" value="Hello World!"> 
+<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
 
 
   <% include ../partials/footer.ejs %>
