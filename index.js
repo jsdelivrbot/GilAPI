@@ -119,6 +119,9 @@ app.get('/logout', function(request, response){
   response.redirect('/');
 });
 
+app.get('/login2', function(request, response) {
+  response.render('pages/login');
+});
 app.post('/login2', function (request, response) {
    res = {
       userName:request.query.userName,
