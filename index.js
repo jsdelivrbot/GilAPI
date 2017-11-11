@@ -3,6 +3,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
 var passport = require('passport');
+var passporthttp = require('passport-http');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
@@ -135,6 +136,23 @@ app.post('/login2', function (request, response) {
     response.redirect('/');
   }; //end if first_name
 })
+
+app.get('/signup', function(request, response) {
+  response.render('pages/signup');
+});
+app.post('/signup', function (request, response) {
+  userEmail_query = request.query.userEmail,
+  userPassword_query = request.query.userPassword
+  
+  client.query("INSERT INTO Users (localemail, localpassword) VALUES (userEmail_query, userPassword_query);", (err, queryOutput) => {
+    if (err) chatGeneral = chatGeneral + err;
+    chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
+    for (let row of queryOutput.rows) {
+      chatGeneral = chatGeneral + row + "\r\n";
+    }
+  });
+    response.redirect('/chat');
+});
 
 //region WIP
 app.get('/Arkdata', function(request, response) {
