@@ -10,9 +10,9 @@
 <body onload="updateGitPage();">
   <br>
   <br>
-  Git repo URL: <input type = "text" id = "gitRepoUrl" name = "gitRepoUrl" class="resizedTextbox" value = "https://raw.githubusercontent.com/Gilgamech/GilAPI/master" onchange="updateGitPage()"> <br>
+  Git repo URL: <input type = "text" id = "gitRepoUrl" name = "gitRepoUrl" class="resizedTextbox" value = "https://raw.githubusercontent.com/Gilgamech/GilAPI/master"> <br>
   <br>
-  File Name: <input type = "text" id = "gitFileName" name = "gitFileName" class="resizedTextbox" value = "README.md" onchange="updateGitPage()"> <br>
+  File Name: <input type = "text" id = "gitFileName" name = "gitFileName" class="resizedTextbox" value = "README.md"> <br>
 
 <div id="gitFileNameItem">Index.JS:</div><br>
 <textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea> <br>
@@ -23,7 +23,7 @@
   <tr><td>Text to Save:</td></tr>
 	<tr>
 		<td colspan="3">
-			<textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
+			<textarea id="gitFileNameItem" style="width:512px;height:256px"></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -35,6 +35,11 @@
 		<td>Select a File to Load:</td>
 		<td><input type="file" id="fileToLoad"></td>
 		<td><button onclick="loadFileAsText()">Load Selected File</button><td>
+	</tr>
+	<tr>
+		<td>Load file from Github:</td>
+		<td></td>
+		<td><button onclick="updateGitPage()">Load from Github</button><td>
 	</tr>
 </table>
   <br>

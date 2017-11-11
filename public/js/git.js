@@ -18,7 +18,7 @@ function loadJSON(file, callback) {
 
 // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
 function saveTextAsFile() {
-	var textToWrite = document.getElementById("inputTextToSave").value;
+	var textToWrite = document.getElementById("gitFileNameItem").value;
 	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
 	var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
 
@@ -48,7 +48,7 @@ function loadFileAsText() {
 	
 	fileReader.onload = function(fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
-		document.getElementById("inputTextToSave").value = textFromFileLoaded;
+		document.getElementById("gitFileNameItem").value = textFromFileLoaded;
 	};
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
