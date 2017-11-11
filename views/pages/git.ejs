@@ -7,6 +7,7 @@
 <body>
   <% include ../partials/nav.ejs %>
 <script src="/js/git.js" Content-Type="text/javascript" charset="UTF-8"></script>
+<script src="/js/text2.js" Content-Type="text/javascript" charset="UTF-8"></script>
   <br>
   <br>
   Git repo URL: <input type = "text" id = "gitRepoUrl" onchange="updateGitPage()"> <br>
@@ -14,9 +15,29 @@
   File Name: <input type = "text" id = "gitFileName" onchange="updateGitPage()"> <br>
 
 <div id="gitFileNameItem">Index.JS:</div><br>
-<textarea id="gitFileTextArea" cols="400" rows="100" value="Code goes here.">Code goes here.</textarea> <br>
+<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea> <br>
+  <br>
+  <br>
+Page Name: <input type = "text" id = "pageName" onchange="updateForm('newappget', 'pageName', 'IndexJS')"> <br>
+Index.JS: <br>
+<textarea id="IndexJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
 
+Test.JS: <br>
+<textarea id="TestJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
 
+New Function Statement: <br>
+<p>Select your type:&nbsp;
+<label><input type="radio" name="size" value="If" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','if')"/> If</label>
+<label><input type="radio" name="size" value="For" checked="checked" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','for')" /> For</label>
+<label><input type="radio" name="size" value="While" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','while')"/> While</label>
+</p>
+
+Variable Name: <input type = "text" id = "NFSpageName" onchange="updateForm('newappget', 'pageName', 'IndexJS')"> <br>
+Index.JS: <br>
+
+<textarea id="NFSInput" cols="100" rows="10" value="Code goes here."></textarea> <br>
+
+<textarea id="NFSJS" cols="100" rows="15" value="Code goes here."></textarea> <br>
 
 
   <% include ../partials/footer.ejs %>
