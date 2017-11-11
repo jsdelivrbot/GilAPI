@@ -22,7 +22,7 @@ function updateGitPage() {
   if (gitFileName) {
     document.getElementById("gitFileName").value = gitFileName
   } else {
-	  gitFileName = "README.MD"
+	  gitFileName = "README.md"
       document.getElementById("gitFileName").value = gitFileName
   }; //end if gitFileName
   document.getElementById("gitFileNameItem").value = gitFileName
