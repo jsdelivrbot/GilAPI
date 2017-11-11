@@ -10,20 +10,13 @@
 <body onload="updateGitPage();">
   <br>
   <br>
-  Git repo URL: <input type = "text" id = "gitRepoUrl" name = "gitRepoUrl" class="resizedTextbox" value = "https://raw.githubusercontent.com/Gilgamech/GilAPI/master"> <br>
-  <br>
-  File Name: <input type = "text" id = "gitFileName" name = "gitFileName" class="resizedTextbox" value = "README.md"> <br>
-
-<div id="gitFileNameItem">Index.JS:</div><br>
-<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea> <br>
-  <br>
-  <br>
+  Git repo URL: <input type = "text" id = "gitRepoUrl" name = "gitRepoUrl" class="resizedTextbox" value = "https://raw.githubusercontent.com/Gilgamech/GilAPI/master">   <br>
   <br>
 <table>
-  <tr><td>Text to Save:</td></tr>
+  <tr><td><div id="gitFileNameItem">Index.JS:</div></td></tr>
 	<tr>
 		<td colspan="3">
-			<textarea id="gitFileNameItem" style="width:512px;height:256px"></textarea>
+			<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea>
 		</td>
 	</tr>
 	<tr>
@@ -38,7 +31,7 @@
 	</tr>
 	<tr>
 		<td>Load file from Github:</td>
-		<td></td>
+		<td><input type = "text" id = "gitFileName" name = "gitFileName" class="resizedTextbox" value = "README.md"></td>
 		<td><button onclick="updateGitPage()">Load from Github</button><td>
 	</tr>
 </table>
