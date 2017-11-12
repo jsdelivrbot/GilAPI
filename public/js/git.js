@@ -80,24 +80,32 @@ function updateNewPageForm() {
   updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea");
   updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea");
   updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea");
-  updateTextAreaFromRepo("PagenameJSNameInput","PagenameJSNameItem",RepoUrlElement,"PagenameJSTextArea");
   updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea");
   
-  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
-  docUpdateTextArea = document.getElementById("IndexJSTextArea").innerText;
-  docUpdateNewName = document.getElementById("NewPageNameInput").value;
-  docUpdateTextString = "\r\n//region WIP\r\napp.get('/" + docUpdateNewName + "', function(request, response) { \r\n  response.render('pages/" + docUpdateNewName + "'); \r\n});  \r\n";
-  document.getElementById("IndexJSTextArea").innerText = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1];
-  
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
-  colorifyDiv("IndexJSTextArea", "function", "green");
-  colorifyDiv("IndexJSTextArea", "var", "green");
-  colorifyDiv("IndexJSTextArea", "this", "green");
-  colorifyDiv("IndexJSTextArea", "new", "green");
-  colorifyDiv("IndexJSTextArea", "if", "green");
-  colorifyDiv("IndexJSTextArea", "then", "green");
 
+  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP")
+  colorifyDivTextArea('IndexJSTextArea')
 }; // end updateNewPageForm
+
+function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {  
+  var lineBreak = "\r\n"
+  var spaceChar = " "
+  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  docUpdateTextArea = document.getElementById(docTextArea).innerText;
+  docUpdateNewName = document.getElementById(docNewName).value;
+  // Customized for index.js
+  docUpdateTextString = lineBreak + splitMarker + lineBreak + "app.get('/" + docUpdateNewName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docUpdateNewName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
+  document.getElementById(DivTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+}; // end boilerplateDivTextArea
+
+function colorifyDivTextArea(DivTextArea) {  
+  var words = ["function","var","this","new","if","then"];
+  var superGreen = "green";
+  for (word of words) {
+    colorifyDiv(DivTextArea, word, superGreen);
+  };
+}; // end colorifyDivTextArea
 
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
@@ -116,7 +124,6 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
-updateForm('newappget', 'pageName', 'IndexJS');
 updateForm('newappget', 'NFSpageName', 'TestJS');
 
 

@@ -25,7 +25,7 @@
 	<tr>
 		<td><div id="IndexJSNameItem">Index.js:</div></td>
 		<td><input type = "text" id = "IndexJSNameInput" name = "IndexJSNameInput" class="resizedTextbox" value = "index.js"></td>
-		<td></td>
+		<td>><button onclick="colorifyDivTextArea('IndexJSTextArea')">Colorify!</button></td>
 	</tr>
 	<tr>
 		<td colspan="3">
@@ -88,7 +88,7 @@
 <label><input type="radio" name="size" value="While" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','while')"/> While</label>
 </p>
 
-Variable Name: <input type = "text" id = "NFSpageName" onchange="updateForm('newappget', 'pageName', 'IndexJS')"> <br>
+Variable Name: <input type = "text" id = "NFSpageName" onchange="updateForm('newappget', 'NFSpageName', 'IndexJS')"> <br>
 Index.js: <br>
 <textarea id="NFSInput" cols="100" rows="10" value="Code goes here."></textarea> <br>
 <textarea id="NFSJS" cols="100" rows="15" value="Code goes here."></textarea> <br>
