@@ -58,20 +58,18 @@ function updateDownloadLink() {
 
 function updateNewPageForm() {
 	//Get new page name from element
-  FileNameElement = "NewPageNameInput"
-  FileNameItem = "NewPageNameItem"
   RepoUrlElement = "gitRepoUrl"
+  Pagename = document.getElementById("NewPageNameInput").value
+  document.getElementById("PagenameEJSNameItem").value = Pagename + ".ejs"
+  document.getElementById("PagenameJSNameItem").value = Pagename + ".js"
+
   // Get each page from Github, populate textarea
-  // updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")
   // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
   updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea")
   updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea")
   updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea")
   updateTextAreaFromRepo("PagenameJSNameInput","PagenameJSNameItem",RepoUrlElement,"PagenameJSTextArea")
   updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea")
-
-  // Load file from repo into gitFileTextArea.
-
   
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
   
@@ -95,6 +93,7 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
+updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
 
 // http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
