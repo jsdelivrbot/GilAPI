@@ -52,7 +52,7 @@
 	background-color: #DDDDDD;
     overflow: scroll;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: scroll;
     text-align: left;
 }
 -->
