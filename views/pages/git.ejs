@@ -10,20 +10,43 @@
 <body onload="updateGitPage();">
   <br>
   <br>
-  Git repo URL: <input type = "text" id = "gitRepoUrl" class="resizedTextbox" value = "https://raw.githubusercontent.com/Gilgamech/GilAPI/master" onchange="updateGitPage()"> <br>
+  <div style="margin: 8px; text-align: center;">
+  Git repo URL: <input type = "text" id = "gitRepoUrl" name = "gitRepoUrl" class="resizedTextbox" value = "https://raw.githubusercontent.com/Gilgamech/GilAPI/master">   <br>
   <br>
-  File Name: <input type = "text" id = "gitFileName" class="resizedTextbox" value = "README.md" onchange="updateGitPage()"> <br>
-
-<div id="gitFileNameItem">Index.JS:</div><br>
-<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea> <br>
+<table>
+  <tr><td><div id="gitFileNameItem">Index.JS:</div></td></tr>
+	<tr>
+		<td colspan="3">
+			<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>Filename to Save As:</td>
+		<td><input type="file" id="inputFileNameToSaveAs" onchange = "updateDownloadLink();"></td>
+		<td><a href="" id="gitFilelink" download="code.txt">Download Above Code</a></td>
+	</tr>
+	<tr>
+		<td>Select a File to Load:</td>
+		<td><input type="file" id="fileToLoad"></td>
+		<td><button onclick="loadFileAsText()">Load Selected File</button><td>
+	</tr>
+	<tr>
+		<td>Load file from Github:</td>
+		<td><input type = "text" id = "gitFileName" name = "gitFileName" class="resizedTextbox" value = "README.md"></td>
+		<td><button onclick="updateGitPage()">Load from Github</button><td>
+	</tr>
+</table>
+</div>
   <br>
   <br>
-Page Name: <input type = "text" id = "pageName" onchange="updateForm('newappget', 'pageName', 'IndexJS')"> <br>
+  <br>
+New Page Name: <input type = "text" id = "pageName" onchange="updateForm('newappget', 'pageName', 'IndexJS')"> <br>
 Index.JS: <br>
 <textarea id="IndexJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
-
 Test.JS: <br>
 <textarea id="TestJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
+Nav.EJS: <br>
+<textarea id="NavEJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
 
 New Function Statement: <br>
 <p>Select your type:&nbsp;

@@ -18,7 +18,7 @@ a:visited{
 a:active{
 	color: #777777;
 }
-.resizedTextbox {width: 100px; height: 20px; padding: 1px}
+.resizedTextbox {width: 500px; height: 20px; padding: 1px}
 canvas {
 	display: block;
 	margin: 0px auto;

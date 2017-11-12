@@ -1,5 +1,3 @@
-
-
 // Load JSON
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 function loadJSON(file, callback) {   
@@ -15,6 +13,20 @@ function loadJSON(file, callback) {
     };
     xobj.send(null);  
 };// end loadJSON
+
+// https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
+function loadFileAsText() { 	
+	var fileToLoad = document.getElementById("fileToLoad").files[0];
+	var fileReader = new FileReader();
+	
+	fileReader.onload = function(fileLoadedEvent) {
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		document.getElementById("gitFileTextArea").value = textFromFileLoaded;
+	};
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+function destroyClickedElement(event) {	document.body.removeChild(event.target); }
 
 function updateGitPage() {
   // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
@@ -35,6 +47,10 @@ function updateGitPage() {
   
 }; // end updateForm
 
+
+function updateDownloadLink() {
+  document.getElementById("gitFilelink").download = document.getElementById("inputFileNameToSaveAs").value
+}; // end updateForm
 
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
