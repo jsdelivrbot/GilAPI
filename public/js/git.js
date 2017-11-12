@@ -29,10 +29,10 @@ function loadFileAsText() {
 function destroyClickedElement(event) {	document.body.removeChild(event.target); }
 
 function updateGitPage() {
-updateTextAreaFromRepo("gitFileName","gitRepoUrl","gitFileTextArea")  
+updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
 }; // end updateForm
 
-function updateTextAreaFromRepo(FileNameElement,RepoUrlElement,TextAreaElement) {
+function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
   // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
   FileName = document.getElementById(FileNameElement).value
   if (FileName) {
@@ -41,6 +41,7 @@ function updateTextAreaFromRepo(FileNameElement,RepoUrlElement,TextAreaElement) 
 	  FileName = "README.md"
       document.getElementById(FileNameElement).value = FileName
   }; //end if FileName
+  document.getElementById(FileNameItem).innerHTML = FileName
   
   // Load file from repo into gitFileTextArea.
   RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
@@ -61,11 +62,13 @@ function updateNewPageForm() {
   FileNameItem = "NewPageNameItem"
   RepoUrlElement = "gitRepoUrl"
   // Get each page from Github, populate textarea
-  updateTextAreaFromRepo("Index.js",RepoUrlElement,"IndexJSTextArea")
-  updateTextAreaFromRepo("Test.js",RepoUrlElement,"TestJSTextArea")
-  updateTextAreaFromRepo("Nav.ejs",RepoUrlElement,"NavEJSTextArea")
-  updateTextAreaFromRepo("Pagename.ejs",RepoUrlElement,"PagenameEJSTextArea")
-  updateTextAreaFromRepo("Pagename.js",RepoUrlElement,"PagenameJSTextArea")
+  // updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")
+  // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
+  updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea")
+  updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea")
+  updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea")
+  updateTextAreaFromRepo("PagenameJSNameInput","PagenameJSNameItem",RepoUrlElement,"PagenameJSTextArea")
+  updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea")
 
   // Load file from repo into gitFileTextArea.
 
