@@ -46,7 +46,7 @@ function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,Text
   // Load file from repo into gitFileTextArea.
   RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
   loadJSON(RepoUrl, function(response) {
-    document.getElementById(TextAreaElement).value = response
+    document.getElementById(TextAreaElement).innerText = response
   }); // end loadJSON
   
 }; // end updateForm
