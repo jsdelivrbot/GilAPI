@@ -55,3 +55,14 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 
 updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
+
+// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
+window.onload = function() {
+  var txt = document.getElementById('gitFileTextArea');
+  txt.value = window.onload + '';
+  document.getElementById('gitFilelink').onclick = function(code) {
+	this.href = 'data:text/plain;charset=utf-8,'
+	  + encodeURIComponent(txt.value);
+  };
+};
+
