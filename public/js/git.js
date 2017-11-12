@@ -1,5 +1,3 @@
-
-
 // Load JSON
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 function loadJSON(file, callback) {   
@@ -16,32 +14,14 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
-// https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
+// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
 function saveTextAsFile() {
-	var textToWrite = document.getElementById("gitFileTextArea").value;
-	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-	var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
-
-	var downloadLink = document.createElement("a");
-	downloadLink.download = fileNameToSaveAs;
-	downloadLink.innerHTML = "Download File";
-	if (window.webkitURL != null) {
-		// Chrome allows the link to be clicked
-		// without actually adding it to the DOM.
-		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-	} else {
-		// Firefox requires the link to be added to the DOM
-		// before it can be clicked.
-		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-		downloadLink.onclick = destroyClickedElement;
-		downloadLink.style.display = "none";
-		document.body.appendChild(downloadLink);
-	}
-	downloadLink.click();
+  var messageData = document.getElementById("gitFileTextArea").value
+  var fileurl = ""/mirror?data=" + encodeURIComponent(JSON.stringify(messageData));
+  window.location = fileurl;
 }
 
-function destroyClickedElement(event) {	document.body.removeChild(event.target); }
-
+// https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
 function loadFileAsText() {
 	var fileToLoad = document.getElementById("fileToLoad").files[0];
 	var fileReader = new FileReader();
@@ -52,6 +32,8 @@ function loadFileAsText() {
 	};
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
+
+function destroyClickedElement(event) {	document.body.removeChild(event.target); }
 
 function updateGitPage() {
   // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
@@ -92,3 +74,13 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 
 updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
+
+window.onload = function() {
+  var txt = document.getElementById('gitFileTextArea');
+  txt.value = window.onload + '';
+  document.getElementById('link').onclick = function(code) {
+	this.href = 'data:text/plain;charset=utf-8,'
+	  + encodeURIComponent(txt.value);
+  };
+};
+
