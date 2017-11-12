@@ -57,7 +57,8 @@ function updateNewPageForm() {
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
 
   boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  colorifyDivTextArea('IndexJSTextArea');
+  var words = ["function","var","this","new","if","then"];
+  colorifyDivTextArea('IndexJSTextArea',words);
 }; // end updateNewPageForm
 
 function updateNewPageBoilerplate() {  
@@ -75,8 +76,7 @@ function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {
   document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
 }; // end boilerplateDivTextArea
 
-function colorifyDivTextArea(DivTextArea) {  
-  var words = ["function","var","this","new","if","then"];
+function colorifyDivTextArea(DivTextArea,words) {  
   var superGreen = "green";
   for (word of words) {
     colorifyDiv(DivTextArea, word, superGreen);
