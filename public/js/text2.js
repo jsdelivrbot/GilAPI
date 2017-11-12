@@ -22,6 +22,33 @@ function handle(e){
 		alert("Enter was pressed was presses");
 	}
 }
+function updateGitPage() {
+  updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
+}; // end updateForm
+
+function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
+  FileName = document.getElementById(FileNameElement).value
+  if (FileName) {
+    document.getElementById(FileNameElement).value = FileName
+  } else {
+	  FileName = "README.md"
+      document.getElementById(FileNameElement).value = FileName
+  }; //end if FileName
+  document.getElementById(FileNameItem).innerHTML = FileName
+  
+  // Load file from repo into gitFileTextArea.
+  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
+  loadJSON(RepoUrl, function(response) {
+    document.getElementById(TextAreaElement).innerText = response
+  }); // end loadJSON
+  
+}; // end updateForm
+
+function updateDownloadLink() {
+  document.getElementById("gitFilelink").download = document.getElementById("inputFileNameToSaveAs").value
+}; // end updateForm
+
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
   nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
