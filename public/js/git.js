@@ -60,8 +60,8 @@ function updateNewPageForm() {
 	//Get new page name from element
   RepoUrlElement = "gitRepoUrl"
   Pagename = document.getElementById("NewPageNameInput").value
-  document.getElementById("PagenameEJSNameItem").value = Pagename + ".ejs"
-  document.getElementById("PagenameJSNameItem").value = Pagename + ".js"
+  document.getElementById("PagenameEJSNameInput").value = "\views\pages\template.ejs"
+  document.getElementById("PagenameJSNameInput").value = Pagename + ".js"
 
   // Get each page from Github, populate textarea
   // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
@@ -73,6 +73,7 @@ function updateNewPageForm() {
   
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
   
+  document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs"
 }; // end updateNewPageForm
 
 
