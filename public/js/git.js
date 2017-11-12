@@ -112,9 +112,11 @@ window.onload = function() {
 };
 
 // Applies color scheme to text in div.
+//  https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css
 function colorifyDiv(divName, replaceWord, replaceColor) {
+  var replacere = new RegExp(replaceWord, "g");
   var str = document.getElementById(divName).innerHTML,
-  str = str.replace(replaceWord, '<span style="color:' + replaceColor + ';">' + replaceWord + '</span>');
+  str = str.replace(replacere, '<span style="color:' + replaceColor + ';">' + replaceWord + '</span>');
   // Clean up repeats and duplicates.
   str = str.replace('<span style="color:<span style="color:', '<span style="color:');
   str = str.replace('</span></span>','</span>');
