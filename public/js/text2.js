@@ -16,6 +16,12 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
+function handle(e){
+	if(e.keyCode === 13){
+		e.preventDefault(); // Ensure it is only this code that runs
+		alert("Enter was pressed was presses");
+	}
+}
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
   nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
@@ -33,12 +39,17 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
-function handle(e){
-	if(e.keyCode === 13){
-		e.preventDefault(); // Ensure it is only this code that runs
-		alert("Enter was pressed was presses");
-	}
-}
-
 updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
+
+
+// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
+window.onload = function() {
+  var txt = document.getElementById('gitFileTextArea');
+  txt.value = window.onload + '';
+  document.getElementById('gitFilelink').onclick = function(code) {
+	this.href = 'data:text/plain;charset=utf-8,'
+	  + encodeURIComponent(txt.value);
+  };
+};
+

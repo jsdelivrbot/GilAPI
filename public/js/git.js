@@ -107,33 +107,3 @@ function colorifyDivTextArea(DivTextArea) {
   };
 }; // end colorifyDivTextArea
 
-function updateForm(nfsCall, nfsName, nfsTextArea) {
-  nfsInput = document.getElementById(nfsName).value
-  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
-  loadJSON(nfsurl, function(response) {
-    document.getElementById(nfsTextArea).value = response //actual_JSON
-  }); // end loadJSON
-}; // end updateForm
-
-function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
-  nfsName = document.getElementById("NFSpageName").value
-  nfsParams = document.getElementById("NFSInput").value
-  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName + "&params=" + nfsParams + "&type=" + nfsType
-  loadJSON(nfsurl, function(response) {
-    document.getElementById(nfsTextArea).value = response //actual_JSON
-  }); // end loadJSON
-}; // end updateForm
-
-updateForm('newappget', 'NFSpageName', 'TestJS');
-
-
-// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
-window.onload = function() {
-  var txt = document.getElementById('gitFileTextArea');
-  txt.value = window.onload + '';
-  document.getElementById('gitFilelink').onclick = function(code) {
-	this.href = 'data:text/plain;charset=utf-8,'
-	  + encodeURIComponent(txt.value);
-  };
-};
-
