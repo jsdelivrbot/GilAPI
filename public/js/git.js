@@ -84,14 +84,20 @@ function updateNewPageForm() {
   updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea");
   
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
-  docUpdateTextArea = document.getElementById("IndexJSTextArea").value;
+  docUpdateTextArea = document.getElementById("IndexJSTextArea").innerText;
   docUpdateNewName = document.getElementById("NewPageNameInput").value;
   docUpdateTextString = "\r\n//region WIP\r\napp.get('/" + docUpdateNewName + "', function(request, response) { \r\n  response.render('pages/" + docUpdateNewName + "'); \r\n});  \r\n";
-  document.getElementById("IndexJSTextArea").value = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1];
+  document.getElementById("IndexJSTextArea").innerText = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1];
   
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
-}; // end updateNewPageForm
+  colorifyDiv("IndexJSTextArea", "function", "green");
+  colorifyDiv("IndexJSTextArea", "var", "green");
+  colorifyDiv("IndexJSTextArea", "this", "green");
+  colorifyDiv("IndexJSTextArea", "new", "green");
+  colorifyDiv("IndexJSTextArea", "if", "green");
+  colorifyDiv("IndexJSTextArea", "then", "green");
 
+}; // end updateNewPageForm
 
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
@@ -113,12 +119,6 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 updateForm('newappget', 'pageName', 'IndexJS');
 updateForm('newappget', 'NFSpageName', 'TestJS');
 
-colorifyDiv("IndexJSTextArea", "function", "green");
-colorifyDiv("IndexJSTextArea", "var", "green");
-colorifyDiv("IndexJSTextArea", "this", "green");
-colorifyDiv("IndexJSTextArea", "new", "green");
-colorifyDiv("IndexJSTextArea", "if", "green");
-colorifyDiv("IndexJSTextArea", "then", "green");
 
 // http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
 window.onload = function() {
