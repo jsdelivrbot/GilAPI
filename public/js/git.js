@@ -111,3 +111,12 @@ window.onload = function() {
   };
 };
 
+// Applies color scheme to text in div.
+function colorifyDiv(divName, replaceWord, replaceColor) {
+  var str = document.getElementById(divName).innerHTML,
+  str = str.replace(replaceWord, '<span style="color:' + replaceColor + ';">' + replaceWord + '</span>');
+  // Clean up repeats and duplicates.
+  str = str.replace('<span style="color:<span style="color:', '<span style="color:');
+  str = str.replace('</span></span>','</span>');
+  document.getElementById(divName).innerHTML = str;
+}; // end colorifyDiv
