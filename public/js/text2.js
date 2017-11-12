@@ -33,5 +33,12 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
+function handle(e){
+	if(e.keyCode === 13){
+		e.preventDefault(); // Ensure it is only this code that runs
+		alert("Enter was pressed was presses");
+	}
+}
+
 updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
