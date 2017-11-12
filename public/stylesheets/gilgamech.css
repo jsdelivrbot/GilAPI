@@ -19,13 +19,19 @@ a:active{
 	color: #777777;
 }
 .resizedTextbox {width: 500px; height: 20px; padding: 1px}
+
 .div_textarea {
 	width: 750px; 
 	height: 500px; 
 	padding: 1px; 
 	border: 1px solid black;
 	background-color: #BBBBBB;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: left;
 }
+
 canvas {
 	display: block;
 	margin: 0px auto;

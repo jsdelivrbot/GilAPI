@@ -28,6 +28,18 @@ function loadFileAsText() {
 
 function destroyClickedElement(event) {	document.body.removeChild(event.target); }
 
+// Applies color scheme to text in div.
+//  https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css
+function colorifyDiv(divName, replaceWord, replaceColor) {
+  var replacere = new RegExp(replaceWord, "g");
+  var str = document.getElementById(divName).innerHTML,
+  str = str.replace(replacere, '<span style="color:' + replaceColor + ';">' + replaceWord + '</span>');
+  // Clean up repeats and duplicates.
+  str = str.replace('<span style="color:<span style="color:', '<span style="color:');
+  str = str.replace('</span></span>','</span>');
+  document.getElementById(divName).innerHTML = str;
+}; // end colorifyDiv
+
 function updateGitPage() {
 updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
 }; // end updateForm
@@ -98,8 +110,15 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
-updateForm('newappget', 'pageName', 'IndexJS')
-updateForm('newappget', 'NFSpageName', 'TestJS')
+updateForm('newappget', 'pageName', 'IndexJS');
+updateForm('newappget', 'NFSpageName', 'TestJS');
+
+colorifyDiv("IndexJSTextArea", "function", "green");
+colorifyDiv("IndexJSTextArea", "var", "green");
+colorifyDiv("IndexJSTextArea", "this", "green");
+colorifyDiv("IndexJSTextArea", "new", "green");
+colorifyDiv("IndexJSTextArea", "if", "green");
+colorifyDiv("IndexJSTextArea", "then", "green");
 
 // http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
 window.onload = function() {
@@ -111,14 +130,3 @@ window.onload = function() {
   };
 };
 
-// Applies color scheme to text in div.
-//  https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css
-function colorifyDiv(divName, replaceWord, replaceColor) {
-  var replacere = new RegExp(replaceWord, "g");
-  var str = document.getElementById(divName).innerHTML,
-  str = str.replace(replacere, '<span style="color:' + replaceColor + ';">' + replaceWord + '</span>');
-  // Clean up repeats and duplicates.
-  str = str.replace('<span style="color:<span style="color:', '<span style="color:');
-  str = str.replace('</span></span>','</span>');
-  document.getElementById(divName).innerHTML = str;
-}; // end colorifyDiv
