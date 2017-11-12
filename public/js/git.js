@@ -29,28 +29,54 @@ function loadFileAsText() {
 function destroyClickedElement(event) {	document.body.removeChild(event.target); }
 
 function updateGitPage() {
+updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
+}; // end updateForm
+
+function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
   // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
-  gitFileName = document.getElementById("gitFileName").value
-  if (gitFileName) {
-    document.getElementById("gitFileName").value = gitFileName
+  FileName = document.getElementById(FileNameElement).value
+  if (FileName) {
+    document.getElementById(FileNameElement).value = FileName
   } else {
-	  gitFileName = "README.md"
-      document.getElementById("gitFileName").value = gitFileName
-  }; //end if gitFileName
-  document.getElementById("gitFileNameItem").value = gitFileName
+	  FileName = "README.md"
+      document.getElementById(FileNameElement).value = FileName
+  }; //end if FileName
+  document.getElementById(FileNameItem).innerHTML = FileName
   
   // Load file from repo into gitFileTextArea.
-  gitRepoUrl = document.getElementById("gitRepoUrl").value + "/" + gitFileName
-  loadJSON(gitRepoUrl, function(response) {
-    document.getElementById("gitFileTextArea").value = response //actual_JSON
+  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
+  loadJSON(RepoUrl, function(response) {
+    document.getElementById(TextAreaElement).value = response
   }); // end loadJSON
   
 }; // end updateForm
 
-
 function updateDownloadLink() {
   document.getElementById("gitFilelink").download = document.getElementById("inputFileNameToSaveAs").value
 }; // end updateForm
+
+
+function updateNewPageForm() {
+	//Get new page name from element
+  FileNameElement = "NewPageNameInput"
+  FileNameItem = "NewPageNameItem"
+  RepoUrlElement = "gitRepoUrl"
+  // Get each page from Github, populate textarea
+  updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")
+  //updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
+  updateTextAreaFromRepo("Index.JS","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea") 
+  updateTextAreaFromRepo("Test.JS","TestJSNameItem",RepoUrlElement,"TestJSTextArea") 
+  updateTextAreaFromRepo("Nav.EJS","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea") 
+  updateTextAreaFromRepo("Pagename.EJS","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea") 
+  updateTextAreaFromRepo("Pagename.JS","PagenameJSNameItem",RepoUrlElement,"PagenameJSTextArea" ) 
+
+  // Load file from repo into gitFileTextArea.
+
+  
+  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  
+}; // end updateNewPageForm
+
 
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
