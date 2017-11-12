@@ -95,7 +95,6 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
-updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
 
 // http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
