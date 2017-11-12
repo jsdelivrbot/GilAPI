@@ -58,26 +58,26 @@ function updateDownloadLink() {
 
 function updateNewPageForm() {
 	//Get new page name from element
-  RepoUrlElement = "gitRepoUrl"
-  Pagename = document.getElementById("NewPageNameInput").value
-  document.getElementById("PagenameEJSNameInput").value = "\\views\\pages\\template.ejs"
-  document.getElementById("PagenameJSNameInput").value = Pagename + ".js"
+  RepoUrlElement = "gitRepoUrl";
+  Pagename = document.getElementById("NewPageNameInput").value;
+  document.getElementById("PagenameEJSNameInput").value = "\\views\\pages\\template.ejs";
+  document.getElementById("PagenameJSNameInput").value = Pagename + ".js";
 
   // Get each page from Github, populate textarea
   // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
-  updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea")
-  updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea")
-  updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea")
-  updateTextAreaFromRepo("PagenameJSNameInput","PagenameJSNameItem",RepoUrlElement,"PagenameJSTextArea")
-  updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea")
+  updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea");
+  updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea");
+  updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea");
+  updateTextAreaFromRepo("PagenameJSNameInput","PagenameJSNameItem",RepoUrlElement,"PagenameJSTextArea");
+  updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea");
   
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
-  docUpdateTextArea = document.getElementById("IndexJSTextArea").value
-  docUpdateNewName = document.getElementById("NewPageNameInput").value
-  docUpdateTextString = "\r\n//region WIP\r\napp.get('/" + docUpdateNewName + "', function(request, response) { \r\n  response.render('pages/" + docUpdateNewName + "'); \r\n});  \r\n"
-  document.getElementById("IndexJSTextArea").value = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1] // JSON.parse();
+  docUpdateTextArea = document.getElementById("IndexJSTextArea").value;
+  docUpdateNewName = document.getElementById("NewPageNameInput").value;
+  docUpdateTextString = "\r\n//region WIP\r\napp.get('/" + docUpdateNewName + "', function(request, response) { \r\n  response.render('pages/" + docUpdateNewName + "'); \r\n});  \r\n";
+  document.getElementById("IndexJSTextArea").value = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1];
   
-  document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs"
+  document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
 }; // end updateNewPageForm
 
 
