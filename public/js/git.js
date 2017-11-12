@@ -48,6 +48,10 @@ function updateGitPage() {
 }; // end updateForm
 
 
+function updateDownloadLink() {
+  document.getElementById("gitFilelink").download = document.getElementById("inputFileNameToSaveAs").value
+}; // end updateForm
+
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
   nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput

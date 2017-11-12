@@ -22,7 +22,7 @@
 	</tr>
 	<tr>
 		<td>Filename to Save As:</td>
-		<td></td>
+		<td><input type="file" id="inputFileNameToSaveAs" onchange = "updateDownloadLink();"></td>
 		<td><a href="" id="gitFilelink" download="code.txt">Download Above Code</a></td>
 	</tr>
 	<tr>
@@ -43,9 +43,10 @@
 New Page Name: <input type = "text" id = "pageName" onchange="updateForm('newappget', 'pageName', 'IndexJS')"> <br>
 Index.JS: <br>
 <textarea id="IndexJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
-
 Test.JS: <br>
 <textarea id="TestJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
+Nav.EJS: <br>
+<textarea id="NavEJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
 
 New Function Statement: <br>
 <p>Select your type:&nbsp;
