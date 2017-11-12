@@ -60,7 +60,7 @@ function updateNewPageForm() {
 	//Get new page name from element
   RepoUrlElement = "gitRepoUrl"
   Pagename = document.getElementById("NewPageNameInput").value
-  document.getElementById("PagenameEJSNameInput").value = "\views\pages\template.ejs"
+  document.getElementById("PagenameEJSNameInput").value = "\\views\\pages\\template.ejs"
   document.getElementById("PagenameJSNameInput").value = Pagename + ".js"
 
   // Get each page from Github, populate textarea
@@ -72,6 +72,9 @@ function updateNewPageForm() {
   updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea")
   
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  docUpdateTextArea = JSON.stringify(document.getElementById("IndexJSTextArea").value)
+  docUpdateTextString = "\r\napp.get('/" + NewPageNameInput + "', function(request, response) { \r\n  response.render('pages/" + NewPageNameInput + "'); \r\n});  \r\n"
+  document.getElementById("IndexJSTextArea").value = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1] // JSON.parse();
   
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs"
 }; // end updateNewPageForm
