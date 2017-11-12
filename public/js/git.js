@@ -14,15 +14,8 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
-// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
-function saveTextAsFile() {
-  var messageData = document.getElementById("gitFileTextArea").value
-  var fileurl = ""/mirror?data=" + encodeURIComponent(JSON.stringify(messageData));
-  window.location = fileurl;
-}
-
 // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
-function loadFileAsText() {
+function loadFileAsText() { 	
 	var fileToLoad = document.getElementById("fileToLoad").files[0];
 	var fileReader = new FileReader();
 	
@@ -75,10 +68,11 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
 
+// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
 window.onload = function() {
   var txt = document.getElementById('gitFileTextArea');
   txt.value = window.onload + '';
-  document.getElementById('link').onclick = function(code) {
+  document.getElementById('gitFilelink').onclick = function(code) {
 	this.href = 'data:text/plain;charset=utf-8,'
 	  + encodeURIComponent(txt.value);
   };
