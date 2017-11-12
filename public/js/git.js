@@ -73,7 +73,8 @@ function updateNewPageForm() {
   
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
   docUpdateTextArea = document.getElementById("IndexJSTextArea").value
-  docUpdateTextString = "\r\n//region WIP\r\napp.get('/" + NewPageNameInput + "', function(request, response) { \r\n  response.render('pages/" + NewPageNameInput + "'); \r\n});  \r\n"
+  docUpdateNewName = document.getElementById("NewPageNameInput").value
+  docUpdateTextString = "\r\n//region WIP\r\napp.get('/" + docUpdateNewName + "', function(request, response) { \r\n  response.render('pages/" + docUpdateNewName + "'); \r\n});  \r\n"
   document.getElementById("IndexJSTextArea").value = docUpdateTextArea.split("//region WIP")[0] + docUpdateTextString + docUpdateTextArea.split("//region WIP")[1] // JSON.parse();
   
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs"
