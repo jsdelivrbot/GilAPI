@@ -84,19 +84,23 @@ function updateNewPageForm() {
   
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
 
-  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP")
-  colorifyDivTextArea('IndexJSTextArea')
+  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  colorifyDivTextArea('IndexJSTextArea');
 }; // end updateNewPageForm
+
+function updateNewPageBoilerplate() {  
+  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+}; // end updateNewPageBoilerplate
 
 function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {  
   var lineBreak = "\r\n"
   var spaceChar = " "
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
   docUpdateTextArea = document.getElementById(docTextArea).innerText;
-  docUpdateNewName = document.getElementById(docNewName).value;
+  docNewPageName = document.getElementById(docNewName).value;
   // Customized for index.js
-  docUpdateTextString = lineBreak + splitMarker + lineBreak + "app.get('/" + docUpdateNewName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docUpdateNewName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
-  document.getElementById(DivTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+  docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
+  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
 }; // end boilerplateDivTextArea
 
 function colorifyDivTextArea(DivTextArea) {  

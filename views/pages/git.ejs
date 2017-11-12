@@ -15,17 +15,17 @@
         <tr>
 		<td><div id="gitRepoUrlItem">Git repo URL:</div></td>
 		<td><input type="text" id="gitRepoUrl" name="gitRepoUrl" class="resizedTextbox" value="https://raw.githubusercontent.com/Gilgamech/GilAPI/master"></td>
-		<td></td>
+		<td><button onclick="updateNewPageForm()">Load from Github</button></td>
 	</tr>
 	<tr>
 		<td><div id="NewPageNameItem">New Page Name:</div></td>
 		<td><input type = "text" id = "NewPageNameInput" name = "NewPageNameInput" class="resizedTextbox" value = "NewPageName"></td>
-		<td><button onclick="updateNewPageForm()">Load from Github</button></td>
+		<td><button onclick="colorifyDivTextArea('IndexJSTextArea')">Colorify!</button></td>
 	</tr>
 	<tr>
 		<td><div id="IndexJSNameItem">Index.js:</div></td>
 		<td><input type = "text" id = "IndexJSNameInput" name = "IndexJSNameInput" class="resizedTextbox" value = "index.js"></td>
-		<td><button onclick="colorifyDivTextArea('IndexJSTextArea')">Colorify!</button></td>
+		<td><button onclick="updateNewPageBoilerplate()">Add new page!</button></td>
 	</tr>
 	<tr>
 		<td colspan="3">
