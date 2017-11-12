@@ -63,6 +63,7 @@ function updateNewPageForm() {
 
 function updateNewPageBoilerplate() {  
   boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  boilerplateDivTextArea2("IndexJSTextArea","NewPageNameInput","t.plan(38);");
 }; // end updateNewPageBoilerplate
 
 function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {  
@@ -74,6 +75,18 @@ function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {
   // Customized for index.js
   docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
   document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+}; // end boilerplateDivTextArea
+
+function boilerplateDivTextArea2(docTextArea,docNewName,splitMarker) {  
+  var lineBreak = "\r\n"
+  var spaceChar = " "
+  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  docUpdateTextArea = document.getElementById(docTextArea).innerText;
+  docNewPageName = document.getElementById(docNewName).value;
+  // Customized for index.js
+  docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
+  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+  "request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
 }; // end boilerplateDivTextArea
 
 function colorifyDivTextArea(DivTextArea,words) {  
