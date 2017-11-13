@@ -94,7 +94,7 @@ function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {
 }; // end boilerplateDivTextArea
 
 function colorifyDivTextArea(DivTextArea) {  
-  var words = ["function","var","this","new","if","then"];
+  var words = ["function","var","this","new","if","then","true","false","const"];
   var superGreen = "green";
   for (word of words) {
     colorifyDiv(DivTextArea, word, superGreen);
