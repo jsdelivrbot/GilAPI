@@ -4,6 +4,14 @@ var Board = {
         Board.min_size = 5;
         Board.max_size = 15;
         Board.move_num = 0;
+		
+		loadJSON("https://gil-api.herokuapp.com/fruitbottotals", function(response) {
+			var actual_JSON = JSON.parse(response);
+			document.getElementById("wins").innerHTML = actual_JSON[0]
+			document.getElementById("losses").innerHTML = actual_JSON[1]
+			document.getElementById("ties").innerHTML = actual_JSON[2]
+		}); // end loadJSON
+		
 
         if (typeof(localStorage) != 'undefined' ) {
             $("#select_largeboard").show();
@@ -11,7 +19,7 @@ var Board = {
             try {
                 val = localStorage.getItem("board");
             } catch (e) {
-            }
+            } //end try
 
             if (val !== null) {
                 var spl = val.split(';');
@@ -22,9 +30,9 @@ var Board = {
                 $("#select_largeboard option").each(function(opt) {
                     if ($(this).val() == val) {
                         $(this).prop('selected', true);
-                    }
-                });
-            }
+                    } // end if this
+                }); // end #select_largeboard
+            } // end if val
 
 
 
@@ -297,3 +305,16 @@ function get_total_item_count(type) {
 function trace(mesg) {
     console.log(mesg);
 }
+function loadJSON(file, callback) {   
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);  
+};// end loadJSON

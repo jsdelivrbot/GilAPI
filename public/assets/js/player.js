@@ -86,6 +86,9 @@ var GamePlay = {
         GamePlay.drawPlayerTwo(ctx, Board.board);
         GamePlay.drawPlayerOne(ctx, Board.board);
         GamePlay.displayScore(ctx, Board.board);
+				//document.getElementById("wins").innerHTML = ((document.getElementById("wins").innerHTML++)+1);
+				//document.getElementById("ties").innerHTML = ((document.getElementById("ties").innerHTML++)+1);
+				//document.getElementById("losses").innerHTML = ((document.getElementById("losses").innerHTML++)+1);
         if (GamePlay.mode == "play") {
            var score = Board.checkGameOver();
 			var div = document.getElementById('fruitbottext');
@@ -97,15 +100,21 @@ var GamePlay = {
 				   console.log("You win!");
 				   console.log("You win!");
 				   console.log("You win!");
-				document.getElementById("wins").innerHTML = ((document.getElementById("wins").innerHTML++)+1);                   
+				    loadJSON("https://gil-api.herokuapp.com/fruitbotwin", function(response) {
+						document.getElementById("wins").innerHTML = JSON.parse(response);
+					}); // end loadJSON
 				console.log("You win!");
                } //end if score
                if (score < 0) {
-				document.getElementById("losses").innerHTML = ((document.getElementById("losses").innerHTML++)+1);
+				    loadJSON("https://gil-api.herokuapp.com/fruitbotloss", function(response) {
+						document.getElementById("losses").innerHTML = JSON.parse(response);
+					}); // end loadJSON
 				console.log("You lose!");
                } //end if score
                if (score == 0) {
-				document.getElementById("ties").innerHTML = ((document.getElementById("ties").innerHTML++)+1);
+					loadJSON("https://gil-api.herokuapp.com/fruitbottie", function(response) {
+						document.getElementById("ties").innerHTML = JSON.parse(response);
+					}); // end loadJSON
 				console.log("You tie!");
                } //end if score
 			   GamePlay.init();
@@ -178,3 +187,18 @@ var GamePlay = {
         }
     }
 }
+// https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
+function loadJSON(file, callback) {   
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);  
+};// end loadJSON
+
