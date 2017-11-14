@@ -171,6 +171,14 @@ app.get('/text2', function(request, response) {
   response.render('pages/text2');
 });
 
+app.get('/badpw', function(request, response) { 
+  response.render('pages/badpw');
+}); 
+app.post('/badpw', function(request, response) { 
+  var randomstring = Math.random().toString(36).slice(-20);
+  response.json(randomstring);
+}); 
+
 app.get('/test', function(request, response) {
   response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
 });
