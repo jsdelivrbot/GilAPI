@@ -176,7 +176,7 @@ app.get('/badpw', function(request, response) {
 }); 
 app.post('/badpw', function(request, response) { 
   var randomstring = Math.random().toString(36).slice(-20);
-  response.json(randomstring);
+  response.send(randomstring);
 }); 
 
 app.get('/test', function(request, response) {

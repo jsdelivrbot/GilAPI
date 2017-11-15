@@ -1,9 +1,8 @@
 // Load JSON
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
-function postJSON(file, callback) {   
-
+function postJSON(file, callback) {
     var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
+    xobj.overrideMimeType("text/plain");
     xobj.open('POST', file, true); // Replace 'my_data' with the path to your file
     xobj.onreadystatechange = function () {
           if (xobj.readyState == 4 && xobj.status == "200") {
@@ -16,7 +15,7 @@ function postJSON(file, callback) {
 
 function updategetBadPWInputForm() {
   postJSON('/badpw', function(response) {
-    document.getElementById('getBadPWInput').innerText = response
+    document.getElementById('getBadPWInput').value  = response
   }); // end loadJSON
 }; // end updategetBadPWInputForm
 
