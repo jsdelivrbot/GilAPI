@@ -155,6 +155,10 @@ app.post('/signup', function (request, response) {
 });
 
 //region WIP
+app.get('/meme', function(request, response) { 
+response.render('pages/meme'); 
+}); 
+
 app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
