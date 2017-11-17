@@ -24,7 +24,6 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
-app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
 
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
@@ -33,8 +32,9 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
+app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -99,13 +99,12 @@ app.get('/', function(request, response) {
 app.get('/login', function(request, response) {
   response.render('pages/login');
 });
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loginSuccess',
-    failureRedirect: '/loginFailure'
-  })
-);
-
+// app.post('/login',  passport.authenticate('local', { successRedirect: '/loginSuccess', failureRedirect: '/loginFailure'}));
+app.post('/login',  passport.authenticate('local', { failureRedirect: '/loginFailure' }),
+  function(request, response) {
+    response.redirect('/loginSuccess');
+});
+  
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
 });
@@ -163,17 +162,19 @@ app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
 
-app.get('/demo', function(request, response) {
-  response.render('pages/demo');
+app.get('demo/', function(request, response) {
+  response.render('pages/demo', { user: req.user });
 });
 
 app.get('/git', function(request, response) { 
   response.render('pages/git'); 
 });  
 
-app.get('/text2', function(request, response) {
-  response.render('pages/text2');
-});
+app.get('/text2',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(request, response){
+    response.render('pages/text2', { user: request.user });
+  });
 
 app.get('/badpw', function(request, response) { 
   response.render('pages/badpw');
