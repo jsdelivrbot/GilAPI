@@ -26,6 +26,13 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
     }); //end request
 	
+    request('http://127.0.0.1:5000/calc', (error, response, body) => {
+      t.false(error); // test 5
+      t.equal(response.statusCode, 200); // test 6
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
+    }); //end request
+	
     request('http://127.0.0.1:5000/badpw', (error, response, body) => {
       t.false(error); // test 5
       t.equal(response.statusCode, 200); // test 6

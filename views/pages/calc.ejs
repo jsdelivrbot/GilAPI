@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+<script src="/js/template.js" Content-Type="text/javascript" charset="UTF-8"></script>
+  <table>
+	<tr>
+		<td colspan="3"><input type = "text" id = "calcDisplay" name = "calcDisplay" class="resizedTextbox" value = "\views\partials\nav.ejs"></td>
+	</tr>
+	<tr>
+		<td><button onclick="pressButton(1)">1</button></td>
+		<td><button onclick="pressButton(2)">2</button></td>
+		<td><button onclick="pressButton(3)">3</button></td>
+	</tr>
+	<tr>
+		<td><button onclick="pressButton(4)">4</button></td>
+		<td><button onclick="pressButton(5)">5</button></td>
+		<td><button onclick="pressButton(6)">6</button></td>
+	</tr>
+	<tr>
+		<td><button onclick="pressButton(7)">7</button></td>
+		<td><button onclick="pressButton(8)">8</button></td>
+		<td><button onclick="pressButton(9)">9</button></td>
+	</tr>
+	<tr>
+		<td colspan="2"><button onclick="pressButton(0)">0</button></td>
+		<td><button onclick="pressButton('.')">.</button></td>
+	</tr>
+  </table>
+
+
+
+  <% include ../partials/footer.ejs %>
+</body>
+</html>
