@@ -57,19 +57,44 @@ function updateNewPageForm() {
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
 
   boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  var words = ["function","var","this","new","if","then"];
-  colorifyDivTextArea('IndexJSTextArea',words);
+  colorifyDivTextArea('IndexJSTextArea');
 }; // end updateNewPageForm
 
+function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
+  FileName = document.getElementById(FileNameElement).value
+  if (FileName) {
+    document.getElementById(FileNameElement).value = FileName
+  } else {
+      FileName = "README.md"
+      document.getElementById(FileNameElement).value = FileName
+  }; //end if FileName
+  document.getElementById(FileNameItem).innerHTML = FileName
+  
+  // Load file from repo into gitFileTextArea.
+  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
+  loadJSON(RepoUrl, function(response) {
+    document.getElementById(TextAreaElement).innerText = response
+  }); // end loadJSON
+  
+}; // end updateForm
 function updateNewPageBoilerplate() {  
-  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  boilerplateDivTextArea2("IndexJSTextArea","NewPageNameInput","t.plan(38);");
+  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  boilerplateTestTextArea("IndexJSTextArea","NewPageNameInput","  t.plan(42);\r\n");
 }; // end updateNewPageBoilerplate
 
-function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {  
-  var lineBreak = "\r\n"
-  var spaceChar = " "
+var lineBreak = "\r\n"
+var spaceChar = " "
+function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  docUpdateTextArea = document.getElementById(docTextArea).innerText;
+  docNewPageName = document.getElementById(docNewName).value;
+  // Customized for index.js
+  docUpdateTextString = 'request("http://127.0.0.1:5000/fruitbot", (error, response, body) => {' + lineBreak + 't.false(error); // test 5' + lineBreak + 't.equal(response.statusCode, 200); // test 6' + lineBreak + 't.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7' + lineBreak + 't.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8' + lineBreak + '}); //end request';
+  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+}; // end boilerplateDivTextArea
+
+function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
   docUpdateTextArea = document.getElementById(docTextArea).innerText;
   docNewPageName = document.getElementById(docNewName).value;
   // Customized for index.js
@@ -77,19 +102,8 @@ function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {
   document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
 }; // end boilerplateDivTextArea
 
-function boilerplateDivTextArea2(docTextArea,docNewName,splitMarker) {  
-  var lineBreak = "\r\n"
-  var spaceChar = " "
-  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
-  docUpdateTextArea = document.getElementById(docTextArea).innerText;
-  docNewPageName = document.getElementById(docNewName).value;
-  // Customized for index.js
-  docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
-  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
-  "request('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
-}; // end boilerplateDivTextArea
-
-function colorifyDivTextArea(DivTextArea,words) {  
+function colorifyDivTextArea(DivTextArea) {  
+  var words = ["function","var","this","new","if","then","true","false","const"];
   var superGreen = "green";
   for (word of words) {
     colorifyDiv(DivTextArea, word, superGreen);
