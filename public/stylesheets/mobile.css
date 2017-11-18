@@ -41,6 +41,23 @@
 		color: #660066;
 		}
 
+    .resizedTextbox {
+      width: 500px; 
+	  height: 20px; 
+	  padding: 1px
+	  }
+
+  .div_textarea {
+      width: 100%; 
+      height: 500px; 
+      padding: 1px; 
+      border: 1px solid black;
+      background-color: #DDDDDD;
+      overflow: scroll;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      text-align: left;
+  }
 }
 /* iPhone-specific styles */
 @media only screen and (max-device-width: 480px) { 
@@ -49,19 +66,5 @@
 		-webkit-text-size-adjust: none;
 		}
 
-}
-
-.resizedTextbox {width: 500px; height: 20px; padding: 1px}
-
-.div_textarea {
-	width: 100%; 
-	height: 500px; 
-	padding: 1px; 
-	border: 1px solid black;
-	background-color: #DDDDDD;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    text-align: left;
 }
 -->
