@@ -7,17 +7,11 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(46);
+  t.plan(42);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
     // Make a request to our app
-    request('http://127.0.0.1:5000', (error, response, body) => {
-      t.false(error); // test 1
-      t.equal(response.statusCode, 200); // test 2
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 3
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 4
-    }); //end request
 	
     request('http://127.0.0.1:5000/fruitbot', (error, response, body) => {
       t.false(error); // test 5
