@@ -1,10 +1,10 @@
 var express = require('express');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var db = require('./db');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var auth = require('http-auth');
-var passport = require('passport');
-var passporthttp = require('passport-http');
-var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
 
@@ -13,6 +13,7 @@ var pg = require('pg').native;
 var pghstore = require('pg-hstore');
 var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
 var User = sequelize.import('./User');
+// var db = require('./db');
 User.sync();
 
 var app = express();
@@ -24,7 +25,6 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
-app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
 
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
@@ -33,8 +33,11 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
-app.use(cookieParser()); // read cookies (needed for auth)
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: false, saveUninitialized: false }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -62,23 +65,15 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 
 //Passport stuff
 // LOCAL LOGIN
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) {
-		chatGeneral = chatGeneral + err;
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
+passport.use(new Strategy(
+  function(username, password, cb) {
+    db.users.findByUsername(username, function(err, user) {
+      if (err) { return cb(err); }
+      if (!user) { return cb(null, false); }
+      if (user.password != password) { return cb(null, false); }
+      return cb(null, user);
     });
-  }
-));
+  }));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -93,19 +88,19 @@ passport.deserializeUser(function(id, done) {
 
 // Page calls
 app.get('/', function(request, response) {
-  response.render('pages/index');
+  response.render('home', { user: req.user });
+  // response.render('pages/index');
 });
 
 app.get('/login', function(request, response) {
   response.render('pages/login');
 });
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loginSuccess',
-    failureRedirect: '/loginFailure'
-  })
-);
-
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(request, response) {
+    response.redirect('/');
+  });
+   
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
 });
@@ -120,6 +115,13 @@ app.get('/logout', function(request, response){
   response.redirect('/');
 });
 
+app.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(request, response){
+    response.render('profile', { user: request.user });
+  });
+
+  
 app.get('/login2', function(request, response) {
   response.render('pages/login');
 });
@@ -144,7 +146,7 @@ app.post('/signup', function (request, response) {
   userEmail_query = request.query.userEmail,
   userPassword_query = request.query.userPassword
   
-  client.query("INSERT INTO Users (localemail, localpassword) VALUES (userEmail_query, userPassword_query);", (err, queryOutput) => {
+  client.query("INSERT INTO Users (localemail, localpassword,createdAt,updatedAt) VALUES (userEmail_query, userPassword_query,,);", (err, queryOutput) => {
     if (err) chatGeneral = chatGeneral + err;
     chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
     for (let row of queryOutput.rows) {
@@ -155,21 +157,35 @@ app.post('/signup', function (request, response) {
 });
 
 //region WIP
+app.get('/meme', function(request, response) { 
+response.render('pages/meme'); 
+}); 
+
 app.get('/Arkdata', function(request, response) {
   response.render('pages/Arkdata');
 });
 
-app.get('/demo', function(request, response) {
-  response.render('pages/demo');
+app.get('demo/', function(request, response) {
+  response.render('pages/demo', { user: req.user });
 });
 
 app.get('/git', function(request, response) { 
   response.render('pages/git'); 
 });  
 
-app.get('/text2', function(request, response) {
-  response.render('pages/text2');
-});
+app.get('/text2',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(request, response){
+    response.render('pages/text2', { user: request.user });
+  });
+
+app.get('/badpw', function(request, response) { 
+  response.render('pages/badpw');
+}); 
+app.post('/badpw', function(request, response) { 
+  var randomstring = Math.random().toString(36).slice(-20);
+  response.send(randomstring);
+}); 
 
 app.get('/test', function(request, response) {
   response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
