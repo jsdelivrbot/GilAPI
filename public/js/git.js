@@ -79,13 +79,22 @@ function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,Text
   
 }; // end updateForm
 function updateNewPageBoilerplate() {  
-  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  boilerplateTestTextArea("IndexJSTextArea","NewPageNameInput","  t.plan(42);\r\n");
 }; // end updateNewPageBoilerplate
 
-function boilerplateDivTextArea(docTextArea,docNewName,splitMarker) {  
-  var lineBreak = "\r\n"
-  var spaceChar = " "
+var lineBreak = "\r\n"
+var spaceChar = " "
+function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  docUpdateTextArea = document.getElementById(docTextArea).innerText;
+  docNewPageName = document.getElementById(docNewName).value;
+  // Customized for index.js
+  docUpdateTextString = 'request("http://127.0.0.1:5000/fruitbot", (error, response, body) => {' + lineBreak + 't.false(error); // test 5' + lineBreak + 't.equal(response.statusCode, 200); // test 6' + lineBreak + 't.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7' + lineBreak + 't.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8' + lineBreak + '}); //end request';
+  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+}; // end boilerplateDivTextArea
+
+function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
   docUpdateTextArea = document.getElementById(docTextArea).innerText;
   docNewPageName = document.getElementById(docNewName).value;
   // Customized for index.js
