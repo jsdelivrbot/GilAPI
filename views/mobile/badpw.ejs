@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+  <script src="/js/badpw.js" Content-Type="text/javascript" charset="UTF-8"></script>
+  <table>
+        <tr>
+		<td><div id="getBadPWItem">Mobile Bad Password:</div></td>
+		<td><input type="text" id="getBadPWInput" name="getBadPWInput" class="resizedTextbox" value=""></td>
+		<td><button onclick="updategetBadPWInputForm()">Get Bad Password</button></td>
+	</tr>
+  </table>
+
+
+  <% include ../partials/footer.ejs %>
+</body>
+</html>

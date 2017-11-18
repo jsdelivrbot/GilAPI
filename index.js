@@ -93,11 +93,24 @@ passport.deserializeUser(function(id, done) {
 
 // Page calls
 app.get('/', function(request, response) {
-  response.render('pages/index');
+  response.render(testUA(request.header('user-agent')) + '/index');
+});
+
+function testUA(ua) {
+    // Check the user-agent string to identyfy the device.
+    if(/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile|ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i.test(ua)) {
+		return 'mobile'
+    } else {
+		return  'web'
+    }
+};
+
+app.get('/', function(request, response) {
+	response.render(testUA(request.header('user-agent')) + '/index');
 });
 
 app.get('/login', function(request, response) {
-  response.render('pages/login');
+  response.render(testUA(request.header('user-agent')) + '/login');
 });
 app.post('/login',
   passport.authenticate('local', {
@@ -121,7 +134,7 @@ app.get('/logout', function(request, response){
 });
 
 app.get('/login2', function(request, response) {
-  response.render('pages/login');
+  response.render(testUA(request.header('user-agent')) + '/login');
 });
 app.post('/login2', function (request, response) {
    res = {
@@ -138,7 +151,7 @@ app.post('/login2', function (request, response) {
 })
 
 app.get('/signup', function(request, response) {
-  response.render('pages/signup');
+  response.render(testUA(request.header('user-agent')) + '/signup');
 });
 app.post('/signup', function (request, response) {
   userEmail_query = request.query.userEmail,
@@ -156,27 +169,27 @@ app.post('/signup', function (request, response) {
 
 //region WIP
 app.get('/meme', function(request, response) { 
-response.render('pages/meme'); 
+response.render(testUA(request.header('user-agent')) + '/meme'); 
 }); 
 
 app.get('/Arkdata', function(request, response) {
-  response.render('pages/Arkdata');
+  response.render(testUA(request.header('user-agent')) + '/Arkdata');
 });
 
 app.get('/demo', function(request, response) {
-  response.render('pages/demo');
+  response.render(testUA(request.header('user-agent')) + '/demo');
 });
 
 app.get('/git', function(request, response) { 
-  response.render('pages/git'); 
+  response.render(testUA(request.header('user-agent')) + '/git'); 
 });  
 
 app.get('/text2', function(request, response) {
-  response.render('pages/text2');
+  response.render(testUA(request.header('user-agent')) + '/text2');
 });
 
 app.get('/badpw', function(request, response) { 
-  response.render('pages/badpw');
+  response.render(testUA(request.header('user-agent')) + '/badpw');
 }); 
 app.post('/badpw', function(request, response) { 
   var randomstring = Math.random().toString(36).slice(-20);
@@ -190,7 +203,7 @@ app.get('/test', function(request, response) {
 
 //region chat 
 app.get('/chat', function(request, response) { 
-  response.render('pages/chat'); 
+  response.render(testUA(request.header('user-agent')) + '/chat'); 
 });  
 
 app.get('/chatpost', function(request, response) { 
@@ -229,7 +242,7 @@ app.get('/chatload', function(request, response) {
 
 //region Fruitbot
 app.get('/fruitbot', function(request, response) {
-  response.render('pages/fruitbot');
+  response.render(testUA(request.header('user-agent')) + '/fruitbot');
 });
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
@@ -262,7 +275,7 @@ app.get('/fizzbuzz', function(request, response) {
 
 
 app.get('/jsonlint', function(request, response) { 
-  response.render('pages/jsonlint'); 
+  response.render(testUA(request.header('user-agent')) + '/jsonlint'); 
 });  
 
 
@@ -295,7 +308,7 @@ app.get('/newfunction', function(request, response) {
 
 app.get('/newappget', function(request, response) {
   newAppName = request.query.name
-  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render('pages/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
+  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render(testUA(request.header('user-agent')) + '/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
 
   response.send(newappgetreturn);
 });

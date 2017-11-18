@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+<script src="/js/text2.js" Content-Type="text/javascript" charset="UTF-8"></script>
+
+<!-- https://stackoverflow.com/questions/13987300/how-to-trigger-enter-key-press-of-textbox 
+-->
+
+Page Name: <input type = "text" id = "pageName" onchange="updateForm('newappget', 'pageName', 'IndexJS');"> <br>
+Index.JS: <br>
+<textarea id="IndexJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
+
+Test.JS: <br>
+<textarea id="TestJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
+
+<div contenteditable="true" class="div_textarea" id="textCE"></div>
+
+<br>Testing some new thing.
+<form action="#">
+    <input type="text" name="txt" onkeypress="handle(event)" />
+</form>
+
+New Function Statement: <br>
+<p>Select your type:&nbsp;
+<label><input type="radio" name="size" value="If" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','if')"/> If</label>
+<label><input type="radio" name="size" value="For" checked="checked" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','for')" /> For</label>
+<label><input type="radio" name="size" value="While" onchange="updateNFSForm('nfs', 'test', 'NFSJS','loadJSON(test)','while')"/> While</label>
+</p>
+
+Variable Name: <input type = "text" id = "NFSpageName" onchange="updateForm('newappget', 'NFSpageName', 'IndexJS')"> <br>
+Index.js: <br>
+<textarea id="NFSInput" cols="100" rows="10" value="Code goes here."></textarea> <br>
+<textarea id="NFSJS" cols="100" rows="15" value="Code goes here."></textarea> <br>
+<br>
+<br>
+<br>
+<table>
+  <tr><td><div id="gitFileNameItem">Index.js:</div></td></tr>
+	<tr>
+		<td colspan="3">
+			<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>Filename to Save As:</td>
+		<td><input type="file" id="inputFileNameToSaveAs" onchange = "updateDownloadLink();"></td>
+		<td><a href="" id="gitFilelink" download="code.txt">Download Above Code</a></td>
+	</tr>
+	<tr>
+		<td>Select a File to Load:</td>
+		<td><input type="file" id="fileToLoad"></td>
+		<td><button onclick="loadFileAsText()">Load Selected File</button></td>
+	</tr>
+	<tr>
+		<td>Load file from Github:</td>
+		<td><input type = "text" id = "gitFileName" name = "gitFileName" class="resizedTextbox" value = "README.md"></td>
+		<td><button onclick="updateGitPage()">Load from Github</button></td>
+	</tr>
+</table><br>
+<br>
+<br>
+<br>
+  <% include ../partials/footer.ejs %>
+</body>
+</html>
+
