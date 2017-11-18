@@ -16,6 +16,39 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
+function handle(e){
+	if(e.keyCode === 13){
+		e.preventDefault(); // Ensure it is only this code that runs
+		alert("Enter was pressed was presses");
+	}
+}
+function updateGitPage() {
+  updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
+}; // end updateForm
+
+function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
+  FileName = document.getElementById(FileNameElement).value
+  if (FileName) {
+    document.getElementById(FileNameElement).value = FileName
+  } else {
+	  FileName = "README.md"
+      document.getElementById(FileNameElement).value = FileName
+  }; //end if FileName
+  document.getElementById(FileNameItem).innerHTML = FileName
+  
+  // Load file from repo into gitFileTextArea.
+  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
+  loadJSON(RepoUrl, function(response) {
+    document.getElementById(TextAreaElement).innerText = response
+  }); // end loadJSON
+  
+}; // end updateForm
+
+function updateDownloadLink() {
+  document.getElementById("gitFilelink").download = document.getElementById("inputFileNameToSaveAs").value
+}; // end updateForm
+
 function updateForm(nfsCall, nfsName, nfsTextArea) {
   nfsInput = document.getElementById(nfsName).value
   nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
@@ -35,3 +68,15 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 
 updateForm('newappget', 'pageName', 'IndexJS')
 updateForm('newappget', 'NFSpageName', 'TestJS')
+
+
+// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
+window.onload = function() {
+  var txt = document.getElementById('gitFileTextArea');
+  txt.value = window.onload + '';
+  document.getElementById('gitFilelink').onclick = function(code) {
+	this.href = 'data:text/plain;charset=utf-8,'
+	  + encodeURIComponent(txt.value);
+  };
+};
+
