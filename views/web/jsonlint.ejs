@@ -7,12 +7,15 @@
 <body>
   <% include ../partials/nav.ejs %>
 <script src="/js/jsonlint.js" Content-Type="text/javascript" charset="UTF-8"></script>
-  <br />
-  <textarea id="myTextArea"  cols="100" rows="25"></textarea>
+  <br>
+  <div contenteditable="true" class="div_textarea" id="myTextArea" value="Code goes here."></div>
+  <br>
   <button onclick="prettyPrint()">Pretty Print</button>
-  <br />
-  <br />
-  <a href="https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037">Stack Overflow - prettify json data in textarea input</a>
+  <button onclick="copyToClipboard('myTextArea')">Copy To Clipboard</button>
+  <br>
+  <br>
+  <a href="https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037">Stack Overflow - prettify json data in textarea input</a><br>
+  <a href="https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068">Stack Overflow - copy textarea to clipboard</a>
   <% include ../partials/footer.ejs %>
 </body>
 </html>
