@@ -13,10 +13,10 @@
 
 Page Name: <input type = "text" id = "pageName" onchange="updateForm('newappget', 'pageName', 'IndexJS');"> <br>
 Index.JS: <br>
-<textarea id="IndexJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
+<textarea id="IndexJS" cols="100" rows="25" value="Javascript not loaded."></textarea> <br>
 
 Test.JS: <br>
-<textarea id="TestJS" cols="100" rows="25" value="Code goes here."></textarea> <br>
+<textarea id="TestJS" cols="100" rows="25" value="Javascript not loaded."></textarea> <br>
 
 <div contenteditable="true" class="div_textarea" id="textCE"></div>
 
@@ -34,8 +34,8 @@ New Function Statement: <br>
 
 Variable Name: <input type = "text" id = "NFSpageName" onchange="updateForm('newappget', 'NFSpageName', 'IndexJS')"> <br>
 Index.js: <br>
-<textarea id="NFSInput" cols="100" rows="10" value="Code goes here."></textarea> <br>
-<textarea id="NFSJS" cols="100" rows="15" value="Code goes here."></textarea> <br>
+<textarea id="NFSInput" cols="100" rows="10" value="Javascript not loaded."></textarea> <br>
+<textarea id="NFSJS" cols="100" rows="15" value="Javascript not loaded."></textarea> <br>
 <br>
 <br>
 <br>
@@ -43,12 +43,12 @@ Index.js: <br>
   <tr><td><div id="gitFileNameItem">Index.js:</div></td></tr>
 	<tr>
 		<td colspan="3">
-			<textarea id="gitFileTextArea" cols="100" rows="25" value="Code goes here.">Code goes here.</textarea>
+			<textarea id="gitFileTextArea" cols="100" rows="25" value="Javascript not loaded.">Code goes here.</textarea>
 		</td>
 	</tr>
 	<tr>
 		<td>Filename to Save As:</td>
-		<td><input type="file" id="inputFileNameToSaveAs" onchange = "updateDownloadLink();"></td>
+		<td><input type="file" id="inputFileNameToSaveAs" onchange = "updateDownloadLink('gitFilelink', 'inputFileNameToSaveAs');"></td>
 		<td><a href="" id="gitFilelink" download="code.txt">Download Above Code</a></td>
 	</tr>
 	<tr>
