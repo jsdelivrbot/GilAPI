@@ -7,11 +7,17 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(42);
+  t.plan(46);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
     // Make a request to our app
+    request('http://127.0.0.1:5000', (error, response, body) => {
+      t.false(error); // test 1
+      t.equal(response.statusCode, 200); // test 2
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 3
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 4
+    }); //end request
 	
     request('http://127.0.0.1:5000/fruitbot', (error, response, body) => {
       t.false(error); // test 5
@@ -66,10 +72,10 @@ test('responds to requests', (t) => {
 	});
 	
     request('http://127.0.0.1:5000/demo', (error, response, body) => {
-      t.false(error); // test 34
-      t.equal(response.statusCode, 200); // test 35
+      t.false(error); // test 22
+      t.equal(response.statusCode, 200); // test 23
     }); //end request
-		
+	
     request('http://127.0.0.1:5000/newappget?name=test', (error, response, body) => {
       t.false(error); // test 24
       t.equal(response.statusCode, 200); // test 25
