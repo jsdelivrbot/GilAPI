@@ -39,7 +39,9 @@ function detectEnter(e){
 document.getElementById('chatMessage').onkeypress = detectEnter(e)
 
 // Refresh chat every 5 seconds.
-var t=setInterval(refreshChat("General"),5000);
+setInterval(function () {
+  refreshChat("General")
+}, 5000);
 
 
 
