@@ -27,53 +27,53 @@ test('responds to requests', (t) => {
     }); //end request
 	
     request('http://127.0.0.1:5000/badpw', (error, response, body) => {
-      t.false(error); // test 5
-      t.equal(response.statusCode, 200); // test 6
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
+      t.false(error); // test 9
+      t.equal(response.statusCode, 200); // test 10
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 11
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 12
     }); //end request
 	
     request('http://127.0.0.1:5000/meme', (error, response, body) => {
-      t.false(error); // test 5
-      t.equal(response.statusCode, 200); // test 6
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
+      t.false(error); // test 13
+      t.equal(response.statusCode, 200); // test 14
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 15
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 16
     }); //end request
 	
     request('http://127.0.0.1:5000/chat', (error, response, body) => { 
-      t.false(error); // 9
-      t.equal(response.statusCode, 200);  // 10
-      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // 11
-      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // 12
+      t.false(error); // 17
+      t.equal(response.statusCode, 200);  // 18
+      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // 19
+      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // 20
     });
     request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
-      t.false(error); // test 13
-      t.equal(response.statusCode, 200); // test 14
-      t.notEqual(body.indexOf("1"), -1); // test 15
+      t.false(error); // test 21
+      t.equal(response.statusCode, 200); // test 22
+      t.notEqual(body.indexOf("1"), -1); // test 23
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbotloss', (error, response, body) => {
-      t.false(error); // test 16
-      t.equal(response.statusCode, 200); // test 17
-      t.notEqual(body.indexOf("1"), -1); // test 18
+      t.false(error); // test 24
+      t.equal(response.statusCode, 200); // test 25
+      t.notEqual(body.indexOf("1"), -1); // test 26
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbottie', (error, response, body) => {
-      t.false(error); // test 19
-      t.equal(response.statusCode, 200); // test 20
-      t.notEqual(body.indexOf("1"), -1); // test 21
+      t.false(error); // test 27
+      t.equal(response.statusCode, 200); // test 28
+      t.notEqual(body.indexOf("1"), -1); // test 29
     }); //end request
 	
 	request('http://127.0.0.1:5000/jsonlint', (error, response, body) => { 
-	  t.false(error); 
-	  t.equal(response.statusCode, 200);  
-	  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  
-	  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  
+	  t.false(error); // test 30
+	  t.equal(response.statusCode, 200);  // test 31
+	  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 32
+	  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 33
 	});
 	
     request('http://127.0.0.1:5000/demo', (error, response, body) => {
-      t.false(error); // test 22
-      t.equal(response.statusCode, 200); // test 23
+      t.false(error); // test 34
+      t.equal(response.statusCode, 200); // test 35
     }); //end request
 	
     request('http://127.0.0.1:5000/newappget?name=test', (error, response, body) => {
