@@ -21,7 +21,11 @@ a:hover, a:active {
 	color: #660066;
 }
 
-.resizedTextbox {width: 500px; height: 20px; padding: 1px}
+    .resizedTextbox {
+      width: 500px; 
+	  height: 20px; 
+	  padding: 0px
+	  }
 
 .div_textarea {
 	width: 750px; 
