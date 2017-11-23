@@ -77,33 +77,33 @@ test('responds to requests', (t) => {
     }); //end request
 	
     request('http://127.0.0.1:5000/newappget?name=test', (error, response, body) => {
-      t.false(error); // test 24
-      t.equal(response.statusCode, 200); // test 25
-      t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 26
+      t.false(error); // test 36
+      t.equal(response.statusCode, 200); // test 37
+      t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 38
     }); //end request
 	
     request('http://127.0.0.1:5000/mirror?message=test', (error, response, body) => {
-      t.false(error); // test 24
-      t.equal(response.statusCode, 200); // test 25
-      t.notEqual(body.indexOf('"test"'), -1); // test 26
+      t.false(error); // test 39
+      t.equal(response.statusCode, 200); // test 40
+      t.notEqual(body.indexOf('"test"'), -1); // test 41
     }); //end request
 	
     request('http://127.0.0.1:5000/git', (error, response, body) => { 
-      t.false(error); // 27
-      t.equal(response.statusCode, 200);  // 28
-      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // 29
-      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // 30
+      t.false(error); // 42
+      t.equal(response.statusCode, 200);  // 43
+      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // 44
+      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // 45
     });
     request('http://127.0.0.1:5000/login2', (error, response, body) => { 
-      t.false(error);  // test 31
-      t.equal(response.statusCode, 200);   // test 32
+      t.false(error);  // test 46
+      t.equal(response.statusCode, 200);   // test 47
     });
     request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
       // stop the server
       child.kill();
 
-      t.false(error); // test 33
-      t.equal(response.statusCode, 200); // test 34
+      t.false(error); // test 48
+      t.equal(response.statusCode, 200); // test 49
     }); //end request
 	
   }); //end child
