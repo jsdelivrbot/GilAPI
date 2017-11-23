@@ -12,11 +12,13 @@
 Mobile Chat Room: <input type = "text" id = "chatRoom" value="General"> <br>
   
 <div id="chatRoomName">All</div>Mobile Chat<br>
-  <textarea id="chatMainBox" cols="100" rows="25" value="Chat goes here.">Chat goes here.</textarea> <br>
+  <textarea id="chatMainBox" cols="100" rows="25" value="Javascript is disabled.">Javascript is disabled.</textarea> <br>
 </div>
-<input type = "text" id = "chatUser" value="User">
-<input type = "text" id = "chatMessage" value="Hello World!"> 
-<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
+<form action="updateChat();" method="post">
+	<input type = "text" id = "chatUser" value="User">
+	<input type = "text" id = "chatMessage" value="Hello World!"> 
+	<input type="chatSendButton" value="send"/>
+</form>
 
 
   <% include ../partials/footer.ejs %>

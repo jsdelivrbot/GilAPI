@@ -7,12 +7,11 @@
     width: 100%;
     height: 100%;
 	font: 12px/15px sans-serif;
-	}
-body {
-	background-color:#909090;
-	margin: 0;
-	padding: 3px;
-}
+		background: #909090;
+		padding: 3px;
+		color: #909090;
+		margin: 0;
+		}
 	#sidebar, #footer {
 		display: none;
 		}
