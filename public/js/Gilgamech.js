@@ -30,6 +30,16 @@ function colorifyDiv(divName, replaceWord, replaceColor) {
   document.getElementById(divName).innerHTML = str;
 }; // end colorifyDiv
 
+//input.onchange
 function updateDownloadLink(downloadLinkID,inputFieldID) {
   document.getElementById(downloadLinkID).download = document.getElementById(inputFieldID).value
 }; // end updateDownloadLink
+
+//window.onload setup link
+function setupLink(textAreaID,downloadLinkID) {
+  document.getElementById(textAreaID).value = window.onload + '';
+  document.getElementById(downloadLinkID).onclick = function() {
+	this.href = 'data:text/plain;charset=utf-8,'
+	  + encodeURIComponent(txtval);
+  };
+};

@@ -26,7 +26,7 @@ function updateNewPageForm() {
   
   document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
 
-  boilerplateDivTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
   colorifyDivTextArea('IndexJSTextArea');
 }; // end updateNewPageForm
 
@@ -62,7 +62,7 @@ function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {
   // Customized for index.js
   docUpdateTextString = 'request("http://127.0.0.1:5000/fruitbot", (error, response, body) => {' + lineBreak + 't.false(error); // test 5' + lineBreak + 't.equal(response.statusCode, 200); // test 6' + lineBreak + 't.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7' + lineBreak + 't.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8' + lineBreak + '}); //end request';
   document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
-}; // end boilerplateDivTextArea
+}; // end boilerplateIndexTextArea
 
 function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
   docUpdateTextArea = document.getElementById(docTextArea).innerText;
@@ -70,7 +70,7 @@ function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {
   // Customized for index.js
   docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
   document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
-}; // end boilerplateDivTextArea
+}; // end boilerplateTestTextArea
 
 function colorifyDivTextArea(DivTextArea) {  
   var words = ["function","var","this","new","if","then","true","false","const"];
