@@ -7,6 +7,7 @@ function updateChat() {
   if (chatMessage) {
     if (chatUser) {
       chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+	  loadChat(chatUrl,"chatMainBox")
       document.getElementById("chatMessage").value = ""
       document.getElementById("userNameErr").value = ""
     } else {
@@ -17,11 +18,11 @@ function updateChat() {
 
 function refreshChat(chatRoom){
   chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
+  document.getElementById("chatRoomName").innerHTML = chatRoom
   loadChat(chatUrl,"chatMainBox")
 }; // end refreshChat
 
 function loadChat(chatUrl,chatBox){
-  document.getElementById("chatRoomName").innerHTML = chatRoom
   loadJSON(chatUrl, function(response) {
     document.getElementById(chatBox).value = response
   }); // end loadJSON
