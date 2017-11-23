@@ -66,7 +66,7 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
       if (err) {
-		chatGeneral = chatGeneral + err;
+		errgoLogic = errgoLogic + err;
         return done(err);
       }
       if (!user) {
@@ -158,7 +158,7 @@ app.post('/signup', function (request, response) {
   userPassword_query = request.query.userPassword
   
   client.query("INSERT INTO Users (localemail, localpassword) VALUES (userEmail_query, userPassword_query);", (err, queryOutput) => {
-    if (err) chatGeneral = chatGeneral + err;
+    if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
@@ -221,14 +221,14 @@ app.get('/chatpost', function(request, response) {
   
   client.connect();
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
-    if (err) chatGeneral = chatGeneral + err;
+    if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
     }
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
-    if (err) chatGeneral = chatGeneral + err;
+    if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'SELECT FROM chatroom_General\n\r';
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
