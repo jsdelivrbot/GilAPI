@@ -9,16 +9,15 @@
 <script src="/js/chat.js" Content-Type="text/javascript" charset="UTF-8"></script>
   <br>
   <br>
-Mobile Chat Room: <input type = "text" id = "chatRoom" value="General"> <br>
-  
+Mobile 
+Chat Room: <input type = "text" id = "chatRoom" value="General"> <br>
+
 <div id="chatRoomName">All</div>Mobile Chat<br>
   <textarea id="chatMainBox" cols="100" rows="25" value="Javascript is disabled.">Javascript is disabled.</textarea> <br>
 </div>
-<form action="updateChat();" method="post">
-	<input type = "text" id = "chatUser" value="User">
-	<input type = "text" id = "chatMessage" value="Hello World!"> 
-	<input type="chatSendButton" value="send"/>
-</form>
+<input type = "text" id = "chatUser" value="User"><br>
+<input type = "text" id = "chatMessage" value="Hello World!" class="resizedTextbox"> 
+<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
 
 
   <% include ../partials/footer.ejs %>
