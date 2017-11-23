@@ -29,4 +29,5 @@ function loadChat(chatUrl,chatBox){
 }; // end loadChat
 
 //init the chat page.
-refreshChat("General")
+window.onload = refreshChat("General")
+
