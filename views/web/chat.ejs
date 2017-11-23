@@ -15,7 +15,7 @@ Chat Room: <input type = "text" id = "chatRoom" value="General"> <br>
   <textarea id="chatMainBox" value="Javascript is disabled."  >Javascript is disabled.</textarea> <br>
 </div>
 <input type = "text" id = "chatUser" placeholder="User Name"> <div id="userNameErr"></div>
-<input type = "text" id = "chatMessage" value="Hello World!"> 
+<input type = "text" id = "chatMessage"  class = "resizedTextbox" onkeypress = "detectEnter(event)" value = "Hello World!">
 <input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
 
 
