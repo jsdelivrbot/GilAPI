@@ -31,5 +31,5 @@ https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea\-inp
 
 - Add enter button detection.
 - Remove default username, make it mandatory somehow. 
-
+- Make chat auto-refresh.
 

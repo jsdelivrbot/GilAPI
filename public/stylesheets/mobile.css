@@ -23,6 +23,12 @@ body {
 	  padding: 0px
 	  }
 
+    textarea {
+      width: 200; 
+	  height: 200px; 
+	  padding: 0px
+	  }
+
   .div_textarea {
       width: 120px; 
       height: 100px; 

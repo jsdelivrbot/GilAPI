@@ -27,6 +27,12 @@ a:hover, a:active {
 	  padding: 0px
 	  }
 
+    textarea {
+      width: 695px; 
+	  height: 506px; 
+	  padding: 0px
+	  }
+
 .div_textarea {
 	width: 750px; 
 	height: 500px; 
