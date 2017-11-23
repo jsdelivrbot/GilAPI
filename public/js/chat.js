@@ -15,6 +15,7 @@ function updateChat() {
   document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight 
 }; // end updateForm
 
+//init the chat page.
 chatRoom = "General"
 chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
 loadJSON(chatUrl, function(response) {
