@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(34);
+  t.plan(46);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -20,6 +20,20 @@ test('responds to requests', (t) => {
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbot', (error, response, body) => {
+      t.false(error); // test 5
+      t.equal(response.statusCode, 200); // test 6
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
+    }); //end request
+	
+    request('http://127.0.0.1:5000/badpw', (error, response, body) => {
+      t.false(error); // test 5
+      t.equal(response.statusCode, 200); // test 6
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8
+    }); //end request
+	
+    request('http://127.0.0.1:5000/meme', (error, response, body) => {
       t.false(error); // test 5
       t.equal(response.statusCode, 200); // test 6
       t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7
@@ -49,6 +63,13 @@ test('responds to requests', (t) => {
       t.equal(response.statusCode, 200); // test 20
       t.notEqual(body.indexOf("1"), -1); // test 21
     }); //end request
+	
+	request('http://127.0.0.1:5000/jsonlint', (error, response, body) => { 
+	  t.false(error); 
+	  t.equal(response.statusCode, 200);  
+	  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  
+	  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  
+	});
 	
     request('http://127.0.0.1:5000/demo', (error, response, body) => {
       t.false(error); // test 22

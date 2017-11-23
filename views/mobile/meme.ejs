@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/mobileheader.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+<script src="/js/meme.js" Content-Type="text/javascript" charset="UTF-8"></script>
+Mobile MemeGen
+  <table>
+        <tr>
+		<td><div id="memeUrlItem">Meme BG URL:</div></td>
+		<td><input type="text" id="memeUrlInput" name="memeUrlInput" class="resizedTextbox" value="/Images/Gil"></td>
+		<td></td>
+	</tr>
+		<td><div id="topTextItem">Top Text:</div></td>
+		<td><input type="text" id="topTextInput" name="topTextInput" class="resizedTextbox" value="/Images/Gil"></td>
+		<td><</td>
+	</tr>
+		<td><div id="BottomTextItem">Bottom Text:</div></td>
+		<td><input type="text" id="BottomTextInput" name="BottomTextInput" class="resizedTextbox" value="/Images/Gil"></td>
+		<td><button onclick="updateMemeForm()">Create Meme!</button></td>
+	</tr>
+  </table>
+
+<script src="/js/git.js" Content-Type="text/javascript" charset="UTF-8"></script>
+
+
+
+  <% include ../partials/footer.ejs %>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/mobileheader.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+<script src="/js/chat.js" Content-Type="text/javascript" charset="UTF-8"></script>
+  <br>
+  <br>
+Mobile Chat Room: <input type = "text" id = "chatRoom" value="General"> <br>
+  
+<div id="chatRoomName">All</div>Mobile Chat<br>
+  <textarea id="chatMainBox" cols="100" rows="25" value="Chat goes here.">Chat goes here.</textarea> <br>
+</div>
+<input type = "text" id = "chatUser" value="User">
+<input type = "text" id = "chatMessage" value="Hello World!"> 
+<input id="chatSendButton" type="button" value="send" onclick="updateChat();" /> <br>
+
+
+  <% include ../partials/footer.ejs %>
+</body>
+</html>

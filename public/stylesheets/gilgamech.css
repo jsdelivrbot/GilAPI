@@ -1,23 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
-	html {
-    height: 100%;
-            }  
-    body {
-	background-color:#909090;
-	margin: 0px;
-	padding: 0px;
-	text-align:left;
-    }
-a:link {
-	color:#9ab945;
-}
-a:visited{
-	color: #777777;
-}
-a:active{
-	color: #777777;
-}
+
 canvas {
 	display: block;
 	margin: 0px auto;
@@ -67,21 +50,8 @@ p.game {
 	
 }
 
-p.banner {
-	text-align:center;
-}
 p.copyright {
 	font-weight:bold;
-	text-align:center;
-}
-h1 {
-
-}
-h2 {
-	font-variant: small-caps;
-	font-family: Verdana, Arial, Helveltica, sans-serif;
-	font-weight:bold;
-	font-size:4ex;
 	text-align:center;
 }
 div.game {
@@ -111,8 +81,5 @@ div.top a:link{
 div.top a:visited {
 
 	color:#000;
-}
-html,body {
-    margin:-10;
 }
 -->
