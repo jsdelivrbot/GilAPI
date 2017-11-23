@@ -4,26 +4,28 @@ function updateChat() {
   chatUser = document.getElementById("chatUser").value
   chatMessage = document.getElementById("chatMessage").value
   chatRoom = document.getElementById("chatRoom").value
-  if (chatUser) {
   if (chatMessage) {
-    chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+    if (chatUser) {
+      chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+      document.getElementById("chatMessage").value = ""
+      document.getElementById("userNameErr").value = ""
+    } else {
+      document.getElementById("userNameErr").innerText = "Enter a user name. Then do a barrel roll."
+    }; //end if chatUser
   }; //end if chatMessage
-  } else {
-   document.getElementById("userNameErr").innerText = "Enter a user name. Then do a barrel roll."
-  }; //end if chatUser
+}; // end updateChat
+
+function refreshChat(chatRoom){
+  chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
+  loadChat(chatUrl,"chatMainBox")
+}; // end refreshChat
+
+function loadChat(chatUrl,chatBox){
   document.getElementById("chatRoomName").innerHTML = chatRoom
   loadJSON(chatUrl, function(response) {
-    document.getElementById("chatMainBox").value = response
+    document.getElementById(chatBox).value = response
   }); // end loadJSON
-  
-  document.getElementById("chatMessage").value = ""
-  
-}; // end updateForm
+}; // end loadChat
 
 //init the chat page.
-chatRoom = "General"
-chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
-loadJSON(chatUrl, function(response) {
-  document.getElementById("chatMainBox").value = response
-}); // end loadJSON
-
+refreshChat("General")
