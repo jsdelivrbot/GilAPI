@@ -28,16 +28,6 @@ function loadChat(chatUrl,chatBox){
 }; // end loadChat
 
 
-// Enter key detection on message field.
-function detectEnter(e){
-	if(e.keyCode === 13){
-		e.preventDefault(); // Ensure it is only this code that runs
-		updateChat();
-	};
-}; // end detectEnter
-
-document.getElementById('chatMessage').onkeypress = detectEnter(e)
-
 // Refresh chat every 5 seconds.
 setInterval(function () {
   refreshChat("General")
