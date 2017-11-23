@@ -24,9 +24,10 @@ body {
 	  }
 
     textarea {
-      width: 200; 
+      width: 200px; 
 	  height: 200px; 
-	  padding: 0px
+	  padding: 0px;
+      outline: none
 	  }
 
   .div_textarea {

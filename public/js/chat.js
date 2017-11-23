@@ -4,7 +4,13 @@ function updateChat() {
   chatUser = document.getElementById("chatUser").value
   chatMessage = document.getElementById("chatMessage").value
   chatRoom = document.getElementById("chatRoom").value
-  chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+  if (chatUser) {
+  if (chatMessage) {
+    chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+  }; //end if chatMessage
+  } else {
+   document.getElementById("userNameErr").innerText = "Enter a user name. Then do a barrel roll."
+  }; //end if chatUser
   document.getElementById("chatRoomName").innerHTML = chatRoom
   loadJSON(chatUrl, function(response) {
     document.getElementById("chatMainBox").value = response
@@ -12,7 +18,6 @@ function updateChat() {
   
   document.getElementById("chatMessage").value = ""
   
-  document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight 
 }; // end updateForm
 
 //init the chat page.
