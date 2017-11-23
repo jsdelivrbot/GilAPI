@@ -82,6 +82,12 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 26
     }); //end request
 	
+    request('http://127.0.0.1:5000/mirror?message=test', (error, response, body) => {
+      t.false(error); // test 24
+      t.equal(response.statusCode, 200); // test 25
+      t.notEqual(body.indexOf('"test"'), -1); // test 26
+    }); //end request
+	
     request('http://127.0.0.1:5000/git', (error, response, body) => { 
       t.false(error); // 27
       t.equal(response.statusCode, 200);  // 28
