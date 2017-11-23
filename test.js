@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(46);
+  t.plan(49);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -41,10 +41,10 @@ test('responds to requests', (t) => {
     }); //end request
 	
     request('http://127.0.0.1:5000/chat', (error, response, body) => { 
-      t.false(error); // 17
-      t.equal(response.statusCode, 200);  // 18
-      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // 19
-      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // 20
+      t.false(error); // test 17
+      t.equal(response.statusCode, 200);  // test 18
+      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 19
+      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 20
     });
     request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
       t.false(error); // test 21
@@ -89,10 +89,10 @@ test('responds to requests', (t) => {
     }); //end request
 	
     request('http://127.0.0.1:5000/git', (error, response, body) => { 
-      t.false(error); // 42
-      t.equal(response.statusCode, 200);  // 43
-      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // 44
-      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // 45
+      t.false(error); // test 42
+      t.equal(response.statusCode, 200);  // test 43
+      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 44
+      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 45
     });
     request('http://127.0.0.1:5000/login2', (error, response, body) => { 
       t.false(error);  // test 46
