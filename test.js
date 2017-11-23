@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(49);
+  t.plan(46);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -80,12 +80,6 @@ test('responds to requests', (t) => {
       t.false(error); // test 36
       t.equal(response.statusCode, 200); // test 37
       t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 38
-    }); //end request
-	
-    request('http://127.0.0.1:5000/mirror?message=test', (error, response, body) => {
-      t.false(error); // test 39
-      t.equal(response.statusCode, 200); // test 40
-      t.notEqual(body.indexOf('"test"'), -1); // test 41
     }); //end request
 	
     request('http://127.0.0.1:5000/git', (error, response, body) => { 
