@@ -9,7 +9,7 @@ function updateChat() {
       chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
 	  loadChat(chatUrl,"chatMainBox")
       document.getElementById("chatMessage").value = ""
-      document.getElementById("userNameErr").value = ""
+      document.getElementById("userNameErr").innerText = ""
     } else {
       document.getElementById("userNameErr").innerText = "Enter a user name. Then do a barrel roll."
     }; //end if chatUser
@@ -18,7 +18,6 @@ function updateChat() {
 
 function refreshChat(chatRoom){
   chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
-  document.getElementById("chatRoomName").innerHTML = chatRoom
   loadChat(chatUrl,"chatMainBox")
 }; // end refreshChat
 
@@ -28,6 +27,19 @@ function loadChat(chatUrl,chatBox){
   }); // end loadJSON
 }; // end loadChat
 
-//init the chat page.
-window.onload = refreshChat("General")
+
+// Enter key detection on message field.
+function detectEnter(e){
+	if(e.keyCode === 13){
+		e.preventDefault(); // Ensure it is only this code that runs
+		updateChat();
+	};
+}; // end detectEnter
+
+document.getElementById('chatMessage').onkeypress = detectEnter(e)
+
+// Refresh chat every 5 seconds.
+var t=setInterval(refreshChat("General"),5000);
+
+
 
