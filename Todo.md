@@ -29,11 +29,7 @@ https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea\-inp
 - Write JS parts as Pagename.js
 
 
-- Revert form for input fields.
-- Revert div to textarea
 - Add enter button detection.
 - Remove default username, make it mandatory somehow. 
-- Make mobile fields smaller/better (Bootstrap?)
-- Remove 
 
 

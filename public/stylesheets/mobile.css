@@ -1,7 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
-/* mobile styles */
-@media handheld {
+
 
 	html, body {
     width: 100%;
@@ -66,13 +65,4 @@
 		display: none;
 		visibility: hidden;
 		}
-}
-/* iPhone-specific styles */
-@media only screen and (max-device-width: 480px) { 
-
-	html {
-		-webkit-text-size-adjust: none;
-		}
-
-}
 -->
