@@ -1,16 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
-
-
-	html, body {
-    width: 100%;
-    height: 100%;
-	font: 12px/15px sans-serif;
-		background: #909090;
-		padding: 3px;
-		color: #909090;
-		margin: 0;
+html {
+height: 100%;
 		}
+body {
+	background-color:#909090;
+	margin: 0px;
+	padding: 0px;
+	text-align:left;
+}
 	a:link, a:visited {
 		text-decoration: underline;
 		color: #0000CC;
@@ -36,6 +34,20 @@
       overflow-y: scroll;
       text-align: left;
   }
+  
+  
+  /* mobile styles */
+@media handheld {
+
+	html, body {
+    width: 100%;
+    height: 100%;
+	font: 12px/15px sans-serif;
+		background: #909090;
+		padding: 3px;
+		color: #909090;
+		margin: 0;
+		}
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: normal;
 		}
@@ -65,4 +77,13 @@
 		display: none;
 		visibility: hidden;
 		}
+}
+/* iPhone-specific styles */
+@media only screen and (max-device-width: 480px) { 
+
+	html {
+		-webkit-text-size-adjust: none;
+		}
+
+}
 -->
