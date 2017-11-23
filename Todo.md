@@ -7,6 +7,7 @@
 - Sort out domains.
 
 - Search page.js files for dupe functions, auto-move to Gilgamech.js
+- Fix divs
 
 # Todo
 - Git page
@@ -17,7 +18,7 @@
 
 New page steps:
 Example: 
-https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037
+https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea\-input#26324037
 - Find code on StackOverflow
 - Identify HTML and JS parts
 - index.js get page call
@@ -26,3 +27,13 @@ https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-inpu
 - nav.ejs add to project in flight.
 - Pagename.ejs add in HTML boilerplate, HTML parts, and Pagename.js call.
 - Write JS parts as Pagename.js
+
+
+- Revert form for input fields.
+- Revert div to textarea
+- Add enter button detection.
+- Remove default username, make it mandatory somehow. 
+- Make mobile fields smaller/better (Bootstrap?)
+- Remove 
+
+
