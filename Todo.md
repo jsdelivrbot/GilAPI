@@ -1,3 +1,13 @@
+1. Add download links to Git page.
+2. Add insert location and auto-insert to Git page files. 
+3. Make wysiwyg page with default "hello world" page. 
+4. Fix up meme-maker (impact font, white with black border)
+5. Make pressing Enter send in chat page.
+- Set up database for chatroom, if time.
+- Sort out domains.
+
+- Search page.js files for dupe functions, auto-move to Gilgamech.js
+
 # Todo
 - Git page
 - Admin page

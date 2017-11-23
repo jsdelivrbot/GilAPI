@@ -187,6 +187,10 @@ app.get('/git', function(request, response) {
 app.get('/text2', function(request, response) {
   response.render(testUA(request.header('user-agent')) + '/text2');
 });
+app.post('/mirror', function(request, response) {
+  message = request.query.message,
+  response.send(message);
+});
 
 app.get('/badpw', function(request, response) { 
   response.render(testUA(request.header('user-agent')) + '/badpw');
