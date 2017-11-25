@@ -214,15 +214,9 @@ app.post('/signup', function (request, response) {
   userEmail_query = request.query.userEmail,
   userPassword_query = request.query.userPassword
   
-<<<<<<< HEAD
-  client.query("INSERT INTO Users (localemail, localpassword,createdAt,updatedAt) VALUES (userEmail_query, userPassword_query,,);", (err, queryOutput) => {
-    if (err) chatGeneral = chatGeneral + err;
-    chatGeneral = chatGeneral + 'New User ' + userEmail_query + ' signup\n\r';
-=======
   client.query("INSERT INTO Users (localemail, localpassword) VALUES (userEmail_query, userPassword_query);", (err, queryOutput) => {
     if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
->>>>>>> master
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
     }
