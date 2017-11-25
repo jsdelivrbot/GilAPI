@@ -1,10 +1,10 @@
 var express = require('express');
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var db = require('./db');
-
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var auth = require('http-auth');
+var passport = require('passport');
+var passporthttp = require('passport-http');
+var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
 
@@ -13,18 +13,18 @@ var pg = require('pg').native;
 var pghstore = require('pg-hstore');
 var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
 var User = sequelize.import('./User');
-// var db = require('./db');
 User.sync();
 
 var app = express();
 
 var chatGeneral = "";
-var errgoLogic = "Variable Initialized.";
+var errgoLogic = "Variable Initialized.\r\n";
 // Fruitbot scores
 var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
+app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
 
 var isValidPassword = function(user, password){
   return bCrypt.compareSync(password, user.password);
@@ -42,11 +42,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: false, saveUninitialized: false }));
-
+app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
+app.use(cookieParser()); // read cookies (needed for auth)
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -57,17 +54,17 @@ const client = new Client({
 });
 client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
-  if (err) chatGeneral = chatGeneral + err;
+  if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + row.table_name + "\r\n";
+    errgoLogic = errgoLogic + row.table_name + "\r\n";
   }
 });
 client.query('SELECT * FROM users;', (err, queryOutput) => {
-  if (err) chatGeneral = chatGeneral + err;
+  if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
   for (let row of queryOutput.rows) {
-    chatGeneral = chatGeneral + row + "\r\n";
+    errgoLogic = errgoLogic + row + "\r\n";
   }
   client.end();
 });
@@ -122,15 +119,23 @@ passport.use('signup', new LocalStrategy({
 );
 
 // LOCAL LOGIN
-passport.use(new Strategy(
-  function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) {
+		errgoLogic = errgoLogic + err;
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
     });
-  }));
+  }
+));
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -145,19 +150,32 @@ passport.deserializeUser(function(id, done) {
 
 // Page calls
 app.get('/', function(request, response) {
-  response.render('home', { user: req.user });
-  // response.render('pages/index');
+  response.render(testUA(request.header('user-agent')) + '/index');
+});
+
+function testUA(ua) {
+    // Check the user-agent string to identyfy the device.
+    if(/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile|ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i.test(ua)) {
+		return 'mobile'
+    } else {
+		return  'web'
+    }
+};
+
+app.get('/', function(request, response) {
+	response.render(testUA(request.header('user-agent')) + '/index');
 });
 
 app.get('/login', function(request, response) {
-  response.render('pages/login');
+  response.render(testUA(request.header('user-agent')) + '/login');
 });
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(request, response) {
-    response.redirect('/');
-  });
-   
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/loginSuccess',
+    failureRedirect: '/loginFailure'
+  })
+);
+
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
 });
@@ -172,15 +190,8 @@ app.get('/logout', function(request, response){
   response.redirect('/');
 });
 
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(request, response){
-    response.render('profile', { user: request.user });
-  });
-
-  
 app.get('/login2', function(request, response) {
-  response.render('pages/login');
+  response.render(testUA(request.header('user-agent')) + '/login');
 });
 app.post('/login2', function (request, response) {
    res = {
@@ -197,15 +208,21 @@ app.post('/login2', function (request, response) {
 })
 
 app.get('/signup', function(request, response) {
-  response.render('pages/signup');
+  response.render(testUA(request.header('user-agent')) + '/signup');
 });
 app.post('/signup', function (request, response) {
   userEmail_query = request.query.userEmail,
   userPassword_query = request.query.userPassword
   
+<<<<<<< HEAD
   client.query("INSERT INTO Users (localemail, localpassword,createdAt,updatedAt) VALUES (userEmail_query, userPassword_query,,);", (err, queryOutput) => {
     if (err) chatGeneral = chatGeneral + err;
     chatGeneral = chatGeneral + 'New User ' + userEmail_query + ' signup\n\r';
+=======
+  client.query("INSERT INTO Users (localemail, localpassword) VALUES (userEmail_query, userPassword_query);", (err, queryOutput) => {
+    if (err) errgoLogic = errgoLogic + err;
+    chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
+>>>>>>> master
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
     }
@@ -215,29 +232,32 @@ app.post('/signup', function (request, response) {
 
 //region WIP
 app.get('/meme', function(request, response) { 
-response.render('pages/meme'); 
+response.render(testUA(request.header('user-agent')) + '/meme'); 
 }); 
 
 app.get('/Arkdata', function(request, response) {
-  response.render('pages/Arkdata');
+  response.render(testUA(request.header('user-agent')) + '/Arkdata');
 });
 
-app.get('demo/', function(request, response) {
-  response.render('pages/demo', { user: req.user });
+app.get('/demo', function(request, response) {
+  response.render(testUA(request.header('user-agent')) + '/demo');
 });
 
 app.get('/git', function(request, response) { 
-  response.render('pages/git'); 
+  response.render(testUA(request.header('user-agent')) + '/git'); 
 });  
 
-app.get('/text2',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(request, response){
-    response.render('pages/text2', { user: request.user });
-  });
+app.get('/text2', function(request, response) {
+  response.render(testUA(request.header('user-agent')) + '/text2');
+});
+
+app.post('/mirror', function(request, response) {
+  message = request.query.message,
+  response.send(message);
+});
 
 app.get('/badpw', function(request, response) { 
-  response.render('pages/badpw');
+  response.render(testUA(request.header('user-agent')) + '/badpw');
 }); 
 app.post('/badpw', function(request, response) { 
   var randomstring = Math.random().toString(36).slice(-20);
@@ -251,7 +271,7 @@ app.get('/test', function(request, response) {
 
 //region chat 
 app.get('/chat', function(request, response) { 
-  response.render('pages/chat'); 
+  response.render(testUA(request.header('user-agent')) + '/chat'); 
 });  
 
 app.get('/chatpost', function(request, response) { 
@@ -264,14 +284,14 @@ app.get('/chatpost', function(request, response) {
   
   client.connect();
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
-    if (err) chatGeneral = chatGeneral + err;
+    if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
     }
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
-    if (err) chatGeneral = chatGeneral + err;
+    if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'SELECT FROM chatroom_General\n\r';
     for (let row of queryOutput.rows) {
       chatGeneral = chatGeneral + row + "\r\n";
@@ -290,7 +310,7 @@ app.get('/chatload', function(request, response) {
 
 //region Fruitbot
 app.get('/fruitbot', function(request, response) {
-  response.render('pages/fruitbot');
+  response.render(testUA(request.header('user-agent')) + '/fruitbot');
 });
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
@@ -323,7 +343,7 @@ app.get('/fizzbuzz', function(request, response) {
 
 
 app.get('/jsonlint', function(request, response) { 
-  response.render('pages/jsonlint'); 
+  response.render(testUA(request.header('user-agent')) + '/jsonlint'); 
 });  
 
 
@@ -356,7 +376,7 @@ app.get('/newfunction', function(request, response) {
 
 app.get('/newappget', function(request, response) {
   newAppName = request.query.name
-  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render('pages/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
+  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render(testUA(request.header('user-agent')) + '/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
 
   response.send(newappgetreturn);
 });

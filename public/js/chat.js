@@ -1,41 +1,43 @@
-
-
-// Load JSON
-// https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
-function loadJSON(file, callback) {   
-
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);  
-};// end loadJSON
-
 function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
   // Post API with user:chat JSON and write reply to textbox.
   chatUser = document.getElementById("chatUser").value
   chatMessage = document.getElementById("chatMessage").value
   chatRoom = document.getElementById("chatRoom").value
-  chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
-  document.getElementById("chatRoomName").innerHTML = chatRoom
-  loadJSON(chatUrl, function(response) {
-    document.getElementById("chatMainBox").value = response
-  }); // end loadJSON
-  
-  document.getElementById("chatMessage").value = ""
-  
-  document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight 
-}; // end updateForm
+  if (chatMessage) {
+    if (chatUser) {
+      chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+	  loadChat(chatUrl,"chatMainBox")
+      document.getElementById("chatMessage").value = ""
+      document.getElementById("userNameErr").innerText = ""
+    } else {
+      document.getElementById("userNameErr").innerText = "Enter a user name. Then do a barrel roll."
+    }; //end if chatUser
+  }; //end if chatMessage
+}; // end updateChat
 
-chatRoom = "General"
-chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
-loadJSON(chatUrl, function(response) {
-  document.getElementById("chatMainBox").value = response
-}); // end loadJSON
+function refreshChat(chatRoom){
+  chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
+  loadChat(chatUrl,"chatMainBox")
+}; // end refreshChat
+
+function loadChat(chatUrl,chatBox){
+  loadJSON(chatUrl, function(response) {
+    document.getElementById(chatBox).value = response
+  }); // end loadJSON
+}; // end loadChat
+
+function detectEnter(e){
+    if(e.keyCode === 13){
+        e.preventDefault(); // Ensure it is only this code that runs
+        updateChat();
+    };
+}; // end detectEnter
+
+// Refresh chat every 5 seconds.
+setInterval(function () {
+  refreshChat("General")
+}, 5000);
+
+
 
