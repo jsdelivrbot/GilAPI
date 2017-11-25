@@ -162,10 +162,6 @@ function testUA(ua) {
     }
 };
 
-app.get('/', function(request, response) {
-	response.render(testUA(request.header('user-agent')) + '/index');
-});
-
 app.get('/login', function(request, response) {
   response.render(testUA(request.header('user-agent')) + '/login');
 });
