@@ -93,9 +93,9 @@ passport.deserializeUser(function(id, done) {
 
 // Page calls
 app.get('/', function(request, response) {
-  var tagline = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
-        tagline: tagline
+        cssType: cssType
     });
 });
 
@@ -110,7 +110,10 @@ function testUA(ua) {
 
 
 app.get('/login', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/login');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/login', {
+        cssType: cssType
+    });
 });
 app.post('/login',
   passport.authenticate('local', {
@@ -134,7 +137,10 @@ app.get('/logout', function(request, response){
 });
 
 app.get('/login2', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/login');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/login', {
+        cssType: cssType
+    });
 });
 app.post('/login2', function (request, response) {
    res = {
@@ -151,7 +157,10 @@ app.post('/login2', function (request, response) {
 })
 
 app.get('/signup', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/signup');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/signup', {
+        cssType: cssType
+    });
 });
 app.post('/signup', function (request, response) {
   userEmail_query = request.query.userEmail,
@@ -169,23 +178,38 @@ app.post('/signup', function (request, response) {
 
 //region WIP
 app.get('/meme', function(request, response) { 
-response.render(testUA(request.header('user-agent')) + '/meme'); 
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/meme', {
+        cssType: cssType
+    });
 }); 
 
 app.get('/Arkdata', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/Arkdata');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/Arkdata', {
+        cssType: cssType
+    });
 });
 
 app.get('/demo', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/demo');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/demo', {
+        cssType: cssType
+    });
 });
 
 app.get('/git', function(request, response) { 
-  response.render(testUA(request.header('user-agent')) + '/git'); 
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/git', {
+        cssType: cssType
+    });
 });  
 
 app.get('/text2', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/text2');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/text2', {
+        cssType: cssType
+    });
 });
 
 app.post('/mirror', function(request, response) {
@@ -194,7 +218,10 @@ app.post('/mirror', function(request, response) {
 });
 
 app.get('/badpw', function(request, response) { 
-  response.render(testUA(request.header('user-agent')) + '/badpw');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/badpw', {
+        cssType: cssType
+    });
 }); 
 app.post('/badpw', function(request, response) { 
   var randomstring = Math.random().toString(36).slice(-20);
@@ -208,8 +235,11 @@ app.get('/test', function(request, response) {
 
 //region chat 
 app.get('/chat', function(request, response) { 
-  response.render(testUA(request.header('user-agent')) + '/chat'); 
-});  
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/chat', {
+        cssType: cssType
+    });
+}); 
 
 app.get('/chatpost', function(request, response) { 
 // /chatpost?user=user&message=message&chatroom=General
@@ -247,7 +277,10 @@ app.get('/chatload', function(request, response) {
 
 //region Fruitbot
 app.get('/fruitbot', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/fruitbot');
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/fruitbot', {
+        cssType: cssType
+    });
 });
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
@@ -280,10 +313,11 @@ app.get('/fizzbuzz', function(request, response) {
 
 
 app.get('/jsonlint', function(request, response) { 
-  response.render(testUA(request.header('user-agent')) + '/jsonlint'); 
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/jsonlint', {
+        cssType: cssType
+    });
 });  
-
-
 
 //region ModuleBuilding
 app.get('/nfs', function(request, response) {
@@ -317,8 +351,6 @@ app.get('/newappget', function(request, response) {
 
   response.send(newappgetreturn);
 });
-
-
 
 
 // catch 404 and forward to error handler

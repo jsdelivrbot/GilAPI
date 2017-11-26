@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/mobileheader.ejs %>
+  <% include ../partials/header.ejs %>
 </head>
 
 <body>
   <% include ../partials/nav.ejs %>
-Mobile Signup
-    <form action="/signup" method="post">
+
+    <form action="/login" method="post">
       <div>
-        <label>Email:</label>
-        <input type="text" name="userEmail" />
+        <label>Username:</label>
+        <input type="text" name="username" />
         <br/>
       </div>
       <div>
@@ -21,8 +21,6 @@ Mobile Signup
         <input type="submit" value="Submit" />
       </div>
     </form>
-
-
   <% include ../partials/footer.ejs %>
 </body>
 </html>
