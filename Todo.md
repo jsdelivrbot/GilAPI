@@ -1,6 +1,4 @@
 0. Make mobile/desktop CSS not take separate pages.
-- Merge Mobile and Web pages back into Pages. 
-- Create call that sends Mobile vs Web CSS.
 - Replace ElseIf with Switch.
 - Determine how much of each partial and page I want to dynamically generate, based on UA, foreach, etc. (Compute vs Storage, consider building a page as an API response - if they don't append anything send full HTML, if outputquery = 'JSON' simply respond with JSON, etc)
 1. Add download links to Git page.
