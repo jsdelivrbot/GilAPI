@@ -93,8 +93,11 @@ passport.deserializeUser(function(id, done) {
 
 // Page calls
 app.get('/', function(request, response) {
-  response.render(testUA(request.header('user-agent')) + '/index');
-});
+  var tagline = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/index', {
+        tagline: tagline
+    });
+}
 
 function testUA(ua) {
     // Check the user-agent string to identyfy the device.
@@ -105,9 +108,6 @@ function testUA(ua) {
     }
 };
 
-app.get('/', function(request, response) {
-	response.render(testUA(request.header('user-agent')) + '/index');
-});
 
 app.get('/login', function(request, response) {
   response.render(testUA(request.header('user-agent')) + '/login');
