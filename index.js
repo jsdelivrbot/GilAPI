@@ -97,7 +97,7 @@ app.get('/', function(request, response) {
   response.render( 'pages/index', {
         tagline: tagline
     });
-}
+});
 
 function testUA(ua) {
     // Check the user-agent string to identyfy the device.
