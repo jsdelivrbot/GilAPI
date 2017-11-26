@@ -90,18 +90,18 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+var navPages = [
+	{ name: 'jsonlint', page: 'JSON Lint' },
+	{ name: 'git', page: 'Git' },
+	{ name: 'meme', page: 'Meme Maker' },
+	{ name: 'demo', page: 'Arkdata Dynamap' },
+	{ name: 'Arkdata', page: 'Arkdata' },
+	{ name: 'text2', page: 'text2' }
+];
 
 // Page calls
 app.get('/', function(request, response) {
   var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-    var pages = [
-        { name: 'jsonlint', page: 'JSON Lint' },
-        { name: 'git', page: 'Git' },
-        { name: 'meme', page: 'Meme Maker' },
-        { name: 'demo', page: 'Arkdata Dynamap' },
-        { name: 'Arkdata', page: 'Arkdata' },
-        { name: 'text2', page: 'text2' }
-    ];
   response.render( 'pages/index', {
         cssType: cssType
     });
