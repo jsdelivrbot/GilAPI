@@ -244,6 +244,7 @@ app.get('/test', function(request, response) {
 app.get('/chat', function(request, response) { 
   var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/chat', {
+	    chatGeneral: chatGeneral,
         cssType: cssType
     });
 }); 
