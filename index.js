@@ -239,6 +239,12 @@ app.get('/test', function(request, response) {
   response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
 });
 
+app.get('/coin', function(request, response) { 
+  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+    response.render( 'pages/coin', {
+    cssType: cssType
+  });
+}); 
 
 //region chat 
 app.get('/chat', function(request, response) { 
