@@ -17,8 +17,10 @@ User.sync();
 
 var app = express();
 
+var lineBreak =  + "\r\n"
+
 var chatGeneral = "";
-var errgoLogic = "Variable Initialized.\r\n";
+var errgoLogic = "Variable Initialized" + lineBreak ;
 // Fruitbot scores
 var fruitbotwin = 0;
 var fruitbotloss = 0;
@@ -48,14 +50,14 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
   if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
   for (let row of queryOutput.rows) {
-    errgoLogic = errgoLogic + row.table_name + "\r\n";
+    errgoLogic = errgoLogic + row.table_name + lineBreak ;
   }
 });
 client.query('SELECT * FROM users;', (err, queryOutput) => {
   if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
   for (let row of queryOutput.rows) {
-    errgoLogic = errgoLogic + row + "\r\n";
+    errgoLogic = errgoLogic + row + lineBreak ;
   }
   client.end();
 });
@@ -177,7 +179,7 @@ app.post('/signup', function (request, response) {
     if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'New User userEmail_query signup\n\r';
     for (let row of queryOutput.rows) {
-      chatGeneral = chatGeneral + row + "\r\n";
+      chatGeneral = chatGeneral + row + lineBreak ;
     }
   });
     response.redirect('/chat');
@@ -261,21 +263,21 @@ app.get('/chatpost', function(request, response) {
   chatUser = request.query.user
   chatRoom = request.query.chatroom
 
-  chatGeneral = chatGeneral + chatUser + ": " + chatMessage + "\r\n"
+  chatGeneral = chatGeneral + chatUser + ": " + chatMessage + lineBreak 
   
   client.connect();
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
     if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
     for (let row of queryOutput.rows) {
-      chatGeneral = chatGeneral + row + "\r\n";
+      chatGeneral = chatGeneral + row + lineBreak ;
     }
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
     if (err) errgoLogic = errgoLogic + err;
     chatGeneral = chatGeneral + 'SELECT FROM chatroom_General\n\r';
     for (let row of queryOutput.rows) {
-      chatGeneral = chatGeneral + row + "\r\n";
+      chatGeneral = chatGeneral + row + lineBreak ;
     }
   });
   client.end();
@@ -341,7 +343,7 @@ app.get('/nfs', function(request, response) {
   spaceChar = " "
   OpenParens = "("
   CloseParens = ")"
-  LineBreak = "\r\n"
+  LineBreak =  + lineBreak 
   OpenCurlBracket = "{"
   CloseCurlBracket = "}"
   SemiColon = ";"
