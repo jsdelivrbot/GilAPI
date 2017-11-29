@@ -15,7 +15,7 @@ function loadCoin(coinUrl,coinBox){
       document.getElementById(coinBox).value += response.data.iso + lineBreak
   } else {
 	  amount = response.data.amount
-      document.getElementById(coinBox).value += response.data.base + " | " + amount  + " | " + Math.round(amount-oldamount) + lineBreak 
+      document.getElementById(coinBox).value += response.data.base + " | " + amount  + " | " + lineBreak 
   }
   }); // end loadJSON
 }; // end loadChat
@@ -26,11 +26,15 @@ setInterval(function () {
 }, 60000);
 
 
+var $btcOld
+var $ltcOld 
+var $ethOld 
+
 function r2Coin (outputTextBox) {
 var $time
 var $btc
 var $ltc
-var $time
+var $eth
 loadJSON("https://api.coinbase.com/v2/time", function($response) { $time = $response.data});
 loadJSON("https://api.coinbase.com/v2/prices/BTC-USD/buy", function($response) { $btc = $response.data});
 loadJSON("https://api.coinbase.com/v2/prices/LTC-USD/buy", function($response) { $ltc = $response.data});

@@ -1,6 +1,6 @@
 //Gil.JS
 
-var lineBreak =  + "\r\n"
+var lineBreak = "\r\n"
 
 // Load JSON
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript

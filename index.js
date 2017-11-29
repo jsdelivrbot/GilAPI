@@ -17,7 +17,7 @@ User.sync();
 
 var app = express();
 
-var lineBreak =  + "\r\n"
+var lineBreak = "\r\n"
 
 var chatGeneral = "";
 var errgoLogic = "Variable Initialized" + lineBreak ;
