@@ -10,7 +10,7 @@ function refreshCoin(outputTextBox){
 }; // end refreshChat
 
 function loadCoin(coinUrl,coinBox){
-  loadJSON(chatUrl, function(response) {
+  loadJSON(coinUrl, function(response) {
   if (response.data.iso) {
       document.getElementById(coinBox).value += response.data.iso + lineBreak
   } else {
