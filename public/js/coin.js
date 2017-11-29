@@ -5,6 +5,7 @@ var $time
 var $btc
 var $ltc
 var $eth
+var $coin2
 
 //Get data from URLs, add to array, do math against old array, output. 
 //Have function get data from URL and output.
@@ -14,7 +15,6 @@ function refreshCoin (outputTextBox) {
 	loadJSON("https://api.coinbase.com/v2/prices/BTC-USD/buy", function($response) { $btc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/LTC-USD/buy", function($response) { $ltc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
-	$coin2 = [];
 	$coin2 = $time.iso + lineBreak;
 	$coin2 += $eth.base + " | " + $eth.amount  + " | " + (Math.round(($eth.amount - $ethOld)*100)/100)+ lineBreak;
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
