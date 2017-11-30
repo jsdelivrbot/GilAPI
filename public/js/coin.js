@@ -35,9 +35,8 @@ function updateCoinBox (outputTextBox) {
   refreshCoin(outputTextBox);
 };
 
-window.onload = updateCoinBox("coinMainBox");
-setTimeout(updateCoinBox("coinMainBox"), 1000);
+updateCoinBox("coinMainBox");
 
-  setInterval(function () {
-    refreshCoin("coinMainBox");
-  }, 30000);
+setInterval(function () {
+  refreshCoin("coinMainBox");
+}, 30000);
