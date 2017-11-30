@@ -18,6 +18,7 @@ User.sync();
 var app = express();
 
 var lineBreak = "\r\n"
+var $basePrice = (Math.random()*10)
 
 var chatGeneral = "";
 var errgoLogic = "Variable Initialized" + lineBreak ;
@@ -325,6 +326,18 @@ app.get('/fizzbuzz', function(request, response) {
     outstring = "Buzz"
   }; //end if 5  
   response.json(outstring);
+});
+
+
+app.get('/fakecoin', function(request, response) {
+  if(Math.random() >= 0.45) {
+    ($basePrice = $basePrice + Math.random());
+  } else {
+    ($basePrice = $basePrice - Math.random());
+  };
+  dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
+	
+  response.json(dataVar);
 });
 
 
