@@ -16,14 +16,23 @@ bgImage.onload = function () {
 	canvas.height = canvas.width * ImageRatio;
 	ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
 	0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
+	addImpactWithBorder('topTextInput',10,100);
+	addImpactWithBorder('BottomTextInput',10,(ctx.height - 20));
 };
 
-function updateMemeForm() {
-	bgImage.src = document.getElementById('memeUrlInput').value;
-	ctx.font="20px Impact";
-	ctx.fillText(document.getElementById('topTextInput').value,10,50);
-	ctx.font="20px Impact";
-	ctx.fillText(document.getElementById('BottomTextInput').value,10,100);
+function updateMemeForm(memeUrlInput) {
+	bgImage.src = document.getElementById(memeUrlInput).value;
+};
+
+
+function addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
+	ctx.font="100px Impact";
+    ctx.lineWidth = 4;  //define the width of the stroke line
+    ctx.fillStyle = 'white';
+	ctx.strokeStyle = 'black';
+	
+	ctx.fillText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
+    ctx.strokeText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
 };
 
 
