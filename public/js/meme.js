@@ -17,7 +17,7 @@ bgImage.onload = function () {
 	ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
 	0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
 	addImpactWithBorder('topTextInput',10,100);
-	addImpactWithBorder('BottomTextInput',10,(ctx.height - 20));
+	addImpactWithBorder('BottomTextInput',10,(ctx.canvas.height - 20));
 };
 
 function updateMemeForm(memeUrlInput) {
