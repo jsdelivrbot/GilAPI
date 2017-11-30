@@ -42,4 +42,4 @@ setTimeout(function(){
   setInterval(function () {
     refreshCoin("coinMainBox");
   }, 30000);
-}
+};
