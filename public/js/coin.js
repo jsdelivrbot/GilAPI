@@ -28,7 +28,18 @@ function refreshCoin (outputTextBox) {
 };
 
 // Refresh chart every 60 seconds.
-setInterval(function () {
-  refreshCoin("coinMainBox")
-}, 60000);
 
+window.onload = function(){ 
+  document.getElementById("coinMainBox").value  = "Data loading...";
+  refreshCoin("coinMainBox");
+
+setTimeout(function(){
+  refreshCoin("coinMainBox");
+  document.getElementById("coinMainBox").value  = "Data loading...";
+  refreshCoin("coinMainBox");
+}, 1000);
+
+  setInterval(function () {
+    refreshCoin("coinMainBox");
+  }, 30000);
+}
