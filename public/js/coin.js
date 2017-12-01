@@ -18,11 +18,14 @@ function refreshCoin (outputTextBox) {
 	loadJSON("https://api.coinbase.com/v2/prices/LTC-USD/buy", function($response) { $ltc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
 	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $ftc = $response.data});
-	$coin2 = $time.iso + lineBreak;
+	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data || $response});
+  try { 
+    $coin2 = $time.iso + lineBreak;
 	$coin2 += $eth.base + " | " + $eth.amount  + " | " + (Math.round(($eth.amount - $ethOld)*100)/100)+ lineBreak;
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
 	$coin2 += $ftc.base + " | " + $ftc.amount  + " | " + (Math.round(($ftc.amount - $ftcOld)*100)/100) + lineBreak;
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
+  }catch(e){console.log(e);};
 
 	document.getElementById(outputTextBox).value  = $coin2 + document.getElementById(outputTextBox).value
 
