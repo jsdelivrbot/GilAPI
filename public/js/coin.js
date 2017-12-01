@@ -1,7 +1,7 @@
-var $btcOld
-var $ltcOld 
-var $ethOld 
-var $ftcOld 
+var $btcOld = 0
+var $ltcOld = 0
+var $ethOld = 0
+var $ftcOld = 0
 var $time
 var $btc
 var $ltc

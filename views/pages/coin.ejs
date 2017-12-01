@@ -2,12 +2,31 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/coin.css">
 </head>
 
 <body>
   <% include ../partials/nav.ejs %>
 <script src="/js/coin.js" Content-Type="text/javascript" charset="UTF-8"></script>
-<textarea id="coinMainBox" value="Javascript is disabled.">Javascript is disabled.</textarea> <br>
+
+<div id="wrapper">
+  <div id="sidebar">
+Coinsole Log:<br>
+<textarea id="coinMainBox" value="Javascript is disabled." style="width: 261px; height: 936px;">Javascript is disabled.</textarea>
+<br>
+</div>
+  <div id="content">Cointent</div>
+<br>
+BTC:  <div id="btc">BTC</div>
+<br>
+FTC:  <div id="ftc">FTC</div>
+<br>
+LTC:  <div id="ltc">LTC</div>
+<br>
+ETH:  <div id="eth">ETH</div>
+<br>
+</div>
+
 
   <% include ../partials/footer.ejs %>
 </body>
