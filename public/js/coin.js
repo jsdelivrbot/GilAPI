@@ -7,7 +7,7 @@ var $btc
 var $ltc
 var $ftc
 var $eth
-var $coin2
+var $coin2 = "Data loading..."
 
 //Get data from URLs, add to array, do math against old array, output. 
 //Have function get data from URL and output.
@@ -19,7 +19,6 @@ function refreshCoin (outputTextBox) {
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
 	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $ftc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data || $response});
-  try {
   var $today = new Date();
     $iso = $time.iso || $today;
     $coin2 = $iso + lineBreak;
@@ -27,7 +26,6 @@ function refreshCoin (outputTextBox) {
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
 	$coin2 += $ftc.base + " | " + $ftc.amount  + " | " + (Math.round(($ftc.amount - $ftcOld)*100)/100) + lineBreak;
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
-  }catch(e){};
 
 	document.getElementById(outputTextBox).value  = $coin2 + document.getElementById(outputTextBox).value
 
@@ -35,6 +33,7 @@ function refreshCoin (outputTextBox) {
 	$ltcOld = $ltc.amount
 	$ethOld = $eth.amount
 	$ftcOld = $ftc.amount
+  }catch(e){};
 };
 
 // Refresh chart every 60 seconds.
@@ -46,11 +45,9 @@ function updateCoinBox (outputTextBox) {
 };
 
 window.onload = function(){ 
-  document.getElementById("coinMainBox").value  = "Data loading..."
-}
-
-updateCoinBox("coinMainBox");
-
-setInterval(function () {
-  refreshCoin("coinMainBox");
-}, 30000);
+  document.getElementById("coinMainBox").value = $coin2
+  updateCoinBox("coinMainBox");
+  setInterval(function () {
+    refreshCoin("coinMainBox");
+  }, 30000);
+};
