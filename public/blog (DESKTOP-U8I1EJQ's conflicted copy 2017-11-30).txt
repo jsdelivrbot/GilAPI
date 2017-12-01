@@ -1,0 +1,76 @@
+Working with Node has been, for the most part, pretty fun. The hardest part of writing a modern website/webapp - for me at least - is making it pretty on mobile. Actually - that's the second-hardest part. The hardest part has been sorting out Passport authentication. Part of why I'm writing this is to help me gather my thoughts. 
+
+
+Passport:
+Mostly works currently - successfully passes loginFailure when given no password. 
+- Requires:
+- Functions:
+- Strategies:
+- Pages: 
+- DB: 
+
+Options: 
+- Local Dev (Need to setup NPM)
+- Reference Build (Tried with Enkida - passes tests but fails on Heroku)
+
+Write blog post, use this to lay out ideas about how it works. Reference HackerNoon post. 
+
+
+Go research forex strategies - don't reinvent them. It's faster.
+
+Min Spread = 
+
+OutputCurrency = ActualSalePrice - ActualBuyPrice
+OutputCurrency = ActualSalePrice - ((InputCurrency - Fee )  * ConversionRateA)
+OutputCurrency = ((ConversionRateB * SalePrice) - Fee) - ((InputCurrency - Fee )  * ConversionRateA)
+OutputCurrency = ((ConversionRateB * SalePrice) - Fee) - ((InputCurrency - Fee )  * ConversionRateA)
+
+BuyPrice = ConversionRateA * InputCurrency
+ActualBuyPrice + (InputCurrency - Fee )  * ConversionRateA
+OutputCurrency / SalePrice = ConversionRateB
+OutputCurrency = ConversionRateB * SalePrice
+ActualSalePrice = SalePrice - Fee
+Spread = ActualSalePrice - ActualBuyPrice
+Profit =  SalePrice - BuyPrice
+
+Profit =  SalePrice - ConversionRateB * Input Currency
+Spread = SalePrice - Fee - ConversionRateB * InputCurrency + Fee
+
+OutputCurrency = ConversionRate * SalePrice
+
+Target Sale Price = ABP + Spread - fee
+
+Velocity of price changes
+Each share has its own sale price? 
+
+
+Way to find "target" price
+More variance at certain times of day? Find patterns?
+
+- I tell Page my Coinbase totals. (It can save?)
+- Page calcuates fees and gives a "zero profit" sale price. 
+
+Table shows: 
+<div class="calculator-value ng-binding">$ 13.39</div>
+1. Current prices
+2. Recent changes
+3. Highs, lows
+- Better than graphs. How? 
+
+- Page to gather stats.
+-- Diff the 3 coins.
+
+- Mine Eth
+
+
+.temp123{
+  text-align:center;
+}
+.temp123 > input{
+  text-align:left;
+}
+
+Diversified Consultants
+T-Mobile $26.26
+Conf# 261929
+

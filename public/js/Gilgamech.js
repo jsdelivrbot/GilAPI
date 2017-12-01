@@ -4,6 +4,7 @@ var lineBreak = "\r\n"
 
 // Load JSON
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
+// Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
 function loadJSON(file, callback) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -43,3 +44,21 @@ function setupLink(textAreaID,downloadLinkID) {
 	  + encodeURIComponent(txtval);
   };
 };
+
+if (testUA(ua) = 'mobile'){ // may need changing?
+  // Create the Script tags, toss these strings between them, store in "js".
+  var js = document.createElement('script');
+  js.type = "text/javascript";
+  js.src = "/js/jquery.dropkick-1.0.0.js";
+
+  // Create the Link tags, toss these strings between them, store in "css".
+  var css = document.createElement('link');
+  css.type = "text/css";
+  css.rel = "stylesheet";
+  css.href = "/stylesheets/mobile.css";
+
+  // Get everything between the Link tags, store in "h", toss these strings at the end. 
+  var h = document.getElementsByTagName('head')[0];
+  h.appendChild(js);
+  h.appendChild(css);
+}
