@@ -13,6 +13,7 @@ var $coin2 = "Data loading..."
 //Have function get data from URL and output.
 
 function refreshCoin (outputTextBox) {
+  try {
 	loadJSON("https://api.coinbase.com/v2/time", function($response) { $time = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/BTC-USD/buy", function($response) { $btc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/LTC-USD/buy", function($response) { $ltc = $response.data});
