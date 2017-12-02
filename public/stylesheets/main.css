@@ -46,6 +46,9 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.dataArea {
+	background-color:#fff;
+}
 
 
 canvas {
