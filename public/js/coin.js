@@ -50,7 +50,7 @@ function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv) {
 	var $botFee = 1
 	var $coinAmount = $coin.amount
 	try {
-		if ($coinMedian == 0) {$coinMedian++} else {$coinMedian = $coinAmount};
+		if ($coinMedian) {$coinMedian++} else {$coinMedian = $coinAmount};
 		if ($coinAmount < $coinMedian && $coinAmount > $oldCoin) {
 			$action = "BUY"
 			$amount += ($coinAmount - $tradeFee)
@@ -91,11 +91,8 @@ function refreshCharts() {
 
 
 // Refresh chart every 30 seconds.
-document.onload = function(){ 
-  document.getElementById("coinMainBox").innerText = $coin2
-  refreshCharts()
-  refreshCharts()
-  setInterval(function () {
-    refreshCharts()
-  }, 30000);
-};
+document.getElementById("coinMainBox").innerText = $coin2
+refreshCharts()
+setInterval(function () {
+	refreshCharts()
+}, 30000);
