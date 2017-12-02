@@ -85,7 +85,7 @@ function refreshCharts() {
 
 
 // Refresh chart every 30 seconds.
-window.onload = function(){ 
+document.onload = function(){ 
   refreshCharts()
   setInterval(function () {
     refreshCharts()
