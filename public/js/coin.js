@@ -74,7 +74,7 @@ function botChooses($coin,$oldCoin,$botAmountDiv,$botActionDiv) {
 			$fbc = $response.data
 			document.getElementById("fbcBotAmount").innerText -= ($fbc.amount -$botFee)
 			document.getElementById("fbcBotAction").innerText = "BUY"
-			});
+			}); 	
 		} else {
 			$action = "HOLD"	
 	}
