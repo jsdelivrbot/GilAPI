@@ -86,6 +86,8 @@ function refreshCharts() {
 
 // Refresh chart every 30 seconds.
 document.onload = function(){ 
+  document.getElementById("coinMainBox").innerText = $coin2
+  refreshCharts()
   refreshCharts()
   setInterval(function () {
     refreshCharts()
