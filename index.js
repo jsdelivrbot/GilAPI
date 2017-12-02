@@ -330,17 +330,23 @@ app.get('/fizzbuzz', function(request, response) {
 
 
 app.get('/fakecoin', function(request, response) {
-  if(Math.random() >= 0.45) {
-    ($basePrice = $basePrice + Math.random());
-  } else {
-    ($basePrice = $basePrice - Math.random());
-  };
-  Math.round($basePrice = Math.round($basePrice*100)/100);
-  dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
-	
-  response.json(dataVar);
+  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
+  response.json($dataVar);
 });
 
+app.get('/fakecoinbuy', function(request, response) {
+  $basePrice = $basePrice + Math.random();
+  Math.round($basePrice = Math.round($basePrice*100)/100);
+  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}};	
+  response.json($dataVar);
+});
+
+app.get('/fakecoinsell', function(request, response) {
+  $basePrice = $basePrice - Math.random();
+  Math.round($basePrice = Math.round($basePrice*100)/100);
+  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}};	
+  response.json($dataVar);
+});
 
 app.get('/jsonlint', function(request, response) { 
   var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
