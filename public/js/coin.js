@@ -22,6 +22,7 @@ function refreshCoin ($outputTextBox) {
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
 	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $fbc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data || $response});
+	
   var $today = new Date();
     $iso = $time.iso || $today;
     $coin2 = $iso + lineBreak;
@@ -44,31 +45,41 @@ function refreshCoin ($outputTextBox) {
 };
 
 
-function botChooses($coin,$botAmountDiv,$botActionDiv) {
+function botChooses($coin,$oldCoin,$botAmountDiv,$botActionDiv) {
+	var $tradeFee = 4
+	var $botFee = 1
   try {
-	$expr = Math.round(Math.random() * 3);
-switch ($expr) {
- case 1:
- $action = "BUY"
- $amount++
-  loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
-    $fbc = $response.data
-    document.getElementById("fbcBotAmount").innerText = $fbc.amount
-  });
- break;
- case 2:
- $action = "SELL"
- $amount--
-  loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
-    $fbc = $response.data
-    document.getElementById("fbcBotAmount").innerText = $fbc.amount
-  });
- break;
- default:
- $action = "HOLD"
-}
-  document.getElementById($botAmountDiv).innerText = $amount
-  document.getElementById($botActionDiv).innerText  = $action
+	  var $median = 90
+	  if (true) {$action = "BUY"}
+		  $expr = ($coin.amount -$tradeFee)> $oldCoin
+	
+	If price is above median + fee and going down 2 consecutive times, sell.
+	If price is below median and going up 2 consecutive times, buy.
+	Otherwise, hold.
+	$Hold = ($coin.amount -$tradeFee)> $oldCoin
+	
+	if (true) {$action = "BUY"}
+	if ($coin.amount < $median && $coin.amount > $oldCoin) {
+		$action = "BUY"
+		$amount += ($coin.amount - $tradeFee)
+		loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
+		$fbc = $response.data
+		document.getElementById("fbcBotAmount").innerText += ($fbc.amount -$botFee)
+		document.getElementById("fbcBotAction").innerText = "SELL"
+	} else {
+		if ($coin.amount + $tradeFee > $median && $coin.amount < $oldCoin) {
+			$action = "SELL"
+			$amount -= ($coin.amount - $tradeFee)
+			loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
+			$fbc = $response.data
+			document.getElementById("fbcBotAmount").innerText -= ($fbc.amount -$botFee)
+			document.getElementById("fbcBotAction").innerText = "BUY"
+			});
+		} else {
+			$action = "HOLD"	
+	}
+	document.getElementById($botAmountDiv).innerText = $amount
+	document.getElementById($botActionDiv).innerText  = $action
     
 	//$coinOld = $coin.amount
   }catch(e){};
@@ -77,9 +88,9 @@ switch ($expr) {
 function refreshCharts() {
   try {
     refreshCoin("coinMainBox");
-    botChooses("btc","btcBotAmount","btcBotAction");
-    botChooses("eth","ethBotAmount","ethBotAction");
-	botChooses("ltc","ltcBotAmount","ltcBotAction");
+    botChooses($btc,$btcOld,"btcBotAmount","btcBotAction");
+    botChooses($eth,$ethOld,"ethBotAmount","ethBotAction");
+	botChooses($ltc,$ltcOld,"ltcBotAmount","ltcBotAction");
   }catch(e){};
 };
 
