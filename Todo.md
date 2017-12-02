@@ -1,6 +1,3 @@
-0. Make mobile/desktop CSS not take separate pages.
-- Replace ElseIf with Switch.
-- Determine how much of each partial and page I want to dynamically generate, based on UA, foreach, etc. (Compute vs Storage, consider building a page as an API response - if they don't append anything send full HTML, if outputquery = 'JSON' simply respond with JSON, etc)
 1. Add download links to Git page.
 2. Add insert location and auto-insert to Git page files. 
 3. Make wysiwyg page with default "hello world" page. 
@@ -14,9 +11,8 @@
 # Todo
 - Git page
 - Admin page
-- Database
 - Passport
-- Chat
+- Error page
 
 New page steps:
 Example: 
@@ -30,9 +26,6 @@ https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea\-inp
 - Pagename.ejs add in HTML boilerplate, HTML parts, and Pagename.js call.
 - Write JS parts as Pagename.js
 
-
-- Add enter button detection.
-- Make chat auto-refresh.
 
 Passport:
 Mostly works currently - successfully passes loginFailure when given no password. 
@@ -73,3 +66,107 @@ app.get('/', function(req, res) {
         <li><%= drink.name %> - <%= drink.drunkness %></li>
     <% }); %>
 </ul>
+
+Working with Node has been, for the most part, pretty fun. The hardest part of writing a modern website/webapp - for me at least - is making it pretty on mobile. Actually - that's the second-hardest part. The hardest part has been sorting out Passport authentication. Part of why I'm writing this is to help me gather my thoughts. 
+
+
+Passport:
+Mostly works currently - successfully passes loginFailure when given no password. 
+- Requires:
+- Functions:
+- Strategies:
+- Pages: 
+- DB: 
+
+Options: 
+- Local Dev (Need to setup NPM)
+- Reference Build (Tried with Enkida - passes tests but fails on Heroku)
+
+Write blog post, use this to lay out ideas about how it works. Reference HackerNoon post. 
+
+
+Go research forex strategies - don't reinvent them. It's faster.
+
+Way to simulate 24h of these? (24*60 = 1440 random changes for a random amount.)
+
+Average of last 24h? 
+LTC - 
+var Median = $87.5.
+var unit = 1 LTC
+var Mult = $2.5
+var 
+
+BTC - 
+var Median = $9250.
+var unit = 0.1 BTC
+
+ETH - 
+var Median = $440.
+var unit = 1 ETH
+
+If price is Median - Mult, and has gone up 2 times in a row, buy 1*unit. 
+If price is Median - 3*Mult, and has gone up 2 times in a row, buy 2*unit. 
+If price is Median + Mult, and has gone down 2 times in a row, buy 1*unit. 
+If price is Median + 3*Mult, and has gone down 2 times in a row, buy 2*unit. 
+- If market stays between these for 24h, buy 1*unit?
+- Prevent rebuy churn? If price stays above Median+3 for 24h, reset median and continue. 
+- 
+
+
+Min Spread = 
+
+OutputCurrency = ActualSalePrice - ActualBuyPrice
+OutputCurrency = ActualSalePrice - ((InputCurrency - Fee )  * ConversionRateA)
+OutputCurrency = ((ConversionRateB * SalePrice) - Fee) - ((InputCurrency - Fee )  * ConversionRateA)
+OutputCurrency = ((ConversionRateB * SalePrice) - Fee) - ((InputCurrency - Fee )  * ConversionRateA)
+
+BuyPrice = ConversionRateA * InputCurrency
+ActualBuyPrice + (InputCurrency - Fee )  * ConversionRateA
+OutputCurrency / SalePrice = ConversionRateB
+OutputCurrency = ConversionRateB * SalePrice
+ActualSalePrice = SalePrice - Fee
+Spread = ActualSalePrice - ActualBuyPrice
+Profit =  SalePrice - BuyPrice
+
+Profit =  SalePrice - ConversionRateB * Input Currency
+Spread = SalePrice - Fee - ConversionRateB * InputCurrency + Fee
+
+OutputCurrency = ConversionRate * SalePrice
+
+Target Sale Price = ABP + Spread - fee
+
+Velocity of price changes
+Each share has its own sale price? 
+
+
+Way to find "target" price
+More variance at certain times of day? Find patterns?
+
+- I tell Page my Coinbase totals. (It can save?)
+- Page calcuates fees and gives a "zero profit" sale price. 
+
+Table shows: 
+<div class="calculator-value ng-binding">$ 13.39</div>
+1. Current prices
+2. Recent changes
+3. Highs, lows
+- Better than graphs. How? 
+
+- Page to gather stats.
+-- Diff the 3 coins.
+
+- Mine Eth
+
+
+.temp123{
+  text-align:center;
+}
+.temp123 > input{
+  text-align:left;
+}
+
+
+var js = document.createElement('script');
+js.type = "text/javascript";
+js.src = "/js/jquery.dropkick-1.0.0.js";
+
