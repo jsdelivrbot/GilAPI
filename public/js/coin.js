@@ -1,11 +1,11 @@
 var $btcOld = 0
 var $ltcOld = 0
 var $ethOld = 0
-var $ftcOld = 0
+var $fbcOld = 0
 var $time
 var $btc
 var $ltc
-var $ftc
+var $fbc
 var $eth
 var $coin2 = "Data loading..."
 var $amount = 0
@@ -20,25 +20,25 @@ function refreshCoin ($outputTextBox) {
 	loadJSON("https://api.coinbase.com/v2/prices/BTC-USD/buy", function($response) { $btc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/LTC-USD/buy", function($response) { $ltc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
-	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $ftc = $response.data});
+	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $fbc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data || $response});
   var $today = new Date();
     $iso = $time.iso || $today;
     $coin2 = $iso + lineBreak;
 	$coin2 += $eth.base + " | " + $eth.amount  + " | " + (Math.round(($eth.amount - $ethOld)*100)/100)+ lineBreak;
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
-	$coin2 += $ftc.base + " | " + $ftc.amount  + " | " + (Math.round(($ftc.amount - $ftcOld)*100)/100) + lineBreak;
+	$coin2 += $fbc.base + " | " + $fbc.amount  + " | " + (Math.round(($fbc.amount - $fbcOld)*100)/100) + lineBreak;
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
 
     document.getElementById($outputTextBox).value  = $coin2 + document.getElementById($outputTextBox).value
     document.getElementById('btc').innerText = $btc.amount
     document.getElementById('ltc').innerText = $ltc.amount
-    document.getElementById('ftc').innerText = $ftc.amount
+    document.getElementById('fbc').innerText = $fbc.amount
     document.getElementById('eth').innerText = $eth.amount
 	$btcOld = $btc.amount
 	$ltcOld = $ltc.amount
 	$ethOld = $eth.amount
-	$ftcOld = $ftc.amount
+	$fbcOld = $fbc.amount
   }catch(e){};
 };
 
@@ -51,16 +51,16 @@ switch ($expr) {
  $action = "BUY"
  $amount++
   loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
-    $ftc = $response.data
-    document.getElementById("ftcBotAmount").innerText = $ftc.amount
+    $fbc = $response.data
+    document.getElementById("fbcBotAmount").innerText = $fbc.amount
   });
  break;
  case 2:
  $action = "SELL"
  $amount--
   loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
-    $ftc = $response.data
-    document.getElementById("ftcBotAmount").innerText = $ftc.amount
+    $fbc = $response.data
+    document.getElementById("fbcBotAmount").innerText = $fbc.amount
   });
  break;
  default:

@@ -1,16 +1,26 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
-#wrapper {
-    width:400px;
+.wrapper {
+	display: flex;
     overflow:hidden;
-    padding:10px;
 }
-#sidebar {
-    float:left;
-    width:100px;
+.sidebar {
+	display: block;
+	float: left;
+    width: 33%;
+    text-align: center;
 }
-#content {
-    margin: 0 0 0 100px;
+.content {
+	display: flex;
+	margin-left: auto;
+    width: 66%;
+    margin-right: auto;
+}
+.contentRows {
+	display: flex;
+}
+.contentItems {
+	display: block;
 }
 div {
     border:1px solid #333;

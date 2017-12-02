@@ -1,3 +1,6 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<!--
+
 .jumbotron {
   background: #532F8C;
   color: white;
@@ -43,3 +46,98 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
+canvas {
+	display: block;
+	margin: 0px auto;
+	border: 1px solid black;
+	
+}
+video{
+	display: block;
+	margin: 0px auto;
+	border: 1px solid black;
+	
+}
+pre {
+	text-align:left;
+}
+p.menu {
+	color: #7f7f7f;
+	margin:0;
+	padding:0;
+	border:0;
+	text-align:left;
+	background-color:#000;
+ 	position: fixed;
+    margin-top: 3.8em; 
+	width: 100%;
+	}
+nav {
+	color: #A3C7B2;
+	margin:0;
+	padding:0;
+	border:0;
+	text-align:left;
+	background-color:#000;
+ 	position: fixed;
+    margin-top: 3em;
+	width: 100%;
+	}
+div.content {
+	padding-top: 3em; /* top 5px plus height 30px */
+	/*padding-left: 3em; /* top 5px plus height 30px */
+	/* top | right | bottom | left */
+	margin: 2px 1em 0 5px;
+	}
+p.game {
+	text-align:center;
+	background-color:A3C7B2;
+	
+}
+
+p.copyright {
+	font-weight:bold;
+	text-align:center;
+}
+div.game {
+	text-align:center;
+
+}
+
+div.top {
+	top:0;
+	margin:0;
+	padding:0;
+	border:1px solid #303030;
+	background-color:#303030;
+	color:#010101;
+	font-variant: small-caps;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	text-align:left;
+ 	font-size: 7ex;
+	position: fixed;
+	width: 100%;
+}
+div.top a:link{
+	text-decoration:none;
+	color:#000;
+}
+div.top a:visited {
+
+	color:#000;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+-->
+<!--https://stackoverflow.com/questions/3443606/make-footer-stick-to-bottom-of-page-correctly#18066619 --> 
+
