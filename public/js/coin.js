@@ -39,13 +39,10 @@ function refreshCoin ($outputTextBox) {
     document.getElementById('ltcAmount').innerText = $ltc.amount
     document.getElementById('ethAmount').innerText = $eth.amount
     document.getElementById('fbcAmount').innerText = $fbc.amount
-	
-	$fbcOld = $fbc.amount
-  }catch(e){};
-};
+  }catch(e){console.log(e)};
+}; // end updateCointent
 
-
-function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv) {
+function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv, callback) {
 	var $tradeFee = 4
 	var $botFee = 1
 	var $coinAmount = $coin.amount
@@ -76,23 +73,28 @@ function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv) {
 		document.getElementById($botAmountDiv).innerText = $amount
 		document.getElementById($botActionDiv).innerText  = $action
 		
-		$coinOld = $coinAmount
+		$oldCoin = $coinAmount
+		callback($oldCoin,$coinMedian)
 	}catch(e){}; // end try 
 }; // end botChooses
 
 function refreshCharts() {
   try {
     refreshCoin("coinMainBox");
-    botChooses($btc,$btcOld,"btcBotAmount","btcBotAction");
-    botChooses($eth,$ethOld,"ethBotAmount","ethBotAction");
-	botChooses($ltc,$ltcOld,"ltcBotAmount","ltcBotAction");
+    botChooses($btc,$btcOld,$btcMedian,"btcBotAmount","btcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
+    botChooses($eth,$ethOld,$ethMedian,"ethBotAmount","ethBotAction",function($e){$ethOld = $e;$ethMedian = $f});
+	botChooses($ltc,$ltcOld,$ltcMedian,"ltcBotAmount","ltcBotAction",function($e){$ltcOld = $e;$ltcMedian = $f});
+	$fbcOld = $fbc.amount
   }catch(e){};
 };
 
 
 // Refresh chart every 30 seconds.
-document.getElementById("coinMainBox").innerText = $coin2
-refreshCharts()
+document.onload = function(){ 
+	document.getElementById("coinMainBox").innerText = $coin2
+	loadCoinData();
+	refreshCharts()
+};
 setInterval(function () {
 	refreshCharts()
 }, 30000);
