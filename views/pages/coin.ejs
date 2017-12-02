@@ -18,37 +18,61 @@
 
   <div id="content" class="content">Cointent
     <div id="btcContentRow" class="contentRows">
-      <div id="btcLabel" class="contentItems">BTC:</div><div id="btc" class="contentItems">BTC</div>
-      <div id="btcBotAmountLabel" class="contentItems">Bot BTC:</div><div id="btcBotAmount" class="contentItems">BTC</div>
-      <div id="btcBotActionLabel" class="contentItems">Bot action:</div><div id="btcBotAction" class="contentItems">BTC</div>
+      <div id="btcLabel" class="contentLabels">BTC:</div>
+	  <div id="btc" class="contentItems">BTC</div>
+      <div id="btcBotAmountLabel" class="contentLabels">Bot BTC:</div>
+	  <div id="btcBotAmount" class="contentItems">BTC</div>
+      <div id="btcBotActionLabel" class="contentLabels">Bot action:</div>
+	  <div id="btcBotAction" class="contentItems">BTC</div>
     </div>
 	
     <div id="ltcContentRow" class="contentRows">
-      <div id="ltcLabel" class="contentItems">LTC:</div><div id="ltc" class="contentItems">LTC</div>
-      <div id="ltcBotAmountLabel" class="contentItems">Bot LTC:</div><div id="ltcBotAmount" class="contentItems">LTC</div>
-      <div id="ltcBotActionLabel" class="contentItems">Bot action:</div><div id="ltcBotAction" class="contentItems">LTC</div>
+      <div id="ltcLabel" class="contentLabels">LTC:</div>
+	  <div id="ltc" class="contentItems">LTC</div>
+      <div id="ltcBotAmountLabel" class="contentLabels">Bot LTC:</div>
+	  <div id="ltcBotAmount" class="contentItems">LTC</div>
+      <div id="ltcBotActionLabel" class="contentLabels">Bot action:</div>
+	  <div id="ltcBotAction" class="contentItems">LTC</div>
     </div>
 	
     <div id="ethContentRow" class="contentRows">	
-      <div id="ethLabel" class="contentItems">ETH:</div><div id="eth" class="contentItems">ETH</div>
-      <div id="ethBotAmountLabel" class="contentItems">Bot ETH:</div><div id="ethBotAmount" class="contentItems">ETH</div>
-      <div id="ethBotActionLabel" class="contentItems">Bot action:</div><div id="ethBotAction" class="contentItems">ETH</div>
+      <div id="ethLabel" class="contentLabels">ETH:</div>
+	  <div id="eth" class="contentItems">ETH</div>
+      <div id="ethBotAmountLabel" class="contentLabels">Bot ETH:</div>
+	  <div id="ethBotAmount" class="contentItems">ETH</div>
+      <div id="ethBotActionLabel" class="contentLabels">Bot action:</div>
+	  <div id="ethBotAction" class="contentItems">ETH</div>
     </div>
 	
-    <div id="btcContentRow" class="contentRows">	
-      <div id="btcLabel" class="contentItems">BTC:</div><div id="btc" class="contentItems">BTC</div>
-      <div id="btcBotAmountLabel" class="contentItems">Bot BTC:</div><div id="btcBotAmount" class="contentItems">BTC</div>
-      <div id="btcBotActionLabel" class="contentItems">Bot action:</div><div id="btcBotAction" class="contentItems">BTC</div>
+    <div id="fbcContentRow" class="contentRows">	
+      <div id="fbcLabel" class="contentLabels">FBC:</div>
+	  <div id="fbc" class="contentItems">FBC</div>
+      <div id="fbcBotAmountLabel" class="contentLabels">Bot FBC:</div>
+	  <div id="fbcBotAmount" class="contentItems">FBC</div>
+      <div id="fbcBotActionLabel" class="contentLabels">Bot action:</div>
+	  <div id="fbcBotAction" class="contentItems">FBC</div>
     </div>
   
   
   </div>
 </div>
 
+1. Div Wrapper (Flex?)
+2. Div Sidebar (works pretty well currently)(Flex around textarea)
+3. Div Content (Flex around divs)
+4. Coin Div rows (Block?)
+5. Div for each item.
+- Coin Name
+- Coin Amount
+- Bot prediction
+- Bot action
+- Bot amount of coin.
+6. Change out div IDs for div classes.
 
 <br>
 <br>
 <br>
+<!-- a href="https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037">How do you implement a fixed left sidebar and fluid right content in CSS</a -->
 <br>
   <% include ../partials/footer.ejs %>
 </body>

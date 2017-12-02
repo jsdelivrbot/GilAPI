@@ -11,7 +11,7 @@
     text-align: center;
 }
 .content {
-	display: flex;
+	display: block;
 	margin-left: auto;
     width: 66%;
     margin-right: auto;
@@ -22,7 +22,8 @@
 .contentItems {
 	display: block;
 }
-div {
-    border:1px solid #333;
+.contentLabels {
+	background-color:#0aa;
+	display: block;
 }
 -->
