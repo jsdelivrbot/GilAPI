@@ -4,7 +4,8 @@
 }
 .sidebar {
 }
-.content {
+.amount {
+	background-color:#3CBE3C;
 }
 .contentRows {
     border:1px solid #333;
@@ -13,5 +14,8 @@
 }
 .contentLabels {
 	background-color:#0aa;
+}
+.dataArea {
+	background-color:#fff;
 }
 -->

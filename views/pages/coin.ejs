@@ -17,19 +17,19 @@
   </div>
   </div>
   <div class="row">
-  <div id="sidebar" class="sidebar col-md-2 contentRows img-rounded">
-        <div id="coinsoleLogLabel" class="contentHeaders">Coinsole Log:</div>
+  <div id="sidebar" class="sidebar col-md-2 hidden-sm contentRows img-rounded  dataArea">
+        <div id="coinsoleLogLabel" class="">Coinsole Log:</div>
       <div id="coinMainBox" class="contentLabels">Javascript is disabled.</div>
      <div id="spacer"><br></div>
-    </div>
+    </div> <!-- end sidebar -->
   <div id="spacer" class="row col-md-1">
     </div>
-  <div id="content" class="img-rounded col-md-8 contentRows">
-  <div id="titleRow" class="row contentRows">
-    <div id="cointentLabel" class="contentHeaders col-md-12 col-xs-4">Cointent</div>
+  <div id="content" class="img-rounded col-md-8 contentRows dataArea">
+  <div id="titleRow" class="row">
+    <div id="cointentLabel" class="col-md-12 col-xs-4">Cointent</div>
     </div>
 
-  <div id="titleRow" class="row ">
+  <div id="titleRow" class="row contentRows">
     <div id="coinLabel" class="contentLabels col-md-2 col-xs-2">Coin:</div>
     <div id="valueLabel" class="contentLabels col-md-2 col-xs-2">Value:</div>
     <div id="medianLabel" class="contentLabels col-md-2 col-xs-2">Median:</div>
@@ -40,7 +40,7 @@
 
   <div id="btcContentRow" class="row ">
 	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">BTC</div>
 	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">BTC</div>
 	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
 	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">BTC</div>
@@ -49,7 +49,7 @@
 
   <div id="ltcContentRow" class="row ">
 	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">LTC</div>
 	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">LTC</div>
 	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
 	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">LTC</div>
@@ -58,7 +58,7 @@
 
   <div id="ethContentRow" class="row ">
 	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">ETH</div>
 	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">ETH</div>
 	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
 	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">ETH</div>
@@ -67,7 +67,7 @@
 
   <div id="fbcContentRow" class="row ">
 	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">FBC</div>
 	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">FBC</div>
 	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
 	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
