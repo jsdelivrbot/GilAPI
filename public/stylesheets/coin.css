@@ -1,29 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
 .wrapper {
-	display: flex;
-    overflow:hidden;
 }
 .sidebar {
-	display: block;
-	float: left;
-    width: 33%;
-    text-align: center;
 }
 .content {
-	display: block;
-	margin-left: auto;
-    width: 66%;
-    margin-right: auto;
 }
 .contentRows {
-	display: flex;
+    border:1px solid #333;
 }
 .contentItems {
-	display: block;
 }
 .contentLabels {
 	background-color:#0aa;
-	display: block;
 }
 -->

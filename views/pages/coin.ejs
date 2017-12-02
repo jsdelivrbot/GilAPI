@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <html>
 <head>
   <% include ../partials/header.ejs %>
@@ -9,65 +10,58 @@
   <% include ../partials/nav.ejs %>
 <script src="/js/coin.js" Content-Type="text/javascript" charset="UTF-8"></script>
 
-<div id="wrapper" class="wrapper">
-  <div id="sidebar" class="sidebar">
-    <div id="consoleLogDiv" class="contentItems">Coinsole Log:
-      <textarea id="coinMainBox" value="Javascript is disabled." style="width: 200px; height: 600px;">Javascript is disabled.</textarea>
+<div id="wrapper" class="wrapper container">
+  <div class="row">
+  <div id="sidebar" class="sidebar col-md-2 contentRows">
+        <div id="coinsoleLogLabel" class="contentHeaders">Coinsole Log:</div>
+      <div id="coinMainBox" class="contentLabels">Javascript is disabled.</div>
+     <div id="spacer"><br></div>
     </div>
+  <div id="spacer" class="row col-md-1">
+    </div>
+  <div id="content" class="content col-md-8">
+  <div id="titleRow" class="row contentRows">
+    <div id="cointentLabel" class="contentHeaders col-md-12">Cointent</div>
     </div>
 
-  <div id="content" class="content">Cointent
-    <div id="btcContentRow" class="contentRows">
-      <div id="btcLabel" class="contentLabels">BTC:</div>
-	  <div id="btc" class="contentItems">BTC</div>
-      <div id="btcBotAmountLabel" class="contentLabels">Bot BTC:</div>
-	  <div id="btcBotAmount" class="contentItems">BTC</div>
-      <div id="btcBotActionLabel" class="contentLabels">Bot action:</div>
-	  <div id="btcBotAction" class="contentItems">BTC</div>
-    </div>
-	
-    <div id="ltcContentRow" class="contentRows">
-      <div id="ltcLabel" class="contentLabels">LTC:</div>
-	  <div id="ltc" class="contentItems">LTC</div>
-      <div id="ltcBotAmountLabel" class="contentLabels">Bot LTC:</div>
-	  <div id="ltcBotAmount" class="contentItems">LTC</div>
-      <div id="ltcBotActionLabel" class="contentLabels">Bot action:</div>
-	  <div id="ltcBotAction" class="contentItems">LTC</div>
-    </div>
-	
-    <div id="ethContentRow" class="contentRows">	
-      <div id="ethLabel" class="contentLabels">ETH:</div>
-	  <div id="eth" class="contentItems">ETH</div>
-      <div id="ethBotAmountLabel" class="contentLabels">Bot ETH:</div>
-	  <div id="ethBotAmount" class="contentItems">ETH</div>
-      <div id="ethBotActionLabel" class="contentLabels">Bot action:</div>
-	  <div id="ethBotAction" class="contentItems">ETH</div>
-    </div>
-	
-    <div id="fbcContentRow" class="contentRows">	
-      <div id="fbcLabel" class="contentLabels">FBC:</div>
-	  <div id="fbc" class="contentItems">FBC</div>
-      <div id="fbcBotAmountLabel" class="contentLabels">Bot FBC:</div>
-	  <div id="fbcBotAmount" class="contentItems">FBC</div>
-      <div id="fbcBotActionLabel" class="contentLabels">Bot action:</div>
-	  <div id="fbcBotAction" class="contentItems">FBC</div>
-    </div>
-  
-  
+  <div id="titleRow" class="row contentRows">
+    <div id="coinLabel" class="contentLabels col-md-3">Coin:</div>
+    <div id="valueLabel" class="contentLabels col-md-3">Value:</div>
+   <div id="botAmountLabel" class="contentLabels col-md-3">Bot Amount:</div>
+    <div id="botActionLabel" class="contentLabels col-md-3">Bot action:</div>
   </div>
-</div>
 
-1. Div Wrapper (Flex?)
-2. Div Sidebar (works pretty well currently)(Flex around textarea)
-3. Div Content (Flex around divs)
-4. Coin Div rows (Block?)
-5. Div for each item.
-- Coin Name
-- Coin Amount
-- Bot prediction
-- Bot action
-- Bot amount of coin.
-6. Change out div IDs for div classes.
+  <div id="btcContentRow" class="row contentRows">
+	<div id="btcLabel" class="contentItems col-md-3">BTC</div>
+	<div id="btcAmount" class="contentItems col-md-3">BTC</div>
+	<div id="btcBotAmount" class="contentItems col-md-3">BTC</div>
+	<div id="btcBotAction" class="contentItems col-md-3">BTC</div>
+  </div>
+
+  <div id="ltcContentRow" class="row contentRows">
+	<div id="ltcLabel" class="contentItems col-md-3">LTC</div>
+	<div id="ltcAmount" class="contentItems col-md-3">LTC</div>
+	<div id="ltcBotAmount" class="contentItems col-md-3">LTC</div>
+	<div id="ltcBotAction" class="contentItems col-md-3">LTC</div>
+  </div>
+
+  <div id="ethContentRow" class="row contentRows">
+	<div id="ethLabel" class="contentItems col-md-3">ETH</div>
+	<div id="ethAmount" class="contentItems col-md-3">ETH</div>
+	<div id="ethBotAmount" class="contentItems col-md-3">ETH</div>
+	<div id="ethBotAction" class="contentItems col-md-3">ETH</div>
+    </div> <!-- end ethContentRow -->
+
+  <div id="fbcContentRow" class="row contentRows">
+	<div id="fbcLabel" class="contentItems col-md-3">FBC</div>
+	<div id="fbcAmount" class="contentItems col-md-3">FBC</div>
+	<div id="fbcBotAmount" class="contentItems col-md-3">FBC</div>
+	<div id="fbcBotAction" class="contentItems col-md-3">FBC</div>
+  </div>
+
+    </div><!-- end content -->
+  </div> <!-- end row	 -->
+</div> <!-- end wrapper -->
 
 <br>
 <br>
