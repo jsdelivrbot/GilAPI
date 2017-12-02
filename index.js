@@ -344,7 +344,7 @@ app.get('/fakecoinbuy', function(request, response) {
 app.get('/fakecoinsell', function(request, response) {
   $basePrice = $basePrice - Math.random();
   Math.round($basePrice = Math.round($basePrice*100)/100);
-  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}};	
+  $dataVar = {"data":{"base":"FBC","currency":"USD","amount": $basePrice}};	
   response.json($dataVar);
 });
 
