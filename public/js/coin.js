@@ -31,10 +31,11 @@ function refreshCoin ($outputTextBox) {
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
 
     document.getElementById($outputTextBox).innerText  = $coin2 + document.getElementById($outputTextBox).innerText
-    document.getElementById('btc').innerText = $btc.amount
-    document.getElementById('ltc').innerText = $ltc.amount
-    document.getElementById('fbc').innerText = $fbc.amount
-    document.getElementById('eth').innerText = $eth.amount
+    document.getElementById('btcAmount').innerText = $btc.amount
+    document.getElementById('ltcAmount').innerText = $ltc.amount
+    document.getElementById('ethAmount').innerText = $eth.amount
+    document.getElementById('fbcAmount').innerText = $fbc.amount
+	
 	$btcOld = $btc.amount
 	$ltcOld = $ltc.amount
 	$ethOld = $eth.amount
