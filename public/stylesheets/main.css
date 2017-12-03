@@ -2,6 +2,8 @@
 <!--
 
 html,body {
+	  width: auto !important;
+  overflow-x: hidden !important;
 }
 html {
 }
@@ -24,6 +26,12 @@ body {
     margin: 1em auto 2em; }
   .navbar + .jumbotron {
     margin-top: -20px; }
+  .navbar {
+	color: #A3C7B2;
+	margin:0;
+	background-color:#000;
+    margin-top: 3em;
+	}
   .jumbotron .lang-logo {
     display: block;
     background: #B01302;
@@ -121,13 +129,11 @@ div.top {
 	top:0;
 	margin:0;
 	padding:0;
-	border:1px solid #303030;
 	color:#010101;
 	font-variant: small-caps;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight:bold;
 	text-align:left;
- 	font-size: 7ex;
 	position: fixed;
 	width: 100%;
 }
@@ -136,8 +142,17 @@ div.top a:link{
 	color:#000;
 }
 div.top a:visited {
-
 	color:#000;
+}
+.banner {
+	width: 100%;
+	text-align: center;
+}
+
+.dropdown {
+	color: #9d9d9d;
+	padding-top: 15px;
+	padding-left: 15px;
 }
 
 .footer {

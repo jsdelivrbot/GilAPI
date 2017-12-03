@@ -23,26 +23,27 @@ a:hover, a:active {
     .resizedTextbox {
       width: 500px; 
 	  height: 20px; 
-	  padding: 0px
 	  }
 
     textarea {
       width: 695px; 
 	  height: 506px; 
-	  padding: 0px;
       outline: none
 	  }
 
 .div_textarea {
 	width: 750px; 
 	height: 500px; 
-	padding: 1px; 
 	border: 1px solid black;
 	background-color: #DDDDDD;
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: scroll;
     text-align: left;
+}
+  
+div.top {
+ 	font-size: 7ex;
 }
 
 h1 {

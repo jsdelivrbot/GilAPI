@@ -11,8 +11,6 @@ var $ltc
 var $fbc
 var $eth
 var $coin2 = "Data loading..."
-var $amount = 0
-var $action = "HOLD"
 
 //Get data from URLs, add to array, do math against old array, output. 
 //Have function get data from URL and output.
@@ -50,7 +48,7 @@ function updateCointent () {
   }catch(e){console.log(e)};
 }; // end updateCointent
 
-function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv, callback) {
+function botChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv,$botActionDiv, callback) {
 	var $tradeFee = 4
 	var $botFee = 1
 	var $coinAmount = $coin.amount
@@ -58,28 +56,29 @@ function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv, call
 		if ($coinMedian) {$coinMedian++} else {$coinMedian = $coinAmount};
 		if ($coinAmount < $coinMedian && $coinAmount > $oldCoin) {
 			$action = "BUY"
-			$amount += ($coinAmount - $tradeFee)
+			$coinAmount += ($coinAmount - $tradeFee)
 			loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
 			$fbc = $response.data
-			document.getElementById("fbcBotAmount").innerText += ($fbc.amount -$botFee)
+			document.getElementById("fbcBotAmount").innerText += (Math.round(($fbc.amount - $botFee)*100)/100)
 			document.getElementById("fbcBotAction").innerText = "SELL"
 			}); //end loadJSON
 		} else {
 			if ($coinAmount + $tradeFee > $coinMedian && $coinAmount < $oldCoin) {
 				$action = "SELL";
 				$coinMedian--;
-				$amount -= ($coinAmount - $tradeFee);
+				$coinAmount -= ($coinAmount - $tradeFee);
 				loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
 				$fbc = $response.data;
-				document.getElementById("fbcBotAmount").innerText -= ($fbc.amount -$botFee);
+				document.getElementById("fbcBotAmount").innerText -= (Math.round(($fbc.amount - $botFee)*100)/100);
 				document.getElementById("fbcBotAction").innerText = "BUY";
 				}); //end loadJSON
 			} else {
 				$action = "HOLD";
 			}; // end if $coinAmount
 		}; // end if $coinAmount
-		document.getElementById($botAmountDiv).innerText = $amount
-		document.getElementById($botActionDiv).innerText  = $action
+		document.getElementById($botAmountDiv).innerText = $coinAmount
+		document.getElementById($botActionDiv).innerText = $action
+		document.getElementById($coinMedianDiv).innerText = $coinMedian
 		
 		$oldCoin = $coinAmount
 		callback($oldCoin,$coinMedian)
@@ -91,9 +90,9 @@ function refreshCharts() {
 	loadCoinData();
 	updateCoinsole("coinMainBox");
 	updateCointent();
-    botChooses($btc,$btcOld,$btcMedian,"btcBotAmount","btcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
-    botChooses($eth,$ethOld,$ethMedian,"ethBotAmount","ethBotAction",function($e){$ethOld = $e;$ethMedian = $f});
-	botChooses($ltc,$ltcOld,$ltcMedian,"ltcBotAmount","ltcBotAction",function($e){$ltcOld = $e;$ltcMedian = $f});
+    botChooses($btc,$btcOld,$btcMedian,"btcMedian","btcBotAmount","btcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
+    botChooses($eth,$ethOld,$ethMedian,"ethMedian","ethBotAmount","ethBotAction",function($e){$ethOld = $e;$ethMedian = $f});
+	botChooses($ltc,$ltcOld,$ltcMedian,"ltcMedian","ltcBotAmount","ltcBotAction",function($e){$ltcOld = $e;$ltcMedian = $f});
 	$fbcOld = $fbc.amount
   }catch(e){};
 };
