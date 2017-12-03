@@ -17,7 +17,7 @@ var $action = "HOLD"
 //Get data from URLs, add to array, do math against old array, output. 
 //Have function get data from URL and output.
 
-function refreshCoin ($outputTextBox) {
+function loadCoinData () {
   try {
 	loadJSON("https://api.coinbase.com/v2/time", function($response) { $time = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/BTC-USD/buy", function($response) { $btc = $response.data});
@@ -25,7 +25,11 @@ function refreshCoin ($outputTextBox) {
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
 	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $fbc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data || $response});
+  }catch(e){console.log(e)};
+}; // end loadCoinData
 	
+function updateCoinsole () {
+  try {
   var $today = new Date();
     $iso = $time.iso || $today;
     $coin2 = $iso + lineBreak;
@@ -33,7 +37,11 @@ function refreshCoin ($outputTextBox) {
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
 	$coin2 += $fbc.base + " | " + $fbc.amount  + " | " + (Math.round(($fbc.amount - $fbcOld)*100)/100) + lineBreak;
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
+  }catch(e){console.log(e)};
+}; // end updateCoinsole
 
+function updateCointent ($outputTextBox) {
+  try {
     document.getElementById($outputTextBox).innerText  = $coin2 + document.getElementById($outputTextBox).innerText
     document.getElementById('btcAmount').innerText = $btc.amount
     document.getElementById('ltcAmount').innerText = $ltc.amount
@@ -80,7 +88,9 @@ function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv, call
 
 function refreshCharts() {
   try {
-    refreshCoin("coinMainBox");
+	loadCoinData();
+	updateCoinsole();
+	updateCointent($outputTextBox);
     botChooses($btc,$btcOld,$btcMedian,"btcBotAmount","btcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
     botChooses($eth,$ethOld,$ethMedian,"ethBotAmount","ethBotAction",function($e){$ethOld = $e;$ethMedian = $f});
 	botChooses($ltc,$ltcOld,$ltcMedian,"ltcBotAmount","ltcBotAction",function($e){$ltcOld = $e;$ltcMedian = $f});
