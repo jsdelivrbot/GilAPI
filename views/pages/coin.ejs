@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<html>
-<head>
-  <% include ../partials/header.ejs %>
-<link rel="stylesheet" type="text/css" href="/stylesheets/coin.css">
-</head>
-
-<body>
-  <% include ../partials/nav.ejs %>
-<script src="/js/coin.js" Content-Type="text/javascript" charset="UTF-8"></script>
 <div id="wrapper" class="container img-rounded dataArea contentRows">
   <div class="row">
   <div id="sidebar" class="sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles">
@@ -16,20 +5,20 @@
       <div id="coinMainBox" class="contentRows dataArea scrollToWindow">Javascript is disabled.</div>
      <div id="spacer"><br></div>
     </div> <!-- end sidebar -->
-  <div id="spacer" class="row col-md-1">
-    </div>
-  <div id="content" class="img-rounded col-md-8 contentRows dataArea">
+  <div id="content" class="img-rounded col-md-10 contentRows dataArea">
+  <div id="coinArea" class="img-rounded col-md-12 contentRows dataArea">
+
   <div id="titleRow" class="row">
     <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">Cointent</div>
     </div>
 
-  <div id="titleRow" class="row contentRows">
-    <div id="coinLabel" class="contentLabels col-md-2 col-xs-2">Coin:</div>
-    <div id="valueLabel" class="contentLabels col-md-2 col-xs-2">Value:</div>
-    <div id="medianLabel" class="contentLabels col-md-2 col-xs-2">Median:</div>
-   <div id="botAmountLabel" class="contentLabels col-md-2 col-xs-2">Bot Amount:</div>
-    <div id="botActionLabel" class="contentLabels col-md-2 col-xs-2">Bot action:</div>
-    <div id="botPredictionLabel" class="contentLabels col-md-2 col-xs-2">Bot pred:</div>
+  <div id="titleRow" class="row contentLabels">
+    <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
+    <div id="valueLabel" class=" col-md-2 col-xs-2">Value:</div>
+    <div id="medianLabel" class=" col-md-2 col-xs-2">Median:</div>
+   <div id="botAmountLabel" class=" col-md-2 col-xs-2">Bot Amount:</div>
+    <div id="botActionLabel" class=" col-md-2 col-xs-2">Bot action:</div>
+    <div id="botPredictionLabel" class=" col-md-2 col-xs-2">Bot pred:</div>
   </div>
 
   <div id="btcContentRow" class="row ">
@@ -67,6 +56,157 @@
 	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
 	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
     </div> <!-- end row	 -->
+   </div><!-- end coinArea -->
+  <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea">
+  <div id="titleRow" class="row">
+    <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">MyBot</div></div>
+
+  <div id="titleRow" class="row contentLabels">
+    <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
+    <div id="valueLabel" class=" col-md-2 col-xs-2">Value:</div>
+    <div id="medianLabel" class=" col-md-2 col-xs-2">Median:</div>
+   <div id="botAmountLabel" class=" col-md-2 col-xs-2">Bot Amount:</div>
+    <div id="botActionLabel" class=" col-md-2 col-xs-2">Bot action:</div>
+    <div id="botPredictionLabel" class=" col-md-2 col-xs-2">Bot pred:</div>
+  </div>
+
+  <div id="btcContentRow" class="row ">
+	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">BTC</div>
+	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">BTC</div>
+  </div>
+
+  <div id="ltcContentRow" class="row ">
+	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">LTC</div>
+	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">LTC</div>
+  </div>
+
+  <div id="ethContentRow" class="row ">
+	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">ETH</div>
+	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">ETH</div>
+    </div> <!-- end ethContentRow -->
+
+  <div id="fbcContentRow" class="row ">
+	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">FBC</div>
+	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
+    </div> <!-- end row	 -->
+   </div><!-- end coinArea -->
+  <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea">
+  <div id="titleRow" class="row">
+    <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">Fruitbot</div>
+    </div>
+
+  <div id="titleRow" class="row contentLabels">
+    <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
+    <div id="valueLabel" class=" col-md-2 col-xs-2">Value:</div>
+    <div id="medianLabel" class=" col-md-2 col-xs-2">Median:</div>
+   <div id="botAmountLabel" class=" col-md-2 col-xs-2">Bot Amount:</div>
+    <div id="botActionLabel" class=" col-md-2 col-xs-2">Bot action:</div>
+    <div id="botPredictionLabel" class=" col-md-2 col-xs-2">Bot pred:</div>
+  </div>
+
+  <div id="btcContentRow" class="row ">
+	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">BTC</div>
+	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">BTC</div>
+  </div>
+
+  <div id="ltcContentRow" class="row ">
+	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">LTC</div>
+	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">LTC</div>
+  </div>
+
+  <div id="ethContentRow" class="row ">
+	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">ETH</div>
+	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">ETH</div>
+    </div> <!-- end ethContentRow -->
+
+  <div id="fbcContentRow" class="row ">
+	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">FBC</div>
+	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
+    </div> <!-- end row	 -->
+   </div><!-- end coinArea -->
+  <div id="content" class="img-rounded col-md-12 col-xs-12 contentRows dataArea">
+  <div id="titleRow" class="row">
+    <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">SimpleBot</div>
+    </div>
+	
+  <div id="titleRow" class="row contentLabels">
+    <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
+    <div id="valueLabel" class=" col-md-2 col-xs-2">Value:</div>
+    <div id="medianLabel" class=" col-md-2 col-xs-2">Median:</div>
+   <div id="botAmountLabel" class=" col-md-2 col-xs-2">Bot Amount:</div>
+    <div id="botActionLabel" class=" col-md-2 col-xs-2">Bot action:</div>
+    <div id="botPredictionLabel" class=" col-md-2 col-xs-2">Bot pred:</div>
+  </div>
+
+  <div id="btcContentRow" class="row ">
+	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">BTC</div>
+	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">BTC</div>
+  </div>
+
+  <div id="ltcContentRow" class="row ">
+	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">LTC</div>
+	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">LTC</div>
+  </div>
+
+  <div id="ethContentRow" class="row ">
+	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">ETH</div>
+	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">ETH</div>
+    </div> <!-- end ethContentRow -->
+
+  <div id="fbcContentRow" class="row ">
+	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">FBC</div>
+	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
+    </div> <!-- end row	 -->
+   </div><!-- end coinArea -->
+   </div><!-- end content -->
   
    <div id="row" class="button row">
     <div id="spacer" class="col-md-5 col-xs-5"></div>
@@ -74,11 +214,6 @@
 		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
      </div> <!-- end button -->
     </div> <!-- end spacer -->
-   </div><!-- end content -->
   </div> <!-- end row -->
 </div> <!-- end wrapper -->
 <!-- a href="https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037">How do you implement a fixed left sidebar and fluid right content in CSS</a -->
-
-  <% include ../partials/footer.ejs %>
-</body>
-</html>

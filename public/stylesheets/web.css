@@ -1,60 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
-html,body {
-    margin:-10;
-}
-html {
-height: 100%;
-		}
-body {
-	margin: 0px;
-	padding: 0px;
-	text-align:center;
-}
-a:link, a:visited {
-	text-decoration: underline;
-	color: #0000CC;
-}
-a:hover, a:active {
-	text-decoration: underline;
-	color: #660066;
-}
 
-    .resizedTextbox {
-      width: 500px; 
-	  height: 20px; 
-	  }
-
-    textarea {
-      width: 695px; 
-	  height: 506px; 
-      outline: none
-	  }
-
-.div_textarea {
-	width: 750px; 
-	height: 500px; 
-	border: 1px solid black;
-	background-color: #DDDDDD;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    text-align: left;
-}
-  
 div.top {
  	font-size: 7ex;
 }
 
-h1 {
-
-}
-h2 {
-	font-variant: small-caps;
-	font-family: Verdana, Arial, Helveltica, sans-serif;
-	font-weight:bold;
-	font-size:4ex;
-	text-align:center;
-}
 
 -->
