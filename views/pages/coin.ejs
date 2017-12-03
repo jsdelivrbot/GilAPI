@@ -11,22 +11,17 @@
 <script src="/js/coin.js" Content-Type="text/javascript" charset="UTF-8"></script>
 
 <div id="wrapper" class="container img-rounded dataArea contentRows">
-   <div id="row" class="button row">
-    <div id="button" class="button col-md-2">
-    <button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
-  </div>
-  </div>
   <div class="row">
-  <div id="sidebar" class="sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded  dataArea ">
+  <div id="sidebar" class="sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles">
         <div id="consoleLogLabel" class="">Coinsole Log:</div>
-      <div id="coinMainBox" class="contentRows">Javascript is disabled.</div>
+      <div id="coinMainBox" class="contentRows dataArea scrollToWindow">Javascript is disabled.</div>
      <div id="spacer"><br></div>
     </div> <!-- end sidebar -->
   <div id="spacer" class="row col-md-1">
     </div>
   <div id="content" class="img-rounded col-md-8 contentRows dataArea">
   <div id="titleRow" class="row">
-    <div id="contentLabel" class="col-md-12 col-xs-4">Cointent</div>
+    <div id="contentLabel" class="col-md-12 col-xs-4 contentTitles">Cointent</div>
     </div>
 
   <div id="titleRow" class="row contentRows">
@@ -75,6 +70,13 @@
 
     </div><!-- end content -->
   </div> <!-- end row	 -->
+
+     <div id="row" class="button row">
+    <div id="spacer" class="col-md-5 col-xs-5"></div>
+    <div id="button" class="button col-md-2 col-xs-2">
+    <button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
+  </div>
+  </div>
 </div> <!-- end wrapper -->
 
 <br>

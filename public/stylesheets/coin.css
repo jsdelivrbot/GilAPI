@@ -12,11 +12,20 @@
 }
 .contentItems {
 }
+.contentTitles {
+	background-color:#337AB7;
+	color:#fff;
+}
 .contentLabels {
 	background-color:#090909;
 	color:#fff;
 }
 .dataArea {
 	background-color:#fff;
+	color:#000;
+}
+.scrollToWindow {
+	height: 75vh;
+    overflow: scroll;
 }
 -->
