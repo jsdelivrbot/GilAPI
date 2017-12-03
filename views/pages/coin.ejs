@@ -10,15 +10,15 @@
   <% include ../partials/nav.ejs %>
 <script src="/js/coin.js" Content-Type="text/javascript" charset="UTF-8"></script>
 
-<div id="wrapper" class="container img-rounded dataArea contentRows">
+<div id="wrapper" class="container img-rounded">
   <div class="row">
   <div id="sidebar" class="sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles">
         <div id="consoleLogLabel" class="">Coinsole Log:</div>
       <div id="coinMainBox" class="contentRows dataArea scrollToWindow">Javascript is disabled.</div>
      <div id="spacer"><br></div>
     </div> <!-- end sidebar -->
-  <div id="content" class="img-rounded col-md-10 contentRows dataArea">
-  <div id="coinArea" class="img-rounded col-md-12 contentRows dataArea">
+  <div id="content" class="img-rounded col-md-10">
+  <div id="coinArea" class="img-rounded col-md-12 contentRows dataArea row">
 
   <div id="titleRow" class="row">
     <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">Cointent</div>
@@ -69,13 +69,25 @@
 	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
-  <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea">
+   
+<div id="manualButtonRow" class="row">
+    <div id="spacer" class="col-md-2 col-xs-1"></div>
+		<div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Buy!</button>
+     </div> <!-- end button -->
+		<div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-success" onclick="refreshCharts()">Sell!</button>
+     </div> <!-- end button -->
+    </div> <!-- end spacer -->
+<br>
+   
+   <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
   <div id="titleRow" class="row">
     <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">MyBot</div></div>
 
   <div id="titleRow" class="row contentLabels">
     <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
-    <div id="valueLabel" class=" col-md-2 col-xs-2">Value:</div>
+    <div id="valueLabel" class=" col-md-2 col-xs-2">Price:</div>
     <div id="medianLabel" class=" col-md-2 col-xs-2">Median:</div>
    <div id="botAmountLabel" class=" col-md-2 col-xs-2">Bot Amount:</div>
     <div id="botActionLabel" class=" col-md-2 col-xs-2">Bot action:</div>
@@ -118,7 +130,49 @@
 	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
-  <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea">
+   
+	 <!-- https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp -->
+<div id="manualButtonRow" class="row contentRows dataArea">
+
+  <div class="">
+  <div class="col-md-1 col-xs-1">
+      buy
+      <input type="number" class="img-rounded col-md-6 col-xs-6">
+  </div>
+  <div class="radio col-md-1 col-xs-1">
+    <div class="radio">
+        <input type="radio" name="optradio">above
+    </div>
+    <div class="radio">
+      <input type="radio" name="optradio">below
+    </div>
+  </div>
+  </div>
+  <div class="contentRows dataArea">
+  <div class="col-md-1 col-xs-1">
+      sell
+      <input type="number" class="img-rounded col-md-2 col-xs-2">
+  </div>
+</div>
+  <div class="radio col-md-1 col-xs-1 ">
+    <div class="radio">
+        <input type="radio" name="optradio">above
+    </div>
+    <div class="radio">
+      <input type="radio" name="optradio">below
+    </div>
+  </div>
+    <div id="spacer" class="col-md-1 col-xs-1"></div>
+		<div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-primary" onclick="refreshCharts()">set!</button>
+     </div> <!-- end button -->
+    <div id="jsonArea" class="contentRows dataArea jsonArea col-md-2 col-xs-2">Javascript is disabled.</div>
+    <div id="spacer" class="col-md-1 col-xs-1">
+</div>
+</div> <!-- end manualButtonRow -->
+<br>
+ 
+ <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
   <div id="titleRow" class="row">
     <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">Fruitbot</div>
     </div>
@@ -168,7 +222,9 @@
 	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
-  <div id="content" class="img-rounded col-md-12 col-xs-12 contentRows dataArea">
+	
+<br>
+ <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
   <div id="titleRow" class="row">
     <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">SimpleBot</div>
     </div>
