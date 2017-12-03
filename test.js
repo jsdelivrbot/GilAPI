@@ -50,8 +50,6 @@ test('responds to requests', (t) => {
     request('http://127.0.0.1:5000/chat', (error, response, body) => { 
       t.false(error); // test 17
       t.equal(response.statusCode, 200);  // test 18
-     // t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 19
-     // t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 20
     });
     request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
       t.false(error); // test 21
