@@ -28,7 +28,7 @@ function loadCoinData () {
   }catch(e){console.log(e)};
 }; // end loadCoinData
 	
-function updateCoinsole () {
+function updateCoinsole ($outputTextBox) {
   try {
   var $today = new Date();
     $iso = $time.iso || $today;
@@ -37,12 +37,12 @@ function updateCoinsole () {
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
 	$coin2 += $fbc.base + " | " + $fbc.amount  + " | " + (Math.round(($fbc.amount - $fbcOld)*100)/100) + lineBreak;
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
+    document.getElementById($outputTextBox).innerText  = $coin2 + document.getElementById($outputTextBox).innerText
   }catch(e){console.log(e)};
 }; // end updateCoinsole
 
-function updateCointent ($outputTextBox) {
+function updateCointent () {
   try {
-    document.getElementById($outputTextBox).innerText  = $coin2 + document.getElementById($outputTextBox).innerText
     document.getElementById('btcAmount').innerText = $btc.amount
     document.getElementById('ltcAmount').innerText = $ltc.amount
     document.getElementById('ethAmount').innerText = $eth.amount
@@ -89,8 +89,8 @@ function botChooses($coin,$oldCoin,$coinMedian,$botAmountDiv,$botActionDiv, call
 function refreshCharts() {
   try {
 	loadCoinData();
-	updateCoinsole();
-	updateCointent($outputTextBox);
+	updateCoinsole("coinMainBox");
+	updateCointent();
     botChooses($btc,$btcOld,$btcMedian,"btcBotAmount","btcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
     botChooses($eth,$ethOld,$ethMedian,"ethBotAmount","ethBotAction",function($e){$ethOld = $e;$ethMedian = $f});
 	botChooses($ltc,$ltcOld,$ltcMedian,"ltcBotAmount","ltcBotAction",function($e){$ltcOld = $e;$ltcMedian = $f});
@@ -101,7 +101,7 @@ function refreshCharts() {
 
 // Refresh chart every 30 seconds.
 document.onload = function(){ 
-	document.getElementById("coinMainBox").innerText = $coin2
+	document.getElementById().innerText = $coin2
 	loadCoinData();
 	refreshCharts()
 };

@@ -1,6 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
 
+html,body {
+}
+html {
+}
+body {
+	background-color:#bbb;
+}
+
 .jumbotron {
   background: #532F8C;
   color: white;
