@@ -82,6 +82,7 @@ video{
 pre {
 	text-align:left;
 }
+
 p.menu {
 	color: #7f7f7f;
 	margin:0;
@@ -156,7 +157,6 @@ div.top a:visited {
 }
 
 .footer {
-    position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
