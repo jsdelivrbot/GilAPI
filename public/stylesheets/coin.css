@@ -15,6 +15,7 @@
 .contentItems {
 }
 .contentTitles {
+	font-size: xx-large;
 	background-color:#337AB7;
 	color:#fff;
 }
@@ -28,9 +29,14 @@
 }
 .scrollToWindow {
 	height: 75vh;
-    overflow: scroll;
+    font-size: initial;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .jsonArea {
-    overflow: scroll;
+	height: 70px;
+    font-size: initial;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 -->

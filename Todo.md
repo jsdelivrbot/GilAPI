@@ -173,3 +173,10 @@ js.src = "/js/jquery.dropkick-1.0.0.js";
 // function testThis(callback) {callback("test","this",1,2,3,"fizz","buzz")}
 // testThis(function(e,f,g){console.log(e,f,g)});
 
+
+SCP 12810
+- Portal Gloves
+- RasenGun
+- DisassemBlade
+- Inverse reality distortion field (cannot control.)
+

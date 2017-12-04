@@ -5,6 +5,8 @@ var $btcOld = 0
 var $ltcOld = 0
 var $ethOld = 0
 var $fbcOld = 0
+var $tradeFee = 4
+var $botFee = 1
 var $time
 var $btc
 var $ltc
@@ -22,7 +24,6 @@ function loadCoinData () {
 	loadJSON("https://api.coinbase.com/v2/prices/LTC-USD/buy", function($response) { $ltc = $response.data});
 	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data});
 	loadJSON("https://gil-api.herokuapp.com/fakecoin", function($response) { $fbc = $response.data});
-	loadJSON("https://api.coinbase.com/v2/prices/ETH-USD/buy", function($response) { $eth = $response.data || $response});
   }catch(e){console.log(e)};
 }; // end loadCoinData
 	
@@ -31,10 +32,20 @@ function updateCoinsole ($outputTextBox) {
   var $today = new Date();
     $iso = $time.iso || $today;
     $coin2 = $iso + lineBreak;
+  }catch(e){console.log(e)};
+  try {
 	$coin2 += $eth.base + " | " + $eth.amount  + " | " + (Math.round(($eth.amount - $ethOld)*100)/100)+ lineBreak;
+  }catch(e){console.log(e)};
+  try {
 	$coin2 += $ltc.base + " | " + $ltc.amount  + " | " + (Math.round(($ltc.amount - $ltcOld)*100)/100) + lineBreak;
+  }catch(e){console.log(e)};
+  try {
 	$coin2 += $fbc.base + " | " + $fbc.amount  + " | " + (Math.round(($fbc.amount - $fbcOld)*100)/100) + lineBreak;
+  }catch(e){console.log(e)};
+  try {
 	$coin2 += $btc.base + " | " + $btc.amount  + " | " + (Math.round(($btc.amount - $btcOld)*100)/100)+ lineBreak;
+  }catch(e){console.log(e)};
+  try {
     document.getElementById($outputTextBox).innerText  = $coin2 + document.getElementById($outputTextBox).innerText
   }catch(e){console.log(e)};
 }; // end updateCoinsole
@@ -48,9 +59,7 @@ function updateCointent () {
   }catch(e){console.log(e)};
 }; // end updateCointent
 
-function botChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv,$botActionDiv, callback) {
-	var $tradeFee = 4
-	var $botFee = 1
+function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv,$botActionDiv, callback) {
 	var $coinAmount = $coin.amount
 	try {
 		if ($coinMedian) {$coinMedian++} else {$coinMedian = $coinAmount};
@@ -82,19 +91,91 @@ function botChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv,$bot
 		
 		$oldCoin = $coinAmount
 		callback($oldCoin,$coinMedian)
-	}catch(e){}; // end try 
-}; // end botChooses
+	}catch(e){console.log(e)}; // end try 
+}; // end fruitbotChooses
+
+function simplebotChooses($coin,$botAmountDiv,$botActionDiv) {
+// function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv,$botActionDiv, callback) {
+	var $coinAmount = $coin.amount
+  try {
+    $expr = Math.round(Math.random() * 3);
+switch ($expr) {
+ case 1:
+  $action = "BUY"
+  $coinAmount += ($coinAmount - $tradeFee)
+  loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
+    $fbc = $response.data
+	document.getElementById("simplebotfbcBotAmount").innerText += (Math.round(($fbc.amount - $botFee)*100)/100)
+	document.getElementById("simplebotfbcBotAction").innerText = "SELL"
+  });
+ break;
+ case 2:
+  $action = "SELL"
+  $coinAmount -= ($coinAmount - $tradeFee);
+  loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
+    $fbc = $response.data
+	document.getElementById("simplebotfbcBotAmount").innerText -= (Math.round(($fbc.amount - $botFee)*100)/100);
+	document.getElementById("simplebotfbcBotAction").innerText = "BUY";
+  });
+ break;
+ default:
+ $action = "HOLD"
+}
+  document.getElementById($botAmountDiv).innerText = $coinAmount
+  document.getElementById($botActionDiv).innerText = $action
+    //$coinOld = $coin.amount
+
+	}catch(e){console.log(e)}; // end try 
+}; // end simplebotChooses
+
+
+function setMyBot() {
+  document.getElementById("jsonArea").innerText = JSON.stringify($coin2);
+}; // end simplebotChooses
+
+function manualTransaction($coin,$direction) {
+switch ($direction) {
+ case "BUY":
+  document.getElementById("btcMedian").innerText += (Math.round(($coin.amount - $botFee)*100)/100);
+  loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
+    $fbc = $response.data
+	document.getElementById("simplebotfbcBotAmount").innerText += (Math.round(($fbc.amount - $botFee)*100)/100)
+	document.getElementById("simplebotfbcBotAction").innerText = "SELL"
+  });
+ break;
+ case 2:
+  document.getElementById("btcMedian").innerText -= (Math.round(($coin.amount - $botFee)*100)/100);
+  loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
+    $fbc = $response.data
+	document.getElementById("simplebotfbcBotAmount").innerText -= (Math.round(($fbc.amount - $botFee)*100)/100);
+	document.getElementById("simplebotfbcBotAction").innerText = "BUY";
+  });
+ break;
+ default:
+ $action = "HOLD"
+}
+
+}; // end simplebotChooses
+
 
 function refreshCharts() {
   try {
 	loadCoinData();
 	updateCoinsole("coinMainBox");
 	updateCointent();
-    botChooses($btc,$btcOld,$btcMedian,"btcMedian","btcBotAmount","btcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
-    botChooses($eth,$ethOld,$ethMedian,"ethMedian","ethBotAmount","ethBotAction",function($e){$ethOld = $e;$ethMedian = $f});
-	botChooses($ltc,$ltcOld,$ltcMedian,"ltcMedian","ltcBotAmount","ltcBotAction",function($e){$ltcOld = $e;$ltcMedian = $f});
+	fruitbotChooses($ltc,$ltcOld,$ltcMedian,"fruitbotltcMedian","fruitbotltcBotAmount","fruitbotltcBotAction",function($e,$f){$ltcOld = $e;$ltcMedian = $f});
+    fruitbotChooses($btc,$btcOld,$btcMedian,"fruitbotbtcMedian","fruitbotbtcBotAmount","fruitbotbtcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
+    fruitbotChooses($eth,$ethOld,$ethMedian,"fruitbotethMedian","fruitbotethBotAmount","fruitbotethBotAction",function($e,$f){$ethOld = $e;$ethMedian = $f});
+  }catch(e){console.log(e)}; // end try 
+  try {
 	$fbcOld = $fbc.amount
-  }catch(e){};
+  }catch(e){console.log(e)}; // end try 
+  try {
+	
+	simplebotChooses($ltc,"simplebotltcBotAmount","simplebotltcBotAction");
+    simplebotChooses($btc,"simplebotbtcBotAmount","simplebotbtcBotAction");
+    simplebotChooses($eth,"simplebotethBotAmount","simplebotethBotAction");
+  }catch(e){console.log(e)}; // end try 
 };
 
 
