@@ -175,8 +175,11 @@ js.src = "/js/jquery.dropkick-1.0.0.js";
 
 
 SCP 12810
-- Portal Gloves
-- RasenGun
-- DisassemBlade
-- Inverse reality distortion field (cannot control.)
+- Only ages during intense mental exertion. 
+- Only known Portal Gloves. (SCP 12811)
+- RasenGun.
+- DisassemBlade is Bankai.
+-- Theoretical weapon - can be used through visualization, enabling past and future use. 
+- Inverse reality distortion field ("a dissonant spirit", a form of invisibility, cannot control.)
+
 

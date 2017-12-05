@@ -97,30 +97,34 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 function simplebotChooses($coin,$botAmountDiv,$botActionDiv) {
 // function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv,$botActionDiv, callback) {
 	var $coinAmount = $coin.amount
-  try {
     $expr = Math.round(Math.random() * 3);
 switch ($expr) {
  case 1:
   $action = "BUY"
   $coinAmount += ($coinAmount - $tradeFee)
+  try {
   loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
     $fbc = $response.data
-	document.getElementById("simplebotfbcBotAmount").innerText += (Math.round(($fbc.amount - $botFee)*100)/100)
+	(document.getElementById("simplebotfbcBotAmount").innerText *1) += (Math.round(($fbc.amount - $botFee)*100)/100)
 	document.getElementById("simplebotfbcBotAction").innerText = "SELL"
   });
+	}catch(e){console.log(e)}; // end try 
  break;
  case 2:
   $action = "SELL"
   $coinAmount -= ($coinAmount - $tradeFee);
+  try {
   loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
     $fbc = $response.data
-	document.getElementById("simplebotfbcBotAmount").innerText -= (Math.round(($fbc.amount - $botFee)*100)/100);
+	(document.getElementById("simplebotfbcBotAmount").innerText *1) -= (Math.round(($fbc.amount - $botFee)*100)/100);
 	document.getElementById("simplebotfbcBotAction").innerText = "BUY";
   });
+	}catch(e){console.log(e)}; // end try 
  break;
  default:
  $action = "HOLD"
 }
+  try {
   document.getElementById($botAmountDiv).innerText = $coinAmount
   document.getElementById($botActionDiv).innerText = $action
     //$coinOld = $coin.amount
@@ -136,19 +140,19 @@ function setMyBot() {
 function manualTransaction($coin,$direction) {
 switch ($direction) {
  case "BUY":
-  document.getElementById("btcMedian").innerText += (Math.round(($coin.amount - $botFee)*100)/100);
+  document.getElementById("btcMedian").innerText = Math.round((((document.getElementById("btcMedian").innerText * 1) + $coin.amount - $botFee)*100)/100);
   loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
     $fbc = $response.data
-	document.getElementById("simplebotfbcBotAmount").innerText += (Math.round(($fbc.amount - $botFee)*100)/100)
-	document.getElementById("simplebotfbcBotAction").innerText = "SELL"
+	document.getElementById("simplebotfbcBotAmount").innerText = Math.round((document.getElementById("btcMedian").innerText * 1) - (($coin.amount - $botFee)*100)/100);
+	document.getElementById("fbcMedian").innerText = "SELL"
   });
  break;
- case 2:
-  document.getElementById("btcMedian").innerText -= (Math.round(($coin.amount - $botFee)*100)/100);
+ case "SELL":
+  document.getElementById("btcMedian").innerText = Math.round((((document.getElementById("btcMedian").innerText * 1) -  + $botFee)*100)/100);
   loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
     $fbc = $response.data
-	document.getElementById("simplebotfbcBotAmount").innerText -= (Math.round(($fbc.amount - $botFee)*100)/100);
-	document.getElementById("simplebotfbcBotAction").innerText = "BUY";
+    Math.round((document.getElementById("simplebotfbcBotAmount").innerText * 1) - (($coin.amount - $botFee)*100)/100);
+	document.getElementById("fbcMedian").innerText = "BUY";
   });
  break;
  default:
@@ -160,7 +164,7 @@ switch ($direction) {
 
 function refreshCharts() {
   try {
-	loadCoinData();
+    if (document.getElementById("btcMedian").innerText == "NaN") {document.getElementById("btcMedian").innerText = 0}	loadCoinData();
 	updateCoinsole("coinMainBox");
 	updateCointent();
 	fruitbotChooses($ltc,$ltcOld,$ltcMedian,"fruitbotltcMedian","fruitbotltcBotAmount","fruitbotltcBotAction",function($e,$f){$ltcOld = $e;$ltcMedian = $f});
@@ -180,10 +184,12 @@ function refreshCharts() {
 
 
 // Refresh chart every 30 seconds.
-document.onload = function(){ 
-	document.getElementById().innerText = $coin2
+window.onload = function(){ 
 	loadCoinData();
-	refreshCharts()
+	refreshCharts();
+	document.getElementById("coinMainBox").innerText = $coin2;
+	document.getElementById("jsonArea").innerText = "Click 'set!' to load.";
+	document.getElementById("btcMedian").innerText = 0;
 };
 setInterval(function () {
 	refreshCharts()
