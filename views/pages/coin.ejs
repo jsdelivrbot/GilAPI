@@ -70,22 +70,9 @@
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
    
-<div id="manualButtonRow" class="row">
-		<div id="button" class="button col-md-2 col-xs-2">
-		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
-     </div> <!-- end button -->
-		<div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-primary" onclick="manualTransaction('$btc','BUY')">Buy!</button>
-     </div> <!-- end button -->
-		<div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-success" onclick="manualTransaction('$btc','SELL')">Sell!</button>
-     </div> <!-- end button -->
-    </div> <!-- end row -->
-<br>
-   
    <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
   <div id="titleRow" class="row">
-    <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles">MyBot</div></div>
+    <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles" contenteditable="true">MyBot</div></div>
 
   <div id="titleRow" class="row contentLabels">
     <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
@@ -135,13 +122,25 @@
    
 	 <!-- https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp -->
 <div id="manualButtonRow" class="row">
+		<div id="button" class="button col-md-2 col-xs-2">
+		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
+     </div> <!-- end button -->
+      <input id = "myBotSell " type="number" class="img-rounded col-md-12 col-xs-12" value=1>
+	  <div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-primary" onclick="manualTransaction($btc,'BUY')">Buy!</button>
+     </div> <!-- end button -->
+		<div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-success" onclick="manualTransaction($btc,'SELL')">Sell!</button>
+     </div> <!-- end button -->
+    </div> <!-- end row -->
+   
+<div id="manualButtonRow" class="row">
 
-  <div class="">
-  <div class="col-md-1 col-xs-1">
+  <div class="col-md-2 col-xs-2">
       buy
-      <input id = "myBotBuy" type="number" class="img-rounded col-md-6 col-xs-6">
+      <input id = "myBotBuy" type="number" class="img-rounded col-md-12 col-xs-12" value=1>
   </div>
-  <div class="radio col-md-1 col-xs-1">
+  <div class="col-md-1 col-xs-1">
     <div class="radio">
         <input type="radio" name="optradio" id="radioBuyAbove">above
     </div>
@@ -149,19 +148,16 @@
       <input type="radio" name="optradio" id="radioBuyBelow">below
     </div>
   </div>
-  </div>
-  <div class="contentRows dataArea">
-  <div class="col-md-1 col-xs-1">
+  <div class="col-md-2 col-xs-2">
       sell
-      <input id = "myBotSell " type="number" class="img-rounded col-md-2 col-xs-2">
+      <input id = "myBotSell " type="number" class="img-rounded col-md-12 col-xs-12" value=1>
   </div>
-</div>
-  <div class="radio col-md-1 col-xs-1 ">
+  <div class="col-md-1 col-xs-1 ">
     <div class="radio">
-        <input type="radio" name="optradio" id="radioSellBelow">above
+        <input type="radio" name="optradio2" id="radioSellBelow">above
     </div>
     <div class="radio">
-      <input type="radio" name="optradio" id="radioSellBelow">below
+      <input type="radio" name="optradio2" id="radioSellBelow">below
     </div>
   </div>
     <div id="spacer" class="col-md-1 col-xs-1"></div>
@@ -277,18 +273,23 @@
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
    </div><!-- end content -->
-  
-   <div id="row" class="button row">
-    <div id="spacer" class="col-md-5 col-xs-5"></div>
-		<div id="button" class="button col-md-2 col-xs-2">
-		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
-     </div> <!-- end button -->
-    </div> <!-- end spacer -->
   </div> <!-- end row -->
 </div> <!-- end wrapper -->
 <!-- a href="https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037">How do you implement a fixed left sidebar and fluid right content in CSS</a -->
+<!-- 
+https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp
+https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
+https://stackoverflow.com/questions/16517718/bootstrap-number-validation
+https://stackoverflow.com/questions/3368546/what-input-field-type-forces-the-number-pad-mobile-keyboard-to-come-up-when-focu
+https://html.com/input-type-radio/
+https://stackoverflow.com/questions/12084121/correct-way-to-create-rounded-corners-in-twitter-bootstrap
+https://getbootstrap.com/docs/3.3/css/
+https://v4-alpha.getbootstrap.com/components/buttons/
+http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/
+https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate
 
-
+-->
   <% include ../partials/footer.ejs %>
+
 </body>
 </html>
