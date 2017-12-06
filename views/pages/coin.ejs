@@ -14,7 +14,7 @@
   <div class="row">
   <div id="sidebar" class="sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles">
         <div id="consoleLogLabel" class="">Coinsole Log:</div>
-      <div id="coinMainBox" class="contentRows dataArea scrollToWindow">Javascript is disabled.</div>
+      <div id="coinMainBox" class="contentRows dataArea scrollToWindow img-rounded">Javascript is disabled.</div>
      <div id="spacer"><br></div>
     </div> <!-- end sidebar -->
   <div id="content" class="img-rounded col-md-10">
@@ -69,10 +69,29 @@
 	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
+<div id="manualButtonRow" class="row">
+   </div><!-- end coinArea -->
+		<div id="button" class="button col-md-2 col-xs-2">
+   </div><!-- end coinArea -->
+	<br>
+<div id="manualButtonRow" class="row">
+		<div id="button" class="button col-md-2 col-xs-2">
+		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
+	</div> <!-- end button -->
+	<div id="button" class="button col-md-6 col-xs-6">
+	<input id = "manualBuySellValue" type="number" class="img-rounded col-md-2 col-xs-2" value=1>
+		<button type="button" class="btn btn-primary" onclick="manualTransaction($btc,'BUY')">Buy!</button>
+		<button type="button" class="btn btn-success" onclick="manualTransaction($btc,'SELL')">Sell!</button>
+	</div> <!-- end button -->
+	<div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-warning" onclick="toggleSettingsDisplay('manualButtonRow2');">Bot Settings</button>
+	</div> <!-- end button -->
+	</div> <!-- end row -->
+
    
    <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
   <div id="titleRow" class="row">
-    <div id="contentLabel" class="col-md-12 col-xs-12 contentTitles" contenteditable="true">MyBot</div></div>
+    <div id="myBotLabel" class="col-md-12 col-xs-12 contentTitles" contenteditable="true">MyBot</div></div>
 
   <div id="titleRow" class="row contentLabels">
     <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
@@ -120,21 +139,8 @@
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
    
-	 <!-- https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp -->
-<div id="manualButtonRow" class="row">
-		<div id="button" class="button col-md-2 col-xs-2">
-		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
-     </div> <!-- end button -->
-      <input id = "myBotSell " type="number" class="img-rounded col-md-12 col-xs-12" value=1>
-	  <div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-primary" onclick="manualTransaction($btc,'BUY')">Buy!</button>
-     </div> <!-- end button -->
-		<div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-success" onclick="manualTransaction($btc,'SELL')">Sell!</button>
-     </div> <!-- end button -->
-    </div> <!-- end row -->
-   
-<div id="manualButtonRow" class="row">
+	 <!-- https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp -->   
+<div id="manualButtonRow2" class="row" style="visibility: hidden;">
 
   <div class="col-md-2 col-xs-2">
       buy
@@ -150,11 +156,11 @@
   </div>
   <div class="col-md-2 col-xs-2">
       sell
-      <input id = "myBotSell " type="number" class="img-rounded col-md-12 col-xs-12" value=1>
+      <input id = "myBotSell" type="number" class="img-rounded col-md-12 col-xs-12" value=1>
   </div>
   <div class="col-md-1 col-xs-1 ">
     <div class="radio">
-        <input type="radio" name="optradio2" id="radioSellBelow">above
+        <input type="radio" name="optradio2" id="radioSellAbove">above
     </div>
     <div class="radio">
       <input type="radio" name="optradio2" id="radioSellBelow">below
@@ -164,9 +170,11 @@
 		<div id="button" class="button col-md-1 col-xs-1">
 		<button type="button" class="btn btn-primary" onclick="setMyBot()">set!</button>
      </div> <!-- end button -->
-    <div id="jsonArea" class="contentRows dataArea jsonArea img-rounded col-md-2 col-xs-2">Javascript is disabled.</div>
-    <div id="spacer" class="col-md-1 col-xs-1">
-</div>
+		<div id="button" class="button col-md-1 col-xs-1">
+		<button type="button" class="btn btn-primary" onclick="getMyBot()">Load</button>
+     </div> <!-- end button -->
+    <div id="jsonArea" class="contentRows dataArea jsonArea img-rounded col-md-2 col-xs-2" contenteditable="true" onchange="getMyBot();">Javascript is disabled.</div>
+    <div id="text" class="col-md-2 col-xs-2">Copy to export.<br>Paste to import.</div>
 </div> <!-- end manualButtonRow -->
 <br>
  
@@ -287,6 +295,7 @@ https://getbootstrap.com/docs/3.3/css/
 https://v4-alpha.getbootstrap.com/components/buttons/
 http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/
 https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate
+https://stackoverflow.com/questions/9476617/how-to-set-radio-button-status-with-javascript
 
 -->
   <% include ../partials/footer.ejs %>

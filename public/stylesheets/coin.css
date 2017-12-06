@@ -29,7 +29,7 @@
 }
 .scrollToWindow {
 	height: 75vh;
-    font-size: initial;
+    font-size: small;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -37,6 +37,7 @@
 	height: 70px;
     font-size: initial;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
+	word-wrap: break-word;
 }
 -->

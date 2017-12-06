@@ -104,8 +104,8 @@ switch ($expr) {
   $coinAmount += ($coinAmount - $tradeFee)
   try {
   loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
-    $fbc = $response.data
-	(document.getElementById("simplebotfbcBotAmount").innerText *1) += (Math.round(($fbc.amount - $botFee)*100)/100)
+    $fbc = $response.data;
+	document.getElementById("simplebotfbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) + $fbc.amount - $botFee)*100)/100)
 	document.getElementById("simplebotfbcBotAction").innerText = "SELL"
   });
 	}catch(e){console.log(e)}; // end try 
@@ -115,8 +115,8 @@ switch ($expr) {
   $coinAmount -= ($coinAmount - $tradeFee);
   try {
   loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
-    $fbc = $response.data
-	(document.getElementById("simplebotfbcBotAmount").innerText *1) -= (Math.round(($fbc.amount - $botFee)*100)/100);
+    $fbc = $response.data;
+	document.getElementById("simplebotfbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) - $fbc.amount - $botFee)*100)/100)
 	document.getElementById("simplebotfbcBotAction").innerText = "BUY";
   });
 	}catch(e){console.log(e)}; // end try 
@@ -132,9 +132,23 @@ switch ($expr) {
 	}catch(e){console.log(e)}; // end try 
 }; // end simplebotChooses
 
-
 function setMyBot() {
-  document.getElementById("jsonArea").innerText = JSON.stringify($coin2);
+	$botName = document.getElementById("myBotLabel").innerText; 
+	$buyVal = "11000"; // document.getElementById("myBotBuy").value; 
+	$buyDir =  "below"; //document.getElementById("radioBuyAbove").checked;
+	$sellVal = "12000"; //document.getElementById("myBotSell").value;
+	$sellDir = "above"; //document.getElementById("radioSellAbove").checked; 
+	$botOutput = {"botName":$botName,"buyVal":$buyVal,"buyDir":$buyDir,"sellVal":$sellVal,"sellDir":$sellDir};	
+	document.getElementById("jsonArea").innerText = JSON.stringify($botOutput);
+}; // end simplebotChooses
+
+function getMyBot() {
+	$botInput = JSON.parse(document.getElementById("jsonArea").innerText);
+	document.getElementById("myBotLabel").innerText = $botInput.botName; 
+	document.getElementById("myBotBuy").value = $botInput.buyVal; 
+	document.getElementById("radioBuyAbove").checked = $botInput.buyDir; 
+	document.getElementById("myBotSell").value = $botInput.sellVal; 
+	document.getElementById("radioSellBelow").checked = $botInput.sellDir; 
 }; // end simplebotChooses
 
 function manualTransaction($coin,$direction) {
@@ -162,6 +176,16 @@ switch ($direction) {
 }; // end simplebotChooses
 
 
+function toggleSettingsDisplay($divId) {
+	
+if (document.getElementById($divId).style.visibility == "visible") {
+  document.getElementById($divId).style.visibility="hidden";
+} else { 
+  document.getElementById($divId).style.visibility="visible";
+} // end if
+}; // end simplebotChooses
+
+
 function refreshCharts() {
   try {
     if (document.getElementById("btcMedian").innerText == "NaN") {document.getElementById("btcMedian").innerText = 0}	loadCoinData();
@@ -180,7 +204,7 @@ function refreshCharts() {
     simplebotChooses($btc,"simplebotbtcBotAmount","simplebotbtcBotAction");
     simplebotChooses($eth,"simplebotethBotAmount","simplebotethBotAction");
   }catch(e){console.log(e)}; // end try 
-};
+}; // end refreshCharts
 
 
 // Refresh chart every 30 seconds.

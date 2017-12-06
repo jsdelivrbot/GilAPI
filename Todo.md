@@ -183,3 +183,94 @@ SCP 12810
 - Inverse reality distortion field ("a dissonant spirit", a form of invisibility, cannot control.)
 
 
+Financial
+Cut costs - Cancel/stop
+- Amazon Prime? 
+- 24h Fitness
+- LA Fitness?
+- Rent - buy a mobile home.
+- Car - pay off by September.
+- Navient - pay off ($8k) - 6 weeks
+- Navient - pay off ($8k) - 6 weeks
+- Navient - pay off ($8k) - 6 weeks
+
+- Passport.js
+- BECU account - apply for loan.
+- Order of financial operations.
+
+best
+$k - weeks - item
+(30 - 37.5 - Draw = $600/wk)
+0.8 - +1 - income
+30 - 37.5 - Bank
+$k - weeks - item
+79.5 - 99.5 - Total (1.91y)
+8 - 10 - Navient
+15.5 - 19 - Car
+50 - 62.5 - Mobile
+6 - 7.5 - Appliances?
+99.5 - 37.5 = 62 - 4 = 58 - 52 = 6
+-- Dec 2017 move-in - 2018 - February 2019 payoff
+
+worst
+$k - weeks - item
+(30 - 37.5 - Draw = $600/wk)
+0.8 - +1 - income
+30 - 37.5 - Bank
+$k - weeks - item
+99.5 - 124.5 - Total (2.39y)
+8 - 10 - Navient
+15.5 - 19 - Car
+50 - 62.5 - Mobile
+6 - 7.5 - Appliances?
+20  - 14.5 - Rent
+124.5 - 37.5 = 87 - 4 = 83 - 52 = 31
+-- 2017 - October 2018 move-in - June 2019 payoff
+
+
+2/20/2018
+best
+$k - weeks - item
+(30 - 37.5 - Draw = $600/wk)
+0.8 - +1 - income
+5 - 6.5 - Bank
+$k - weeks - item
+45.5 - 57 - Total (1.91y)
+14.5 - 18 - Car
+25 - 62.5 - Mobile
+6 - 7.5 - Appliances?
+57 - 6.5 = 50.5 +8 = 58.5 - 52 = 6.5
+-- Dec 2017 move-in - 2018 - February 2019 payoff
+
+worst
+$k - weeks - item
+(30 - 37.5 - Draw = $600/wk)
+0.8 - +1 - income
+31.5 - 39.5 - Bank
+$k - weeks - item
+86.5 - 108 - Total (2.07y)
+14.5 - 18 - Car
+50 - 62.5 - Mobile
+6 - 7.5 - Appliances?
+16  - 14.5 - Rent
+108 - 39.5 = 68.5 + 8 = 76.5 - 52 = 24.5
+-- October 2018 move-in - May 2019 payoff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
