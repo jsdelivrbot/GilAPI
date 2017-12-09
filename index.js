@@ -69,6 +69,11 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
 
+	  if (err) {
+		errgoLogic = errgoLogic + err;
+        return done(err);
+      }// end if err
+
       // else
       return done(null, user);
     }); // end User.findOne
