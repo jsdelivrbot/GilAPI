@@ -93,6 +93,33 @@ app.get('/login', function(request, response) {
     });
 });
 
+app.post('/login', function(request, response) {
+    var username = request.body.username
+    var enteredPassword = request.body.password;
+    
+    new User({username:username}).fetch().then(function(found){
+        if (found) {
+            errgoLogic = errgoLogic + "User found: " + username + lineBreak;
+          
+            bcrypt.compare(enteredPassword, found.get('password'), function(err, userFound) {
+                if (userFound) {
+                        request.session.regenerate(function(){
+                        errgoLogic = errgoLogic + "User password matches: " + username + lineBreak;
+                        response.redirect('/');
+                        request.session.found = found.username;
+                    }); // end request.session.regenerate
+                } else {
+                    errgoLogic = errgoLogic + "User password not match: " + username + lineBreak;
+                    response.redirect('/signup');
+                }; //end if userFound
+            }); // end bcrypt.compare
+        } else {
+            errgoLogic = errgoLogic + "User not found: " + username + lineBreak;
+            response.redirect('/signup');
+        }; // end if found
+    }); // end new User
+}); // end app post login 
+
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
 });
