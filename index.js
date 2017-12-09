@@ -1,6 +1,7 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
 const { Client } = require('pg');
 
@@ -34,8 +35,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(passport.initialize());
-app.use(passport.session());
 
 // PostGre SQL stuff.
 const client = new Client({
@@ -118,19 +117,13 @@ app.get('/login2', function(request, response) {
         cssType: cssType
     });
 });
-app.post('/login2', function (request, response) {
-   res = {
-      userName:request.query.userName,
-      last_name:request.query.userPassword
-   };
-  userName_query = request.query.userName,
-  userPassword_query = request.query.userPassword
-  if (userPassword_query == "Hello") {
-    response.redirect('/demo');
-  } else {
-    response.redirect('/');
-  }; //end if first_name
-})
+app.post('/login2',
+  // passport.authenticate('local', {
+  //   successRedirect: '/loginSuccess',
+  //  failureRedirect: '/loginFailure'
+  // })
+  
+);
 
 app.get('/signup', function(request, response) {
   var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
