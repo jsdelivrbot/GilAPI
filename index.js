@@ -50,7 +50,6 @@ client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-  errgoLogic = errgoLogic + "Connected successfully to DB server\n\r";
   for (let row of queryOutput.rows) {
     errgoLogic = errgoLogic + row.table_name + lineBreak ;
   }
@@ -68,21 +67,29 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 // LOCAL LOGIN
 passport.use(new LocalStrategy(
   function(username, password, done) {
-	errgoLogic = errgoLogic + "Login attempt for " + username + lineBreak;
     User.findOne({ username: username }, function(err, user) {
 
 	  if (err) {
-		errgoLogic = errgoLogic + "err:" + err + lineBreak;
+		errgoLogic = errgoLogic + err + lineBreak;
         return done(err);
       }// end if err
 
+      if (!user) {
+		errgoLogic = errgoLogic + "Login failed (bad un) for " + username + lineBreak;
+        return done(null, false);
+      }// end if user
+
+      if (!user.validPassword(password)) {
+		errgoLogic = errgoLogic + "Login failed (bad pw) for " + username + lineBreak;
+        return done(null, false);
+      } // end if user
+      
       // else
 		errgoLogic = errgoLogic + "Login success for " + username + lineBreak;
       return done(null, user);
     }); // end User.findOne
   } // end function
 )); //end passport.use
- 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -141,11 +148,11 @@ app.get('/loginSuccess', function(request, response, next) {
 });  
 
 app.get('/err', function(request, response) {
-  response.send(errgoLogic);
+  response.send('errgoLogic');
 });
 
 app.get('/logout', function(request, response){
-    errgoLogic = errgoLogic + "Logout" + lineBreak ;
+  // console.log('logging out');
   request.logout();
   response.redirect('/');
 });
@@ -411,8 +418,6 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
-	errgoLogic = errgoLogic + "500: " + err + lineBreak;
-
 });
 
 
