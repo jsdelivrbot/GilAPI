@@ -70,11 +70,22 @@ passport.use(new LocalStrategy(
     User.findOne({ username: username }, function(err, user) {
 
 	  if (err) {
-		errgoLogic = errgoLogic + err;
+		errgoLogic = errgoLogic + err + lineBreak;
         return done(err);
       }// end if err
 
+      if (!user) {
+		errgoLogic = errgoLogic + "Login failed (bad un) for " + username + lineBreak;
+        return done(null, false);
+      }// end if user
+
+      if (!user.validPassword(password)) {
+		errgoLogic = errgoLogic + "Login failed (bad pw) for " + username + lineBreak;
+        return done(null, false);
+      } // end if user
+      
       // else
+		errgoLogic = errgoLogic + "Login success for " + username + lineBreak;
       return done(null, user);
     }); // end User.findOne
   } // end function
