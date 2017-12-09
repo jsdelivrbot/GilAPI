@@ -95,8 +95,8 @@ app.get('/login', function(request, response) {
 });
 
 app.post('/login', function(request, response) {
-    var username = request.body.username
-    var enteredPassword = request.body.password;
+    var username = request.query.username
+    var enteredPassword = request.query.password;
 	errgoLogic = errgoLogic + "Login for user: " + username + lineBreak;
     
     new User({username:username}).fetch().then(function(found){
@@ -169,7 +169,7 @@ app.get('/signup', function(request, response) {
 });
 app.post('/signup', function (request, response) {
   var username = request.query.username
-  bcrypt.hash(request.body.password, null, null, function(err, hash){
+  bcrypt.hash(request.query.password, null, null, function(err, hash){
 	  var user = new User({username:username, password:hash})
 	  user.save().then(function(newUser){
 		  
