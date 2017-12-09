@@ -141,26 +141,6 @@ app.get('/logout', function(request, response){
   response.redirect('/');
 });
 
-app.get('/login2', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/login', {
-        cssType: cssType
-    });
-});
-app.post('/login2', function (request, response) {
-   res = {
-      userName:request.query.userName,
-      last_name:request.query.userPassword
-   };
-  userName_query = request.query.userName,
-  userPassword_query = request.query.userPassword
-  if (userPassword_query == "Hello") {
-    response.redirect('/demo');
-  } else {
-    response.redirect('/');
-  }; //end if first_name
-})
-
 app.get('/signup', function(request, response) {
   var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/signup', {

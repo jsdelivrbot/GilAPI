@@ -93,7 +93,7 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 44
       t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 45
     });
-    request('http://127.0.0.1:5000/login2', (error, response, body) => { 
+    request('http://127.0.0.1:5000/login', (error, response, body) => { 
       t.false(error);  // test 46
       t.equal(response.statusCode, 200);   // test 47
     });
