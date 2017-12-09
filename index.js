@@ -1,6 +1,10 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var auth = require('http-auth');
+var passport = require('passport');
+var passporthttp = require('passport-http');
+var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
 
@@ -34,6 +38,8 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
+app.use(passport.initialize());
+app.use(passport.session());
 
 // PostGre SQL stuff.
 const client = new Client({
@@ -56,6 +62,35 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
     errgoLogic = errgoLogic + row + lineBreak ;
   }
   client.end();
+});
+
+//Passport stuff
+// LOCAL LOGIN
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+	errgoLogic = errgoLogic + "Login attempt for " + username + lineBreak;
+    User.findOne({ username: username }, function(err, user) {
+
+	  if (err) {
+		errgoLogic = errgoLogic + "err:" + err + lineBreak;
+        return done(err);
+      }// end if err
+
+      // else
+		errgoLogic = errgoLogic + "Login success for " + username + lineBreak;
+      return done(null, user);
+    }); // end User.findOne
+  } // end function
+)); //end passport.use
+ 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
 });
 
 var navPages = [
@@ -90,9 +125,11 @@ app.get('/login', function(request, response) {
         cssType: cssType
     });
 });
-app.post('/login',function(request, response) {
-    errgoLogic = errgoLogic + "Login" + lineBreak ;
-  response.redirect('/');
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/loginSuccess',
+    failureRedirect: '/loginFailure'
+  })
 );
 
 app.get('/loginFailure', function(request, response, next) {
@@ -119,15 +156,19 @@ app.get('/login2', function(request, response) {
         cssType: cssType
     });
 });
-app.post('/login2',function(request, response) {
-    errgoLogic = errgoLogic + "Login2" + lineBreak ;
-  response.redirect('/');
-  // passport.authenticate('local', {
-  //   successRedirect: '/loginSuccess',
-  //  failureRedirect: '/loginFailure'
-  // })
-  
-);
+app.post('/login2', function (request, response) {
+   res = {
+      userName:request.query.userName,
+      last_name:request.query.userPassword
+   };
+  userName_query = request.query.userName,
+  userPassword_query = request.query.userPassword
+  if (userPassword_query == "Hello") {
+    response.redirect('/demo');
+  } else {
+    response.redirect('/');
+  }; //end if first_name
+})
 
 app.get('/signup', function(request, response) {
   var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
