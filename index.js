@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var auth = require('http-auth');
 var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
+var bookshelf = require("bookshelf");
 const { Client } = require('pg');
 
 var Sequelize = require('sequelize');
