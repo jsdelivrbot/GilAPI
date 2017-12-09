@@ -2,9 +2,6 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
-var passport = require('passport');
-var passporthttp = require('passport-http');
-var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
 
