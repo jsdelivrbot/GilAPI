@@ -137,6 +137,21 @@ app.get('/signup', function(request, response) {
         cssType: cssType
     });
 });
+app.post('/signup', function (request, response) {
+  var username = request.query.username
+  bcrypt.hash(request.body.password, null, null, function(err, hash){
+	  var user = new User({username:username, password:hash})
+	  user.save().then(function(newUser){
+		  
+		  errgoLogic = errgoLogic + "User signup: " + username + lineBreak;
+		  request.session.regenerate(function(){
+			  response.redirect('/');
+			  request.session.user = user;
+			  
+		  }) // end request.session.regenerate
+	  }) // end user.save
+  }); // end bcrypt.hash
+}); // end app.post
 
 //region WIP
 app.get('/meme', function(request, response) { 
