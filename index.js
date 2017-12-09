@@ -19,7 +19,7 @@ var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 
 var chatGeneral = "";
-var errgoLogic = "Variable Initialized" + lineBreak ;
+var errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
 // Fruitbot scores
 var fruitbotwin = 0;
 var fruitbotloss = 0;
@@ -45,17 +45,17 @@ const client = new Client({
 client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) errgoLogic = errgoLogic + err;
-  chatGeneral = chatGeneral + "Connected successfully to server\n\r";
-  errgoLogic = errgoLogic + "Connected successfully to DB server\n\r";
-  for (let row of queryOutput.rows) {
-    errgoLogic = errgoLogic + row.table_name + lineBreak ;
-  }
+  chatGeneral = chatGeneral + "Connected successfully to server" + lineBreak;
+  errgoLogic = errgoLogic + "Connected successfully to DB server" + lineBreak;
+  // for (let row of queryOutput.rows) {
+    // errgoLogic = errgoLogic + row.table_name + lineBreak ;
+  // }
 });
 client.query('SELECT * FROM users;', (err, queryOutput) => {
   if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
   for (let row of queryOutput.rows) {
-    errgoLogic = errgoLogic + row + lineBreak ;
+    errgoLogic = errgoLogic + row.user + lineBreak ;
   }
   client.end();
 });
@@ -96,8 +96,10 @@ app.get('/login', function(request, response) {
 app.post('/login', function(request, response) {
     var username = request.body.username
     var enteredPassword = request.body.password;
+	errgoLogic = errgoLogic + "Login for user: " + username + lineBreak;
     
     new User({username:username}).fetch().then(function(found){
+	errgoLogic = errgoLogic + "Searching for user: " + username + lineBreak;
         if (found) {
             errgoLogic = errgoLogic + "User found: " + username + lineBreak;
           
