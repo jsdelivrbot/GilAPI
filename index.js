@@ -45,6 +45,7 @@ client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
   if (err) errgoLogic = errgoLogic + err;
   chatGeneral = chatGeneral + "Connected successfully to server\n\r";
+  errgoLogic = errgoLogic + "Connected successfully to DB server\n\r";
   for (let row of queryOutput.rows) {
     errgoLogic = errgoLogic + row.table_name + lineBreak ;
   }
@@ -100,7 +101,7 @@ app.get('/loginSuccess', function(request, response, next) {
 });  
 
 app.get('/err', function(request, response) {
-  response.send('errgoLogic');
+  response.send(errgoLogic);
 });
 
 app.get('/logout', function(request, response){
