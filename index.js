@@ -1,10 +1,6 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var auth = require('http-auth');
-var passport = require('passport');
-var passporthttp = require('passport-http');
-var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 const { Client } = require('pg');
 
@@ -63,35 +59,6 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
   client.end();
 });
 
-//Passport stuff
-// LOCAL LOGIN
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-	errgoLogic = errgoLogic + "Login attempt for " + username + lineBreak;
-    User.findOne({ username: username }, function(err, user) {
-
-	  if (err) {
-		errgoLogic = errgoLogic + "err:" + err + lineBreak;
-        return done(err);
-      }// end if err
-
-      // else
-		errgoLogic = errgoLogic + "Login success for " + username + lineBreak;
-      return done(null, user);
-    }); // end User.findOne
-  } // end function
-)); //end passport.use
- 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
-
 var navPages = [
 	{ name: 'jsonlint', page: 'JSON Lint' },
 	{ name: 'git', page: 'Git' },
@@ -125,10 +92,6 @@ app.get('/login', function(request, response) {
     });
 });
 app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loginSuccess',
-    failureRedirect: '/loginFailure'
-  })
 );
 
 app.get('/loginFailure', function(request, response, next) {
