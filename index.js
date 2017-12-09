@@ -66,8 +66,8 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 //Passport stuff
 // LOCAL LOGIN
 passport.use(new LocalStrategy(
-	errgoLogic = errgoLogic + "Login attempt for " + username + lineBreak;
   function(username, password, done) {
+	errgoLogic = errgoLogic + "Login attempt for " + username + lineBreak;
     User.findOne({ username: username }, function(err, user) {
 
 	  if (err) {
