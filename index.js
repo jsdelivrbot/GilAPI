@@ -99,7 +99,7 @@ app.post('/login', function(request, response) {
     var enteredPassword = request.body.password;
 	errgoLogic = errgoLogic + "Login for user: " + username + lineBreak;
     
-    new User({username:username}).fetch().then(function(found){
+    User.findOne({ username: username }).then(function(found){
 	errgoLogic = errgoLogic + "Searching for user: " + username + lineBreak;
         if (found) {
             errgoLogic = errgoLogic + "User found: " + username + lineBreak;
