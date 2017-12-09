@@ -92,48 +92,6 @@ app.get('/login', function(request, response) {
         cssType: cssType
     });
 });
-app.post('/login', function(request, response) {
-	var username = request.body.username
-	var enteredPassword = request.body.password;
-	
-	new User({username:username}).fetch().then(function(found){
-		if (found) {
-			errgoLogic = errgoLogic + "User found: " + username + lineBreak;
-		  
-			bcrypt.compare(enteredPassword, found.get('password'), function(err, userFound) {
-				if (userFound) {
-						request.session.regenerate(function(){
-						errgoLogic = errgoLogic + "User password matches: " + username + lineBreak;
-						response.redirect('/');
-						request.session.found = found.username;
-					}); // end request.session.regenerate
-				} else {
-					errgoLogic = errgoLogic + "User password not match: " + username + lineBreak;
-					response.redirect('/signup');
-				}; //end if userFound
-			}); // end bcrypt.compare
-		} else {
-			errgoLogic = errgoLogic + "User not found: " + username + lineBreak;
-			response.redirect('/signup');
-		}; // end if found
-	}); // end new User
-}); // end app post login 
-	
-	
-	
-  bcrypt.hash(request.body.password, null, null, function(err, hash){
-	  var user = new User({username:username, password:hash})
-	  user.save().then(function(newUser){
-		  
-		  errgoLogic = errgoLogic + "User signup: " + username + lineBreak;
-		  request.session.regenerate(function(){
-			  response.redirect('/');
-			  request.session.user = user;
-			  
-		  }) // end request.session.regenerate
-	  }) // end user.save
-  }); // end bcrypt.hash
-});
 
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
@@ -179,21 +137,6 @@ app.get('/signup', function(request, response) {
         cssType: cssType
     });
 });
-app.post('/signup', function (request, response) {
-  var username = request.query.username
-  bcrypt.hash(request.body.password, null, null, function(err, hash){
-	  var user = new User({username:username, password:hash})
-	  user.save().then(function(newUser){
-		  
-		  errgoLogic = errgoLogic + "User signup: " + username + lineBreak;
-		  request.session.regenerate(function(){
-			  response.redirect('/');
-			  request.session.user = user;
-			  
-		  }) // end request.session.regenerate
-	  }) // end user.save
-  }); // end bcrypt.hash
-}); // end app.post
 
 //region WIP
 app.get('/meme', function(request, response) { 
