@@ -104,7 +104,7 @@ app.get('/loginSuccess', function(request, response, next) {
 });  
 
 app.get('/err', function(request, response) {
-  response.send('errgoLogic');
+  response.send(errgoLogic);
 });
 
 app.get('/logout', function(request, response){
