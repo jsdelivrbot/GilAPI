@@ -151,10 +151,10 @@ function getMyBot() {
 	document.getElementById("radioSellBelow").checked = $botInput.sellDir; 
 }; // end simplebotChooses
 
-function manualTransaction($coin,$direction) {
+function manualTransaction($coin,$direction,$divToUpdate) {
 switch ($direction) {
  case "BUY":
-  document.getElementById("btcMedian").innerText = Math.round((((document.getElementById("btcMedian").innerText * 1) + $coin.amount - $botFee)*100)/100);
+  document.getElementById($divToUpdate).innerText = Math.round((((document.getElementById("btcMedian").innerText * 1) + $coin.amount - $botFee)*100)/100);
   loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
     $fbc = $response.data
 	document.getElementById("simplebotfbcBotAmount").innerText = Math.round((document.getElementById("btcMedian").innerText * 1) - (($coin.amount - $botFee)*100)/100);
@@ -162,7 +162,7 @@ switch ($direction) {
   });
  break;
  case "SELL":
-  document.getElementById("btcMedian").innerText = Math.round((((document.getElementById("btcMedian").innerText * 1) -  + $botFee)*100)/100);
+  document.getElementById($divToUpdate).innerText = Math.round((((document.getElementById("btcMedian").innerText * 1) -  + $botFee)*100)/100);
   loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
     $fbc = $response.data
     Math.round((document.getElementById("simplebotfbcBotAmount").innerText * 1) - (($coin.amount - $botFee)*100)/100);
