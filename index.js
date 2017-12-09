@@ -52,13 +52,10 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
     // errgoLogic = errgoLogic + row.table_name + lineBreak ;
   // }
 });
-client.query('SELECT * FROM users;', (err, queryOutput) => {
-  if (err) errgoLogic = errgoLogic + err;
-  chatGeneral = chatGeneral + 'SELECT FROM Users\n\r';
-  for (let row of queryOutput.rows) {
-    errgoLogic = errgoLogic + row.user + lineBreak ;
-  }
-  client.end();
+
+User.findAll().then(users => {
+  $chatGeneral = $chatGeneral + 'SELECT FROM Users\n\r';
+  $errgoLogic = $errgoLogic + users + lineBreak ;
 });
 
 var navPages = [
@@ -77,6 +74,11 @@ app.get('/', function(request, response) {
         cssType: cssType
     });
 });
+
+function addErr(err) {
+  errgoLogic = errgoLogic + err + "<br>"// lineBreak
+  // Check the user-agent string to identyfy the device.
+};
 
 function testUA(ua) {
     // Check the user-agent string to identyfy the device.
@@ -97,7 +99,7 @@ app.get('/login', function(request, response) {
 app.post('/login', function(request, response) {
     var username = request.body.username
     var enteredPassword = request.body.password;
-	errgoLogic = errgoLogic + "Login for user: " + username + lineBreak;
+	addErr(("Login for user: " + username));
     
     User.findOne({ username: username }).then(function(found){
 	errgoLogic = errgoLogic + "Searching for user: " + username + lineBreak;
