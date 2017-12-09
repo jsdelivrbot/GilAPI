@@ -68,21 +68,12 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
-      if (err) {
-		errgoLogic = errgoLogic + err;
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
 
+      // else
+      return done(null, user);
+    }); // end User.findOne
+  } // end function
+)); //end passport.use
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -139,6 +130,10 @@ app.get('/loginFailure', function(request, response, next) {
 app.get('/loginSuccess', function(request, response, next) {
   response.send('Successfully authenticated');
 });  
+
+app.get('/err', function(request, response) {
+  response.send('errgoLogic');
+});
 
 app.get('/logout', function(request, response){
   // console.log('logging out');
