@@ -67,29 +67,21 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
 // LOCAL LOGIN
 passport.use(new LocalStrategy(
   function(username, password, done) {
+	errgoLogic = errgoLogic + "Login attempt for " + username + lineBreak;
     User.findOne({ username: username }, function(err, user) {
 
 	  if (err) {
-		errgoLogic = errgoLogic + err + lineBreak;
+		errgoLogic = errgoLogic + "err:" + err + lineBreak;
         return done(err);
       }// end if err
 
-      if (!user) {
-		errgoLogic = errgoLogic + "Login failed (bad un) for " + username + lineBreak;
-        return done(null, false);
-      }// end if user
-
-      if (!user.validPassword(password)) {
-		errgoLogic = errgoLogic + "Login failed (bad pw) for " + username + lineBreak;
-        return done(null, false);
-      } // end if user
-      
       // else
 		errgoLogic = errgoLogic + "Login success for " + username + lineBreak;
       return done(null, user);
     }); // end User.findOne
   } // end function
 )); //end passport.use
+ 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -418,6 +410,8 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+	errgoLogic = errgoLogic + "500: " + err + lineBreak;
+
 });
 
 
