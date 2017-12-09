@@ -38,8 +38,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(passport.initialize());
-app.use(passport.session());
 
 // PostGre SQL stuff.
 const client = new Client({
@@ -61,43 +59,6 @@ client.query('SELECT * FROM users;', (err, queryOutput) => {
     errgoLogic = errgoLogic + row + lineBreak ;
   }
   client.end();
-});
-
-//Passport stuff
-// LOCAL LOGIN
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-
-	  if (err) {
-		errgoLogic = errgoLogic + err + lineBreak;
-        return done(err);
-      }// end if err
-
-      if (!user) {
-		errgoLogic = errgoLogic + "Login failed (bad un) for " + username + lineBreak;
-        return done(null, false);
-      }// end if user
-
-      if (!user.validPassword(password)) {
-		errgoLogic = errgoLogic + "Login failed (bad pw) for " + username + lineBreak;
-        return done(null, false);
-      } // end if user
-      
-      // else
-		errgoLogic = errgoLogic + "Login success for " + username + lineBreak;
-      return done(null, user);
-    }); // end User.findOne
-  } // end function
-)); //end passport.use
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
 });
 
 var navPages = [
@@ -132,12 +93,6 @@ app.get('/login', function(request, response) {
         cssType: cssType
     });
 });
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loginSuccess',
-    failureRedirect: '/loginFailure'
-  })
-);
 
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
