@@ -35,107 +35,116 @@
 
   <div id="btcContentRow" class="row ">
 	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">BTC</div>
+	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
 	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
   </div>
 
   <div id="ltcContentRow" class="row ">
 	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">LTC</div>
-	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
   </div>
 
   <div id="ethContentRow" class="row ">
 	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">ETH</div>
-	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
     </div> <!-- end ethContentRow -->
 
   <div id="fbcContentRow" class="row ">
 	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">FBC</div>
-	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
 <div id="manualButtonRow" class="row">
    </div><!-- end coinArea -->
 		<div id="button" class="button col-md-2 col-xs-2">
    </div><!-- end coinArea -->
-	<br>
-<div id="manualButtonRow" class="row">
-		<div id="button" class="button col-md-2 col-xs-2">
-		<button type="button" class="btn btn-primary" onclick="refreshCharts()">Refresh Charts</button>
-	</div> <!-- end button -->
-	<div id="button" class="button col-md-6 col-xs-6">
-	<input id = "manualBuySellValue" type="number" class="img-rounded col-md-2 col-xs-2" value=1>
-		<button type="button" class="btn btn-primary" onclick="manualTransaction($btc,'BUY')">Buy!</button>
-		<button type="button" class="btn btn-success" onclick="manualTransaction($btc,'SELL')">Sell!</button>
-	</div> <!-- end button -->
-	<div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-warning" onclick="toggleSettingsDisplay('manualButtonRow2');">Bot Settings</button>
-	</div> <!-- end button -->
+	<div id="manualButtonRow" class="row">
+		<br>
 	</div> <!-- end row -->
 
    
    <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
-  <div id="titleRow" class="row">
-    <div id="myBotLabel" class="col-md-12 col-xs-12 contentTitles" contenteditable="true">MyBot</div></div>
+  <div id="titleRow" class="row contentTitles">
+    <div id="myBotLabel" class="col-md-10 col-xs-10" contenteditable="true">MyBot</div>
+		<div id="button" class="button col-md-2 col-xs-2">
+		<button type="button" class="btn btn-warning btn-sm" onclick="toggleSettingsDisplay('manualButtonRow2');">Bot Settings</button>
+	</div> <!-- end button -->
+	</div> <!-- end row -->
 
   <div id="titleRow" class="row contentLabels">
     <div id="coinLabel" class=" col-md-2 col-xs-2">Coin:</div>
     <div id="valueLabel" class=" col-md-2 col-xs-2">Price:</div>
-    <div id="medianLabel" class=" col-md-2 col-xs-2">Median:</div>
+    <div id="medianLabel" class=" col-md-2 col-xs-2">Manual Buy:</div>
    <div id="botAmountLabel" class=" col-md-2 col-xs-2">Bot Amount:</div>
     <div id="botActionLabel" class=" col-md-2 col-xs-2">Bot action:</div>
     <div id="botPredictionLabel" class=" col-md-2 col-xs-2">Bot pred:</div>
   </div>
 
   <div id="btcContentRow" class="row ">
-	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">BTC</div>
-	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="myBotBtcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
+	<div id="myBotBtcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="myBotBtcMedian" class="contentItems col-md-2 col-xs-2">
+		<input id = "manualBuySellBtc" type="number" class="img-rounded col-md-4 col-xs-4" value=1>
+		<button type="button" class="btn btn-primary btn-xs" onclick="manualTransaction($btc,'BUY','myBotBtcAmount')">Buy!</button>
+		<button type="button" class="btn btn-success btn-xs" onclick="manualTransaction($btc,'SELL','myBotBtcAmount')">Sell!</button>
+	</div>
+	<div id="myBotBtcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="myBotBtcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="myBotBtcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
   </div>
 
   <div id="ltcContentRow" class="row ">
 	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">LTC</div>
-	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">LTC</div>
+	<div id="myBotLtcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">
+		<input id = "manualBuySellLtc" type="number" class="img-rounded col-md-4 col-xs-4" value=1>
+		<button type="button" class="btn btn-primary btn-xs" onclick="manualTransaction($ltc,'BUY','myBotLtcAmount')">Buy!</button>
+		<button type="button" class="btn btn-success btn-xs" onclick="manualTransaction($ltc,'SELL','myBotLtcAmount')">Sell!</button>
+	</div>
+	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
   </div>
 
   <div id="ethContentRow" class="row ">
 	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">ETH</div>
-	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">ETH</div>
+	<div id="myBotEthAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">
+		<input id = "manualBuySellLtc" type="number" class="img-rounded col-md-4 col-xs-4" value=1>
+		<button type="button" class="btn btn-primary btn-xs" onclick="manualTransaction($eth,'BUY','myBotEthAmount')">Buy!</button>
+		<button type="button" class="btn btn-success btn-xs" onclick="manualTransaction($ltc,'SELL','myBotEthAmount')">Sell!</button>
+	</div>
+	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
     </div> <!-- end ethContentRow -->
 
   <div id="fbcContentRow" class="row ">
 	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">FBC</div>
-	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">FBC</div>
+	<div id="myBotFbcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
+	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">
+		<input id = "manualBuySellLtc" type="number" class="img-rounded col-md-4 col-xs-4" value=1>
+		<button type="button" class="btn btn-primary btn-xs" onclick="manualTransaction($fbc,'BUY','myBotFbcAmount')">Buy!</button>
+		<button type="button" class="btn btn-success btn-xs" onclick="manualTransaction($fbc,'SELL','myBotFbcAmount')">Sell!</button>
+	</div>
+	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
+	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
     </div> <!-- end row	 -->
    </div><!-- end coinArea -->
    
@@ -166,15 +175,14 @@
       <input type="radio" name="optradio2" id="radioSellBelow">below
     </div>
   </div>
-    <div id="spacer" class="col-md-1 col-xs-1"></div>
-		<div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-primary" onclick="setMyBot()">set!</button>
-     </div> <!-- end button -->
-		<div id="button" class="button col-md-1 col-xs-1">
-		<button type="button" class="btn btn-primary" onclick="getMyBot()">Load</button>
-     </div> <!-- end button -->
-    <div id="jsonArea" class="contentRows dataArea jsonArea img-rounded col-md-2 col-xs-2" contenteditable="true" onchange="getMyBot();">Javascript is disabled.</div>
-    <div id="text" class="col-md-2 col-xs-2">Copy to export.<br>Paste to import.</div>
+  <div id="button" class="button col-md-1 col-xs-1">
+	<button type="button" class="btn btn-primary" onclick="setMyBot()">set!</button>
+ </div> <!-- end button -->
+	<div id="button" class="button col-md-1 col-xs-1">
+	<button type="button" class="btn btn-primary" onclick="getMyBot()">Load</button>
+ </div> <!-- end button -->
+  <div id="jsonArea" class="contentRows dataArea jsonArea img-rounded col-md-2 col-xs-2" contenteditable="true" onchange="getMyBot();">Javascript is disabled.</div>
+  <div id="text" class="col-md-2 col-xs-2">Copy to export.<br>Paste to import.</div>
 </div> <!-- end manualButtonRow -->
 <br>
  
