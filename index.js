@@ -173,8 +173,9 @@ app.get('/err', function(request, response) {
 });
 
 app.get('/logout', function(request, response){
-  // console.log('logging out');
-  request.logout();
+	addErr("User logout: " request.session.username);
+  // request.logout();
+  request.session.destroy();
   response.redirect('/');
 });
 
@@ -386,6 +387,7 @@ app.get('/newappget', function(request, response) {
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
+	addErr((req + err));
     next(err);
 });
 
@@ -395,6 +397,7 @@ app.use(function(req, res, next) {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+	addErr(err);
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
