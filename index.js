@@ -161,7 +161,7 @@ app.post('/signup', function (request, response) {
 		  errgoLogic = errgoLogic + "User signup: " + username + lineBreak;
 		  request.session.regenerate(function(){
 			  response.redirect('/');
-			  request.session.user = user;
+			  request.session.user = username;
 			  
 		  }) // end request.session.regenerate
 	  }) // end user.save
