@@ -104,7 +104,7 @@ app.post('/login', function(request, response) {
     User.findOne({ localemail: username }).then(function(found){
 	addErr(("Searching for user: " + username));
         if (found) {
-            addErr(("User found: " + username + " " + found.get('localpassword') +  " " + found.username));
+            addErr(("User found: " + username + " " + found.get('localpassword') +  " " + found.get('localemail')));
           
             bcrypt.compare(enteredPassword, found.get('localpassword'), function(err, userFound) {
                 if (err) {
