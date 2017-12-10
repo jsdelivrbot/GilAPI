@@ -105,8 +105,8 @@ app.post('/login', function(request, response) {
 	addErr(("Searching for user: " + username));
         if (found) {
 			pwhash = found.get('localpassword');
-			pwhash = found.get('localemail');
-            addErr(("User found: " + username + " " + pwhash +  " " + ));
+			userfromdb = found.get('localemail');
+            addErr(("User found: " + username + " " + pwhash +  " " + userfromdb));
           
             bcrypt.compare(enteredPassword, pwhash, function(err, userFound) {
                 if (err) {
