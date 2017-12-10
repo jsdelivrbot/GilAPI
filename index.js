@@ -96,7 +96,7 @@ app.get('/', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
        cssType: $cssType,
-       login: $loggedin
+       loggedin: $loggedin
     });
 });
 
