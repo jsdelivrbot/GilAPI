@@ -125,7 +125,7 @@ app.post('/login', function(request, response) {
                         request.session.regenerate(function(){
                         addErr(("User password matches: " + username));
                         response.redirect('/');
-                        request.session.found = found.username;
+                        request.session.user = found.username;
                     }); // end request.session.regenerate
                 } else {
                     addErr(("User password not match: " + username));
