@@ -101,18 +101,14 @@ app.post('/login', function(request, response) {
     var enteredPassword = request.body.password;
 	addErr(("Login for user: " + username));
     
-    User.findAll({
-  limit: 1,
-  where: {
-localemail: username    //your where conditions, or without them if you need ANY entry
-  },
-  order: [ [ 'createdAt', 'DESC' ]]
-}).then(function(found){
+    User.findOne({ localemail: username }).then(function(found){
 	addErr(("Searching for user: " + username));
         if (found) {
-            addErr(("User found: " + username + " " + found.get('localpassword') +  " " + found.get('localemail')));
+			pwhash = found.get('localpassword');
+			pwhash = found.get('localemail');
+            addErr(("User found: " + username + " " + pwhash +  " " + ));
           
-            bcrypt.compare(enteredPassword, found.get('localpassword'), function(err, userFound) {
+            bcrypt.compare(enteredPassword, pwhash, function(err, userFound) {
                 if (err) {
                         addErr(err);
                 }; //end if err
@@ -133,6 +129,28 @@ localemail: username    //your where conditions, or without them if you need ANY
         }; // end if found
     }); // end new User
 }); // end app post login 
+
+app.get('/signup', function(request, response) {
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/signup', {
+        cssType: $cssType
+    });
+});
+app.post('/signup', function (request, response) {
+  var username = request.body.username
+  bcrypt.hash(request.body.password, null, null, function(err, hash){
+	  var user = new User({localemail:username, localpassword:hash})
+	  user.save().then(function(newUser){
+		  
+		  addErr(("User signup: " + username));
+		  request.session.regenerate(function(){
+			  response.redirect('/');
+			  request.session.user = username;
+			  
+		  }) // end request.session.regenerate
+	  }) // end user.save
+  }); // end bcrypt.hash
+}); // end app.post
 
 app.get('/logintest', function(request, response) {
     if (request.session) {
@@ -160,27 +178,6 @@ app.get('/logout', function(request, response){
   response.redirect('/');
 });
 
-app.get('/signup', function(request, response) {
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/signup', {
-        cssType: $cssType
-    });
-});
-app.post('/signup', function (request, response) {
-  var username = request.body.username
-  bcrypt.hash(request.body.password, null, null, function(err, hash){
-	  var user = new User({localemail:username, localpassword:hash})
-	  user.save().then(function(newUser){
-		  
-		  addErr(("User signup: " + username));
-		  request.session.regenerate(function(){
-			  response.redirect('/');
-			  request.session.user = username;
-			  
-		  }) // end request.session.regenerate
-	  }) // end user.save
-  }); // end bcrypt.hash
-}); // end app.post
 
 //region WIP
 app.get('/meme', function(request, response) { 
