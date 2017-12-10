@@ -45,17 +45,17 @@ const client = new Client({
 });
 client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
-  if (err) $errgoLogic = $errgoLogic + err;
   $chatGeneral = $chatGeneral + "Connected successfully to server" + lineBreak;
-  $errgoLogic = $errgoLogic + "Connected successfully to DB server" + lineBreak;
+  if (err) addErr((err));
+  addErr(("Connected successfully to DB server"));
   // for (let row of queryOutput.rows) {
-    // $errgoLogic = $errgoLogic + row.table_name + lineBreak ;
+    // addErr((row.table_name));
   // }
 });
 
 User.findAll().then(users => {
   $chatGeneral = $chatGeneral + 'SELECT FROM Users\n\r';
-  $errgoLogic = $errgoLogic + users + lineBreak ;
+  addErr((users));
 });
 
 var navPages = [
@@ -76,7 +76,7 @@ app.get('/', function(request, response) {
 });
 
 function addErr(err) {
-  $errgoLogic = $errgoLogic + err + "<br>"// lineBreak
+  addErr((err + "<br>"// lineBreak
   // Check the user-agent string to identyfy the device.
 };
 
@@ -108,21 +108,21 @@ app.post('/login', function(request, response) {
           
             bcrypt.compare(enteredPassword, found.get('password'), function(err, userFound) {
                 if (err) {
-                        $errgoLogic = $errgoLogic + err + lineBreak;
+                        addErr(err);
                 }; //end if err
                 if (userFound) {
                         request.session.regenerate(function(){
-                        $errgoLogic = $errgoLogic + "User password matches: " + username + lineBreak;
+                        addErr(("User password matches: " + username));
                         response.redirect('/');
                         request.session.found = found.username;
                     }); // end request.session.regenerate
                 } else {
-                    $errgoLogic = $errgoLogic + "User password not match: " + username + lineBreak;
+                    addErr(("User password not match: " + username));
                     response.redirect('/signup');
                 }; //end if userFound
             }); // end bcrypt.compare
         } else {
-            $errgoLogic = $errgoLogic + "User not found: " + username + lineBreak;
+            addErr(("User not found: " + username));
             response.redirect('/signup');
         }; // end if found
     }); // end new User
@@ -166,7 +166,7 @@ app.post('/signup', function (request, response) {
 	  var user = new User({username:username, password:hash})
 	  user.save().then(function(newUser){
 		  
-		  $errgoLogic = $errgoLogic + "User signup: " + username + lineBreak;
+		  addErr(("User signup: " + username));
 		  request.session.regenerate(function(){
 			  response.redirect('/');
 			  request.session.user = username;
@@ -258,17 +258,17 @@ app.get('/chatpost', function(request, response) {
   
   client.connect();
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
-    if (err) $errgoLogic = $errgoLogic + err;
+    if (err) addErr((err));
     $chatGeneral = $chatGeneral + 'INSERT INTO chatroom_General\n\r';
     for (let row of queryOutput.rows) {
-      $chatGeneral = $chatGeneral + row + lineBreak ;
+      $chatGeneral = $chatGeneral + row + lineBreak;
     }
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
-    if (err) $errgoLogic = $errgoLogic + err;
+    if (err) addErr((err));
     $chatGeneral = $chatGeneral + 'SELECT FROM chatroom_General\n\r';
     for (let row of queryOutput.rows) {
-      $chatGeneral = $chatGeneral + row + lineBreak ;
+      $chatGeneral = $chatGeneral + row + lineBreak;
     }
   });
   client.end();
