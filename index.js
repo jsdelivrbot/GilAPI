@@ -101,7 +101,7 @@ app.post('/login', function(request, response) {
     var enteredPassword = request.body.password;
 	addErr(("Login for user: " + username));
     
-    User.findOne({ localemail: username }).then(function(found){
+    User.findOne( where:{ localemail: username }).then(function(found){
 	addErr(("Searching for user: " + username));
         if (found) {
 			pwhash = found.get('localpassword');
