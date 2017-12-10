@@ -89,6 +89,14 @@ function testUA(ua) {
     }
 };
 
+function testLoggedIn(request) {
+    // Check the user-agent string to identyfy the device.
+    if (request.session.user) {
+		return ("Welcome, " + request.session.user); //true;
+    } else {
+		return "Login!"; //false;
+    }; // end if request
+};
 
 app.get('/login', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
