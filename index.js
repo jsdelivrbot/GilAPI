@@ -69,6 +69,7 @@ var navPages = [
 
 // Page calls
 app.get('/', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
         cssType: $cssType
