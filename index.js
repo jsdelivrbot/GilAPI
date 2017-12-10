@@ -67,15 +67,6 @@ var navPages = [
 	{ name: 'text2', page: 'text2' }
 ];
 
-// Page calls
-app.get('/', function(request, response) {
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/index', {
-        cssType: $cssType
-    });
-});
-
 function addErr(err) {
   $errgoLogic += err + "<br>"// lineBreak
   // Check the user-agent string to identyfy the device.
@@ -98,6 +89,16 @@ function testLoggedIn(request) {
 		return "Login!"; //false;
     }; // end if request
 };
+
+// Page calls
+app.get('/', function(request, response) {
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/index', {
+       cssType: $cssType,
+       login: $loggedin
+    });
+});
 
 app.get('/login', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
