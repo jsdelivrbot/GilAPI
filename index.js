@@ -173,7 +173,7 @@ app.get('/err', function(request, response) {
 });
 
 app.get('/logout', function(request, response){
-	addErr("User logout: " request.session.username);
+	addErr("User logout: " + request.session.username);
   // request.logout();
   request.session.destroy();
   response.redirect('/');
