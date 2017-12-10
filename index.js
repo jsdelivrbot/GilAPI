@@ -163,7 +163,7 @@ app.get('/signup', function(request, response) {
 app.post('/signup', function (request, response) {
   var username = request.body.username
   bcrypt.hash(request.body.password, null, null, function(err, hash){
-	  var user = new User({username:username, password:hash})
+	  var user = new User({localemail:username, localpassword:hash})
 	  user.save().then(function(newUser){
 		  
 		  addErr(("User signup: " + username));
