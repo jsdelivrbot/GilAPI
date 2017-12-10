@@ -128,6 +128,14 @@ app.post('/login', function(request, response) {
     }); // end new User
 }); // end app post login 
 
+app.get('/logintest', function(request, response) {
+    if (request.session) {
+	response.redirect('/chat');
+	} else {
+	response.redirect('/signup');
+	};
+});
+
 app.get('/loginFailure', function(request, response, next) {
   response.send('Failed to authenticate');
 });
