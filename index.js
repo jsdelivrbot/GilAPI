@@ -69,9 +69,11 @@ var navPages = [
 
 // Page calls
 app.get('/', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
-        cssType: $cssType
+        cssType: $cssType,
+        loggedin: $loggedin
     });
 });
 
@@ -87,6 +89,14 @@ function testUA(ua) {
     } else {
 		return  'web'
     }
+};
+function testLoggedIn(request) {
+    // Check the user-agent string to identyfy the device.
+    if (request.session) {
+		return ("Welcome, " + request.session.username); //true;
+    } else {
+		return "Login!"; //false;
+    }; // end if request
 };
 
 app.get('/login', function(request, response) {
