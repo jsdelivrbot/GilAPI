@@ -76,7 +76,7 @@ app.get('/', function(request, response) {
 });
 
 function addErr(err) {
-  addErr((err + "<br>"// lineBreak
+  $errgoLogic += err + "<br>"// lineBreak
   // Check the user-agent string to identyfy the device.
 };
 
