@@ -101,7 +101,13 @@ app.post('/login', function(request, response) {
     var enteredPassword = request.body.password;
 	addErr(("Login for user: " + username));
     
-    User.findOne({ localemail: username }).then(function(found){
+    User.YourModel.findAll({
+  limit: 1,
+  where: {
+localemail: username    //your where conditions, or without them if you need ANY entry
+  },
+  order: [ [ 'createdAt', 'DESC' ]]
+}).then(function(found){
 	addErr(("Searching for user: " + username));
         if (found) {
             addErr(("User found: " + username + " " + found.get('localpassword') +  " " + found.get('localemail')));
