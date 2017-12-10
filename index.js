@@ -101,7 +101,7 @@ app.post('/login', function(request, response) {
     var enteredPassword = request.body.password;
 	addErr(("Login for user: " + username));
     
-    User.YourModel.findAll({
+    User.findAll({
   limit: 1,
   where: {
 localemail: username    //your where conditions, or without them if you need ANY entry
