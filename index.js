@@ -19,8 +19,8 @@ var app = express();
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 
-var chatGeneral = "";
-var errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
+var $chatGeneral = "";
+var $errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
 // Fruitbot scores
 var fruitbotwin = 0;
 var fruitbotloss = 0;
@@ -45,11 +45,11 @@ const client = new Client({
 });
 client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
-  if (err) errgoLogic = errgoLogic + err;
-  chatGeneral = chatGeneral + "Connected successfully to server" + lineBreak;
-  errgoLogic = errgoLogic + "Connected successfully to DB server" + lineBreak;
+  if (err) $errgoLogic = $errgoLogic + err;
+  $chatGeneral = $chatGeneral + "Connected successfully to server" + lineBreak;
+  $errgoLogic = $errgoLogic + "Connected successfully to DB server" + lineBreak;
   // for (let row of queryOutput.rows) {
-    // errgoLogic = errgoLogic + row.table_name + lineBreak ;
+    // $errgoLogic = $errgoLogic + row.table_name + lineBreak ;
   // }
 });
 
@@ -69,9 +69,9 @@ var navPages = [
 
 // Page calls
 app.get('/', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 
@@ -90,9 +90,9 @@ function testUA(ua) {
 };
 
 app.get('/login', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/login', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 
@@ -112,17 +112,17 @@ app.post('/login', function(request, response) {
                 }; //end if err
                 if (userFound) {
                         request.session.regenerate(function(){
-                        errgoLogic = errgoLogic + "User password matches: " + username + lineBreak;
+                        $errgoLogic = $errgoLogic + "User password matches: " + username + lineBreak;
                         response.redirect('/');
                         request.session.found = found.username;
                     }); // end request.session.regenerate
                 } else {
-                    errgoLogic = errgoLogic + "User password not match: " + username + lineBreak;
+                    $errgoLogic = $errgoLogic + "User password not match: " + username + lineBreak;
                     response.redirect('/signup');
                 }; //end if userFound
             }); // end bcrypt.compare
         } else {
-            errgoLogic = errgoLogic + "User not found: " + username + lineBreak;
+            $errgoLogic = $errgoLogic + "User not found: " + username + lineBreak;
             response.redirect('/signup');
         }; // end if found
     }); // end new User
@@ -145,7 +145,7 @@ app.get('/loginSuccess', function(request, response, next) {
 });  
 
 app.get('/err', function(request, response) {
-  response.send(errgoLogic);
+  response.send($errgoLogic);
 });
 
 app.get('/logout', function(request, response){
@@ -155,9 +155,9 @@ app.get('/logout', function(request, response){
 });
 
 app.get('/signup', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/signup', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 app.post('/signup', function (request, response) {
@@ -166,7 +166,7 @@ app.post('/signup', function (request, response) {
 	  var user = new User({username:username, password:hash})
 	  user.save().then(function(newUser){
 		  
-		  errgoLogic = errgoLogic + "User signup: " + username + lineBreak;
+		  $errgoLogic = $errgoLogic + "User signup: " + username + lineBreak;
 		  request.session.regenerate(function(){
 			  response.redirect('/');
 			  request.session.user = username;
@@ -178,37 +178,37 @@ app.post('/signup', function (request, response) {
 
 //region WIP
 app.get('/meme', function(request, response) { 
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/meme', {
-        cssType: cssType
+        cssType: $cssType
     });
 }); 
 
 app.get('/Arkdata', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/Arkdata', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 
 app.get('/demo', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/demo', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 
 app.get('/git', function(request, response) { 
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/git', {
-        cssType: cssType
+        cssType: $cssType
     });
 });  
 
 app.get('/text2', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/text2', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 
@@ -218,9 +218,9 @@ app.post('/mirror', function(request, response) {
 });
 
 app.get('/badpw', function(request, response) { 
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/badpw', {
-        cssType: cssType
+        cssType: $cssType
     });
 }); 
 app.post('/badpw', function(request, response) { 
@@ -233,18 +233,18 @@ app.get('/test', function(request, response) {
 });
 
 app.get('/coin', function(request, response) { 
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
     response.render( 'pages/coin', {
-    cssType: cssType
+    cssType: $cssType
   });
 }); 
 
 //region chat 
 app.get('/chat', function(request, response) { 
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/chat', {
-	    chatGeneral: chatGeneral,
-        cssType: cssType
+	    $chatGeneral: $chatGeneral,
+        cssType: $cssType
     });
 }); 
 
@@ -254,39 +254,39 @@ app.get('/chatpost', function(request, response) {
   chatUser = request.query.user
   chatRoom = request.query.chatroom
 
-  chatGeneral = chatGeneral + chatUser + ": " + chatMessage + lineBreak 
+  $chatGeneral = $chatGeneral + chatUser + ": " + chatMessage + lineBreak 
   
   client.connect();
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
-    if (err) errgoLogic = errgoLogic + err;
-    chatGeneral = chatGeneral + 'INSERT INTO chatroom_General\n\r';
+    if (err) $errgoLogic = $errgoLogic + err;
+    $chatGeneral = $chatGeneral + 'INSERT INTO chatroom_General\n\r';
     for (let row of queryOutput.rows) {
-      chatGeneral = chatGeneral + row + lineBreak ;
+      $chatGeneral = $chatGeneral + row + lineBreak ;
     }
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
-    if (err) errgoLogic = errgoLogic + err;
-    chatGeneral = chatGeneral + 'SELECT FROM chatroom_General\n\r';
+    if (err) $errgoLogic = $errgoLogic + err;
+    $chatGeneral = $chatGeneral + 'SELECT FROM chatroom_General\n\r';
     for (let row of queryOutput.rows) {
-      chatGeneral = chatGeneral + row + lineBreak ;
+      $chatGeneral = $chatGeneral + row + lineBreak ;
     }
   });
   client.end();
-  response.send(chatGeneral);
+  response.send($chatGeneral);
 });  
 
 app.get('/chatload', function(request, response) { 
 // /chatpost?user=user&message=message&chatroom=General
   chatRoom = request.query.chatroom
-  response.send(chatGeneral);
+  response.send($chatGeneral);
 });  
 //endregion
 
 //region Fruitbot
 app.get('/fruitbot', function(request, response) {
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/fruitbot', {
-        cssType: cssType
+        cssType: $cssType
     });
 });
 app.get('/fruitbotwin', function(request, response) {
@@ -339,9 +339,9 @@ app.get('/fakecoinsell', function(request, response) {
 });
 
 app.get('/jsonlint', function(request, response) { 
-  var cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/jsonlint', {
-        cssType: cssType
+        cssType: $cssType
     });
 });  
 
