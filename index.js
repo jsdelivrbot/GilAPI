@@ -69,7 +69,6 @@ var navPages = [
 
 // Page calls
 app.get('/', function(request, response) {
-  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
         cssType: $cssType
@@ -89,14 +88,7 @@ function testUA(ua) {
 		return  'web'
     }
 };
-function testLoggedIn(request) {
-    // Check the user-agent string to identyfy the device.
-    if (request.session) {
-		return ("Welcome, " + request.session.username); //true;
-    } else {
-		return "Login!"; //false;
-    }; // end if request
-};
+
 
 app.get('/login', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
@@ -396,7 +388,6 @@ app.get('/newappget', function(request, response) {
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-	// addErr((req + err));
     next(err);
 });
 
@@ -406,7 +397,6 @@ app.use(function(req, res, next) {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-	// addErr(err);
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
