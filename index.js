@@ -101,9 +101,11 @@ app.get('/', function(request, response) {
 });
 
 app.get('/login', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/login', {
-        cssType: $cssType
+       cssType: $cssType,
+       loggedin: $loggedin
     });
 });
 
@@ -142,9 +144,11 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.get('/signup', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/signup', {
-        cssType: $cssType
+       cssType: $cssType,
+       loggedin: $loggedin
     });
 });
 app.post('/signup', function (request, response) {
@@ -193,37 +197,47 @@ app.get('/logout', function(request, response){
 
 //region WIP
 app.get('/meme', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/meme', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 }); 
 
 app.get('/Arkdata', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/Arkdata', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 });
 
 app.get('/demo', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/demo', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 });
 
 app.get('/git', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/git', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 });  
 
 app.get('/text2', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/text2', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 });
 
@@ -233,12 +247,15 @@ app.post('/mirror', function(request, response) {
 });
 
 app.get('/badpw', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/badpw', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 }); 
 app.post('/badpw', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var randomstring = Math.random().toString(36).slice(-20);
   response.send(randomstring);
 }); 
@@ -248,18 +265,22 @@ app.get('/test', function(request, response) {
 });
 
 app.get('/coin', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
     response.render( 'pages/coin', {
-    cssType: $cssType
+    cssType: $cssType,
+       loggedin: $loggedin
   });
 }); 
 
 //region chat 
 app.get('/chat', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/chat', {
 	    $chatGeneral: $chatGeneral,
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 }); 
 
@@ -299,9 +320,11 @@ app.get('/chatload', function(request, response) {
 
 //region Fruitbot
 app.get('/fruitbot', function(request, response) {
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/fruitbot', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 });
 app.get('/fruitbotwin', function(request, response) {
@@ -354,9 +377,11 @@ app.get('/fakecoinsell', function(request, response) {
 });
 
 app.get('/jsonlint', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/jsonlint', {
-        cssType: $cssType
+        cssType: $cssType,
+       loggedin: $loggedin
     });
 });  
 
