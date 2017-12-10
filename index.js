@@ -102,9 +102,9 @@ app.post('/login', function(request, response) {
 	addErr(("Login for user: " + username));
     
     User.findOne({ username: username }).then(function(found){
-	errgoLogic = errgoLogic + "Searching for user: " + username + lineBreak;
+	addErr(("Searching for user: " + username));
         if (found) {
-            errgoLogic = errgoLogic + "User found: " + username + lineBreak;
+			addErr(("User found: " + found + " " + found.username + " " + found.password));
           
             bcrypt.compare(enteredPassword, found.get('password'), function(err, userFound) {
                 if (userFound) {
