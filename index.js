@@ -191,7 +191,7 @@ app.get('/logout', function(request, response){
 	addErr("User logout: " + request.session.username);
   // request.logout();
 	request.session.destroy(function (err) {
-        res.redirect('/'); //Inside a callback… bulletproof!
+        response.redirect('/'); //Inside a callback… bulletproof!
     });
 });
 
