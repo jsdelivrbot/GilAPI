@@ -26,7 +26,7 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
-app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
 
 // Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
@@ -128,8 +128,8 @@ app.post('/login', function(request, response) {
                 if (userFound) {
                         request.session.regenerate(function(){
                         addErr(("User password matches: " + username));
-                        response.redirect('/');
                         request.session.user = found.username;
+                        response.redirect('/');
                     }); // end request.session.regenerate
                 } else {
                     addErr(("User password not match: " + username));
@@ -190,8 +190,9 @@ app.get('/err', function(request, response) {
 app.get('/logout', function(request, response){
 	addErr("User logout: " + request.session.username);
   // request.logout();
-  request.session.destroy();
-  response.redirect('/');
+	request.session.destroy(function (err) {
+        res.redirect('/'); //Inside a callback… bulletproof!
+    });
 });
 
 
