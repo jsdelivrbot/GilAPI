@@ -188,7 +188,7 @@ app.get('/err', function(request, response) {
 });
 
 app.get('/logout', function(request, response){
-	addErr("User logout: " + request.session.username);
+	addErr("User logout: " + request.session.user);
   // request.logout();
 	request.session.destroy(function (err) {
 		addErr(err);
