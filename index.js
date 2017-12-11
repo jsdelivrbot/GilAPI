@@ -83,7 +83,7 @@ function testUA(ua) {
 
 function testLoggedIn(request) {
     // Check the user-agent string to identyfy the device.
-    if (request.session.user) {
+    if (request.session) {
 		return ("Welcome, " + request.session.user); //true;
     } else {
 		return "Login!"; //false;
@@ -191,6 +191,7 @@ app.get('/logout', function(request, response){
 	addErr("User logout: " + request.session.username);
   // request.logout();
 	request.session.destroy(function (err) {
+		addErr(err);
         response.redirect('/'); //Inside a callback… bulletproof!
     });
 });
