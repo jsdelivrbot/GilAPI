@@ -40,6 +40,13 @@ test('responds to requests', (t) => {
       t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 16
     }); //end request
 	
+    request('http://127.0.0.1:5000/rgb', (error, response, body) => {
+      t.false(error); // test 13
+      t.equal(response.statusCode, 200); // test 14
+      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 15
+      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 16
+    }); //end request
+	
     request('http://127.0.0.1:5000/coin', (error, response, body) => {
       t.false(error); // test 17
       t.equal(response.statusCode, 200); // test 18
