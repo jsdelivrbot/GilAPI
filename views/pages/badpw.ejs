@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+h<!DOCTYPE html>
 <html>
 <head>
   <% include ../partials/header.ejs %>
@@ -7,16 +7,25 @@
 <body>
   <% include ../partials/nav.ejs %>
   <script src="/js/badpw.js" Content-Type="text/javascript" charset="UTF-8"></script>
-  <table>
-	<tr>
-		<td colspan="3"><div id="getBadPWItem"class = "img-rounded"> Bad Password:</div></td>
-	</tr>
-	<tr>
-		<td colspan="2"><input type="text" id="getBadPWInput" name="getBadPWInput" class="resizedTextbox img-rounded" value=""></td>
-		<td><button type="button" class="btn btn-primary" onclick="updategetBadPWInputForm()">Get Bad Password</button></td>
-	</tr>
-  </table>
+<div id="wrapper" class="container img-rounded">
 
+  <div id="spacer" class="img-rounded col-md-3 hidden-xs"></div>
+
+  <div id="content" class="img-rounded col-md-6 col-xs-12">
+   <div id="coinArea" class="">
+    <div id="contentLabel" class="img-rounded row contentTitles">Bad Password</div>
+	
+  <div id="htmlColorRow" class="row colorRow">
+	<input type="text" id="getBadPWInput" name="getBadPWInput" class="resizedTextbox img-rounded" value="">
+  </div>
+
+  <div id="colorRow" class="row colorRow">
+	<button type="button" class="btn btn-primary" onclick="updategetBadPWInputForm()">Get Bad Password</button>
+  </div>
+
+   </div><!-- end coinArea -->
+</div><!-- end cointent -->
+</div><!-- end wrapper -->
 
   <% include ../partials/footer.ejs %>
 </body>
