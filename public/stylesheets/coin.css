@@ -1,7 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
 
-
 .wrapper {
 }
 .sidebar {
@@ -23,6 +22,14 @@
 	background-color:#090909;
 	color:#fff;
 }
+
+.colorRow {
+	background-color:#090909;
+	border:white;
+	background-color:#3CBE3C;
+}
+
+
 .dataArea {
 	background-color:#fff;
 	color:#000;

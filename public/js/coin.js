@@ -52,10 +52,10 @@ function updateCoinsole ($outputTextBox) {
 
 function updateCointent () {
   try {
-    document.getElementById('btcAmount').innerText = $btc.amount
-    document.getElementById('ltcAmount').innerText = $ltc.amount
-    document.getElementById('ethAmount').innerText = $eth.amount
-    document.getElementById('fbcAmount').innerText = $fbc.amount
+    document.getElementById('btcAmount').value = $btc.amount
+    document.getElementById('ltcAmount').value = $ltc.amount
+    document.getElementById('ethAmount').value = $eth.amount
+    document.getElementById('fbcAmount').value = $fbc.amount
   }catch(e){console.log(e)};
 }; // end updateCointent
 
