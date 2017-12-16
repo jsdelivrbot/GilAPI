@@ -3,8 +3,6 @@ BotDB
 - CRUD
 - Data source
 - Buy/sell price strategies
-- Add/remove assets
-- Add/remove bots
 - Bot settings as dropdown
 
 1. Add download links to Git page.
