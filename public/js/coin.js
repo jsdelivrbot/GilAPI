@@ -68,7 +68,7 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 			$coinAmount += ($coinAmount - $tradeFee)
 			loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
 			$fbc = $response.data
-			document.getElementById("fbcBotAmount").value += (Math.round(($fbc.amount - $botFee)*100)/100)
+			document.getElementById("fbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) + $fbc.amount - $botFee)*100)/100)
 			document.getElementById("fbcBotAction").value = "SELL"
 			}); //end loadJSON
 		} else {
@@ -78,7 +78,7 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 				$coinAmount -= ($coinAmount - $tradeFee);
 				loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
 				$fbc = $response.data;
-				document.getElementById("fbcBotAmount").innerText -= (Math.round(($fbc.amount - $botFee)*100)/100);
+				document.getElementById("fbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) - $fbc.amount - $botFee)*100)/100)
 				document.getElementById("fbcBotAction").innerText = "BUY";
 				}); //end loadJSON
 			} else {

@@ -1,3 +1,12 @@
+BotDB
+- Asset type infos.
+- CRUD
+- Data source
+- Buy/sell price strategies
+- Add/remove assets
+- Add/remove bots
+- Bot settings as dropdown
+
 1. Add download links to Git page.
 2. Add insert location and auto-insert to Git page files. 
 3. Make wysiwyg page with default "hello world" page. 
