@@ -24,11 +24,12 @@
 }
 
 .colorRow {
-	background-color:#090909;
 	border:white;
-	background-color:#3CBE3C;
 }
 
+.numberRow {
+	background-color:#3CBE3C;
+}
 
 .dataArea {
 	background-color:#fff;
