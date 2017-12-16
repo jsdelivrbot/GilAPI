@@ -8,73 +8,32 @@
 
 <body>
   <% include ../partials/nav.ejs %>
-<script src="/js/coin.js" Content-Type="text/javascript" charset="UTF-8"></script>
+<script src="/js/rgb.js" Content-Type="text/javascript" charset="UTF-8"></script>
 
 <div id="wrapper" class="container img-rounded">
-  <div id="content" class="img-rounded">
-   <div id="coinArea" class="img-rounded col-md-12 col-xs-12 contentRows dataArea row">
-  <div id="titleRow" class="row contentTitles">
-    <div id="contentLabel" class="col-md-10 col-xs-10 contentTitles">RGB Calculator</div>
-		<div id="button" class="button col-md-2 col-xs-2">
-		<button type="button" class="btn btn-success btn-sm" onclick="refreshCharts();">Refresh</button>
-	</div> <!-- end button -->
-	</div> <!-- end row -->
+  <div id="spacer" class="img-rounded col-md-3 hidden-xs"></div>
+  
+  <div id="content" class="img-rounded col-md-6 col-xs-12">
+   <div id="coinArea" class="">
+    <div id="contentLabel" class="img-rounded row contentTitles">RGB Calculator</div>
 	
-  <div id="titleRow" class="row contentLabels">
-    <div id="coinLabel" class="" contenteditable = true>Coin:</div>
+  <div id="htmlColorRow" class="row colorRow">
+    <input style = "color:#000" id="htmlRow" class="colorRow img-rounded htmlColorRow contentRows col-md-12 col-xs-12" contenteditable = true onkeyup = "updateHeader();" value="#abcdef"></input>
   </div>
 
-  <div id="btcContentRow" class="row ">
-	<div id="btcLabel" class="contentItems col-md-2 col-xs-2">BTC</div>
-	<div id="btcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
-	<div id="btcMedian" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="btcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="btcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="btcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
+  <div id="colorRow" class="row colorRow">
+    <input type="number" id="redRow" class="colorRow img-rounded redColorRow contentRows col-md-12 col-xs-12" contenteditable = true onkeyup = "updateHeader();" value=171></input>
   </div>
 
-  <div id="ltcContentRow" class="row ">
-	<div id="ltcLabel" class="contentItems col-md-2 col-xs-2">LTC</div>
-	<div id="ltcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
-	<div id="ltcMedian" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="ltcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="ltcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="ltcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
+  <div id="colorRow" class="row colorRow">
+    <input type="number" id="greenRow" class="colorRow img-rounded greenColorRow contentRows col-md-12 col-xs-12" contenteditable = true onkeyup = "updateHeader();" value=205></input>
   </div>
 
-  <div id="ethContentRow" class="row ">
-	<div id="ethLabel" class="contentItems col-md-2 col-xs-2">ETH</div>
-	<div id="ethAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
-	<div id="ethMedian" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="ethBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="ethBotAction" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="ethBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
-    </div> <!-- end ethContentRow -->
-
-  <div id="fbcContentRow" class="row ">
-	<div id="fbcLabel" class="contentItems col-md-2 col-xs-2">FBC</div>
-	<div id="fbcAmount" class="contentItems amount col-md-2 col-xs-2">0</div>
-	<div id="fbcMedian" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="fbcBotAmount" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="fbcBotAction" class="contentItems col-md-2 col-xs-2">0</div>
-	<div id="fbcBotPrediction" class="contentItems col-md-2 col-xs-2">0</div>
-    </div> <!-- end row	 -->
+  <div id="colorRow" class="row colorRow">
+    <input type="number" id="blueRow" class="colorRow img-rounded blueColorRow contentRows col-md-12 col-xs-12" contenteditable = true onkeyup = "updateHeader();" value=239></input>
+  </div>
    </div><!-- end coinArea -->
-<div id="manualButtonRow" class="row">
-   </div><!-- end coinArea -->
-		<div id="button" class="button col-md-2 col-xs-2">
-   </div><!-- end coinArea -->
-	<div id="manualButtonRow" class="row">
-		<br>
-	</div> <!-- end row -->
 
-   
-		<div id="button" class="button col-md-2 col-xs-2">
-		<button type="button" class="btn btn-warning btn-sm" onclick="toggleSettingsDisplay('manualButtonRow2');">Bot Settings</button>
-	</div> <!-- end button -->
-	</div> <!-- end row -->
-
- 
   <% include ../partials/footer.ejs %>
 
 </body>
