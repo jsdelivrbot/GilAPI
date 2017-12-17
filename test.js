@@ -43,42 +43,38 @@ test('responds to requests', (t) => {
     request('http://127.0.0.1:5000/rgb', (error, response, body) => {
       t.false(error); // test 17
       t.equal(response.statusCode, 200); // test 18
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 19
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 20
     }); //end request
 	
     request('http://127.0.0.1:5000/coin', (error, response, body) => {
-      t.false(error); // test 17
-      t.equal(response.statusCode, 200); // test 18
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 19
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 20
+      t.false(error); // test 21
+      t.equal(response.statusCode, 200); // test 22
     }); //end request
 	
     request('http://127.0.0.1:5000/chat', (error, response, body) => { 
-      t.false(error); // test 17
-      t.equal(response.statusCode, 200);  // test 18
+      t.false(error); // test 25
+      t.equal(response.statusCode, 200);  // test 26
     });
     request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
-      t.false(error); // test 21
-      t.equal(response.statusCode, 200); // test 22
-      t.notEqual(body.indexOf("1"), -1); // test 23
-    }); //end request
-	
-    request('http://127.0.0.1:5000/fruitbotloss', (error, response, body) => {
-      t.false(error); // test 24
-      t.equal(response.statusCode, 200); // test 25
-      t.notEqual(body.indexOf("1"), -1); // test 26
-    }); //end request
-	
-    request('http://127.0.0.1:5000/fruitbottie', (error, response, body) => {
       t.false(error); // test 27
       t.equal(response.statusCode, 200); // test 28
       t.notEqual(body.indexOf("1"), -1); // test 29
     }); //end request
 	
+    request('http://127.0.0.1:5000/fruitbotloss', (error, response, body) => {
+      t.false(error); // test 30
+      t.equal(response.statusCode, 200); // test 25
+      t.notEqual(body.indexOf("1"), -1); // test 26
+    }); //end request
+	
+    request('http://127.0.0.1:5000/fruitbottie', (error, response, body) => {
+      t.false(error); // test 33
+      t.equal(response.statusCode, 200); // test 28
+      t.notEqual(body.indexOf("1"), -1); // test 29
+    }); //end request
+	
 	request('http://127.0.0.1:5000/jsonlint', (error, response, body) => { 
-	  t.false(error); // test 30
-	  t.equal(response.statusCode, 200);  // test 31
+	  t.false(error); // test 36
+	  t.equal(response.statusCode, 200);  // test 37
 	  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 32
 	  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 33
 	});
