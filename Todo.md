@@ -5,6 +5,13 @@ BotDB
 - Buy/sell price strategies
 - Bot settings as dropdown
 
+
+- Asset is dropdown of coins. Array.
+- Something updates all DIVs on page with new prices? 
+- Remove borders between rows.
+- Spacer between bots.
+- Top bar shows top scores. Something gets those from below?
+- "getNumberFromDiv"
 1. Add download links to Git page.
 2. Add insert location and auto-insert to Git page files. 
 3. Make wysiwyg page with default "hello world" page. 

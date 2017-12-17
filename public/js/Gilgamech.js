@@ -43,3 +43,45 @@ function setupLink(textAreaID,downloadLinkID) {
 	  + encodeURIComponent(txtval);
   };
 };
+
+function getNumberFromDiv($numericDiv) {
+	return Math.round(
+		document.getElementById($numericDiv).innerText  *1
+	)
+};
+
+function toggleSettingsDisplay($divId) {
+	if (document.getElementById($divId).style.visibility == "visible") {
+		document.getElementById($divId).style.visibility="hidden";
+	} else { 
+		document.getElementById($divId).style.visibility="visible";
+	} // end if
+}; // end toggleSettingsDisplay
+
+function removeDiv($divID) {
+	var $div = document.getElementById($divID);
+	if ($div) {
+		$div.parentNode.removeChild($div);
+	}	
+}; // end removeBot
+
+function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$onClick) {
+	if (!$elementType) {
+		$elementType = 'div'
+	}	
+	var $newDiv = document.createElement('div');
+	$newDiv.id = $divID;
+	$newDiv.className = $divClass
+	
+	if ($onClick) {
+		$newDiv.onClick = $onClick
+	}; // end if onClick
+	
+	if ($innerText) {
+		$newDiv.innerText = $innerText
+	}; // end if innerText
+	
+	document.getElementById($divParent).appendChild($newDiv);
+}; // end addDiv
+
+
