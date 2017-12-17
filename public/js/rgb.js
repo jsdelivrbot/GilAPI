@@ -20,11 +20,11 @@ function addPage() {
 	addDiv("htmlRow","colorRow img-rounded htmlColorRow contentRows col-md-12 col-xs-12",'htmlColorRow','#abcdef');
 	document.getElementById("htmlRow").setAttribute( "style",  "color: #000");
 	addDiv("redCRow","row colorRow",'coinArea');
-	addDiv("redRow","colorRow img-rounded redColorRow contentRows col-md-12 col-xs-12",'redCRow',171);
+	addDiv("redRow","colorRow img-rounded redColorRow contentRows col-md-12 col-xs-12",'redCRow',171,'input');
 	addDiv("greenCRow","row colorRow",'coinArea');
-	addDiv("greenRow","colorRow img-rounded greenColorRow contentRows col-md-12 col-xs-12",'greenCRow',205);
+	addDiv("greenRow","colorRow img-rounded greenColorRow contentRows col-md-12 col-xs-12",'greenCRow',205,'input');
 	addDiv("blueCRow","row colorRow",'coinArea');
-	addDiv("blueRow","colorRow img-rounded blueColorRow contentRows col-md-12 col-xs-12",'blueCRow',239);
+	addDiv("blueRow","colorRow img-rounded blueColorRow contentRows col-md-12 col-xs-12",'blueCRow',239,'input');
 	
 	
 }; // end addPage
