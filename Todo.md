@@ -14,6 +14,15 @@ BotDB
 - "getNumberFromDiv"
 
 
+
+
+A time for everything, and everything in its time. When the time is right, it will already have happened. A patient person waits for 5 perfect opportunities to pass, and moves on the 6th. In this way, the Superior Person can follow the provenance of the Fates.
+
+Some think the loading screen has a mini game. It's usually in the 3rd hour they realize that is the game. 
+
+Risk only enough to increase your paperwork and frustration, but never enough to greatly change your lifestyle. 
+
+
 1. Add download links to Git page.
 2. Add insert location and auto-insert to Git page files. 
 3. Make wysiwyg page with default "hello world" page. 

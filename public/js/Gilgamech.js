@@ -112,13 +112,13 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$onClick,$hr
 
 function addHeader() {
 	addDiv("titleHead","",'head','Gilgamech Technologies','title');
-	addDiv("scr1","",'head','','script','','./public/js/Gilgamech.js');
-	addDiv("scr2","",'head','','script','','./public/js/jquery.min.js');
-	addDiv("link1","",'head','','link','','./public/stylesheets/bootstrap.min.css');
-	addDiv("link2","",'head','','link','','./public/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','','./public/stylesheets/main.css');
-	addDiv("link4","",'head','','link','','./public/stylesheets/mobile.css');
-	addDiv("link5","",'head','','link','','./public/stylesheets/rgb.css');
+	addDiv("scr1","",'head','','script','','/js/Gilgamech.js');
+	addDiv("scr2","",'head','','script','','/js/jquery.min.js');
+	addDiv("link1","",'head','','link','','/stylesheets/bootstrap.min.css');
+	addDiv("link2","",'head','','link','','/stylesheets/normalize.css');
+	addDiv("link3","",'head','','link','','/stylesheets/main.css');
+	addDiv("link4","",'head','','link','','/stylesheets/mobile.css');
+	addDiv("link5","",'head','','link','','/stylesheets/rgb.css');
 	
 }; // end addFooter
 
