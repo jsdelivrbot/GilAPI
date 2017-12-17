@@ -10,26 +10,29 @@ window.onkeypress = function () {updateHeader(keyCode)};
 
 // addDiv($divID,$divClass,$divParent,$innerText,$elementType,$onClick)
 function addPage() {
-	addDiv("wrapper","container img-rounded",'bodyCon');
+	addDiv("wrapper","container img-rounded",'body');
 	addDiv("spacer","img-rounded col-md-3 hidden-xs",'wrapper');
 	addDiv("content","img-rounded col-md-6 col-xs-12",'wrapper');
 	addDiv("coinArea","",'content');
 	addDiv("contentLabel","img-rounded row contentTitles",'coinArea','RGB Calculator');
 	
 	addDiv("htmlColorRow","row colorRow",'coinArea');
-	addDiv("htmlRow","colorRow img-rounded htmlColorRow contentRows col-md-12 col-xs-12",'htmlColorRow','#abcdef','input');
+	addDiv("htmlRow","colorRow img-rounded htmlColorRow contentRows col-md-12 col-xs-12",'htmlColorRow','#abcdef');
 	document.getElementById("htmlRow").setAttribute( "style",  "color: #000");
 	addDiv("redCRow","row colorRow",'coinArea');
-	addDiv("redRow","colorRow img-rounded redColorRow contentRows col-md-12 col-xs-12",'redCRow',171,'input');
+	addDiv("redRow","colorRow img-rounded redColorRow contentRows col-md-12 col-xs-12",'redCRow',171);
 	addDiv("greenCRow","row colorRow",'coinArea');
-	addDiv("greenRow","colorRow img-rounded greenColorRow contentRows col-md-12 col-xs-12",'greenCRow',205,'input');
+	addDiv("greenRow","colorRow img-rounded greenColorRow contentRows col-md-12 col-xs-12",'greenCRow',205);
 	addDiv("blueCRow","row colorRow",'coinArea');
-	addDiv("blueRow","colorRow img-rounded blueColorRow contentRows col-md-12 col-xs-12",'blueCRow',239,'input');
+	addDiv("blueRow","colorRow img-rounded blueColorRow contentRows col-md-12 col-xs-12",'blueCRow',239);
 	
 	
 }; // end addPage
 
 
 window.onload = function(){ 
-addPage();
+	addHeader();
+	addNav();
+	addPage();
+	addFooter();
 }

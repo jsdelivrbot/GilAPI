@@ -12,6 +12,8 @@ BotDB
 - Spacer between bots.
 - Top bar shows top scores. Something gets those from below?
 - "getNumberFromDiv"
+
+
 1. Add download links to Git page.
 2. Add insert location and auto-insert to Git page files. 
 3. Make wysiwyg page with default "hello world" page. 
