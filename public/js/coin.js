@@ -13,6 +13,8 @@ var $ltc
 var $fbc
 var $eth
 var $coin2 = "Data loading..."
+var $botCounter = 0
+var $assetCounter = 0
 
 //Get data from URLs, add to array, do math against old array, output. 
 //Have function get data from URL and output.
@@ -68,7 +70,7 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 			$coinAmount += ($coinAmount - $tradeFee)
 			loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
 			$fbc = $response.data
-			document.getElementById("fbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) + $fbc.amount - $botFee)*100)/100)
+			document.getElementById("fbcBotAmount").innerText = (getNumberFromDiv("simplebotfbcBotAmount") + $fbc.amount - $botFee)*100)/100
 			document.getElementById("fbcBotAction").value = "SELL"
 			}); //end loadJSON
 		} else {
@@ -78,7 +80,7 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 				$coinAmount -= ($coinAmount - $tradeFee);
 				loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
 				$fbc = $response.data;
-				document.getElementById("fbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) - $fbc.amount - $botFee)*100)/100)
+				document.getElementById("fbcBotAmount").innerText = (getNumberFromDiv("simplebotfbcBotAmount") - $fbc.amount - $botFee)*100)/100)
 				document.getElementById("fbcBotAction").innerText = "BUY";
 				}); //end loadJSON
 			} else {
@@ -176,15 +178,87 @@ switch ($direction) {
 }; // end simplebotChooses
 
 
-function toggleSettingsDisplay($divId) {
-	
-if (document.getElementById($divId).style.visibility == "visible") {
-  document.getElementById($divId).style.visibility="hidden";
-} else { 
-  document.getElementById($divId).style.visibility="visible";
-} // end if
-}; // end simplebotChooses
 
+function addBot($divBotName) {
+	var $botName = document.getElementById($divBotName).innerText;
+	
+	var $coinAreaID = ($botName + 'CoinArea')
+	var $coinAreaClass = 'img-rounded col-md-12 col-xs-12 contentRows dataArea row' ;
+	var $titleRowID = ($botName + 'TitleRow')
+	var $titleRowClass = 'row contentTitles';
+	var $contentLabelID = ($botName + 'ContentLabel')
+	var $contentLabelClass = 'col-md-6 col-xs-6';
+	
+	
+	addDiv($coinAreaID,$coinAreaClass,'content');
+	addDiv($titleRowID,$titleRowClass,$coinAreaID);
+	addDiv($contentLabelID,$contentLabelClass,$titleRowID,$botName);
+	$assetCounter++
+	
+	var $assetLabelID = ($botName + 'AssetLabel')
+	var $assetLabelClass = 'col-md-4 col-xs-4 dataArea img-rounded';
+	addDiv($assetLabelID,$assetLabelClass,$titleRowID,"Asset"  + $assetCounter);
+	
+	var $buttonID = ($botName + 'AssetButton')
+	var $buttonClass = 'btn btn-warning';
+	addDiv($buttonID,$buttonClass,$titleRowID,'Add Asset','button')
+	var $btnAttribute = "javascript: addBotRow('" + $assetLabelID + "','" + $coinAreaID + "');"
+	document.getElementById($buttonID).setAttribute( "onClick",  $btnAttribute);
+	
+	var $button2ID = ($botName + 'DeleteButton')
+	var $button2Class = 'btn btn-xs btn-danger';
+	addDiv($button2ID,$button2Class,$titleRowID,'Del Bot','button')	
+	var $btnAttribute = "javascript: removeDiv('" + $coinAreaID + "');"
+	document.getElementById($button2ID).setAttribute( "onClick",  $btnAttribute);
+	
+	document.getElementById($assetLabelID).setAttribute( "contenteditable",  true);
+	
+	var $headerRow = ($botName + 'HeaderRow')
+	var $headerClass = 'col-md-2 col-xs-2';
+	
+	addDiv($headerRow,"row contentLabels",$coinAreaID);
+	addDiv(($botName + "headerCoin"),$headerClass,$headerRow,"Coin:");
+	addDiv(($botName + "headerPrice"),$headerClass,$headerRow,"Price:");
+	addDiv(($botName + "headerManualBuy"),$headerClass,$headerRow,"Manual Buy:");
+	addDiv(($botName + "headerBotAmount"),$headerClass,$headerRow,"Bot Amount:");
+	addDiv(($botName + "headerBotAction"),$headerClass,$headerRow,"Bot Action:");
+	addDiv(($botName + "headerBotPred"),$headerClass,$headerRow,"Del Asset:");
+
+	$assetName = document.getElementById($assetLabelID).innerText
+	
+	$botCounter++;
+	document.getElementById($divBotName).innerText = $botName + $botCounter;
+}; // end addBot
+
+function addBotRow($assetLabelID,$parentDivName) {
+	$assetName = document.getElementById($assetLabelID).innerText;
+
+	//coinAreaRowID is the container for the row.
+	var $coinAreaRowID = ($assetName + 'ContentRow');
+	var $divClass = 'contentRows row';
+	addDiv($coinAreaRowID,$divClass,$parentDivName);
+	
+	var $assetManualTrans = ($assetName + 'AssetManualTrans');
+	var $divDeleteBot = ($assetName + 'DeleteButtonDiv');
+	var $button2ID = ($assetName + 'DeleteButton');
+	
+	var $divClass = 'contentItems col-md-2 col-xs-2';
+	addDiv(($assetName + 'AssetLabel'),$divClass,$coinAreaRowID,$assetName);
+	addDiv(($assetName + 'AssetPrice'),$divClass,$coinAreaRowID,"0");
+	addDiv($assetManualTrans,$divClass,$coinAreaRowID);
+	addDiv(($assetName + 'ManualBuyButton'),'btn btn-primary btn-xs',$assetManualTrans,'Buy','button');
+	addDiv(($assetName + 'ManualSellButton'),'btn btn-success btn-xs',$assetManualTrans,'Sell','button');
+	addDiv(($assetName + 'BotAmount'),$divClass,$coinAreaRowID,"0");
+	addDiv(($assetName + 'BotAction'),$divClass,$coinAreaRowID,"0");
+	addDiv($divDeleteBot,$divClass,$coinAreaRowID);
+	
+	var $btnAttribute = "javascript: removeDiv('" + $coinAreaRowID + "');";
+	addDiv($button2ID,'btn btn-xs btn-danger',$divDeleteBot,'Del','button',$btnAttribute);
+	
+	$assetCounter++;
+	document.getElementById($assetLabelID).innerText = $assetName + $assetCounter
+	
+}; // end addBot
 
 function refreshCharts() {
   try {
