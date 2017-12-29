@@ -198,6 +198,15 @@ app.get('/logout', function(request, response){
 
 
 //region WIP
+app.get('/dsq', function(request, response) { 
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/dsq', {
+        cssType: $cssType,
+       loggedin: $loggedin
+    });
+}); 
+
 app.get('/rgb', function(request, response) { 
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
