@@ -79,7 +79,7 @@ function updateRgbDivColor($divId) {
 }; // end updateRedDivColor
 
 window.onload = function(){ 
-	addHeader2();
+	addHeader();
 	addNav();
 	addPage();
 	addFooter();

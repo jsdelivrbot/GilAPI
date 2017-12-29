@@ -141,17 +141,6 @@ function addHeader() {
 	
 }; // end addHeader
 
-function addHeader2() {
-	addDiv("titleHead","",'head','Gilgamech Technologies','title');
-	addDiv("scr1","",'head','','script','./public/js/Gilgamech.js');
-	addDiv("scr2","",'head','','script','./public/js/jquery.min.js');
-	addDiv("link1","",'head','','link','./public/stylesheets/bootstrap.min.css');
-	addDiv("link2","",'head','','link','./public/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','./public/stylesheets/main.css');
-	addDiv("link4","",'head','','link','./public/stylesheets/mobile.css');
-	addDiv("link5","",'head','','link','./public/stylesheets/rgb.css');
-	
-}; // end addHeader
 
 function addNav() {
 	var $pclass1="hidden-sm hidden-xs"
