@@ -99,6 +99,8 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attri
 	
 	if ($elementType == 'input' && $innerText) {
 		$newDiv.value = $innerText
+	} else if ($elementType == 'img' && $innerText) {
+		$newDiv.title = $innerText
 	} else if ($innerText) {
 		$newDiv.innerText = $innerText
 	}; // end if elementType	
@@ -230,12 +232,13 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
+	addDiv("spacer","container-fluid",'body',"");
 	addDiv("footClan","footer navbar-static-bottom",'body');
 	addDiv("ftBanner","banner",'footClan','','p');
 	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
-	addDiv("aFooterImg","",'aFooter','','img',"/images/BannerImage.gif");
-	addDiv("aFooterCR","copyright",'footClan','(c) 2013-2017 Gilgamech Technologies. Now enhanced with gaming technology.','p');
+	addDiv("aFooterImg","",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"./public/images/BannerImage.gif","","height","250px");
+	document.getElementById("aFooterImg").style.height = "150px";
+	addDiv("aFooterCR","copyright",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p');
 	
 }; // end addFooter
-
 
