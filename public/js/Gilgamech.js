@@ -141,7 +141,6 @@ function addHeader() {
 	
 }; // end addHeader
 
-
 function addNav() {
 	var $pclass1="hidden-sm hidden-xs"
 	var $pclass2="hidden-md hidden-lg"

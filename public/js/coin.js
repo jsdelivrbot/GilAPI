@@ -13,6 +13,8 @@ var $ltc
 var $fbc
 var $eth
 var $coin2 = "Data loading..."
+var $botCounter = 0
+var $assetCounter = 0
 
 //Get data from URLs, add to array, do math against old array, output. 
 //Have function get data from URL and output.
@@ -68,7 +70,7 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 			$coinAmount += ($coinAmount - $tradeFee)
 			loadJSON("https://gil-api.herokuapp.com/fakecoinsell", function($response) { 
 			$fbc = $response.data
-			document.getElementById("fbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) + $fbc.amount - $botFee)*100)/100)
+			document.getElementById("fbcBotAmount").innerText = Math.round((getNumberFromDiv("simplebotfbcBotAmount") + $fbc.amount - $botFee)*100)/100
 			document.getElementById("fbcBotAction").value = "SELL"
 			}); //end loadJSON
 		} else {
@@ -78,7 +80,7 @@ function fruitbotChooses($coin,$oldCoin,$coinMedian,$coinMedianDiv,$botAmountDiv
 				$coinAmount -= ($coinAmount - $tradeFee);
 				loadJSON("https://gil-api.herokuapp.com/fakecoinbuy", function($response) { 
 				$fbc = $response.data;
-				document.getElementById("fbcBotAmount").innerText = (Math.round(((document.getElementById("simplebotfbcBotAmount").innerText *1) - $fbc.amount - $botFee)*100)/100)
+				document.getElementById("fbcBotAmount").innerText = Math.round((getNumberFromDiv("simplebotfbcBotAmount") - $fbc.amount - $botFee)*100)/100
 				document.getElementById("fbcBotAction").innerText = "BUY";
 				}); //end loadJSON
 			} else {
@@ -175,16 +177,102 @@ switch ($direction) {
 
 }; // end simplebotChooses
 
-
-function toggleSettingsDisplay($divId) {
+function addBot($divBotName) {
+	var $botName = document.getElementById($divBotName).innerText;
 	
-if (document.getElementById($divId).style.visibility == "visible") {
-  document.getElementById($divId).style.visibility="hidden";
-} else { 
-  document.getElementById($divId).style.visibility="visible";
-} // end if
-}; // end simplebotChooses
+	var $coinAreaID = ($botName + 'CoinArea')
+	var $coinAreaClass = 'img-rounded col-md-12 col-xs-12 contentRows dataArea row' ;
+	var $titleRowID = ($botName + 'TitleRow')
+	var $titleRowClass = 'row contentTitles';
+	var $contentLabelID = ($botName + 'ContentLabel')
+	var $contentLabelClass = 'col-md-6 col-xs-6';
+	
+	
+	addDiv($coinAreaID,$coinAreaClass,'content');
+	addDiv($titleRowID,$titleRowClass,$coinAreaID);
+	addDiv($contentLabelID,$contentLabelClass,$titleRowID,$botName);
+	$assetCounter++
+	
+	var $assetLabelID = ($botName + 'AssetLabel')
+	var $assetLabelClass = 'col-md-4 col-xs-4 dataArea img-rounded contentRows';
+	// addDiv($assetLabelID,$assetLabelClass,$titleRowID,"Asset"  + $assetCounter);
+	 addDiv($assetLabelID,$assetLabelClass,$titleRowID,"Asset" + $assetCounter,'input');
+	
+	var $dropdownListName = ('items' + $assetCounter);
+	document.getElementById($assetLabelID).setAttribute( "list", $dropdownListName);
 
+	 addDiv($dropdownListName,"",$titleRowID,"",'datalist');
+	 addDiv("","",$dropdownListName,"Asset" + $assetCounter,'option');
+	 addDiv("","",$dropdownListName,"firefox",'option');
+	// <input type=text list=browsers ><datalist id=browsers >   <option> Google   <option> IE9</datalist>
+	// <input type="text" name="myText" value="Norway" selectBoxOptions="Canada;Denmark;Finland;Germany;Mexico;Norway;Sweden;United Kingdom;United States"> 
+
+
+	var $buttonID = ($botName + 'AssetButton')
+	var $buttonClass = 'btn btn-warning';
+	var $onClick = "javascript: addBotRow('" + $assetLabelID + "','" + $coinAreaID + "');"
+	addDiv($buttonID,$buttonClass,$titleRowID,'Add Asset','button',"","onclick",$onClick)
+	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) {
+	
+	var $button2ID = ($botName + 'DeleteButton')
+	var $button2Class = 'btn btn-xs btn-danger';
+	var $onClick = "javascript: removeDiv('" + $coinAreaID + "');"
+	addDiv($button2ID,$button2Class,$titleRowID,'Del Bot','button',"","onclick",$onClick)	
+	
+	
+	var $headerRow = ($botName + 'HeaderRow')
+	var $headerClass = 'col-md-2 col-xs-2';
+	
+	addDiv($headerRow,"row contentLabels",$coinAreaID);
+	addDiv(($botName + "headerCoin"),$headerClass,$headerRow,"Coin:");
+	addDiv(($botName + "headerPrice"),$headerClass,$headerRow,"Price:");
+	addDiv(($botName + "headerManualBuy"),$headerClass,$headerRow,"Manual Buy:");
+	addDiv(($botName + "headerBotAmount"),$headerClass,$headerRow,"Bot Amount:");
+	addDiv(($botName + "headerBotAction"),$headerClass,$headerRow,"Bot Action:");
+	addDiv(($botName + "headerBotPred"),$headerClass,$headerRow,"Del Asset:");
+
+	$assetName = document.getElementById($assetLabelID).innerText
+	
+	$botCounter++;
+	document.getElementById($divBotName).innerText = $botName + $botCounter;
+	
+	var $spacerName = ("spacerrow" + $botCounter);
+	var $spacerClass = 'col-md-12 col-xs-12 row' ;
+	addDiv($spacerName,$spacerClass,'content'," ",'');
+	addDiv("","",$spacerName," ",'br');
+	addDiv("","",$spacerName," ",'br');
+
+}; // end addBot
+
+function addBotRow($assetLabelID,$parentDivName) {
+	$assetName = document.getElementById($assetLabelID).value;
+
+	//coinAreaRowID is the container for the row.
+	var $coinAreaRowID = ($assetName + 'ContentRow');
+	var $divClass = 'contentRows row';
+	addDiv($coinAreaRowID,'row',$parentDivName);
+	
+	var $assetManualTrans = ($assetName + 'AssetManualTrans');
+	var $divDeleteBot = ($assetName + 'DeleteButtonDiv');
+	var $button2ID = ($assetName + 'DeleteButton');
+	
+	var $divClass = 'contentItems col-md-2 col-xs-2';
+	addDiv(($assetName + 'AssetLabel'),$divClass,$coinAreaRowID,$assetName);
+	addDiv(($assetName + 'AssetPrice'),$divClass,$coinAreaRowID,"0");
+	addDiv($assetManualTrans,$divClass,$coinAreaRowID);
+	addDiv(($assetName + 'ManualBuyButton'),'btn btn-primary btn-xs',$assetManualTrans,'Buy','button');
+	addDiv(($assetName + 'ManualSellButton'),'btn btn-success btn-xs',$assetManualTrans,'Sell','button');
+	addDiv(($assetName + 'BotAmount'),$divClass,$coinAreaRowID,"0");
+	addDiv(($assetName + 'BotAction'),$divClass,$coinAreaRowID,"0");
+	addDiv($divDeleteBot,$divClass,$coinAreaRowID);
+
+	var $btnAttribute = "javascript: removeDiv('" + $coinAreaRowID + "');";
+	addDiv($button2ID,'btn btn-xs btn-danger',$divDeleteBot,'Del','button',"","onClick",$btnAttribute);
+	
+	$assetCounter++;
+	document.getElementById($assetLabelID).innerText = $assetName + $assetCounter
+	
+}; // end addBot
 
 function refreshCharts() {
   try {
@@ -212,7 +300,7 @@ window.onload = function(){
 	loadCoinData();
 	refreshCharts();
 	document.getElementById("coinMainBox").innerText = $coin2;
-	document.getElementById("jsonArea").innerText = "Click 'set!' to load.";
+	// document.getElementById("jsonArea").innerText = "Click 'set!' to load.";
 	document.getElementById("btcMedian").innerText = 0;
 };
 setInterval(function () {
