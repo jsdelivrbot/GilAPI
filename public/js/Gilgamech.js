@@ -44,6 +44,24 @@ function setupLink(textAreaID,downloadLinkID) {
   };
 };
 
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+};// end componentToHex
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+};// end rgbToHex
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+};// end hexToRgb
+
 function getNumberFromDiv($numericDiv) {
 	return Math.round(
 		document.getElementById($numericDiv).innerText  *1
@@ -65,7 +83,7 @@ function removeDiv($divID) {
 	}	
 }; // end removeBot
 
-function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$onClick,$href) {
+function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) {
 	if (!$elementType) {
 		$elementType = 'div'
 	}; // end if elementType	
@@ -77,10 +95,6 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$onClick,$hr
 
 	if ($divClass) {
 		$newDiv.className = $divClass
-	}; // end if onClick
-	
-	if ($onClick) {
-		$newDiv.onClick = $onClick
 	}; // end if onClick
 	
 	if ($elementType == 'input' && $innerText) {
@@ -108,26 +122,44 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$onClick,$hr
 	} else {
 		document.getElementById($divParent).appendChild($newDiv);
 	}; // end if divParent
+	
+	if ($attributeType && $attributeAction) {
+		document.getElementById($divID).setAttribute($attributeType, $attributeAction);
+	}; // end if onClick
+	
 }; // end addDiv	
 
 function addHeader() {
 	addDiv("titleHead","",'head','Gilgamech Technologies','title');
-	addDiv("scr1","",'head','','script','','/js/Gilgamech.js');
-	addDiv("scr2","",'head','','script','','/js/jquery.min.js');
-	addDiv("link1","",'head','','link','','/stylesheets/bootstrap.min.css');
-	addDiv("link2","",'head','','link','','/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','','/stylesheets/main.css');
-	addDiv("link4","",'head','','link','','/stylesheets/mobile.css');
-	addDiv("link5","",'head','','link','','/stylesheets/rgb.css');
+	addDiv("scr1","",'head','','script','/js/Gilgamech.js');
+	addDiv("scr2","",'head','','script','/js/jquery.min.js');
+	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
+	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
+	addDiv("link3","",'head','','link','/stylesheets/main.css');
+	addDiv("link4","",'head','','link','/stylesheets/mobile.css');
+	addDiv("link5","",'head','','link','/stylesheets/rgb.css');
 	
-}; // end addFooter
+}; // end addHeader
+
+function addHeader2() {
+	addDiv("titleHead","",'head','Gilgamech Technologies','title');
+	addDiv("scr1","",'head','','script','./public/js/Gilgamech.js');
+	addDiv("scr2","",'head','','script','./public/js/jquery.min.js');
+	addDiv("link1","",'head','','link','./public/stylesheets/bootstrap.min.css');
+	addDiv("link2","",'head','','link','./public/stylesheets/normalize.css');
+	addDiv("link3","",'head','','link','./public/stylesheets/main.css');
+	addDiv("link4","",'head','','link','./public/stylesheets/mobile.css');
+	addDiv("link5","",'head','','link','./public/stylesheets/rgb.css');
+	
+}; // end addHeader
 
 function addNav() {
 	var $pclass1="hidden-sm hidden-xs"
 	var $pclass2="hidden-md hidden-lg"
 	
 	addDiv("gtBannerWrapper","wrapper container",'body');
-	addDiv("gtBanner","img-rounded top",'gtBannerWrapper',"Gilgamech Technologies");
+	addDiv("gtBannerLink","img-rounded top",'gtBannerWrapper',"","a","","/");
+	addDiv("gtBanner","img-rounded top",'gtBannerLink',"Gilgamech Technologies");
 	
 	addDiv("navbar","navbar navbar-static-top navbar-inverse",'body');
 	addDiv("navWrapper","wrapper container",'navbar');

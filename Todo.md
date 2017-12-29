@@ -6,21 +6,20 @@ BotDB
 - Bot settings as dropdown
 
 
+curl "https://olymptrade.com/user/set-option" -H "Cookie: checked=1; lang=en_US; session=1000000000000594446900736398131081513801526685118229571196716166; CSRF-TOKEN=M7OiUmPw98fWjckPf52w1-wyPl8zv1pc9ISeIbcGWo0; enterdate=2017-12-20+23^%^3A25^%^3A27; guest_id=1000000000000594446911136398131081513801527371914125152420139937; props^[chatCol^]=true; props^[user_data_enriched17352083^]=true" -H "Origin: https://olymptrade.com" -H "Accept-Encoding: gzip, deflate, br" -H "Accept-Language: en-US,en;q=0.9" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" -H "Accept: application/json, text/javascript, */*; q=0.01" -H "Referer: https://olymptrade.com/en-us/platform" -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "DNT: 1" --data "name=duration_history^&value=^%^5B^%^5D" --compressed
+
+
+curl "https://olymptrade.com/user/set-option" -H "Cookie: checked=1; lang=en_US; session=1000000000000594446900736398131081513801526685118229571196716166; CSRF-TOKEN=M7OiUmPw98fWjckPf52w1-wyPl8zv1pc9ISeIbcGWo0; enterdate=2017-12-20+23^%^3A25^%^3A27; guest_id=1000000000000594446911136398131081513801527371914125152420139937; props^[chatCol^]=true; props^[user_data_enriched17352083^]=true" -H "Origin: https://olymptrade.com" -H "Accept-Encoding: gzip, deflate, br" -H "Accept-Language: en-US,en;q=0.9" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" -H "Accept: application/json, text/javascript, */*; q=0.01" -H "Referer: https://olymptrade.com/en-us/platform" -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "DNT: 1" --data "name=duration_history^&value=^%^5B^%^5D" --compressed
+
+curl "https://olymptrade.com/user/set-option" -H "Cookie: checked=1; lang=en_US; session=1000000000000594446900736398131081513801526685118229571196716166; CSRF-TOKEN=M7OiUmPw98fWjckPf52w1-wyPl8zv1pc9ISeIbcGWo0; enterdate=2017-12-20+23^%^3A25^%^3A27; guest_id=1000000000000594446911136398131081513801527371914125152420139937; props^[chatCol^]=true; props^[user_data_enriched17352083^]=true" -H "Origin: https://olymptrade.com" -H "Accept-Encoding: gzip, deflate, br" -H "Accept-Language: en-US,en;q=0.9" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" -H "Accept: application/json, text/javascript, */*; q=0.01" -H "Referer: https://olymptrade.com/en-us/platform" -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "DNT: 1" --data "name=duration_history^&value=^%^5B^%^5D" --compressed
+
+
 - Asset is dropdown of coins. Array.
 - Something updates all DIVs on page with new prices? 
 - Remove borders between rows.
 - Spacer between bots.
 - Top bar shows top scores. Something gets those from below?
 - "getNumberFromDiv"
-
-
-
-
-A time for everything, and everything in its time. When the time is right, it will already have happened. A patient person waits for 5 perfect opportunities to pass, and moves on the 6th. In this way, the Superior Person can follow the provenance of the Fates.
-
-Some think the loading screen has a mini game. It's usually in the 3rd hour they realize that is the game. 
-
-Risk only enough to increase your paperwork and frustration, but never enough to greatly change your lifestyle. 
 
 
 1. Add download links to Git page.
@@ -282,20 +281,95 @@ $k - weeks - item
 -- October 2018 move-in - May 2019 payoff
 
 
+https://olymptrade.com/user/set-option
 
 
 
 
 
 
+curl "https://olymptrade.com/user/set-option" -H "Cookie: lang=en_US; session=1000000000000594446900736398131081513801526685118229571196716166; CSRF-TOKEN=M7OiUmPw98fWjckPf52w1-wyPl8zv1pc9ISeIbcGWo0; enterdate=2017-12-20+23^%^3A25^%^3A27; guest_id=1000000000000594446911136398131081513801527371914125152420139937; props^[chatCol^]=true; checked=1; props^[user_data_enriched17352083^]=true; props^[deal_user_collapsed^]=true" -H "Origin: https://olymptrade.com" -H "Accept-Encoding: gzip, deflate, br" -H "Accept-Language: en-US,en;q=0.9" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" -H "Accept: application/json, text/javascript, */*; q=0.01" -H "Referer: https://olymptrade.com/en-us/platform" -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "DNT: 1" --data "name=duration_history^&value=^%^5B^%^5D" --compressed &
+
+curl "https://olymptrade.com/user/set-option" -H "Cookie: lang=en_US; session=1000000000000594446900736398131081513801526685118229571196716166; CSRF-TOKEN=M7OiUmPw98fWjckPf52w1-wyPl8zv1pc9ISeIbcGWo0; enterdate=2017-12-20+23^%^3A25^%^3A27; guest_id=1000000000000594446911136398131081513801527371914125152420139937; props^[chatCol^]=true; checked=1; props^[user_data_enriched17352083^]=true; props^[deal_user_collapsed^]=true" -H "Origin: https://olymptrade.com" -H "Accept-Encoding: gzip, deflate, br" -H "Accept-Language: en-US,en;q=0.9" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" -H "Accept: application/json, text/javascript, */*; q=0.01" -H "Referer: https://olymptrade.com/en-us/platform" -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "DNT: 1" --data "name=duration_history^&value=^%^5B^%^5D" --compressed
 
 
 
 
+Calculators
+http://www.mortgage-info.com/mortgage-calculators/15yearmortgagecalculator.aspx
+https://www.cryptocompare.com/mining/calculator/btc?HashingPower=1&HashingUnit=TH%2Fs&PowerConsumption=1&CostPerkWh=0. (also coin)
+https://bettereveryday.vc/how-hard-is-it-to-generate-a-10x-return-on-an-investment-9c1656d6c3af
+http://www.morningstar.com/InvGlossary/risk-adjusted-return.aspx
+https://en.wikipedia.org/wiki/Beta_(finance)
+https://cnotmz.appspot.com/#
+http://www.bristol.ac.uk/media-library/sites/physics/migrated/documents/tutorial.pdf
+https://liquorwa.appspot.com/?msg=Cost%20Breakdown:&lP=$25.00&t=$36.72&pT=$5.12&lT=$6.60
+
+Finn
+https://encrypted.google.com/search?q=stock+price+api&hl=en&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwiLjc2k3orYAhUK1WMKHbpZAE4QpwUIIA&biw=1315&bih=1192&dpr=0.8
+https://developers.coinbase.com/docs/wallet/guides/bitcoin-wallet
+https://finance.yahoo.com/cryptocurrencies
+https://finance.yahoo.com/quote/grow
+http://www.morningstar.com/funds/XNAS/DFEMX/quote.html
+https://data.bitcoinity.org/markets/price/6m/USD?c=e&t=l
+https://coinmarketcap.com/
+
+- APIs
+https://docs.gdax.com/#api
+https://duckduckgo.com/?q=binary+options+api&atb=v61-6&ia=web
+https://www.programmableweb.com/news/96-stocks-apis-bloomberg-nasdaq-and-etrade/2013/05/22
+https://www.quora.com/Are-there-any-binary-option-brokers-that-offer-a-trading-API
+https://www.quora.com/What-are-some-good-APIs-to-get-real-time-stock-quotes
+http://www.financial-hacker.com/bye-yahoo-and-thank-you-for-the-fish/
+http://www.xe.com/currencyconverter/convert/?Amount=260&From=ZAR&To=USD
+https://blog.quandl.com/api-for-stock-data
+https://www.tdameritrade.com/why-td-ameritrade.page
+https://www.interactivebrokers.com/en/index.php?f=1338
+https://blockchain.info/api
+https://blockchain.info/q/24hrtransactioncount
+https://blockchain.info/q/24hrbtcsent
+https://blockchain.info/q/hashrate
+https://blockchain.info/q/unconfirmedcount
+https://blockchain.info/ticker
+
+- Strategies
+https://www.youtube.com/watch?v=9ofM0QbgYvE
+https://davidgerard.co.uk/blockchain/2017/12/17/why-you-cant-cash-out-pt-1-why-bitcoins-price-is-largely-fictional/
+https://news.ycombinator.com/item?id=15987828
+https://olymptrade.com/en-us/training
+https://www.investopedia.com/terms/m/movingaverage.asp
+https://admiralmarkets.com/education/articles/forex-strategy/best-forex-trading-strategies-that-work
+http://www.nasdaq.com/dividend-stocks/
+https://www.alphavantage.co/
+http://js.syncfusion.com/demos/web/dashboard/stockAnalysis/default.html
+http://www.eeemo.net/
+http://www.dividend.com/
+https://www.marketwatch.com/story/heres-a-better-way-to-screen-for-dividend-stocks-so-you-dont-get-burned-2017-11-27
+https://www.investopedia.com/articles/basics/04/100804.asp
+
+JS Music
+https://duckduckgo.com/?q=javascript+music&atb=v61-6&ia=web
+http://javascriptkit.com/script/cutindex4.shtml
+http://badassjs.com/post/41708259332/teoria-a-javascript-music-theory-library-for
+https://github.com/mudcube/MIDI.js
+
+Misc
+https://www.postgresql.org/docs/9.3/static/hstore.html
+https://he.net/colocation.html
+http://js.syncfusion.com/demos/web/
+https://guacamole.apache.org/
 
 
+Enkida
+https://hubot.github.com/
 
 
-
+Map
+https://duckduckgo.com/?q=add+google+maps+to+your+website&atb=v61-6&ia=web
+https://www.add-map.net/
+https://www.add-map.net/en/google-maps-api-key
+https://console.developers.google.com/apis/credentials/key?project=red-road-189822&type=CLIENT_SIDE
+http://www.vestus.com/ForeclosureCount.aspx?page=countyCity&CountyID=3
+http://www.vestus.com/foreclosure/WA/King/BELLEVUE/Register%20for%20full%20address-98007/350556
 
 
