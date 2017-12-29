@@ -1,3 +1,38 @@
+
+function addPage() {
+	$inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
+	$rowClasses = "row colorRow"
+	
+	addDiv("wrapper","container img-rounded",'body');
+	addDiv("spacer","img-rounded col-md-3 hidden-xs",'wrapper');
+	addDiv("content","img-rounded col-md-6 col-xs-12",'wrapper');
+	addDiv("coinArea","",'content');
+	addDiv("contentLabel","img-rounded row contentTitles",'coinArea','Chat Room:');
+	
+	addDiv("htmlColorRow",$rowClasses,'coinArea');
+	addDiv("chatRoom",$inputClasses + "htmlColorRow",'htmlColorRow','General',"input","","onchange","updateRgbColor()");
+	document.getElementById("chatRoom").setAttribute( "style",  "color: #000");
+	
+	addDiv("redCRow",$rowClasses,'coinArea');
+	addDiv("chatMainBox","img-rounded",'redCRow',171,"textarea");
+	document.getElementById("chatMainBox").setAttribute( "style",  "color: #000");
+	
+	addDiv("blueCRow",$rowClasses,'coinArea');
+	addDiv("chatUser",$inputClasses + "blueColorRow",'blueCRow',"","input","","placeholder","User Name");
+	
+	addDiv("greenCRow",$rowClasses,'coinArea');
+	addDiv("chatMessage",$inputClasses + "greenColorRow",'greenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
+	
+}; // end addPage
+
+/*
+<textarea id="chatMainBox" value="Javascript is disabled."class = "img-rounded">Javascript is disabled.</textarea>
+
+<input type = "text" id = "chatUser" placeholder="User Name" class = "img-rounded"> 
+<input type = "text" id = "chatMessage"  class = "img-rounded resizedTextbox" onkeypress = "detectEnter(event)" value = "Hello World!">
+
+*/
+
 function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
   // Post API with user:chat JSON and write reply to textbox.
@@ -39,5 +74,10 @@ setInterval(function () {
   refreshChat("General")
 }, 5000);
 
-
+window.onload = function(){ 
+	addHeader();
+	addNav();
+	addPage();
+	addFooter();
+}
 
