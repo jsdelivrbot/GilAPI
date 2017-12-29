@@ -338,7 +338,7 @@ app.get('/chatpost', function(request, response) {
 app.get('/chatload', function(request, response) { 
 // /chatpost?user=user&message=message&chatroom=General
   chatRoom = request.query.chatroom
-  response.send($chatGeneral);
+  response.json($chatGeneral);
 });  
 //endregion
 

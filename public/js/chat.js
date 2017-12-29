@@ -25,14 +25,6 @@ function addPage() {
 	
 }; // end addPage
 
-/*
-<textarea id="chatMainBox" value="Javascript is disabled."class = "img-rounded">Javascript is disabled.</textarea>
-
-<input type = "text" id = "chatUser" placeholder="User Name" class = "img-rounded"> 
-<input type = "text" id = "chatMessage"  class = "img-rounded resizedTextbox" onkeypress = "detectEnter(event)" value = "Hello World!">
-
-*/
-
 function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
   // Post API with user:chat JSON and write reply to textbox.
