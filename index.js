@@ -316,16 +316,20 @@ app.get('/chatpost', function(request, response) {
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
     if (err) addErr((err));
     $chatGeneral = $chatGeneral + 'INSERT INTO chatroom_General\n\r';
+	try {
     for (let row of queryOutput.rows) {
       $chatGeneral = $chatGeneral + row + lineBreak;
     }
+	} catch(err) {addErr((err))}
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
     if (err) addErr((err));
     $chatGeneral = $chatGeneral + 'SELECT FROM chatroom_General\n\r';
+	try {
     for (let row of queryOutput.rows) {
       $chatGeneral = $chatGeneral + row + lineBreak;
     }
+	} catch(err) {addErr((err))}
   });
   client.end();
   response.send($chatGeneral);
