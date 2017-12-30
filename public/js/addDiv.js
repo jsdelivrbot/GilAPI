@@ -3,7 +3,7 @@ function addPage() {
 	var $rowClasses = "row";
 	var $Title = "addDiv explained";
 	var $Header = "addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)"
-	var $bodyText = "This can be intimidating, but will start to make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n"
+	var $bodyText = "This can be complex to look at, but will make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n"
 	$bodyText +=  "$divID - The only mandatory one is the first one.\n\n"
 	
 	$bodyText +=  "$divClass- Text.\n\n"
