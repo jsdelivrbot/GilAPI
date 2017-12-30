@@ -178,6 +178,9 @@ function addNav() {
 	addDiv("lip4",$pclass2,'ddc','','p');
 	addDiv("aip4","",'lip4','Chat!','a',"https://gil-api.herokuapp.com/chat");
 
+	addDiv("lip13","",'ddc','','p');
+	addDiv("aip13","",'lip13','addDiv Explained','a',"https://gil-api.herokuapp.com/addDiv");
+
 	addDiv("lip11","",'ddc','','p');
 	addDiv("aip11","",'lip11','RGB Calculator','a',"https://gil-api.herokuapp.com/rgb");
 

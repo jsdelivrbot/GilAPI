@@ -7,7 +7,7 @@ const env = Object.assign({}, process.env, {PORT: 5000});
 const child = spawn('node', ['index.js'], {env});
 
 test('responds to requests', (t) => {
-  t.plan(52);
+  t.plan(50);
 
   // Wait until the server is ready
   child.stdout.on('data', _ => {
@@ -46,78 +46,76 @@ test('responds to requests', (t) => {
     }); //end request
 	
     request('http://127.0.0.1:5000/coin', (error, response, body) => {
-      t.false(error); // test 21
-      t.equal(response.statusCode, 200); // test 22
-      t.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 23
-      t.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 24
+      t.false(error); // test 19
+      t.equal(response.statusCode, 200); // test 20
     }); //end request
 	
     request('http://127.0.0.1:5000/chat', (error, response, body) => { 
-      t.false(error); // test 25
-      t.equal(response.statusCode, 200);  // test 26
+      t.false(error); // test 21
+      t.equal(response.statusCode, 200);  // test 22
     });
 	
     request('http://127.0.0.1:5000/fruitbotwin', (error, response, body) => {
-      t.false(error); // test 27
-      t.equal(response.statusCode, 200); // test 28
-      t.notEqual(body.indexOf("1"), -1); // test 29
+      t.false(error); // test 23
+      t.equal(response.statusCode, 200); // test 24
+      t.notEqual(body.indexOf("1"), -1); // test 25
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbotloss', (error, response, body) => {
-      t.false(error); // test 30
-      t.equal(response.statusCode, 200); // test 31
-      t.notEqual(body.indexOf("1"), -1); // test 32
+      t.false(error); // test 26
+      t.equal(response.statusCode, 200); // test 27
+      t.notEqual(body.indexOf("1"), -1); // test 28
     }); //end request
 	
     request('http://127.0.0.1:5000/fruitbottie', (error, response, body) => {
-      t.false(error); // test 33
-      t.equal(response.statusCode, 200); // test 34
-      t.notEqual(body.indexOf("1"), -1); // test 35
+      t.false(error); // test 29
+      t.equal(response.statusCode, 200); // test 30
+      t.notEqual(body.indexOf("1"), -1); // test 31
     }); //end request
 	
 	request('http://127.0.0.1:5000/jsonlint', (error, response, body) => { 
-	  t.false(error); // test 36
-	  t.equal(response.statusCode, 200);  // test 37
+	  t.false(error); // test 32
+	  t.equal(response.statusCode, 200);  // test 33
 	});
 	
     request('http://127.0.0.1:5000/demo', (error, response, body) => {
-      t.false(error); // test 38
-      t.equal(response.statusCode, 200); // test 39
+      t.false(error); // test 34
+      t.equal(response.statusCode, 200); // test 35
     }); //end request
 	
     request('http://127.0.0.1:5000/newappget?name=test', (error, response, body) => {
-      t.false(error); // test 40
-      t.equal(response.statusCode, 200); // test 41
-      t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 42
+      t.false(error); // test 36
+      t.equal(response.statusCode, 200); // test 37
+      t.notEqual(body.indexOf("app.get('/test', function(request, response) { "), -1); // test 38
     }); //end request
 	
     request('http://127.0.0.1:5000/git', (error, response, body) => { 
-      t.false(error); // test 43
-      t.equal(response.statusCode, 200);  // test 44
-      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 45
-      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 46
+      t.false(error); // test 39
+      t.equal(response.statusCode, 200);  // test 40
+      t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  // test 41
+      t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  // test 42
     });
     request('http://127.0.0.1:5000/login', (error, response, body) => { 
-      t.false(error);  // test 47
-      t.equal(response.statusCode, 200);   // test 48
+      t.false(error);  // test 43
+      t.equal(response.statusCode, 200);   // test 44
     });
 	
     request('http://127.0.0.1:5000/dsq', (error, response, body) => {
-      t.false(error); // test 49
-      t.equal(response.statusCode, 200); // test 50
+      t.false(error); // test 45
+      t.equal(response.statusCode, 200); // test 46
     }); //end request
 	
     request('http://127.0.0.1:5000/addDiv', (error, response, body) => {
-      t.false(error); // test 51
-      t.equal(response.statusCode, 200); // test 52
+      t.false(error); // test 47
+      t.equal(response.statusCode, 200); // test 48
     }); //end request
 	
     request('http://127.0.0.1:5000/favicon.ico', (error, response, body) => {
       // stop the server
       child.kill();
 
-      t.false(error); // test 51
-      t.equal(response.statusCode, 200); // test 52
+      t.false(error); // test 49
+      t.equal(response.statusCode, 200); // test 50
     }); //end request
 	
   }); //end child
