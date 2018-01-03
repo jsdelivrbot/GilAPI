@@ -69,8 +69,17 @@ var navPages = [
 
 function addErr(err) {
   $errgoLogic += err + "<br>"// lineBreak
-  // Check the user-agent string to identyfy the device.
 };
+
+function standardResponse(request, response,$pageName) { 
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/addDiv', {
+        cssType: $cssType,
+       loggedin: $loggedin
+	   pageName: $pageName
+    });
+}); 
 
 function testUA(ua) {
     // Check the user-agent string to identyfy the device.
@@ -192,19 +201,15 @@ app.get('/logout', function(request, response){
   // request.logout();
 	request.session.destroy(function (err) {
 		addErr(err);
-        response.redirect('/'); //Inside a callback… bulletproof!
+        response.redirect('/'); 
     });
 });
 
 
 //region WIP
 app.get('/addDiv', function(request, response) { 
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/addDiv', {
-        cssType: $cssType,
-       loggedin: $loggedin
-    });
+  var $pageName = "/js/addDiv.js";
+  standardResponse(request, response,$pageName);
 }); 
 
 app.get('/dsq', function(request, response) { 
