@@ -209,8 +209,12 @@ app.get('/logout', function(request, response){
 
 //region WIP
 app.get('/addDiv', function(request, response) { 
-  var $pageName = "addDiv";
-  standardResponse(request, response,$pageName);
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/addDiv', {
+        cssType: $cssType,
+       loggedin: $loggedin
+    });
 }); 
 
 app.get('/dsq', function(request, response) { 
