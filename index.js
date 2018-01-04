@@ -71,6 +71,16 @@ function addErr(err) {
   $errgoLogic += err + "<br>"// lineBreak
 };
 
+function standardResponse(request, response,$pageName) { 
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'pages/addDiv', {
+        cssType: $cssType,
+       loggedin: $loggedin,
+       pageName: $pageName
+    });
+}); 
+
 function testUA(ua) {
     // Check the user-agent string to identyfy the device.
     if(/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile|ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i.test(ua)) {
