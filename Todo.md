@@ -372,4 +372,13 @@ https://console.developers.google.com/apis/credentials/key?project=red-road-1898
 http://www.vestus.com/ForeclosureCount.aspx?page=countyCity&CountyID=3
 http://www.vestus.com/foreclosure/WA/King/BELLEVUE/Register%20for%20full%20address-98007/350556
 
+BPG
+
+Who is needed in the team? (Can be names, can be roles, can be an estimate.)
+What will these people do? What processes will they follow? What business needs will they fulfil?
+When will they do this? What will be the business hours, how long will customers expect to wait for service/delivery? 
+Where will the business be based? Offices? Warehouses? Internet? 
+Why will people give you money? Competitors? Location? Good service? 
+
+
 
