@@ -203,7 +203,7 @@ app.get('/addDiv', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/page', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
        pageName: $pageName
     });
 }); 
