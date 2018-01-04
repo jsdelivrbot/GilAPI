@@ -198,11 +198,13 @@ app.get('/logout', function(request, response){
 
 //region WIP
 app.get('/addDiv', function(request, response) { 
+  var $pageName = "/js/addDiv.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/addDiv', {
+  response.render( 'pages/page', {
         cssType: $cssType,
        loggedin: $loggedin
+       pageName: $pageName
     });
 }); 
 
