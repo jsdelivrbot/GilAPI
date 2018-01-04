@@ -209,20 +209,24 @@ app.get('/addDiv', function(request, response) {
 }); 
 
 app.get('/dsq', function(request, response) { 
+  var $pageName = "/js/dsq.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/dsq', {
+  response.render( 'pages/page', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 
 app.get('/rgb', function(request, response) { 
+  var $pageName = "/js/dsq.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/rgb', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 
