@@ -318,6 +318,7 @@ app.get('/chat', function(request, response) {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
        loggedin: $loggedin
+       pageName: $pageName
     });
 }); 
 
