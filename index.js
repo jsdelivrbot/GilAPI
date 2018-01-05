@@ -95,7 +95,8 @@ app.get('/', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
        cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 
@@ -104,7 +105,8 @@ app.get('/login', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/login', {
        cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 
@@ -147,7 +149,8 @@ app.get('/signup', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/signup', {
        cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 app.post('/signup', function (request, response) {
@@ -220,10 +223,10 @@ app.get('/dsq', function(request, response) {
 }); 
 
 app.get('/rgb', function(request, response) { 
-  var $pageName = "/js/dsq.js";
+  var $pageName = "/js/rgb.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/rgb', {
+  response.render( 'pages/page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
@@ -235,7 +238,8 @@ app.get('/meme', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/meme', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 
@@ -244,7 +248,8 @@ app.get('/Arkdata', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/Arkdata', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 
@@ -253,7 +258,8 @@ app.get('/demo', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/demo', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 
@@ -262,7 +268,8 @@ app.get('/git', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/git', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });  
 
@@ -271,7 +278,8 @@ app.get('/text2', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/text2', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 
@@ -285,7 +293,8 @@ app.get('/badpw', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/badpw', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 app.post('/badpw', function(request, response) { 
@@ -303,18 +312,21 @@ app.get('/coin', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
     response.render( 'pages/coin', {
     cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
   });
 }); 
 
 //region chat 
 app.get('/chat', function(request, response) { 
+  var $pageName = "/js/chat.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/chat', {
+  response.render( 'pages/page', {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 
@@ -362,7 +374,8 @@ app.get('/fruitbot', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/fruitbot', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 app.get('/fruitbotwin', function(request, response) {
@@ -419,7 +432,8 @@ app.get('/jsonlint', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/jsonlint', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });  
 
