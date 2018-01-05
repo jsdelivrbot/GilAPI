@@ -317,7 +317,7 @@ app.get('/chat', function(request, response) {
   response.render( 'pages/page', {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
        pageName: $pageName
     });
 }); 
