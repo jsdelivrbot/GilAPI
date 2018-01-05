@@ -95,8 +95,7 @@ app.get('/', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/index', {
        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 
@@ -105,8 +104,7 @@ app.get('/login', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/login', {
        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 
@@ -149,8 +147,7 @@ app.get('/signup', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/signup', {
        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 app.post('/signup', function (request, response) {
@@ -248,8 +245,7 @@ app.get('/Arkdata', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/Arkdata', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 
@@ -258,8 +254,7 @@ app.get('/demo', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/demo', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 
@@ -268,8 +263,7 @@ app.get('/git', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/git', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });  
 
@@ -278,8 +272,7 @@ app.get('/text2', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/text2', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 
@@ -312,8 +305,7 @@ app.get('/coin', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
     response.render( 'pages/coin', {
     cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
   });
 }); 
 
@@ -325,8 +317,7 @@ app.get('/chat', function(request, response) {
   response.render( 'pages/page', {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 }); 
 
@@ -374,8 +365,7 @@ app.get('/fruitbot', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/fruitbot', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });
 app.get('/fruitbotwin', function(request, response) {
@@ -428,9 +418,10 @@ app.get('/fakecoinsell', function(request, response) {
 });
 
 app.get('/jsonlint', function(request, response) { 
+  var $pageName = "/js/jsonlint.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/jsonlint', {
+  response.render( 'pages/page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
