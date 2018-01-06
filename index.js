@@ -201,7 +201,7 @@ app.get('/addDiv', function(request, response) {
   var $pageName = "/js/addDiv.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
@@ -212,7 +212,7 @@ app.get('/dsq', function(request, response) {
   var $pageName = "/js/dsq.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
@@ -223,7 +223,7 @@ app.get('/rgb', function(request, response) {
   var $pageName = "/js/rgb.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
@@ -249,13 +249,15 @@ app.get('/Arkdata', function(request, response) {
 });
 
 app.get('/demo', function(request, response) {
+  var $pageName = "/js/ARKMap.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/demo', {
+  response.render( 'page', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
-});
+}); 
 
 app.get('/git', function(request, response) { 
   var $loggedin = testLoggedIn(request);
@@ -312,7 +314,7 @@ app.get('/chat', function(request, response) {
   var $pageName = "/js/chat.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'page', {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
        loggedin: $loggedin,
@@ -420,7 +422,7 @@ app.get('/jsonlint', function(request, response) {
   var $pageName = "/js/jsonlint.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
