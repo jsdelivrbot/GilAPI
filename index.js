@@ -415,11 +415,13 @@ app.get('/fakecoinsell', function(request, response) {
 });
 
 app.get('/jsonlint', function(request, response) { 
+  var $pageName = "/js/jsonlint.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/jsonlint', {
+  response.render( 'pages/page', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });  
 
