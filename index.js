@@ -298,16 +298,11 @@ app.post('/badpw', function(request, response) {
 
 app.get('/coin', function(request, response) { 
   var $pageName = "/js/coin.js";
-  var $stackoverflowLinks = '<a href="https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037">Stack Overflow - prettify json data in textarea input</a><br>'
-  $stackoverflowLinks += '<a href="https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068">Stack Overflow - copy textarea to clipboard</a>'
-
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
     response.render( 'pages/coin', {
 		cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName,
-       stackoverflowLinks: $stackoverflowLinks
+       loggedin: $loggedin
   });
 }); 
 
