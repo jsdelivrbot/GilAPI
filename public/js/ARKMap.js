@@ -20,8 +20,8 @@ canvas.height = window.innerHeight;
 // canvas.width = bgImage.width;
 
 // load background
-var bgImage = new Image();
-var bgReady = false;
+bgImage = new Image();
+bgReady = false;
 bgImage.onload = function () {
   bgReady = true;
 };

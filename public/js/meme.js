@@ -28,8 +28,8 @@ window.onload = function(){
 
 
 //Create the canvas
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
 
 canvas.width  = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -37,8 +37,8 @@ canvas.height = window.innerHeight;
 // canvas.width = bgImage.width;
 
 // load background
-var bgImage = new Image();
-var bgReady = false;
+bgImage = new Image();
+bgReady = false;
 bgImage.onload = function () {
 	var ImageRatio = bgImage.width / bgImage.height;
 	canvas.height = canvas.width * ImageRatio;
