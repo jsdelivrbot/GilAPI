@@ -220,10 +220,10 @@ app.get('/dsq', function(request, response) {
 }); 
 
 app.get('/rgb', function(request, response) { 
-  var $pageName = "/js/dsq.js";
+  var $pageName = "/js/rgb.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/rgb', {
+  response.render( 'pages/page', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
