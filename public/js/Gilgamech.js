@@ -32,6 +32,11 @@ function postJSON(file, callback) {
 
 function destroyClickedElement(event) {	document.body.removeChild(event.target); }
 
+function copyToClipboard(text) {
+    Copied = text.createRange();
+    Copied.execCommand("Copy");
+}; // end copyToClipboard
+
 // Applies color scheme to text in div.
 //  https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css
 function colorifyDiv(divName, replaceWord, replaceColor) {

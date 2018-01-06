@@ -9,10 +9,6 @@ function prettyPrint($divName) {
 		document.getElementById("myErrDiv").innerText = $err;
 	};
 }
-function copyToClipboard(text) {
-    Copied = text.createTextRange();
-    Copied.execCommand("Copy");
-}
 
 function addPage() {
 	var $inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 ";
