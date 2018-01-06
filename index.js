@@ -309,12 +309,14 @@ app.get('/coin', function(request, response) {
 
 //region chat 
 app.get('/chat', function(request, response) { 
+  var $pageName = "/js/chat.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/chat', {
+  response.render( 'pages/page', {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 
