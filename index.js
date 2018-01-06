@@ -268,15 +268,6 @@ app.get('/git', function(request, response) {
     });
 });  
 
-app.get('/text2', function(request, response) {
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/text2', {
-        cssType: $cssType,
-       loggedin: $loggedin
-    });
-});
-
 app.post('/mirror', function(request, response) {
   message = request.query.message,
   response.send(message);
