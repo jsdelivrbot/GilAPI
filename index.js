@@ -220,10 +220,10 @@ app.get('/dsq', function(request, response) {
 }); 
 
 app.get('/rgb', function(request, response) { 
-  var $pageName = "/js/rgb.js";
+  var $pageName = "/js/dsq.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'pages/rgb', {
         cssType: $cssType,
        loggedin: $loggedin,
        pageName: $pageName
@@ -235,8 +235,7 @@ app.get('/meme', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/meme', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 }); 
 
@@ -286,8 +285,7 @@ app.get('/badpw', function(request, response) {
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/badpw', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 }); 
 app.post('/badpw', function(request, response) { 
@@ -311,14 +309,12 @@ app.get('/coin', function(request, response) {
 
 //region chat 
 app.get('/chat', function(request, response) { 
-  var $pageName = "/js/chat.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'pages/chat', {
 	    $chatGeneral: $chatGeneral,
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 }); 
 
@@ -419,13 +415,11 @@ app.get('/fakecoinsell', function(request, response) {
 });
 
 app.get('/jsonlint', function(request, response) { 
-  var $pageName = "/js/jsonlint.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/page', {
+  response.render( 'pages/jsonlint', {
         cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
+       loggedin: $loggedin
     });
 });  
 
