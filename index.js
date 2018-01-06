@@ -284,13 +284,6 @@ app.get('/badpw', function(request, response) {
     });
 }); 
 
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/badpw', {
-        cssType: $cssType,
-       loggedin: $loggedin
-    });
-}); 
 app.post('/badpw', function(request, response) { 
   var $loggedin = testLoggedIn(request);
   var randomstring = Math.random().toString(36).slice(-20);
