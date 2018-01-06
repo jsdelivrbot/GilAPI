@@ -283,6 +283,16 @@ app.post('/mirror', function(request, response) {
 });
 
 app.get('/badpw', function(request, response) { 
+  var $pageName = "/js/badpw.js";
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'page', {
+        cssType: $cssType,
+       loggedin: $loggedin,
+       pageName: $pageName
+    });
+}); 
+
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
   response.render( 'pages/badpw', {
