@@ -143,13 +143,16 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.get('/signup', function(request, response) {
+  var $pageName = "/js/signup.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/signup', {
-       cssType: $cssType,
-       loggedin: $loggedin
+  response.render( 'page', {
+        cssType: $cssType,
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
+
 app.post('/signup', function (request, response) {
   var username = request.body.username
   bcrypt.hash(request.body.password, null, null, function(err, hash){
