@@ -296,10 +296,6 @@ app.post('/badpw', function(request, response) {
   response.send(randomstring);
 }); 
 
-app.get('/test', function(request, response) {
-  response.send("app.get('/nfs', function(request, response) { <br> response.json(outstring); <br> }); ");
-});
-
 app.get('/coin', function(request, response) { 
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
@@ -308,6 +304,17 @@ app.get('/coin', function(request, response) {
        loggedin: $loggedin
   });
 }); 
+
+app.get('/jsonlint', function(request, response) { 
+  var $pageName = "/js/jsonlint.js";
+  var $loggedin = testLoggedIn(request);
+  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
+  response.render( 'page', {
+        cssType: $cssType,
+       loggedin: $loggedin,
+       pageName: $pageName
+    });
+});  
 
 //region chat 
 app.get('/chat', function(request, response) { 
@@ -417,17 +424,6 @@ app.get('/fakecoinsell', function(request, response) {
   $dataVar = {"data":{"base":"FBC","currency":"USD","amount": $basePrice}};	
   response.json($dataVar);
 });
-
-app.get('/jsonlint', function(request, response) { 
-  var $pageName = "/js/jsonlint.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});  
 
 //region ModuleBuilding
 app.get('/nfs', function(request, response) {
