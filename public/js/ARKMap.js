@@ -1,19 +1,23 @@
+var bgImage
+var bgReady
+var canvas
+var ctx
+
+window.onload = function(){ 
+	addHeader();
+	addNav();
+	addPage();
+	addFooter();
 
 
 //Create the canvas
-var canvas = document.createElement("canvas");
-var ctx = canvas.getContext("2d");
+canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
 
 canvas.width  = window.innerWidth;
-//canvas.width = 600;
-// console.log(bgImage.width);
-// canvas.width = bgImage.width;
-
 canvas.height = window.innerHeight;
-//canvas.height = 600;
 // canvas.height = bgImage.height;
-// console.log(bgImage.height);
-document.body.appendChild(canvas);
+// canvas.width = bgImage.width;
 
 // load background
 var bgImage = new Image();
@@ -21,7 +25,7 @@ var bgReady = false;
 bgImage.onload = function () {
   bgReady = true;
 };
-bgImage.src = "http://gilgamech.com/Images/ARKMap.jpg";
+bgImage.src = "/images/ARKMap.jpg";
 
 // load clientClint
 var clientClintReady = false;
@@ -29,7 +33,6 @@ var clientClintImage = new Image();
 clientClintImage.onload = function () {
   clientClintReady = true;
 };
-// clientClintImage.src = "http://gilgamech.com/images/clientClint.png";
 
 // packet image
 var packetReady = false;
@@ -37,7 +40,7 @@ var packetImage = new Image();
 packetImage .onload = function () {
   packetReady = true;
 };
-// packetImage .src = "http://gilgamech.com/images/packet.png";
+}; // end window.onload
 
 // Game objects
 var ARKMapJSON = "";
@@ -63,11 +66,27 @@ var reset = function () {
 	loadTribes();
 };
 
+function addPage() {
+		
+	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
+	addDiv("wrapper","container img-rounded",'body');
+	addDiv("content","img-rounded row contentTitles",'wrapper',"ARKData Dynamap");
+	
+	addDiv("canvas","img-rounded",'wrapper',"","canvas");
+
+	addDiv("memeUrlInput","img-rounded col-md-12 col-xs-12",'wrapper',"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","input");
+	addDiv("topTextInput","img-rounded col-md-12 col-xs-12",'wrapper',"Top Text","input");
+	addDiv("BottomTextInput","img-rounded col-md-12 col-xs-12",'wrapper',"Bottom Text","input");
+	addDiv("myRow","row img-rounded col-md-12 col-xs-12",'wrapper');
+	addDiv("btnPretty","btn btn-primary",'myRow',"Create Meme!","button","","onclick","updateMemeForm('memeUrlInput')");
+		
+}; // end addPage
+
 // Load...stuff?
 // https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 function loadARKMap() {
     
-    loadJSON("http://gilgamech.com/ARKData/ARKMap.json", function(response) {
+    loadJSON("/data/ARKMap.json", function(response) {
     // loadJSON("http://gilgamech.com:65530/?API=map", function(response) {
   
         var actual_JSON = JSON.parse(response);
@@ -78,7 +97,7 @@ function loadARKMap() {
 
 function loadARKDataPayload() {
     
-    loadJSON("http://gilgamech.com/ARKData/ARKDataPayload.json", function(response) {
+    loadJSON("/data/ARKDataPayload.json", function(response) {
   
         var actual_JSON = JSON.parse(response);
 		ARKDataPayload = actual_JSON
@@ -88,7 +107,7 @@ function loadARKDataPayload() {
 
 function loadTribes() {
     
-    loadJSON("http://gilgamech.com/ARKData/tribe.json", function(response) {
+    loadJSON("/data/tribe.json", function(response) {
   
         var actual_JSON = JSON.parse(response);
 		TribeJSON = actual_JSON
