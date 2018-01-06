@@ -80,3 +80,58 @@ function colorifyDivTextArea(DivTextArea) {
   };
 }; // end colorifyDivTextArea
 
+function addPage() {
+	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
+	
+	addDiv("wrapper","container img-rounded",'body');
+	
+	addDiv("wrapperGit","container img-rounded",'body');
+	addDiv("contentGit","img-rounded row contentTitles",'wrapperGit',"Git repo URL");
+	addDiv("myTextAreaGit","div_textarea img-rounded col-md-12 col-xs-12",'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
+	addDiv("myRowGit","row img-rounded col-md-12 col-xs-12",'wrapperGit');
+	addDiv("btnClipGit","btn btn-info",'myRowGit',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaGit')");
+	addDiv("btnUpdateGit","btn btn-primary",'myRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
+	addDiv("btnAddPageGit","btn btn-warning",'myRowGit',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
+
+	addDiv("wrapperNPN","container img-rounded",'body');
+	addDiv("contentNPN","img-rounded row contentTitles",'wrapperNPN',"NewPageName","","","contenteditable","true");
+	addDiv("myTextAreaNPN","div_textarea img-rounded col-md-12 col-xs-12",'wrapperNPN','Code goes here.',"textarea");
+	addDiv("myRowNPN","row img-rounded col-md-12 col-xs-12",'wrapperNPN');
+	addDiv("btnPrettyNPN","btn btn-primary",'myRowNPN',"Pretty Print","button","","onclick","prettyPrint('myTextAreaNPN')");
+	addDiv("btnColorifyNPN","btn btn-secondary",'myRowNPN',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaNPN')");
+	addDiv("btnClipNPN","btn btn-info",'myRowNPN',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaNPN')");
+
+	addDiv("wrapperIndex","container img-rounded",'body');
+	addDiv("contentIndex","img-rounded row contentTitles",'wrapperIndex',"Index.js","","","contenteditable","true");
+	addDiv("myTextAreaIndex","div_textarea img-rounded col-md-12 col-xs-12",'wrapperIndex','Code goes here.',"textarea");
+	addDiv("myRowIndex","row img-rounded col-md-12 col-xs-12",'wrapperIndex');
+	addDiv("btnPrettyIndex","btn btn-primary",'myRowIndex',"Pretty Print","button","","onclick","prettyPrint('myTextAreaIndex')");
+	addDiv("btnColorifyIndex","btn btn-secondary",'myRowIndex',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaIndex')");
+	addDiv("btnClipIndex","btn btn-info",'myRowIndex',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaIndex')");
+
+	addDiv("wrapperTest","container img-rounded",'body');
+	addDiv("contentTest","img-rounded row contentTitles",'wrapperTest',"Test.js","","","contenteditable","true");
+	addDiv("myTextAreaTest","div_textarea img-rounded col-md-12 col-xs-12",'wrapperTest','Code goes here.',"textarea");
+	addDiv("myRowTest","row img-rounded col-md-12 col-xs-12",'wrapperTest');
+	addDiv("btnPrettyTest","btn btn-primary",'myRowTest',"Pretty Print","button","","onclick","prettyPrint('myTextAreaTest')");
+	addDiv("btnColorifyTest","btn btn-secondary",'myRowTest',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaTest')");
+	addDiv("btnClipTest","btn btn-info",'myRowTest',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaTest')");
+
+	addDiv("wrapperPagename","container img-rounded",'body');
+	addDiv("contentPagename","img-rounded row contentTitles",'wrapperPagename',"Pagename.js","","","contenteditable","true");
+	addDiv("myTextAreaPagename","div_textarea img-rounded col-md-12 col-xs-12",'wrapperPagename','Code goes here.',"textarea");
+	addDiv("myRowPagename","row img-rounded col-md-12 col-xs-12",'wrapperPagename');
+	addDiv("btnPrettyPagename","btn btn-primary",'myRowPagename',"Pretty Print","button","","onclick","prettyPrint('myTextAreaPagename')");
+	addDiv("btnColorifyPagename","btn btn-secondary",'myRowPagename',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaPagename')");
+	addDiv("btnClipPagename","btn btn-info",'myRowPagename',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaPagename')");
+	
+	addDiv("myErrDiv","row img-rounded col-md-12 col-xs-12",'wrapper');
+		
+}; // end addPage
+
+window.onload = function() {
+	addHeader();
+	addNav();
+	addPage();
+	addFooter();
+}

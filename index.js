@@ -262,11 +262,13 @@ app.get('/demo', function(request, response) {
 }); 
 
 app.get('/git', function(request, response) { 
+  var $pageName = "/js/git.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/git', {
+  response.render( 'page', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });  
 
