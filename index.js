@@ -100,11 +100,13 @@ app.get('/', function(request, response) {
 });
 
 app.get('/login', function(request, response) {
+  var $pageName = "/js/login.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/login', {
-       cssType: $cssType,
-       loggedin: $loggedin
+  response.render( 'page', {
+        cssType: $cssType,
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 });
 

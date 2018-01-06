@@ -1,10 +1,9 @@
-
 function addPage() {
 	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("wrapper","container img-rounded",'body');
-	addDiv("content","img-rounded row contentTitles",'wrapper',"Signup");
+	addDiv("content","img-rounded row contentTitles",'wrapper',"Login");
 	
-	addDiv("signupForm","",'wrapper',"","form","","action","/signup");
+	addDiv("signupForm","",'wrapper',"","form","","action","/login");
 	document.getElementById("signupForm").setAttribute( "method", "post");
 	
 	addDiv("emailInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Email");
