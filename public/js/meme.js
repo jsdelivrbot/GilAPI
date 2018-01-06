@@ -1,5 +1,7 @@
-var bgImage = new Image();
-var bgReady = false;
+var bgImage
+var bgReady
+var canvas
+var ctx
 
 
 function addPage() {
@@ -35,6 +37,8 @@ canvas.height = window.innerHeight;
 // canvas.width = bgImage.width;
 
 // load background
+var bgImage = new Image();
+var bgReady = false;
 bgImage.onload = function () {
 	var ImageRatio = bgImage.width / bgImage.height;
 	canvas.height = canvas.width * ImageRatio;
