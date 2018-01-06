@@ -231,11 +231,13 @@ app.get('/rgb', function(request, response) {
 }); 
 
 app.get('/meme', function(request, response) { 
+  var $pageName = "/js/meme.js";
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/meme', {
+  response.render( 'page', {
         cssType: $cssType,
-       loggedin: $loggedin
+       loggedin: $loggedin,
+       pageName: $pageName
     });
 }); 
 
