@@ -25,23 +25,8 @@ var $eth
 var $coin2 = "Data loading..."
 var $botCounter = 0
 var $assetCounter = 0
+var timerInterval
 
-function updateMemeForm(memeUrlInput) {
-	bgImage.src = document.getElementById(memeUrlInput).value;
-};
-
-function addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
-	ctx.font="100px Impact";
-    ctx.lineWidth = 4;  //define the width of the stroke line
-    ctx.fillStyle = 'white';
-	ctx.strokeStyle = 'black';
-	
-	ctx.fillText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
-    ctx.strokeText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
-};
-
-// Load JSON
-// https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 function loadJSON(file, callback) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -54,7 +39,6 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
-// Post JSON
 function postJSON(file, callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("text/plain");
@@ -75,8 +59,6 @@ function copyToClipboard(text) {
     Copied.execCommand("Copy");
 }; // end copyToClipboard
 
-// Applies color scheme to text in div.
-//  https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css
 function colorifyDiv(divName, replaceWord, replaceColor) {
   var replacere = new RegExp(replaceWord, "g");
   var str = document.getElementById(divName).innerHTML,
@@ -87,7 +69,6 @@ function colorifyDiv(divName, replaceWord, replaceColor) {
   document.getElementById(divName).innerHTML = str;
 }; // end colorifyDiv
 
-//input.onchange
 function updateDownloadLink(downloadLinkID,inputFieldID) {
   document.getElementById(downloadLinkID).download = document.getElementById(inputFieldID).value
 }; // end updateDownloadLink
@@ -118,14 +99,10 @@ function updateChat() {
 
 function refreshChat(chatRoom){
   chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
-  loadChat(chatUrl,"ChatchatMainBox")
-}; // end refreshChat
-
-function loadChat(chatUrl,chatBox){
   loadJSON(chatUrl, function(response) {
-    document.getElementById(chatBox).value = response
+    document.getElementById("ChatchatMainBox").value = response
   }); // end loadJSON
-}; // end loadChat
+}; // end refreshChat
 
 function detectEnter(e){
     if(e.keyCode === 13){
@@ -182,7 +159,6 @@ function drag(evt) {
   $stage.update();   
 }
 
-// https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
 function loadFileAsText() { 	
 	var fileToLoad = document.getElementById("fileToLoad").files[0];
 	var fileReader = new FileReader();
@@ -275,7 +251,6 @@ function colorifyDivTextArea(DivTextArea) {
   };
 }; // end colorifyDivTextArea
 
-//window.onload setup link
 function setupLink(textAreaID,downloadLinkID) {
   document.getElementById(textAreaID).value = window.onload + '';
   document.getElementById(downloadLinkID).onclick = function() {
@@ -459,6 +434,19 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
+function updateMemeForm(memeUrlInput) {
+	bgImage.src = document.getElementById(memeUrlInput).value;
+};
+
+function addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
+	ctx.font="100px Impact";
+    ctx.lineWidth = 4;  //define the width of the stroke line
+    ctx.fillStyle = 'white';
+	ctx.strokeStyle = 'black';
+	
+	ctx.fillText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
+    ctx.strokeText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
+};
 
 function loadCoinData () {
   try {
@@ -717,28 +705,24 @@ function addBotRow($assetLabelID,$parentDivName) {
 
 function refreshCharts() {
   try {
-    if (document.getElementById("btcMedian").innerText == "NaN") {document.getElementById("btcMedian").innerText = 0}	loadCoinData();
-	updateCoinsole("coinMainBox");
+    if (document.getElementById("CoinbtcMedian").innerText == "NaN") {document.getElementById("CoinbtcMedian").innerText = 0}	loadCoinData();
+	updateCoinsole("CoincoinMainBox");
 	updateCointent();
-	fruitbotChooses($ltc,$ltcOld,$ltcMedian,"fruitbotltcMedian","fruitbotltcBotAmount","fruitbotltcBotAction",function($e,$f){$ltcOld = $e;$ltcMedian = $f});
-    fruitbotChooses($btc,$btcOld,$btcMedian,"fruitbotbtcMedian","fruitbotbtcBotAmount","fruitbotbtcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
-    fruitbotChooses($eth,$ethOld,$ethMedian,"fruitbotethMedian","fruitbotethBotAmount","fruitbotethBotAction",function($e,$f){$ethOld = $e;$ethMedian = $f});
+	fruitbotChooses($ltc,$ltcOld,$ltcMedian,"CoinfruitbotltcMedian","CoinfruitbotltcBotAmount","CoinfruitbotltcBotAction",function($e,$f){$ltcOld = $e;$ltcMedian = $f});
+    fruitbotChooses($btc,$btcOld,$btcMedian,"CoinfruitbotbtcMedian","CoinfruitbotbtcBotAmount","CoinfruitbotbtcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
+    fruitbotChooses($eth,$ethOld,$ethMedian,"CoinfruitbotethMedian","CoinfruitbotethBotAmount","CoinfruitbotethBotAction",function($e,$f){$ethOld = $e;$ethMedian = $f});
   }catch(e){console.log(e)}; // end try 
   try {
 	$fbcOld = $fbc.amount
   }catch(e){console.log(e)}; // end try 
   try {
 	
-	simplebotChooses($ltc,"simplebotltcBotAmount","simplebotltcBotAction");
-    simplebotChooses($btc,"simplebotbtcBotAmount","simplebotbtcBotAction");
-    simplebotChooses($eth,"simplebotethBotAmount","simplebotethBotAction");
+	simplebotChooses($ltc,"CoinsimplebotltcBotAmount","CoinsimplebotltcBotAction");
+    simplebotChooses($btc,"CoinsimplebotbtcBotAmount","CoinsimplebotbtcBotAction");
+    simplebotChooses($eth,"CoinsimplebotethBotAmount","CoinsimplebotethBotAction");
   }catch(e){console.log(e)}; // end try 
 }; // end refreshCharts
 
-// updateForm('newappget', 'pageName', 'IndexJS')
-// updateForm('newappget', 'NFSpageName', 'TestJS')
-// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
-// window.onload = setupLink('textAreaID','gitFilelink');
 
 // Add pages
 function addHeader() {
@@ -829,8 +813,9 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
-	addDiv("Footerspacer","container-fluid",'body',"");
-	addDiv("footClan","footer navbar-static-bottom",'body');
+	addDiv("footWrapper","",'body',"");
+	addDiv("Footerspacer","container-fluid",'footWrapper',"");
+	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
 	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
 	addDiv("aFooterImg","",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
@@ -840,7 +825,6 @@ function addFooter() {
 }; // end addFooter
 
 function addFruitBotPage() {
-	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("headWrapper","",'head');
 	addDiv("FruitBotload1","",'headWrapper',"","link","/assets/css/drawgame.css");
 	addDiv("FruitBotload2","",'headWrapper',"","script","/assets/js/seedrandom.js");
@@ -917,7 +901,6 @@ function addRgbColorPage() {
 
 function addArkdataPage() {
 	var $Class1 = "col-md-2 col-xs-2";
-	//addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)
 	addDiv("headWrapper","",'head');
 	addDiv("metaRefresh","",'headWrapper',"","meta","","http-equiv","refresh");
 	document.getElementById("metaRefresh").setAttribute( "content","60");
@@ -942,8 +925,6 @@ function addArkdataPage() {
 	addDiv("ArkdataBotPrediction","contentItems" + $Class1,"ArkdataContentRow","0");
 
 }; // end addArkdataPage
-//	removeDiv("metaRefresh");
-
 /*
 
 <H1>Welcome to ARKData</h1>
@@ -1007,14 +988,35 @@ function addMemePage() {
 	addDiv("MemetopTextInput","img-rounded col-md-12 col-xs-12",'bodyWrapper',"Top Text","input");
 	addDiv("MemeBottomTextInput","img-rounded col-md-12 col-xs-12",'bodyWrapper',"Bottom Text","input");
 	addDiv("MememyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("MemebtnPretty","btn btn-primary",'MememyRow',"Create Meme!","button","","onclick","updateMemeForm('memeUrlInput')");
+	addDiv("MemebtnPretty","btn btn-primary",'MememyRow',"Create Meme!","button","","onclick","updateMemeForm('MemememeUrlInput')");
+
+	//Create the canvas
+	canvas = document.getElementById("Memecanvas");
+	ctx = canvas.getContext("2d");
+
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	// canvas.height = bgImage.height;
+	// canvas.width = bgImage.width;
+
+	// load background
+	bgImage = new Image();
+	bgReady = false;
+	bgImage.onload = function () {
+		var ImageRatio = bgImage.width / bgImage.height;
+		canvas.height = canvas.width * ImageRatio;
+		ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
+		0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
+		addImpactWithBorder('MemetopTextInput',10,100);
+		addImpactWithBorder('MemeBottomTextInput',10,(ctx.canvas.height - 20));
+	};
+
 }; // end addPage
 
 function addBadPWPage() {
 	var $inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 ";
 	var $rowClasses = "row";
 		
-	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("BadPWcontent","img-rounded row contentTitles",'bodyWrapper',"Bad Password");
 	
@@ -1050,6 +1052,12 @@ function addChatPage() {
 	addDiv("ChatgreenCRow",$rowClasses,'ChatcoinArea');
 	addDiv("ChatchatMessage",$inputClasses + "greenColorRow",'ChatgreenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
 	
+	refreshChat(document.getElementById("ChatchatRoom").value)
+	
+	timerInterval = setInterval(function () {
+		refreshChat(document.getElementById("ChatchatRoom").value)
+	}, 5000);
+
 }; // end addPage
 
 function addDragSqPage() {
@@ -1063,7 +1071,7 @@ function addDragSqPage() {
 	
 	// addDiv("canvasDiv","container-fluid","body","")
 	addDiv("DragSqcanvas","","bodyWrapper" ,"This text is displayed if your browser does not support HTML5 Canvas.","canvas")
-	canvas = document.getElementsByTagName('canvas')[0];
+	canvas = document.getElementById('DragSqcanvas');
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 
@@ -1077,7 +1085,6 @@ function addDragSqPage() {
 }; // end addPage
 
 function addGitPage() {
-	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	
 	addDiv("bodyWrapper","container img-rounded",'body');
 	
@@ -1123,6 +1130,10 @@ function addGitPage() {
 	
 	addDiv("GitmyErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
 		
+	// updateForm('newappget', 'pageName', 'IndexJS')
+	// updateForm('newappget', 'NFSpageName', 'TestJS')
+	// window.onload = setupLink('textAreaID','gitFilelink');
+
 }; // end addPage
 
 function addJsonLintPage() {
@@ -1133,7 +1144,6 @@ function addJsonLintPage() {
 	var $bodyText = "This can be complex to look at, but will make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n"
 	$bodyText +=  "$divID - The only mandatory one is the first one.\n\n"
 		
-	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("JsonLintmyTextArea","div_textarea img-rounded col-md-12 col-xs-12",'bodyWrapper','"JSON goes here"',"textarea");
 	addDiv("JsonLintmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
@@ -1144,7 +1154,6 @@ function addJsonLintPage() {
 }; // end addPage
 
 function addLoginPage() {
-	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("Logincontent","img-rounded row contentTitles",'bodyWrapper',"Login");
 	
@@ -1160,7 +1169,6 @@ function addLoginPage() {
 }; // end addPage
 
 function addSignupPage() {
-	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("Signupcontent","img-rounded row contentTitles",'bodyWrapper',"Signup");
 	
@@ -1244,19 +1252,25 @@ function addCoinPage() {
 	addDiv("CoinbotNameLabel","col-md-10 col-xs-10 dataArea contentRows img-rounded","CoincointentArea","MyBotName","","","contenteditable","true");
 	addDiv("Coinbutton2","button" + $Class1,"CoincointentArea");
 	addDiv("CoinBtnAddBot","btn btn-success btn-sm","bodyWrapper","Add Bot","button","","onclick","addBot('CoinbotNameLabel');");
+
+	loadCoinData();
+	refreshCharts();
+	document.getElementById("CoincoinMainBox").innerText = $coin2;
+	document.getElementById("CoinbtcMedian").innerText = 0;
+	
+	timerInterval = setInterval(function () {
+		refreshCharts()
+	}, 30000);
+	
 }; // end addCoinPage
 
 
 function removePage() {
 	removeDiv("headWrapper");
 	removeDiv("bodyWrapper");
-	removeFooter();
+	removeDiv("footWrapper");
+	window.clearInterval(timerInterval);
 }; // end addPage
-
-function removeFooter() {
-	removeDiv("Footerspacer");
-	removeDiv("footClan");
-}; // end removeFooter
 
 function loadPage($pageName) {
 try {
@@ -1311,53 +1325,6 @@ try {
 	addFooter();
 } catch(e){console.log(e)};
 }; // end removePage
-
-
-/* Meme page onload
-window.onload = function(){ 
-	addHeader();
-	addNav();
-	addMemePage();
-	addFooter();
-
-
-//Create the canvas
-canvas = document.getElementById("canvas");
-ctx = canvas.getContext("2d");
-
-canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight;
-// canvas.height = bgImage.height;
-// canvas.width = bgImage.width;
-
-// load background
-bgImage = new Image();
-bgReady = false;
-bgImage.onload = function () {
-	var ImageRatio = bgImage.width / bgImage.height;
-	canvas.height = canvas.width * ImageRatio;
-	ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
-	0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
-	addImpactWithBorder('topTextInput',10,100);
-	addImpactWithBorder('BottomTextInput',10,(ctx.canvas.height - 20));
-};
-}; // end window.onload
-*/
-
-// Refresh chart every 30 seconds.
-// window.onload = coinOnLoad();
-function coinOnLoad(){ 
-	addCoinPage();
-	loadCoinData();
-	refreshCharts();
-	document.getElementById("CoincoinMainBox").innerText = $coin2;
-	// document.getElementById("jsonArea").innerText = "Click 'set!' to load.";
-	document.getElementById("CoinbtcMedian").innerText = 0;
-};
-
-/* setInterval(function () {
-	refreshCharts()
-}, 30000);*/
 
 window.onload = function(){ 
 	addHeader();
