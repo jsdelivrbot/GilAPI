@@ -108,7 +108,6 @@ function loadChat(chatUrl,chatBox){
     document.getElementById("ChatchatMainBox").value = response
   }); // end loadJSON
 }; // end loadChat
-}; // end refreshChat
 
 function detectEnter(e){
     if(e.keyCode === 13){
