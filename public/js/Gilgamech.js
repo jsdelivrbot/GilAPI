@@ -82,9 +82,9 @@ function updategetBadPWInputForm() {
 function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
   // Post API with user:chat JSON and write reply to textbox.
-  chatUser = document.getElementById("chatUser").value
-  chatMessage = document.getElementById("chatMessage").value
-  chatRoom = document.getElementById("chatRoom").value
+  chatUser = document.getElementById("ChatchatUser").value
+  chatMessage = document.getElementById("ChatchatMessage").value
+  chatRoom = document.getElementById("ChatchatRoom").value
   if (chatMessage) {
     if (chatUser) {
       chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
@@ -1128,7 +1128,7 @@ function addGitPage() {
 	addDiv("GitbtnColorifyPagename","btn btn-secondary",'GitmyRowPagename',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaPagename')");
 	addDiv("GitbtnClipPagename","btn btn-info",'GitmyRowPagename',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaPagename')");
 	
-	addDiv("GitmyErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
+	addDiv("myErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
 		
 	// updateForm('newappget', 'pageName', 'IndexJS')
 	// updateForm('newappget', 'NFSpageName', 'TestJS')
@@ -1149,7 +1149,7 @@ function addJsonLintPage() {
 	addDiv("JsonLintmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
 	addDiv("JsonLintbtnPretty","btn btn-primary",'JsonLintmyRow',"Pretty Print","button","","onclick","prettyPrint('myTextArea')");
 	addDiv("JsonLintbtnClip","btn btn-info",'JsonLintmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
-	addDiv("JsonLintmyErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
+	addDiv("myErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
 		
 }; // end addPage
 
