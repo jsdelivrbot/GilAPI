@@ -372,25 +372,6 @@ https://console.developers.google.com/apis/credentials/key?project=red-road-1898
 http://www.vestus.com/ForeclosureCount.aspx?page=countyCity&CountyID=3
 http://www.vestus.com/foreclosure/WA/King/BELLEVUE/Register%20for%20full%20address-98007/350556
 
-Coin
-<!-- a href="https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037">How do you implement a fixed left sidebar and fluid right content in CSS</a -->
-<!-- 
-https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp
-https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
-https://stackoverflow.com/questions/16517718/bootstrap-number-validation
-https://stackoverflow.com/questions/3368546/what-input-field-type-forces-the-number-pad-mobile-keyboard-to-come-up-when-focu
-https://html.com/input-type-radio/
-https://stackoverflow.com/questions/12084121/correct-way-to-create-rounded-corners-in-twitter-bootstrap
-https://getbootstrap.com/docs/3.3/css/
-https://v4-alpha.getbootstrap.com/components/buttons/
-http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/
-https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate
-https://stackoverflow.com/questions/9476617/how-to-set-radio-button-status-with-javascript
-http://www.scriptol.com/html5/combobox.php
-http://www.dhtmlgoodies.com/scripts/form_widget_editable_select/form_widget_editable_select.html
-
--->
-
 BPG
 
 Who is needed in the team? (Can be names, can be roles, can be an estimate.)
