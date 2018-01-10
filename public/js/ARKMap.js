@@ -66,7 +66,7 @@ var reset = function () {
 	loadTribes();
 };
 
-function addPage() {
+function addArkDynaPage() {
 		
 	// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) 
 	addDiv("wrapper","container img-rounded",'body');

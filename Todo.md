@@ -372,6 +372,25 @@ https://console.developers.google.com/apis/credentials/key?project=red-road-1898
 http://www.vestus.com/ForeclosureCount.aspx?page=countyCity&CountyID=3
 http://www.vestus.com/foreclosure/WA/King/BELLEVUE/Register%20for%20full%20address-98007/350556
 
+Coin
+<!-- a href="https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037">How do you implement a fixed left sidebar and fluid right content in CSS</a -->
+<!-- 
+https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp
+https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
+https://stackoverflow.com/questions/16517718/bootstrap-number-validation
+https://stackoverflow.com/questions/3368546/what-input-field-type-forces-the-number-pad-mobile-keyboard-to-come-up-when-focu
+https://html.com/input-type-radio/
+https://stackoverflow.com/questions/12084121/correct-way-to-create-rounded-corners-in-twitter-bootstrap
+https://getbootstrap.com/docs/3.3/css/
+https://v4-alpha.getbootstrap.com/components/buttons/
+http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/
+https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate
+https://stackoverflow.com/questions/9476617/how-to-set-radio-button-status-with-javascript
+http://www.scriptol.com/html5/combobox.php
+http://www.dhtmlgoodies.com/scripts/form_widget_editable_select/form_widget_editable_select.html
+
+-->
+
 BPG
 
 Who is needed in the team? (Can be names, can be roles, can be an estimate.)
@@ -379,6 +398,53 @@ What will these people do? What processes will they follow? What business needs 
 When will they do this? What will be the business hours, how long will customers expect to wait for service/delivery? 
 Where will the business be based? Offices? Warehouses? Internet? 
 Why will people give you money? Competitors? Location? Good service? 
+
+
+
+addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction) {
+addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
+addCircle(x, y, r, fill) {
+addStar(x, y, r, fill) {
+addRoundedSquare(x, y, s, r, fill) {
+boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
+boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
+colorifyDiv(divName, replaceWord, replaceColor) {
+copyToClipboard(text) {
+colorifyDivTextArea(DivTextArea) {  
+componentToHex(c) {
+detectEnter(e){
+detectEnter(e){
+drag(evt) {
+destroyClickedElement(event) {	document.body.removeChild(event.target); }
+
+getNumberFromDiv($numericDiv) {
+hexToRgb(hex) {
+loadChat(chatUrl,chatBox){
+loadFileAsText() { 	
+loadJSON(file, callback) {   
+postJSON(file, callback) {
+
+prettyPrint($divName) {
+rgbToHex(r, g, b) {
+refreshChat(chatRoom){
+removeDiv($divID) {
+setupLink(textAreaID,downloadLinkID) {
+toggleSettingsDisplay($divId) {
+
+updateNewPageForm() {
+updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+updateNewPageBoilerplate() {  
+updateRgbColor() { 
+updateRgbDivColor($divId) { 
+updateMemeForm(memeUrlInput) {
+updateDownloadLink(downloadLinkID,inputFieldID) {
+updategetBadPWInputForm() {
+updateChat() {
+updateGitPage() {
+updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+updateForm(nfsCall, nfsName, nfsTextArea) {
+updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
+
 
 
 

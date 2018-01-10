@@ -93,20 +93,9 @@ function testLoggedIn(request) {
 app.get('/', function(request, response) {
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/index', {
+  response.render( 'page', {
        cssType: $cssType,
        loggedin: $loggedin
-    });
-});
-
-app.get('/login', function(request, response) {
-  var $pageName = "/js/login.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
     });
 });
 
@@ -143,17 +132,6 @@ app.post('/login', function(request, response) {
         }; // end if found
     }); // end new User
 }); // end app post login 
-
-app.get('/signup', function(request, response) {
-  var $pageName = "/js/signup.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});
 
 app.post('/signup', function (request, response) {
   var username = request.body.username
@@ -202,50 +180,6 @@ app.get('/logout', function(request, response){
 
 
 //region WIP
-app.get('/addDiv', function(request, response) { 
-  var $pageName = "/js/addDiv.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/dsq', function(request, response) { 
-  var $pageName = "/js/dsq.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/rgb', function(request, response) { 
-  var $pageName = "/js/rgb.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/meme', function(request, response) { 
-  var $pageName = "/js/meme.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
 app.get('/Arkdata', function(request, response) {
   var $loggedin = testLoggedIn(request);
   var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
@@ -266,38 +200,16 @@ app.get('/demo', function(request, response) {
     });
 }); 
 
-app.get('/git', function(request, response) { 
-  var $pageName = "/js/git.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});  
-
 app.post('/mirror', function(request, response) {
   message = request.query.message,
   response.send(message);
 });
 
-app.get('/badpw', function(request, response) { 
-  var $pageName = "/js/badpw.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
 app.post('/badpw', function(request, response) { 
   var $loggedin = testLoggedIn(request);
   var randomstring = Math.random().toString(36).slice(-20);
   response.send(randomstring);
-}); 
+});
 
 app.get('/coin', function(request, response) { 
   var $pageName = "/js/coin.js";
@@ -309,29 +221,6 @@ app.get('/coin', function(request, response) {
   });
 }); 
 
-app.get('/jsonlint', function(request, response) { 
-  var $pageName = "/js/jsonlint.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});  
-
-//region chat 
-app.get('/chat', function(request, response) { 
-  var $pageName = "/js/chat.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-	    $chatGeneral: $chatGeneral,
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
 
 app.get('/chatpost', function(request, response) { 
 // /chatpost?user=user&message=message&chatroom=General
@@ -463,7 +352,6 @@ app.get('/newappget', function(request, response) {
 });
 
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -471,11 +359,6 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
-
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
 	addErr(err);
     res.status(err.status || 500);
@@ -485,9 +368,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
 
