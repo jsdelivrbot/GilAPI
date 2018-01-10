@@ -99,9 +99,15 @@ function updateChat() {
 
 function refreshChat(chatRoom){
   chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
+  loadChat(chatUrl,"ChatchatMainBox")
+}; // end refreshChat
+
+function loadChat(chatUrl,chatBox){
   loadJSON(chatUrl, function(response) {
+    document.getElementById(chatBox).value = response
     document.getElementById("ChatchatMainBox").value = response
   }); // end loadJSON
+}; // end loadChat
 }; // end refreshChat
 
 function detectEnter(e){
