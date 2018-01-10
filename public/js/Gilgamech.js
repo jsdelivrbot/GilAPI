@@ -807,10 +807,8 @@ function addNav() {
 	//addDiv("aip9","",'lip9','Arkdata Dynamap','a',"","onclick","loadPage('demo');");
 	//addDiv("lip10","",'ddc','','p');
 	//addDiv("aip10","",'lip10','Arkdata','a',"","onclick","loadPage('Arkdata');");
-	addDiv("lip1","",'ddc','','p');
-	addDiv("aip1","",'lip1','text2','a',"","onclick","loadPage('text2');");
-	addDiv("lip1",$pclass2,'ddc','','p');
-	addDiv("aip1","",'lip1','Login!','a',"","onclick","loadPage('login');");	
+	addDiv("lip14",$pclass2,'ddc','','p');
+	addDiv("aip14","",'lip14','Login!','a',"","onclick","loadPage('login');");	
 	addDiv("dd2","dropdown" + $pclass2,'nav2');
 	addDiv("ddr","",'dd2','StackOverflow Links','p');
 	addDiv("ddrc","dropdown-content",'dd2',);
@@ -920,10 +918,11 @@ function addRgbColorPage() {
 function addArkdataPage() {
 	var $Class1 = "col-md-2 col-xs-2";
 	//addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)
-	addDiv("metaRefresh","",'head',"","meta","","http-equiv","refresh");
+	addDiv("headWrapper","",'head');
+	addDiv("metaRefresh","",'headWrapper',"","meta","","http-equiv","refresh");
 	document.getElementById("metaRefresh").setAttribute( "content","60");
-	addDiv("Arkdatalink","",'head','','link','/stylesheets/ARKData.css');
-	addDiv("Arkdatalinkm","",'head','','link','/stylesheets/ARKDatam.css',"media","handheld");
+	addDiv("Arkdatalink","",'headWrapper','','link','/stylesheets/ARKData.css');
+	addDiv("Arkdatalinkm","",'headWrapper','','link','/stylesheets/ARKDatam.css',"media","handheld");
 	
 	addDiv("Arkdatawrapper","container img-rounded",'body');
 	addDiv("Arkdataspacer","img-rounded col-md-3 hidden-xs",'Arkdatawrapper');
@@ -1054,7 +1053,9 @@ function addChatPage() {
 }; // end addPage
 
 function addDragSqPage() {
-	addDiv("easelScript","","head","","script","/js/easeljs-0.8.2.min.js")
+	addDiv("headWrapper","",'head');
+	addDiv("easelScript","","headWrapper","","script","/js/easeljs-0.8.2.min.js")
+
 	addDiv("bodyWrapper","","body","")
 	addDiv("DragSqbtnSquare","btn","bodyWrapper","Add Square","button","","onclick","addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow');")
 	addDiv("DragSqbtnCircle","btn","bodyWrapper","Add Circle","button","","onclick","addCircle(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 'red');")
