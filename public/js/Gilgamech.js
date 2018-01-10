@@ -1147,8 +1147,8 @@ function addJsonLintPage() {
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("JsonLintmyTextArea","div_textarea img-rounded col-md-12 col-xs-12",'bodyWrapper','"JSON goes here"',"textarea");
 	addDiv("JsonLintmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("JsonLintbtnPretty","btn btn-primary",'JsonLintmyRow',"Pretty Print","button","","onclick","prettyPrint('myTextArea')");
-	addDiv("JsonLintbtnClip","btn btn-info",'JsonLintmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
+	addDiv("JsonLintbtnPretty","btn btn-primary",'JsonLintmyRow',"Pretty Print","button","","onclick","prettyPrint('JsonLintmyTextArea')");
+	addDiv("JsonLintbtnClip","btn btn-info",'JsonLintmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('JsonLintmyTextArea')");
 	addDiv("myErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
 		
 }; // end addPage
