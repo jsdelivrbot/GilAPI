@@ -622,7 +622,7 @@ function addBot($divBotName) {
 	var $contentLabelClass = 'col-md-6 col-xs-6';
 	
 	
-	addDiv($coinAreaID,$coinAreaClass,'CoincointentArea');
+	addDiv($coinAreaID,$coinAreaClass,'CoincointentArea2');
 	addDiv($titleRowID,$titleRowClass,$coinAreaID);
 	addDiv($contentLabelID,$contentLabelClass,$titleRowID,$botName);
 	$assetCounter++
@@ -1189,6 +1189,9 @@ function addSignupPage() {
 }; // end addPage
 
 function addCoinPage() {
+	addDiv("headWrapper","",'head');
+	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
+
 // addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)
 	var $Class1 = "col-md-2 col-xs-2";
 
@@ -1201,49 +1204,55 @@ function addCoinPage() {
 
 	addDiv("Coincontent","img-rounded col-md-10 col-xs-10","bodyWrapper");
 
-	addDiv("CoincointentArea","img-rounded col-md-12 col-xs-12 contentRows dataArea row","bodyWrapper");
+	addDiv("CoincointentArea","img-rounded col-md-12 col-xs-12 contentRows dataArea row","Coincontent");
 
-	addDiv("CointitleRow","row contentTitles","bodyWrapper");
-	addDiv("Cointent","col-md-10 col-xs-10 contentTitles","bodyWrapper","","","","contenteditable","true");
-	addDiv("Coinbutton1","button" + $Class1,"bodyWrapper");
-	addDiv("CoinBtnGeneric","btn btn-success btn-sm","bodyWrapper","Refresh","button","","onclick","refreshCharts();");
-	addDiv("CoincoinLabel",$Class1,"CointitleRow","Coin");
-	addDiv("CoinvalueLabel",$Class1,"CointitleRow","Value");
-	addDiv("CoinmedianLabel",$Class1,"CointitleRow","My Coins");
-	addDiv("CoinbotAmountLabel",$Class1,"CointitleRow","MyBot");
-	addDiv("CoinbotActionLabel",$Class1,"CointitleRow","Fruitbot");
-	addDiv("CoinbotPredictionLabel",$Class1,"CointitleRow","SimpleBot");
+	addDiv("CointitleRow","row contentTitles","Coincontent");
+	addDiv("CoincontentLabel","col-md-10 col-xs-10 contentTitles","CointitleRow","Cointent");
+	addDiv("Coinbutton1","button" + $Class1,"CointitleRow");
+	addDiv("CoinBtnGeneric","btn btn-success btn-sm","CointitleRow","Refresh","button","","onclick","refreshCharts();");
+	
+	addDiv("CoinNameRow","row contentLabels","Coincontent");
+	addDiv("CoincoinLabel",$Class1,"CoinNameRow","Coin");
+	addDiv("CoinvalueLabel",$Class1,"CoinNameRow","Value");
+	addDiv("CoinmedianLabel",$Class1,"CoinNameRow","My Coins");
+	addDiv("CoinbotAmountLabel",$Class1,"CoinNameRow","MyBot");
+	addDiv("CoinbotActionLabel",$Class1,"CoinNameRow","Fruitbot");
+	addDiv("CoinbotPredictionLabel",$Class1,"CoinNameRow","SimpleBot");
 
 
-	addDiv("CoinbtcContentRow","row ","bodyWrapper");
+	addDiv("CoinbtcContentRow","row contentRows dataArea","Coincontent");
 	addDiv("CoinbtcLabel","contentItems" + $Class1,"CoinbtcContentRow","BTC");
-	addDiv("CoinbtcAmount","img-rounded colorRow numberRow contentItems col-md-12 col-xs-12","CoinbtcContentRow","0","number","","readonly");
+	addDiv("CoinbtcAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinbtcContentRow","0","input","","readonly");
+	document.getElementById("CoinbtcAmount").setAttribute( "type", "number");
 	addDiv("CoinbtcMedian","contentItems" + $Class1,"CoinbtcContentRow","0");
 	addDiv("CoinbtcBotAmount","contentItems" + $Class1,"CoinbtcContentRow","0");
 	addDiv("CoinbtcBotAction","contentItems" + $Class1,"CoinbtcContentRow","0");
 	addDiv("CoinbtcBotPrediction","contentItems" + $Class1,"CoinbtcContentRow","0");
 
 
-	addDiv("CoinltcContentRow","row ","bodyWrapper");
+	addDiv("CoinltcContentRow","row contentRows dataArea","Coincontent");
 	addDiv("CoinltcLabel","contentItems" + $Class1,"CoinltcContentRow","LTC");
-	addDiv("CoinltcAmount","img-rounded colorRow numberRow contentItems col-md-12 col-xs-12","CoinbtcContentRow","0","number","","readonly");
+	addDiv("CoinltcAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinltcContentRow","0","input","","readonly");
+	document.getElementById("CoinltcAmount").setAttribute( "type", "number");
 	addDiv("CoinltcMedian","contentItems" + $Class1,"CoinltcContentRow","0");
 	addDiv("CoinltcBotAmount","contentItems" + $Class1,"CoinltcContentRow","0");
 	addDiv("CoinltcBotAction","contentItems" + $Class1,"CoinltcContentRow","0");
 	addDiv("CoinltcBotPrediction","contentItems" + $Class1,"CoinltcContentRow","0");
 
 
-	addDiv("CoinethContentRow","row ","bodyWrapper");
+	addDiv("CoinethContentRow","row contentRows dataArea","Coincontent");
 	addDiv("CoinethLabel","contentItems" + $Class1,"CoinethContentRow","ETH");
-	addDiv("CoinethAmount","img-rounded colorRow numberRow contentItems col-md-12 col-xs-12","CoinbtcContentRow","0","number","","readonly");
+	addDiv("CoinethAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinethContentRow","0","input","","readonly");
+	document.getElementById("CoinethAmount").setAttribute( "type", "number");
 	addDiv("CoinethMedian","contentItems" + $Class1,"CoinethContentRow","0");
 	addDiv("CoinethBotAmount","contentItems" + $Class1,"CoinethContentRow","0");
 	addDiv("CoinethBotAction","contentItems" + $Class1,"CoinethContentRow","0");
 	addDiv("CoinethBotPrediction","contentItems" + $Class1,"CoinethContentRow","0");
 
-	addDiv("CoinfbcContentRow","row ","bodyWrapper");
+	addDiv("CoinfbcContentRow","row contentRows dataArea","Coincontent");
 	addDiv("CoinfbcLabel","contentItems" + $Class1,"CoinfbcContentRow","FBC");
-	addDiv("CoinfbcAmount","img-rounded colorRow numberRow contentItems col-md-12 col-xs-12","CoinbtcContentRow","0","number","","readonly");
+	addDiv("CoinfbcAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinfbcContentRow","0","input","","readonly");
+	document.getElementById("CoinfbcAmount").setAttribute( "type", "number");
 	addDiv("CoinfbcMedian","contentItems" + $Class1,"CoinfbcContentRow","0");
 	addDiv("CoinfbcBotAmount","contentItems" + $Class1,"CoinfbcContentRow","0");
 	addDiv("CoinfbcBotAction","contentItems" + $Class1,"CoinfbcContentRow","0");
@@ -1252,11 +1261,11 @@ function addCoinPage() {
 	addDiv("Coinfbcbutton","button" + $Class1,"CoinfbcContentRow");
 	addDiv("CoinfbcmanualButtonRow","row","CoinfbcContentRow");
 
-	addDiv("CoincointentArea","img-rounded col-md-12 col-xs-12 contentRows dataArea row","bodyWrapper");
-	addDiv("CointitleRow","row contentTitles","CoincointentArea");
-	addDiv("CoinbotNameLabel","col-md-10 col-xs-10 dataArea contentRows img-rounded","CoincointentArea","MyBotName","","","contenteditable","true");
-	addDiv("Coinbutton2","button" + $Class1,"CoincointentArea");
-	addDiv("CoinBtnAddBot","btn btn-success btn-sm","bodyWrapper","Add Bot","button","","onclick","addBot('CoinbotNameLabel');");
+	addDiv("CoincointentArea2","img-rounded col-md-12 col-xs-12 contentRows dataArea row","Coincontent");
+	addDiv("CointitleRow","row contentTitles","CoincointentArea2");
+	addDiv("CoinbotNameLabel","col-md-10 col-xs-10 dataArea contentTitles img-rounded","CoincointentArea2","MyBotName","","","contenteditable","true");
+	addDiv("Coinbutton2","button" + $Class1,"CoincointentArea2");
+	addDiv("CoinBtnAddBot","btn btn-success btn-sm","CoincointentArea2","Add Bot","button","","onclick","addBot('CoinbotNameLabel');");
 
 	loadCoinData();
 	refreshCharts();
