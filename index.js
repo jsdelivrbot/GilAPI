@@ -133,17 +133,6 @@ app.post('/login', function(request, response) {
     }); // end new User
 }); // end app post login 
 
-app.get('/signup', function(request, response) {
-  var $pageName = "/js/signup.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});
-
 app.post('/signup', function (request, response) {
   var username = request.body.username
   bcrypt.hash(request.body.password, null, null, function(err, hash){
