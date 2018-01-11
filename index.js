@@ -185,57 +185,13 @@ app.post('/mirror', function(request, response) {
   response.send(message);
 });
 
-app.get('/badpw', function(request, response) { 
-  var $pageName = "/js/badpw.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
 app.post('/badpw', function(request, response) { 
   var $loggedin = testLoggedIn(request);
   var randomstring = Math.random().toString(36).slice(-20);
   response.send(randomstring);
 }); 
 
-app.get('/coin', function(request, response) { 
-  var $pageName = "/js/coin.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-    response.render( 'pages/coin', {
-		cssType: $cssType,
-       loggedin: $loggedin
-  });
-}); 
-
-app.get('/jsonlint', function(request, response) { 
-  var $pageName = "/js/jsonlint.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});  
-
 //region chat 
-app.get('/chat', function(request, response) { 
-  var $pageName = "/js/chat.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-	    $chatGeneral: $chatGeneral,
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
 app.get('/chatpost', function(request, response) { 
 // /chatpost?user=user&message=message&chatroom=General
   chatMessage = request.query.message
@@ -274,15 +230,6 @@ app.get('/chatload', function(request, response) {
 });  
 
 //region Fruitbot
-app.get('/fruitbot', function(request, response) {
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/fruitbot', {
-        cssType: $cssType,
-       loggedin: $loggedin
-    });
-});
-
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
   response.json(fruitbotwin);
