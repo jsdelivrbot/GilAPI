@@ -30,6 +30,15 @@ var $coin2 = "Data loading..."
 var $botCounter = 0
 var $assetCounter = 0
 
+var $pclass1="hidden-sm hidden-xs"
+var $pclass2="hidden-md hidden-lg"
+var $cssClassA = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
+var $cssClassB = "img-rounded col-md-12 col-xs-12"
+var $cssClassC = "img-rounded row contentTitles"
+var $btnPrimary = "btn btn-primary"
+var $rowClasses = "row";
+var $cssClassD = "col-md-2 col-xs-2";
+
 // General
 function loadJSON(file, callback) {   
     var xobj = new XMLHttpRequest();
@@ -754,9 +763,6 @@ function addHeader() {
 }; // end addHeader
 
 function addNav() {
-	var $pclass1="hidden-sm hidden-xs"
-	var $pclass2="hidden-md hidden-lg"
-	
 	addDiv("gtBannerWrapper","bodyWrapper container",'body');
 	addDiv("gtBannerLink","img-rounded top",'gtBannerWrapper',"","a","","/");
 	addDiv("gtBanner","img-rounded top",'gtBannerLink',"Gilgamech Technologies");
@@ -842,72 +848,71 @@ function addFooter() {
 
 function addFruitBotPage() {
 	addDiv("headWrapper","",'head');
-	addDiv("FruitBotload1","",'headWrapper',"","link","/assets/css/drawgame.css");
-	addDiv("FruitBotload2","",'headWrapper',"","script","/assets/js/seedrandom.js");
-	addDiv("FruitBotload3","",'headWrapper',"","script","/assets/js/board.js");
-	addDiv("FruitBotload4","",'headWrapper',"","script","/assets/js/grid.js");
-	addDiv("FruitBotload5","",'headWrapper',"","script","/mybot.js");
-	addDiv("FruitBotload6","",'headWrapper',"","script","/assets/js/simplebot.js");
-	addDiv("FruitBotload7","",'headWrapper',"","script","/assets/js/player.js");
-	addDiv("FruitBotload8","",'headWrapper',"","script","/js/jquery.min.js");
+	addDiv("load1","",'headWrapper',"","link","/assets/css/drawgame.css");
+	addDiv("load2","",'headWrapper',"","script","/assets/js/seedrandom.js");
+	addDiv("load3","",'headWrapper',"","script","/assets/js/board.js");
+	addDiv("load4","",'headWrapper',"","script","/assets/js/grid.js");
+	addDiv("load5","",'headWrapper',"","script","/mybot.js");
+	addDiv("load6","",'headWrapper',"","script","/assets/js/simplebot.js");
+	addDiv("load7","",'headWrapper',"","script","/assets/js/player.js");
+	addDiv("load8","",'headWrapper',"","script","/js/jquery.min.js");
 	
 	addDiv("bodyWrapper","container img-rounded",'body');
-	addDiv("FruitBotcontentLabels","img-rounded row FruitBotcontentTitles",'bodyWrapper',"FruitBot");
+	addDiv("contentLabels","img-rounded row contentTitles",'bodyWrapper',"");
 	
-	addDiv("FruitBotcontent","container img-rounded",'bodyWrapper');
-	addDiv("FruitBotgrid","img-rounded row FruitBotcontentTitles",'FruitBotcontent',"","canvas");
-	addDiv("FruitBotgame_view","img-rounded row FruitBotcontentTitles",'FruitBotcontent',"","canvas");
+	addDiv("content","container img-rounded",'bodyWrapper');
+	addDiv("grid","img-rounded row contentTitles",'content',"","canvas");
+	addDiv("game_view","img-rounded row contentTitles",'content',"","canvas");
 
-	addDiv("FruitBotmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("FruitBotbtnPretty","btn btn-primary",'FruitBotmyRow',"new","button");
-	addDiv("FruitBotbtnPretty","btn btn-caution",'FruitBotmyRow',"reset","button");
-	addDiv("FruitBotbtnPretty","btn btn-info",'FruitBotmyRow',"pause","button");
-	addDiv("FruitBotbtnPretty","btn btn-success",'FruitBotmyRow',"play","button");
-	addDiv("FruitBotbtnPretty","btn btn-warning",'FruitBotmyRow',"forward","button");
+	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("btnPretty",$btnPrimary,'myRow',"new","button");
+	addDiv("btnPretty","btn btn-caution",'myRow',"reset","button");
+	addDiv("btnPretty","btn btn-info",'myRow',"pause","button");
+	addDiv("btnPretty","btn btn-success",'myRow',"play","button");
+	addDiv("btnPretty","btn btn-warning",'myRow',"forward","button");
 
-	addDiv("FruitBotmyBoardRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("FruitBotcontentLabel2","img-rounded row FruitBotcontentTitles",'FruitBotmyBoardRow',"Board number");
-	addDiv("FruitBotBottomTextInput","img-rounded col-md-12 col-xs-12",'FruitBotmyBoardRow',"0","input","","type","number");
-	addDiv("FruitBotbtnPretty","btn btn-caution",'FruitBotmyBoardRow',"Set","button");
+	addDiv("myBoardRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("contentLabel2","img-rounded row contentTitles",'myBoardRow',"Board number");
+	addDiv("BottomTextInput",$cssClassB,'myBoardRow',"0","input","","type","number");
+	addDiv("btnPretty","btn btn-caution",'myBoardRow',"Set","button");
 	
-	addDiv("FruitBotmyScoreRow","row img-rounded col-md-4 col-xs-6",'bodyWrapper');
-	addDiv("FruitBotwinsRow","row img-rounded",'FruitBotmyScoreRow');
-	addDiv("FruitBotwinsLabel","img-rounded col-md-6 col-xs-3",'FruitBotwinsRow',"Wins");
-	addDiv("FruitBotwinsInput","img-rounded col-md-6 col-xs-3",'FruitBotwinsRow',0,"input");
-	addDiv("FruitBotlossRow","row img-rounded",'FruitBotmyScoreRow');
-	addDiv("FruitBotlossLabel","img-rounded col-md-6 col-xs-3",'FruitBotlossRow',"Losses");
-	addDiv("FruitBotlossInput","img-rounded col-md-6 col-xs-3",'FruitBotlossRow',0,"input");
-	addDiv("FruitBottiesRow","row img-rounded",'FruitBotmyScoreRow');
-	addDiv("FruitBottiesLabel","img-rounded col-md-6 col-xs-3",'FruitBottiesRow',"Ties");
-	addDiv("FruitBottiesInput","img-rounded col-md-6 col-xs-3",'FruitBottiesRow',0,"input");
+	addDiv("myScoreRow","row img-rounded col-md-4 col-xs-6",'bodyWrapper');
+	addDiv("winsRow","row img-rounded",'myScoreRow');
+	addDiv("winsLabel","img-rounded col-md-6 col-xs-3",'winsRow',"Wins");
+	addDiv("winsInput","img-rounded col-md-6 col-xs-3",'winsRow',0,"input");
+	addDiv("lossRow","row img-rounded",'myScoreRow');
+	addDiv("lossLabel","img-rounded col-md-6 col-xs-3",'lossRow',"Losses");
+	addDiv("lossInput","img-rounded col-md-6 col-xs-3",'lossRow',0,"input");
+	addDiv("tiesRow","row img-rounded",'myScoreRow');
+	addDiv("tiesLabel","img-rounded col-md-6 col-xs-3",'tiesRow',"Ties");
+	addDiv("tiesInput","img-rounded col-md-6 col-xs-3",'tiesRow',0,"input");
 	
 }; // end addPage
 
 function addRgbColorPage() {
-	$inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
-	$rowClasses = "row colorRow"
+	var $rowClasses = "row colorRow"
 	
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("Rgbspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("Rgbcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("RgbcoinArea","",'Rgbcontent');
-	addDiv("RgbcontentLabel","img-rounded row contentTitles",'RgbcoinArea','RGB Calculator');
+	addDiv("RgbcontentLabel",$cssClassC,'RgbcoinArea','RGB Calculator');
 	
 	addDiv("RgbhtmlColorRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbhtmlRow",$inputClasses + "RgbhtmlColorRow",'RgbhtmlColorRow','',"input","","onchange","updateRgbColor()");
+	addDiv("RgbhtmlRow",$cssClassA + "RgbhtmlColorRow",'RgbhtmlColorRow','',"input","","onchange","updateRgbColor()");
 	document.getElementById("RgbhtmlRow").setAttribute( "style",  "color: #000");
 	document.getElementById("RgbhtmlRow").setAttribute( "maxlength",  "7");
 	
 	addDiv("RgbredCRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbredRow",($inputClasses + "redColorRow"),'RgbredCRow',171,"input","","onchange","updateRgbDivColor('redRow');");
+	addDiv("RgbredRow",($cssClassA + "redColorRow"),'RgbredCRow',171,"input","","onchange","updateRgbDivColor('redRow');");
 	document.getElementById("RgbredRow").setAttribute( "type",  "number");
 	
 	addDiv("RgbgreenCRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbgreenRow",$inputClasses + "greenColorRow",'RgbgreenCRow',205,"input","","onchange","updateRgbDivColor('greenRow');");
+	addDiv("RgbgreenRow",$cssClassA + "greenColorRow",'RgbgreenCRow',205,"input","","onchange","updateRgbDivColor('greenRow');");
 	document.getElementById("RgbgreenRow").setAttribute( "type",  "number");
 	
 	addDiv("RgbblueCRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbblueRow",$inputClasses + "blueColorRow",'RgbblueCRow',239,"input","","onchange","updateRgbDivColor('blueRow');");
+	addDiv("RgbblueRow",$cssClassA + "blueColorRow",'RgbblueCRow',239,"input","","onchange","updateRgbDivColor('blueRow');");
 	document.getElementById("RgbblueRow").setAttribute( "type",  "number");
 	
 	updateRgbDivColor('RgbredRow');
@@ -916,7 +921,6 @@ function addRgbColorPage() {
 }; // end addPage
 
 function addArkdataPage() {
-	var $Class1 = "col-md-2 col-xs-2";
 	addDiv("headWrapper","",'head');
 	addDiv("metaRefresh","",'headWrapper',"","meta","","http-equiv","refresh");
 	document.getElementById("metaRefresh").setAttribute( "content","60");
@@ -927,18 +931,18 @@ function addArkdataPage() {
 	addDiv("Arkdataspacer","img-rounded col-md-3 hidden-xs",'Arkdatawrapper');
 	addDiv("Arkdatacontent","img-rounded col-md-6 col-xs-12",'Arkdatawrapper');
 	addDiv("ArkdatacoinArea","",'Arkdatacontent');
-	addDiv("ArkdatacontentLabel1","img-rounded row contentTitles",'ArkdatacoinArea','Welcome to ARKData');
+	addDiv("ArkdatacontentLabel1",$cssClassC,'ArkdatacoinArea','Welcome to ARKData');
 	addDiv("ArkdatacontentLabel2","img-rounded row contentItems",'ArkdatacoinArea',"Gil's player and tribe tracker");
 	addDiv("ArkdatacontentLabel3","img-rounded row contentItems",'ArkdatacoinArea',"Players currently being tracked:");
 
 	
 	addDiv("ArkdataContentRow","container contentRows row ","ArkdatacoinArea");
-	addDiv("ArkdataLabel","contentItems" + $Class1,"ArkdataContentRow","BTC");
+	addDiv("ArkdataLabel","contentItems" + $cssClassD,"ArkdataContentRow","BTC");
 	addDiv("ArkdataAmount","img-rounded colorRow numberRow contentItems col-md-12 col-xs-12","ArkdataContentRow","0","number","","readonly");
-	addDiv("ArkdataMedian","contentItems" + $Class1,"ArkdataContentRow","0");
-	addDiv("ArkdataBotAmount","contentItems" + $Class1,"ArkdataContentRow","0");
-	addDiv("ArkdataBotAction","contentItems" + $Class1,"ArkdataContentRow","0");
-	addDiv("ArkdataBotPrediction","contentItems" + $Class1,"ArkdataContentRow","0");
+	addDiv("ArkdataMedian","contentItems" + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataBotAmount","contentItems" + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataBotAction","contentItems" + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataBotPrediction","contentItems" + $cssClassD,"ArkdataContentRow","0");
 
 }; // end addArkdataPage
 /*
@@ -965,8 +969,6 @@ function addArkdataPage() {
 */
 
 function addAddDivPage() {
-	var $inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 ";
-	var $rowClasses = "row";
 	var $Title = "addDiv explained";
 	var $Header = "addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)"
 	var $bodyText = "This can be complex to look at, but will make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n"
@@ -991,7 +993,7 @@ function addAddDivPage() {
 	addDiv("AddDivspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("AddDivcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("AddDivcoinArea","",'AddDivcontent');
-	addDiv("AddDivcontentLabel","img-rounded row contentTitles",'AddDivcoinArea',$Title);
+	addDiv("AddDivcontentLabel",$cssClassC,'AddDivcoinArea',$Title);
 	
 	addDiv("AddDivheaderMainRow",$rowClasses,'AddDivcoinArea');
 	addDiv("AddDivheaderRow","img-rounded col-md-12 col-xs-12 ",'AddDivheaderMainRow',$Header,"p","","onchange","updateRgbColor()");
@@ -1003,18 +1005,18 @@ function addAddDivPage() {
 
 function addMemePage() {
 	addDiv("bodyWrapper","container img-rounded",'body');
-	addDiv("Memecontent","img-rounded row contentTitles",'bodyWrapper',"MemeGen");
+	addDiv("content",$cssClassC,'bodyWrapper',"MemeGen");
 	
-	addDiv("Memecanvas","img-rounded row contentTitles",'bodyWrapper',"","canvas");
+	addDiv("canvas",$cssClassC,'bodyWrapper',"","canvas");
 
-	addDiv("MemememeUrlInput","img-rounded col-md-12 col-xs-12",'bodyWrapper',"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","input");
-	addDiv("MemetopTextInput","img-rounded col-md-12 col-xs-12",'bodyWrapper',"Top Text","input");
-	addDiv("MemeBottomTextInput","img-rounded col-md-12 col-xs-12",'bodyWrapper',"Bottom Text","input");
-	addDiv("MememyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("MemebtnPretty","btn btn-primary",'MememyRow',"Create Meme!","button","","onclick","updateMemeForm('MemememeUrlInput')");
+	addDiv("memeUrlInput",$cssClassB,'bodyWrapper',"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","input");
+	addDiv("topTextInput",$cssClassB,'bodyWrapper',"Top Text","input");
+	addDiv("BottomTextInput",$cssClassB,'bodyWrapper',"Bottom Text","input");
+	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("btnPretty",$btnPrimary,'myRow',"Create !","button","","onclick","updateMemeForm('memeUrlInput')");
 
 	//Create the canvas
-	canvas = document.getElementById("Memecanvas");
+	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 
 	canvas.width  = window.innerWidth;
@@ -1030,39 +1032,36 @@ function addMemePage() {
 		canvas.height = canvas.width * ImageRatio;
 		ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
 		0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
-		addImpactWithBorder('MemetopTextInput',10,100);
-		addImpactWithBorder('MemeBottomTextInput',10,(ctx.canvas.height - 20));
+		
+		addImpactWithBorder('topTextInput',10,100);
+		addImpactWithBorder('BottomTextInput',10,(ctx.canvas.height - 20));
 	};
 
 }; // end addPage
 
-function addBadPWPage() {
-	var $inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 ";
-	var $rowClasses = "row";
-		
+function addBadPWPage() {	
 	addDiv("bodyWrapper","container img-rounded",'body');
-	addDiv("BadPWcontent","img-rounded row contentTitles",'bodyWrapper',"Bad Password");
+	addDiv("BadPWcontent",$cssClassC,'bodyWrapper',"Bad Password");
 	
-	addDiv("BadPWgetBadPWInput","div_textarea img-rounded col-md-12 col-xs-12",'bodyWrapper','"JSON goes here"',"textarea");
+	addDiv("BadPWgetBadPWInput","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
 
-	addDiv("BadPWmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("BadPWbtnPretty","btn btn-primary",'BadPWmyRow',"Get Bad Password","button","","onclick","updateFormPost('/badpw','getBadPWInput')");
+	addDiv("BadPWmyRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("BadPWbtnPretty",$btnPrimary,'BadPWmyRow',"Get Bad Password","button","","onclick","updateFormPost('/badpw','getBadPWInput')");
 	addDiv("BadPWbtnClip","btn btn-info",'BadPWmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('getBadPWInput')");
 		
 }; // end addPage
 
 function addChatPage() {
-	$inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
-	$rowClasses = "row colorRow"
+	var $rowClasses = "row colorRow"
 	
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("Chatspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("Chatcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("ChatcoinArea","",'Chatcontent');
-	addDiv("ChatcontentLabel","img-rounded row contentTitles",'ChatcoinArea','Chat Room:');
+	addDiv("ChatcontentLabel",$cssClassC,'ChatcoinArea','Chat Room:');
 	
 	addDiv("ChathtmlColorRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatRoom",$inputClasses + "htmlColorRow",'ChathtmlColorRow','General',"input","","onchange","updateRgbColor()");
+	addDiv("ChatchatRoom",$cssClassA + "htmlColorRow",'ChathtmlColorRow','General',"input","","onchange","updateRgbColor()");
 	document.getElementById("ChatchatRoom").setAttribute( "style",  "color: #000");
 	
 	addDiv("ChatredCRow",$rowClasses,'ChatcoinArea');
@@ -1070,10 +1069,10 @@ function addChatPage() {
 	document.getElementById("ChatchatMainBox").setAttribute( "style",  "color: #000");
 	
 	addDiv("ChatblueCRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatUser",$inputClasses + "blueColorRow",'ChatblueCRow',"","input","","placeholder","User Name");
+	addDiv("ChatchatUser",$cssClassA + "blueColorRow",'ChatblueCRow',"","input","","placeholder","User Name");
 	
 	addDiv("ChatgreenCRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatMessage",$inputClasses + "greenColorRow",'ChatgreenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
+	addDiv("ChatchatMessage",$cssClassA + "greenColorRow",'ChatgreenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
 	
 	refreshChat(document.getElementById("ChatchatRoom").value)
 	
@@ -1112,46 +1111,46 @@ function addGitPage() {
 	addDiv("bodyWrapper","container img-rounded",'body');
 	
 	addDiv("wrapperGit","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentGit","img-rounded row contentTitles",'wrapperGit',"Git repo URL");
-	addDiv("GitmyTextAreaGit","div_textarea img-rounded col-md-12 col-xs-12",'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
-	addDiv("GitmyRowGit","row img-rounded col-md-12 col-xs-12",'wrapperGit');
+	addDiv("GitcontentGit",$cssClassC,'wrapperGit',"Git repo URL");
+	addDiv("GitmyTextAreaGit","div_textarea" + $cssClassB,'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
+	addDiv("GitmyRowGit","row" + $cssClassB,'wrapperGit');
 	addDiv("GitbtnClipGit","btn btn-info",'GitmyRowGit',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaGit')");
-	addDiv("GitbtnUpdateGit","btn btn-primary",'GitmyRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
+	addDiv("GitbtnUpdateGit",$btnPrimary,'GitmyRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
 	addDiv("GitbtnAddPageGit","btn btn-warning",'GitmyRowGit',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
 
 	addDiv("wrapperNPN","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentNPN","img-rounded row contentTitles",'wrapperNPN',"NewPageName","","","contenteditable","true");
-	addDiv("GitmyTextAreaNPN","div_textarea img-rounded col-md-12 col-xs-12",'wrapperNPN','Code goes here.',"textarea");
-	addDiv("GitmyRowNPN","row img-rounded col-md-12 col-xs-12",'wrapperNPN');
-	addDiv("GitbtnPrettyNPN","btn btn-primary",'GitmyRowNPN',"Pretty Print","button","","onclick","prettyPrint('myTextAreaNPN')");
+	addDiv("GitcontentNPN",$cssClassC,'wrapperNPN',"NewPageName","","","contenteditable","true");
+	addDiv("GitmyTextAreaNPN","div_textarea" + $cssClassB,'wrapperNPN','Code goes here.',"textarea");
+	addDiv("GitmyRowNPN","row" + $cssClassB,'wrapperNPN');
+	addDiv("GitbtnPrettyNPN",$btnPrimary,'GitmyRowNPN',"Pretty Print","button","","onclick","prettyPrint('myTextAreaNPN')");
 	addDiv("GitbtnColorifyNPN","btn btn-secondary",'GitmyRowNPN',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaNPN')");
 	addDiv("GitbtnClipNPN","btn btn-info",'GitmyRowNPN',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaNPN')");
 
 	addDiv("wrapperIndex","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentIndex","img-rounded row contentTitles",'wrapperIndex',"Index.js","","","contenteditable","true");
-	addDiv("GitmyTextAreaIndex","div_textarea img-rounded col-md-12 col-xs-12",'wrapperIndex','Code goes here.',"textarea");
-	addDiv("GitmyRowIndex","row img-rounded col-md-12 col-xs-12",'wrapperIndex');
-	addDiv("GitbtnPrettyIndex","btn btn-primary",'GitmyRowIndex',"Pretty Print","button","","onclick","prettyPrint('myTextAreaIndex')");
+	addDiv("GitcontentIndex",$cssClassC,'wrapperIndex',"Index.js","","","contenteditable","true");
+	addDiv("GitmyTextAreaIndex","div_textarea" + $cssClassB,'wrapperIndex','Code goes here.',"textarea");
+	addDiv("GitmyRowIndex","row" + $cssClassB,'wrapperIndex');
+	addDiv("GitbtnPrettyIndex",$btnPrimary,'GitmyRowIndex',"Pretty Print","button","","onclick","prettyPrint('myTextAreaIndex')");
 	addDiv("GitbtnColorifyIndex","btn btn-secondary",'GitmyRowIndex',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaIndex')");
 	addDiv("GitbtnClipIndex","btn btn-info",'GitmyRowIndex',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaIndex')");
 
 	addDiv("wrapperTest","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentTest","img-rounded row contentTitles",'wrapperTest',"Test.js","","","contenteditable","true");
-	addDiv("GitmyTextAreaTest","div_textarea img-rounded col-md-12 col-xs-12",'wrapperTest','Code goes here.',"textarea");
-	addDiv("GitmyRowTest","row img-rounded col-md-12 col-xs-12",'wrapperTest');
-	addDiv("GitbtnPrettyTest","btn btn-primary",'GitmyRowTest',"Pretty Print","button","","onclick","prettyPrint('myTextAreaTest')");
+	addDiv("GitcontentTest",$cssClassC,'wrapperTest',"Test.js","","","contenteditable","true");
+	addDiv("GitmyTextAreaTest","div_textarea" + $cssClassB,'wrapperTest','Code goes here.',"textarea");
+	addDiv("GitmyRowTest","row" + $cssClassB,'wrapperTest');
+	addDiv("GitbtnPrettyTest",$btnPrimary,'GitmyRowTest',"Pretty Print","button","","onclick","prettyPrint('myTextAreaTest')");
 	addDiv("GitbtnColorifyTest","btn btn-secondary",'GitmyRowTest',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaTest')");
 	addDiv("GitbtnClipTest","btn btn-info",'GitmyRowTest',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaTest')");
 
 	addDiv("wrapperPagename","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentPagename","img-rounded row contentTitles",'wrapperPagename',"Pagename.js","","","contenteditable","true");
-	addDiv("GitmyTextAreaPagename","div_textarea img-rounded col-md-12 col-xs-12",'wrapperPagename','Code goes here.',"textarea");
-	addDiv("GitmyRowPagename","row img-rounded col-md-12 col-xs-12",'wrapperPagename');
-	addDiv("GitbtnPrettyPagename","btn btn-primary",'GitmyRowPagename',"Pretty Print","button","","onclick","prettyPrint('myTextAreaPagename')");
+	addDiv("GitcontentPagename",$cssClassC,'wrapperPagename',"Pagename.js","","","contenteditable","true");
+	addDiv("GitmyTextAreaPagename","div_textarea" + $cssClassB,'wrapperPagename','Code goes here.',"textarea");
+	addDiv("GitmyRowPagename","row" + $cssClassB,'wrapperPagename');
+	addDiv("GitbtnPrettyPagename",$btnPrimary,'GitmyRowPagename',"Pretty Print","button","","onclick","prettyPrint('myTextAreaPagename')");
 	addDiv("GitbtnColorifyPagename","btn btn-secondary",'GitmyRowPagename',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaPagename')");
 	addDiv("GitbtnClipPagename","btn btn-info",'GitmyRowPagename',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaPagename')");
 	
-	addDiv("myErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
+	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
 		
 	// updateForm('newappget', 'pageName', 'IndexJS')
 	// updateForm('newappget', 'NFSpageName', 'TestJS')
@@ -1160,19 +1159,14 @@ function addGitPage() {
 }; // end addPage
 
 function addJsonLintPage() {
-	var $inputClasses = "colorRow img-rounded contentRows col-md-12 col-xs-12 ";
-	var $rowClasses = "row";
-	var $Title = "addDiv explained";
-	var $Header = "addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)"
-	var $bodyText = "This can be complex to look at, but will make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n"
-	$bodyText +=  "$divID - The only mandatory one is the first one.\n\n"
-		
 	addDiv("bodyWrapper","container img-rounded",'body');
-	addDiv("JsonLintmyTextArea","div_textarea img-rounded col-md-12 col-xs-12",'bodyWrapper','"JSON goes here"',"textarea");
-	addDiv("JsonLintmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("JsonLintbtnPretty","btn btn-primary",'JsonLintmyRow',"Pretty Print","button","","onclick","prettyPrint('JsonLintmyTextArea')");
-	addDiv("JsonLintbtnClip","btn btn-info",'JsonLintmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('JsonLintmyTextArea')");
-	addDiv("myErrDiv","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
+	addDiv("content",$cssClassC,'bodyWrapper',"JSONLint");
+	
+	addDiv("myTextArea","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
+	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("btnPretty",$btnPrimary,'myRow',"Pretty Print","button","","onclick","prettyPrint('myTextArea')");
+	addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
+	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
 		
 }; // end addPage
 
@@ -1182,10 +1176,10 @@ function addLoginPage() {
 	addDiv("signupForm","",'bodyWrapper',"","form","","action","/login");
 	document.getElementById("signupForm").setAttribute( "method", "post");
 	
-	addDiv("emailInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Email");
-	addDiv("passwordInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Password");
+	addDiv("emailInput",$cssClassB,'signupForm','',"input","","placeholder","Email");
+	addDiv("passwordInput",$cssClassB,'signupForm','',"input","","placeholder","Password");
 
-	addDiv("myRow","row img-rounded col-md-12 col-xs-12",'signupForm');
+	addDiv("myRow","row" + $cssClassB,'signupForm');
 	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
 		
 }; // end addPage
@@ -1196,10 +1190,10 @@ function addSignupPage() {
 	addDiv("signupForm","",'bodyWrapper',"","form","","action","/signup");
 	document.getElementById("signupForm").setAttribute("method", "post");
 	
-	addDiv("emailInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Email");
-	addDiv("passwordInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Password");
+	addDiv("emailInput",$cssClassB,'signupForm','',"input","","placeholder","Email");
+	addDiv("passwordInput",$cssClassB,'signupForm','',"input","","placeholder","Password");
 
-	addDiv("myRow","row img-rounded col-md-12 col-xs-12",'signupForm');
+	addDiv("myRow","row" + $cssClassB,'signupForm');
 	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
 		
 }; // end addPage
@@ -1207,9 +1201,6 @@ function addSignupPage() {
 function addCoinPage() {
 	addDiv("headWrapper","",'head');
 	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
-
-// addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attributeType,$attributeAction)
-	var $Class1 = "col-md-2 col-xs-2";
 
 	addDiv("bodyWrapper","container img-rounded","body");
 	addDiv("Coingeneric","row","bodyWrapper");
@@ -1224,63 +1215,63 @@ function addCoinPage() {
 
 	addDiv("CointitleRow","row contentTitles","Coincontent");
 	addDiv("CoincontentLabel","col-md-10 col-xs-10 contentTitles","CointitleRow","Cointent");
-	addDiv("Coinbutton1","button" + $Class1,"CointitleRow");
+	addDiv("Coinbutton1","button" + $cssClassD,"CointitleRow");
 	addDiv("CoinBtnGeneric","btn btn-success btn-sm","CointitleRow","Refresh","button","","onclick","refreshCharts();");
 	
 	addDiv("CoinNameRow","row contentLabels","Coincontent");
-	addDiv("CoincoinLabel",$Class1,"CoinNameRow","Coin");
-	addDiv("CoinvalueLabel",$Class1,"CoinNameRow","Value");
-	addDiv("CoinmedianLabel",$Class1,"CoinNameRow","My Coins");
-	addDiv("CoinbotAmountLabel",$Class1,"CoinNameRow","MyBot");
-	addDiv("CoinbotActionLabel",$Class1,"CoinNameRow","Fruitbot");
-	addDiv("CoinbotPredictionLabel",$Class1,"CoinNameRow","SimpleBot");
+	addDiv("CoincoinLabel",$cssClassD,"CoinNameRow","Coin");
+	addDiv("CoinvalueLabel",$cssClassD,"CoinNameRow","Value");
+	addDiv("CoinmedianLabel",$cssClassD,"CoinNameRow","My Coins");
+	addDiv("CoinbotAmountLabel",$cssClassD,"CoinNameRow","MyBot");
+	addDiv("CoinbotActionLabel",$cssClassD,"CoinNameRow","Fruitbot");
+	addDiv("CoinbotPredictionLabel",$cssClassD,"CoinNameRow","SimpleBot");
 
 
 	addDiv("CoinbtcContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinbtcLabel","contentItems" + $Class1,"CoinbtcContentRow","BTC");
-	addDiv("CoinbtcAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinbtcContentRow","0","input","","readonly");
+	addDiv("CoinbtcLabel","contentItems" + $cssClassD,"CoinbtcContentRow","BTC");
+	addDiv("CoinbtcAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinbtcContentRow","0","input","","readonly");
 	document.getElementById("CoinbtcAmount").setAttribute( "type", "number");
-	addDiv("CoinbtcMedian","contentItems" + $Class1,"CoinbtcContentRow","0");
-	addDiv("CoinbtcBotAmount","contentItems" + $Class1,"CoinbtcContentRow","0");
-	addDiv("CoinbtcBotAction","contentItems" + $Class1,"CoinbtcContentRow","0");
-	addDiv("CoinbtcBotPrediction","contentItems" + $Class1,"CoinbtcContentRow","0");
+	addDiv("CoinbtcMedian","contentItems" + $cssClassD,"CoinbtcContentRow","0");
+	addDiv("CoinbtcBotAmount","contentItems" + $cssClassD,"CoinbtcContentRow","0");
+	addDiv("CoinbtcBotAction","contentItems" + $cssClassD,"CoinbtcContentRow","0");
+	addDiv("CoinbtcBotPrediction","contentItems" + $cssClassD,"CoinbtcContentRow","0");
 
 
 	addDiv("CoinltcContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinltcLabel","contentItems" + $Class1,"CoinltcContentRow","LTC");
-	addDiv("CoinltcAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinltcContentRow","0","input","","readonly");
+	addDiv("CoinltcLabel","contentItems" + $cssClassD,"CoinltcContentRow","LTC");
+	addDiv("CoinltcAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinltcContentRow","0","input","","readonly");
 	document.getElementById("CoinltcAmount").setAttribute( "type", "number");
-	addDiv("CoinltcMedian","contentItems" + $Class1,"CoinltcContentRow","0");
-	addDiv("CoinltcBotAmount","contentItems" + $Class1,"CoinltcContentRow","0");
-	addDiv("CoinltcBotAction","contentItems" + $Class1,"CoinltcContentRow","0");
-	addDiv("CoinltcBotPrediction","contentItems" + $Class1,"CoinltcContentRow","0");
+	addDiv("CoinltcMedian","contentItems" + $cssClassD,"CoinltcContentRow","0");
+	addDiv("CoinltcBotAmount","contentItems" + $cssClassD,"CoinltcContentRow","0");
+	addDiv("CoinltcBotAction","contentItems" + $cssClassD,"CoinltcContentRow","0");
+	addDiv("CoinltcBotPrediction","contentItems" + $cssClassD,"CoinltcContentRow","0");
 
 
 	addDiv("CoinethContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinethLabel","contentItems" + $Class1,"CoinethContentRow","ETH");
-	addDiv("CoinethAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinethContentRow","0","input","","readonly");
+	addDiv("CoinethLabel","contentItems" + $cssClassD,"CoinethContentRow","ETH");
+	addDiv("CoinethAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinethContentRow","0","input","","readonly");
 	document.getElementById("CoinethAmount").setAttribute( "type", "number");
-	addDiv("CoinethMedian","contentItems" + $Class1,"CoinethContentRow","0");
-	addDiv("CoinethBotAmount","contentItems" + $Class1,"CoinethContentRow","0");
-	addDiv("CoinethBotAction","contentItems" + $Class1,"CoinethContentRow","0");
-	addDiv("CoinethBotPrediction","contentItems" + $Class1,"CoinethContentRow","0");
+	addDiv("CoinethMedian","contentItems" + $cssClassD,"CoinethContentRow","0");
+	addDiv("CoinethBotAmount","contentItems" + $cssClassD,"CoinethContentRow","0");
+	addDiv("CoinethBotAction","contentItems" + $cssClassD,"CoinethContentRow","0");
+	addDiv("CoinethBotPrediction","contentItems" + $cssClassD,"CoinethContentRow","0");
 
 	addDiv("CoinfbcContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinfbcLabel","contentItems" + $Class1,"CoinfbcContentRow","FBC");
-	addDiv("CoinfbcAmount","img-rounded colorRow numberRow contentItems" + $Class1,"CoinfbcContentRow","0","input","","readonly");
+	addDiv("CoinfbcLabel","contentItems" + $cssClassD,"CoinfbcContentRow","FBC");
+	addDiv("CoinfbcAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinfbcContentRow","0","input","","readonly");
 	document.getElementById("CoinfbcAmount").setAttribute( "type", "number");
-	addDiv("CoinfbcMedian","contentItems" + $Class1,"CoinfbcContentRow","0");
-	addDiv("CoinfbcBotAmount","contentItems" + $Class1,"CoinfbcContentRow","0");
-	addDiv("CoinfbcBotAction","contentItems" + $Class1,"CoinfbcContentRow","0");
-	addDiv("CoinfbcBotPrediction","contentItems" + $Class1,"CoinfbcContentRow","0");
+	addDiv("CoinfbcMedian","contentItems" + $cssClassD,"CoinfbcContentRow","0");
+	addDiv("CoinfbcBotAmount","contentItems" + $cssClassD,"CoinfbcContentRow","0");
+	addDiv("CoinfbcBotAction","contentItems" + $cssClassD,"CoinfbcContentRow","0");
+	addDiv("CoinfbcBotPrediction","contentItems" + $cssClassD,"CoinfbcContentRow","0");
 	addDiv("CoinfbcmanualButtonRow","row","CoinfbcContentRow");
-	addDiv("Coinfbcbutton","button" + $Class1,"CoinfbcContentRow");
+	addDiv("Coinfbcbutton","button" + $cssClassD,"CoinfbcContentRow");
 	addDiv("CoinfbcmanualButtonRow","row","CoinfbcContentRow");
 
 	addDiv("CoincointentArea2","img-rounded col-md-12 col-xs-12 contentRows dataArea row","Coincontent");
 	addDiv("CointitleRow","row contentTitles","CoincointentArea2");
 	addDiv("CoinbotNameLabel","col-md-10 col-xs-10 dataArea contentTitles img-rounded","CoincointentArea2","MyBotName","","","contenteditable","true");
-	addDiv("Coinbutton2","button" + $Class1,"CoincointentArea2");
+	addDiv("Coinbutton2","button" + $cssClassD,"CoincointentArea2");
 	addDiv("CoinBtnAddBot","btn btn-success btn-sm","CoincointentArea2","Add Bot","button","","onclick","addBot('CoinbotNameLabel');");
 
 	loadCoinData();
