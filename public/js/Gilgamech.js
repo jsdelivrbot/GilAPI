@@ -1,13 +1,17 @@
 //Gil.JS
 
-var lineBreak = "\r\n";
-var spaceChar = " ";
+var timerInterval //Default timer variable, removed in removePage.
+
+var lineBreak = "\r\n"; //Oddly useful
+var spaceChar = " "; //Oddly useful
+
 var bgImage;
 var bgReady;
 var canvas;
 var ctx;
 var $stage;
 var SIZE = 50;
+
 var $btcMedian = 0
 var $ltcMedian = 0
 var $ethMedian = 0
@@ -25,8 +29,8 @@ var $eth
 var $coin2 = "Data loading..."
 var $botCounter = 0
 var $assetCounter = 0
-var timerInterval
 
+// General
 function loadJSON(file, callback) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -73,152 +77,6 @@ function updateDownloadLink(downloadLinkID,inputFieldID) {
   document.getElementById(downloadLinkID).download = document.getElementById(inputFieldID).value
 }; // end updateDownloadLink
 
-function updategetBadPWInputForm() {
-  postJSON('/badpw', function(response) {
-    document.getElementById('getBadPWInput').value  = response
-  }); // end loadJSON
-}; // end updategetBadPWInputForm
-
-function updateChat() {
-  // /chatpost?user=user&message=message&chatroom=General
-  // Post API with user:chat JSON and write reply to textbox.
-  chatUser = document.getElementById("ChatchatUser").value
-  chatMessage = document.getElementById("ChatchatMessage").value
-  chatRoom = document.getElementById("ChatchatRoom").value
-  if (chatMessage) {
-    if (chatUser) {
-      chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
-	  loadChat(chatUrl,"chatMainBox")
-      document.getElementById("ChatchatMessage").value = ""
-      document.getElementById("ChatuserNameErr").innerText = ""
-    } else {
-      document.getElementById("ChatuserNameErr").innerText = "Enter a user name. Then do a barrel roll."
-    }; //end if chatUser
-  }; //end if chatMessage
-}; // end updateChat
-
-function refreshChat(chatRoom){
-  chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
-  loadChat(chatUrl,"ChatchatMainBox")
-}; // end refreshChat
-
-function loadChat(chatUrl,chatBox){
-  loadJSON(chatUrl, function(response) {
-    document.getElementById(chatBox).value = response
-    document.getElementById("ChatchatMainBox").value = response
-  }); // end loadJSON
-}; // end loadChat
-
-function detectEnter(e){
-    if(e.keyCode === 13){
-        e.preventDefault(); // Ensure it is only this code that runs
-        updateChat();
-    };
-}; // end detectEnter
-
-function addCircle(x, y, r, fill) {
-  var circle = new createjs.Shape();
-  circle.graphics.beginFill(fill).drawCircle(0, 0, r);
-  circle.x = x;
-  circle.y = y;
-  circle.name = "circle";
-  circle.on("pressmove",drag);
-  $stage.addChild(circle);
-  $stage.update();
-}
-
-function addStar(x, y, r, fill) {
-  var star = new createjs.Shape();
-  star.graphics.beginFill(fill).drawPolyStar(0, 0, r, 5, 0.6, -90);
-  star.x = x;
-  star.y = y;
-  star.name = "star";
-  star.on("pressmove",drag);
-  $stage.addChild(star);
-  $stage.update();
-}
-
-function addRoundedSquare(x, y, s, r, fill) {
-  var square = new createjs.Shape();
-  square.graphics.beginFill(fill).drawRoundRect(0, 0, s, s, r);
-  square.x = x - s/2;
-  square.y = y - s/2;
-  square.name = "square";
-  square.on("pressmove",drag);
-  $stage.addChild(square);
-  $stage.update();
-}
-
-function drag(evt) {
-  // target will be the container that the event listener was added to
-  if(evt.target.name == "square") {
-    evt.target.x = evt.stageX - SIZE;
-    evt.target.y = evt.stageY - SIZE;
-  }
-  else  {
-    evt.target.x = evt.stageX;
-    evt.target.y = evt.stageY;
-  }
-
-  // make sure to redraw the stage to show the change
-  $stage.update();   
-}
-
-function loadFileAsText() { 	
-	var fileToLoad = document.getElementById("fileToLoad").files[0];
-	var fileReader = new FileReader();
-	
-	fileReader.onload = function(fileLoadedEvent) {
-		var textFromFileLoaded = fileLoadedEvent.target.result;
-		document.getElementById("gitFileTextArea").value = textFromFileLoaded;
-	};
-	fileReader.readAsText(fileToLoad, "UTF-8");
-}
-
-function updateNewPageForm() {
-	//Get new page name from element
-  RepoUrlElement = "gitRepoUrl";
-  Pagename = document.getElementById("NewPageNameInput").value;
-  document.getElementById("PagenameEJSNameInput").value = "\\views\\pages\\template.ejs";
-  document.getElementById("PagenameJSNameInput").value = Pagename + ".js";
-
-  // Get each page from Github, populate textarea
-  // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
-  updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea");
-  updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea");
-  updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea");
-  updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea");
-  
-  document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
-
-  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  colorifyDivTextArea('IndexJSTextArea');
-}; // end updateNewPageForm
-
-function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
-  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
-  FileName = document.getElementById(FileNameElement).value
-  if (FileName) {
-    document.getElementById(FileNameElement).value = FileName
-  } else {
-      FileName = "README.md"
-      document.getElementById(FileNameElement).value = FileName
-  }; //end if FileName
-  document.getElementById(FileNameItem).innerHTML = FileName
-  
-  // Load file from repo into gitFileTextArea.
-  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
-  loadJSON(RepoUrl, function(response) {
-    document.getElementById(TextAreaElement).innerText = response
-  }); // end loadJSON
-  
-}; // end updateForm
-
-function updateNewPageBoilerplate() {  
-  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  boilerplateTestTextArea("IndexJSTextArea","NewPageNameInput","  t.plan(42);\r\n");
-}; // end updateNewPageBoilerplate
-
 function prettyPrint($divName) {
 	try {
 		var ugly = document.getElementById($divName).value;
@@ -230,57 +88,6 @@ function prettyPrint($divName) {
 		document.getElementById("myErrDiv").innerText = $err;
 	};
 }
-
-function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
-  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
-  docUpdateTextArea = document.getElementById(docTextArea).innerText;
-  docNewPageName = document.getElementById(docNewName).value;
-  // Customized for index.js
-  docUpdateTextString = 'request("http://127.0.0.1:5000/fruitbot", (error, response, body) => {' + lineBreak + 't.false(error); // test 5' + lineBreak + 't.equal(response.statusCode, 200); // test 6' + lineBreak + 't.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7' + lineBreak + 't.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8' + lineBreak + '}); //end request';
-  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
-}; // end boilerplateIndexTextArea
-
-function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
-  docUpdateTextArea = document.getElementById(docTextArea).innerText;
-  docNewPageName = document.getElementById(docNewName).value;
-  // Customized for index.js
-  docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
-  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
-}; // end boilerplateTestTextArea
-
-function colorifyDivTextArea(DivTextArea) {  
-  var words = ["function","var","this","new","if","then","true","false","const"];
-  var superGreen = "green";
-  for (word of words) {
-    colorifyDiv(DivTextArea, word, superGreen);
-  };
-}; // end colorifyDivTextArea
-
-function setupLink(textAreaID,downloadLinkID) {
-  document.getElementById(textAreaID).value = window.onload + '';
-  document.getElementById(downloadLinkID).onclick = function() {
-	this.href = 'data:text/plain;charset=utf-8,'
-	  + encodeURIComponent(txtval);
-  };
-};
-
-function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-};// end componentToHex
-
-function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-};// end rgbToHex
-
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-};// end hexToRgb
 
 function getNumberFromDiv($numericDiv) {
 	return Math.round(
@@ -351,6 +158,207 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attri
 	
 }; // end addDiv	
 
+function detectEnter(e){
+    if(e.keyCode === 13){
+        e.preventDefault(); // Ensure it is only this code that runs
+        updateChat();
+    };
+}; // end detectEnter
+
+function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
+	postJSON($postJsonUrl, function(response) {
+		document.getElementById($DivIDtoUpdate).value  = response
+	}); // end loadJSON
+}; // end updateFormPost
+
+// Chat
+function updateChat() {
+  // /chatpost?user=user&message=message&chatroom=General
+  // Post API with user:chat JSON and write reply to textbox.
+  chatUser = document.getElementById("ChatchatUser").value
+  chatMessage = document.getElementById("ChatchatMessage").value
+  chatRoom = document.getElementById("ChatchatRoom").value
+  if (chatMessage) {
+    if (chatUser) {
+      chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
+	  loadChat(chatUrl,"chatMainBox")
+      document.getElementById("ChatchatMessage").value = ""
+      document.getElementById("ChatuserNameErr").innerText = ""
+    } else {
+      document.getElementById("ChatuserNameErr").innerText = "Enter a user name. Then do a barrel roll."
+    }; //end if chatUser
+  }; //end if chatMessage
+}; // end updateChat
+
+function refreshChat(chatRoom){
+  chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
+  loadChat(chatUrl,"ChatchatMainBox")
+}; // end refreshChat
+
+function loadChat(chatUrl,chatBox){
+  loadJSON(chatUrl, function(response) {
+    document.getElementById(chatBox).value = response
+    document.getElementById("ChatchatMainBox").value = response
+  }); // end loadJSON
+}; // end loadChat
+
+// DSQ
+function addCircle(x, y, r, fill) {
+  var circle = new createjs.Shape();
+  circle.graphics.beginFill(fill).drawCircle(0, 0, r);
+  circle.x = x;
+  circle.y = y;
+  circle.name = "circle";
+  circle.on("pressmove",drag);
+  $stage.addChild(circle);
+  $stage.update();
+}
+
+function addStar(x, y, r, fill) {
+  var star = new createjs.Shape();
+  star.graphics.beginFill(fill).drawPolyStar(0, 0, r, 5, 0.6, -90);
+  star.x = x;
+  star.y = y;
+  star.name = "star";
+  star.on("pressmove",drag);
+  $stage.addChild(star);
+  $stage.update();
+}
+
+function addRoundedSquare(x, y, s, r, fill) {
+  var square = new createjs.Shape();
+  square.graphics.beginFill(fill).drawRoundRect(0, 0, s, s, r);
+  square.x = x - s/2;
+  square.y = y - s/2;
+  square.name = "square";
+  square.on("pressmove",drag);
+  $stage.addChild(square);
+  $stage.update();
+}
+
+function drag(evt) {
+  // target will be the container that the event listener was added to
+  if(evt.target.name == "square") {
+    evt.target.x = evt.stageX - SIZE;
+    evt.target.y = evt.stageY - SIZE;
+  }
+  else  {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+  }
+
+  // make sure to redraw the stage to show the change
+  $stage.update();   
+}
+
+// Git
+function loadFileAsText() {
+	var fileToLoad = document.getElementById("fileToLoad").files[0];
+	var fileReader = new FileReader();
+	
+	fileReader.onload = function(fileLoadedEvent) {
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		document.getElementById("gitFileTextArea").value = textFromFileLoaded;
+	};
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+function updateNewPageForm() {
+	//Get new page name from element
+  RepoUrlElement = "gitRepoUrl";
+  Pagename = document.getElementById("NewPageNameInput").value;
+  document.getElementById("PagenameEJSNameInput").value = "\\views\\pages\\template.ejs";
+  document.getElementById("PagenameJSNameInput").value = Pagename + ".js";
+
+  // Get each page from Github, populate textarea
+  // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
+  updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea");
+  updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea");
+  updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea");
+  updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea");
+  
+  document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
+
+  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  colorifyDivTextArea('IndexJSTextArea');
+}; // end updateNewPageForm
+
+function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
+  FileName = document.getElementById(FileNameElement).value
+  if (FileName) {
+    document.getElementById(FileNameElement).value = FileName
+  } else {
+      FileName = "README.md"
+      document.getElementById(FileNameElement).value = FileName
+  }; //end if FileName
+  document.getElementById(FileNameItem).innerHTML = FileName
+  
+  // Load file from repo into gitFileTextArea.
+  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
+  loadJSON(RepoUrl, function(response) {
+    document.getElementById(TextAreaElement).innerText = response
+  }); // end loadJSON
+  
+}; // end updateForm
+
+function updateNewPageBoilerplate() {  
+  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
+  boilerplateTestTextArea("IndexJSTextArea","NewPageNameInput","  t.plan(42);\r\n");
+}; // end updateNewPageBoilerplate
+
+function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
+  //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
+  docUpdateTextArea = document.getElementById(docTextArea).innerText;
+  docNewPageName = document.getElementById(docNewName).value;
+  // Customized for index.js
+  docUpdateTextString = 'request("http://127.0.0.1:5000/fruitbot", (error, response, body) => {' + lineBreak + 't.false(error); // test 5' + lineBreak + 't.equal(response.statusCode, 200); // test 6' + lineBreak + 't.notEqual(body.indexOf("<title>Gilgamech Technologies</title>"), -1); // test 7' + lineBreak + 't.notEqual(body.indexOf("Gilgamech Technologies"), -1); // test 8' + lineBreak + '}); //end request';
+  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+}; // end boilerplateIndexTextArea
+
+function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
+  docUpdateTextArea = document.getElementById(docTextArea).innerText;
+  docNewPageName = document.getElementById(docNewName).value;
+  // Customized for index.js
+  docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
+  document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
+}; // end boilerplateTestTextArea
+
+function colorifyDivTextArea(DivTextArea) {  
+  var words = ["function","var","this","new","if","then","true","false","const"];
+  var superGreen = "green";
+  for (word of words) {
+    colorifyDiv(DivTextArea, word, superGreen);
+  };
+}; // end colorifyDivTextArea
+
+function setupLink(textAreaID,downloadLinkID) {
+  document.getElementById(textAreaID).value = window.onload + '';
+  document.getElementById(downloadLinkID).onclick = function() {
+	this.href = 'data:text/plain;charset=utf-8,'
+	  + encodeURIComponent(txtval);
+  };
+};
+
+// RGB
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+};// end componentToHex
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+};// end rgbToHex
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+};// end hexToRgb
+
 function updateRgbColor() { 
 	
 	$hex = hexToRgb(document.getElementById("htmlRow").value);
@@ -399,6 +407,7 @@ function updateRgbDivColor($divId) {
 
 }; // end updateRedDivColor
 
+// Git
 function updateGitPage() {
   updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
 }; // end updateGitPage
@@ -439,6 +448,7 @@ function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
   }); // end loadJSON
 }; // end updateForm
 
+// Meme
 function updateMemeForm(memeUrlInput) {
 	bgImage.src = document.getElementById(memeUrlInput).value;
 };
@@ -453,6 +463,7 @@ function addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
     ctx.strokeText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
 };
 
+// Coin
 function loadCoinData () {
   try {
 	loadJSON("https://api.coinbase.com/v2/time", function($response) { $time = $response.data});
@@ -968,6 +979,13 @@ function addAddDivPage() {
 	$bodyText +=  "$href- Specify HRef link if A type, HRef link and CSS type for Link type, or Source if IMG or Script type.\n\n"
 	$bodyText +=  "$attributeType- Set a custom attribute, like 'onclick' or 'placeholder' or 'contenteditable'.\n\n"
 	$bodyText +=  "$attributeAction- Set the value for the above attribute type. Leave blank for attributes with no value, such as 'contenteditable'.\n\n"
+	$bodyText +=  "\n\n"
+	$bodyText +=  "Other key parts of this framework are removeDiv, wrapperHead, wrapperBody, and wrapperFoot. These divs are unloaded and rebuilt on each page change.\n\n"
+	$bodyText +=  "\n\n"
+	$bodyText +=  "Call other Javascript scripts, CSS files, and other Head-based items in wrapperHead.\n\n"
+	$bodyText +=  "Nest all of your page within wrapperBody.\n\n"
+	$bodyText +=  "Add any extra footer elements to wrapperFoot.\n\n"
+	$bodyText +=  "\n\n"
 	
 	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("AddDivspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
@@ -1028,7 +1046,7 @@ function addBadPWPage() {
 	addDiv("BadPWgetBadPWInput","div_textarea img-rounded col-md-12 col-xs-12",'bodyWrapper','"JSON goes here"',"textarea");
 
 	addDiv("BadPWmyRow","row img-rounded col-md-12 col-xs-12",'bodyWrapper');
-	addDiv("BadPWbtnPretty","btn btn-primary",'BadPWmyRow',"Get Bad Password","button","","onclick","updategetBadPWInputForm()");
+	addDiv("BadPWbtnPretty","btn btn-primary",'BadPWmyRow',"Get Bad Password","button","","onclick","updateFormPost('/badpw','getBadPWInput')");
 	addDiv("BadPWbtnClip","btn btn-info",'BadPWmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('getBadPWInput')");
 		
 }; // end addPage
@@ -1160,31 +1178,29 @@ function addJsonLintPage() {
 
 function addLoginPage() {
 	addDiv("bodyWrapper","container img-rounded",'body');
-	addDiv("Logincontent","img-rounded row contentTitles",'bodyWrapper',"Login");
 	
-	addDiv("LoginsignupForm","",'bodyWrapper',"","form","","action","/login");
-	document.getElementById("LoginsignupForm").setAttribute( "method", "post");
+	addDiv("signupForm","",'bodyWrapper',"","form","","action","/login");
+	document.getElementById("signupForm").setAttribute( "method", "post");
 	
-	addDiv("LoginemailInput","img-rounded col-md-12 col-xs-12",'LoginsignupForm','',"input","","placeholder","Email");
-	addDiv("LoginpasswordInput","img-rounded col-md-12 col-xs-12",'LoginsignupForm','',"input","","placeholder","Password");
+	addDiv("emailInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Email");
+	addDiv("passwordInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Password");
 
-	addDiv("LoginmyRow","row img-rounded col-md-12 col-xs-12",'LoginsignupForm');
-	addDiv("LoginbtnSubmit","btn btn-success",'LoginmyRow',"Submit","button");
+	addDiv("myRow","row img-rounded col-md-12 col-xs-12",'signupForm');
+	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
 		
 }; // end addPage
 
 function addSignupPage() {
 	addDiv("bodyWrapper","container img-rounded",'body');
-	addDiv("Signupcontent","img-rounded row contentTitles",'bodyWrapper',"Signup");
 	
-	addDiv("SignupsignupForm","",'bodyWrapper',"","form","","action","/login");
-	document.getElementById("SignupsignupForm").setAttribute( "method", "post");
+	addDiv("signupForm","",'bodyWrapper',"","form","","action","/signup");
+	document.getElementById("signupForm").setAttribute("method", "post");
 	
-	addDiv("SignupemailInput","img-rounded col-md-12 col-xs-12",'SignupsignupForm','',"input","","placeholder","Email");
-	addDiv("SignuppasswordInput","img-rounded col-md-12 col-xs-12",'SignupsignupForm','',"input","","placeholder","Password");
+	addDiv("emailInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Email");
+	addDiv("passwordInput","img-rounded col-md-12 col-xs-12",'signupForm','',"input","","placeholder","Password");
 
-	addDiv("SignupmyRow","row img-rounded col-md-12 col-xs-12",'SignupsignupForm');
-	addDiv("SignupbtnSubmit","btn btn-success",'SignupmyRow',"Submit","button");
+	addDiv("myRow","row img-rounded col-md-12 col-xs-12",'signupForm');
+	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
 		
 }; // end addPage
 
