@@ -180,81 +180,6 @@ app.get('/logout', function(request, response){
 
 
 //region WIP
-app.get('/addDiv', function(request, response) { 
-  var $pageName = "/js/addDiv.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/dsq', function(request, response) { 
-  var $pageName = "/js/dsq.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/rgb', function(request, response) { 
-  var $pageName = "/js/rgb.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/meme', function(request, response) { 
-  var $pageName = "/js/meme.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/Arkdata', function(request, response) {
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'pages/Arkdata', {
-        cssType: $cssType,
-       loggedin: $loggedin
-    });
-});
-
-app.get('/demo', function(request, response) {
-  var $pageName = "/js/ARKMap.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-}); 
-
-app.get('/git', function(request, response) { 
-  var $pageName = "/js/git.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});  
-
 app.post('/mirror', function(request, response) {
   message = request.query.message,
   response.send(message);
@@ -347,7 +272,6 @@ app.get('/chatload', function(request, response) {
   chatRoom = request.query.chatroom
   response.json($chatGeneral);
 });  
-//endregion
 
 //region Fruitbot
 app.get('/fruitbot', function(request, response) {
@@ -358,6 +282,7 @@ app.get('/fruitbot', function(request, response) {
        loggedin: $loggedin
     });
 });
+
 app.get('/fruitbotwin', function(request, response) {
   fruitbotwin++
   response.json(fruitbotwin);
@@ -386,7 +311,6 @@ app.get('/fizzbuzz', function(request, response) {
   }; //end if 5  
   response.json(outstring);
 });
-
 
 app.get('/fakecoin', function(request, response) {
   $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
@@ -440,8 +364,6 @@ app.get('/newappget', function(request, response) {
   response.send(newappgetreturn);
 });
 
-
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -449,11 +371,6 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
-
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
 	addErr(err);
     res.status(err.status || 500);
@@ -463,9 +380,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-
