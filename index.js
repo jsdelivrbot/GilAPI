@@ -99,17 +99,6 @@ app.get('/', function(request, response) {
     });
 });
 
-app.get('/login', function(request, response) {
-  var $pageName = "/js/login.js";
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-        cssType: $cssType,
-       loggedin: $loggedin,
-       pageName: $pageName
-    });
-});
-
 app.post('/login', function(request, response) {
     var username = request.body.username
     var enteredPassword = request.body.password;
