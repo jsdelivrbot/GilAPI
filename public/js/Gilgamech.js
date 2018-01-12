@@ -829,8 +829,7 @@ function addNav() {
 	addDiv("dd4r","",'dd42','StackOverflow Links','p');
 	addDiv("dd4rc","dropdown-content",'dd42',);
 
-	addDiv("lip4r5","",'dd4rc','','p');
-	addDiv("aip4r5","",'lip4r5','Coins','a',"","onclick","loadPage('coin');");	
+	addDiv("SODDOuter","",'dd4rc','','p');
 
 }; // end addPage
 
@@ -889,6 +888,17 @@ function addFruitBotPage() {
 function addRgbColorPage() {
 	var $rowClasses = "row colorRow"
 	
+	addDiv("linkP1","",'SODDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','Search Convert to Hex','a',"https://duckduckgo.com/?q=javascript+convert+to+he&atb=v49-6&ia=qa");
+	addDiv("linkP2","",'SODDWrapper','','p');
+	addDiv("linkSO2","",'linkP2','RGB to HEX and HEX to RGB','a',"https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb#5624139");
+	addDiv("linkP3","",'SODDWrapper','','p');
+	addDiv("linkSO3","",'linkP3','Change Div color on keypress','a',"https://stackoverflow.com/questions/42521420/change-div-bgcolor-onkeypress");
+	addDiv("linkP4","",'SODDWrapper','','p');
+	addDiv("linkSO4","",'linkP4','Prop style background color','a',"https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp");
+	addDiv("linkP5","",'SODDWrapper','','p');
+	addDiv("linkSO5","",'linkP5','RGB coder','a',"https://www.easycalculation.com/colorconverter/rgb-coder.php");
+
 	addDiv("spacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("content","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("coinArea","",'content');
@@ -998,6 +1008,9 @@ function addAddDivPage() {
 }; // end addPage
 
 function addMemePage() {
+	addDiv("linkP1","",'SODDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','How to add a border on html5 canvas text?','a',"https://stackoverflow.com/questions/1421082/how-to-add-a-border-on-html5-canvas-text#1421598");
+
 	addDiv("content",$cssClassC,'bodyWrapper',"MemeGen");
 	
 	addDiv("canvas",$cssClassC,'bodyWrapper',"","canvas");
@@ -1075,9 +1088,18 @@ function addChatPage() {
 function addDragSqPage() {
 	addDiv("easelScript","","headWrapper","","script","/js/easeljs-0.8.2.min.js")
 
-	addDiv("btnSquare","btn","bodyWrapper","Add Square","button","","onclick","addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow');")
-	addDiv("btnCircle","btn","bodyWrapper","Add Circle","button","","onclick","addCircle(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 'red');")
-	addDiv("btnStar","btn","bodyWrapper","Add Star","button","","onclick",'addStar(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, "blue");')
+	addDiv("linkP1","",'SODDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','Making draggable shapes with CreateJS','a',"https://superdevresources.com/draggable-shapes-canvas-createjs/");
+	addDiv("linkP2","",'SODDWrapper','','p');
+	addDiv("linkSO2","",'linkP2','CreateJS website','a',"https://www.createjs.com/");
+	addDiv("linkP3","",'SODDWrapper','','p');
+	addDiv("linkSO3","",'linkP3','Codepen demo','a',"https://codepen.io/anon/pen/rpMmvr");
+	
+	addDiv("divForButtons","","bodyWrapper")
+	addDiv("btnSquare","btn","divForButtons","Add Square","button","","onclick","addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow');")
+	addDiv("btnCircle","btn","divForButtons","Add Circle","button","","onclick","addCircle(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 'red');")
+	addDiv("btnStar","btn","divForButtons","Add Star","button","","onclick",'addStar(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, "blue");')
+	addDiv("HelpfulMessage","","divForButtons" ,"Page has bug - it does not work the first time. Please click the link again.")
 	
 	addDiv("canvas","","bodyWrapper" ,"This text is displayed if your browser does not support HTML5 Canvas.","canvas")
 	canvas = document.getElementById('canvas');
@@ -1143,6 +1165,12 @@ function addGitPage() {
 }; // end addPage
 
 function addJsonLintPage() {
+	addDiv("linkP1","",'SODDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','prettify json data in textarea input','a',"https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037");
+	addDiv("linkP2","",'SODDWrapper','','p');
+	addDiv("linkSO2","",'linkP2','copy textarea to clipboard	','a',"https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068");
+	
+	
 	addDiv("content",$cssClassC,'bodyWrapper',"JSONLint");
 	
 	addDiv("myTextArea","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
@@ -1167,7 +1195,44 @@ function addFormPage($formPost) {
 
 function addCoinPage() {
 	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
-
+	
+	addDiv("linkP1","",'SODDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','How do you implement a fixed left sidebar and fluid right content in CSS','a',"https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037");
+	addDiv("linkP2","",'SODDWrapper','','p');
+	addDiv("linkSO2","",'linkP2','updateMePlease','a',"https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp");	
+	addDiv("linkP3","",'SODDWrapper','','p');
+	addDiv("linkSO3","",'linkP3','Bootstrap','a',"https://getbootstrap.com/docs/3.3/css/");
+	addDiv("linkP4","",'SODDWrapper','','p');
+	addDiv("linkSO4","",'linkP4','Bootstrap Buttons','a',"https://v4-alpha.getbootstrap.com/components/buttons/");
+	addDiv("linkP5","",'SODDWrapper','','p');
+	addDiv("linkSO5","",'linkP5','Bootstrap Navbar','a',"https://www.w3schools.com/bootstrap/bootstrap_navbar.asp");
+	addDiv("linkP6","",'SODDWrapper','','p');
+	addDiv("linkSO6","",'linkP6','Bootstrap Number Validation','a',"https://stackoverflow.com/questions/16517718/bootstrap-number-validation");
+	addDiv("linkP7","",'SODDWrapper','','p');
+	addDiv("linkSO7","",'linkP7','Bootstrap rounded corners','a',"https://stackoverflow.com/questions/12084121/correct-way-to-create-rounded-corners-in-twitter-bootstrap");
+	addDiv("linkP8","",'SODDWrapper','','p');
+	addDiv("linkSO8","",'linkP8','Number Input Type','a',"https://stackoverflow.com/questions/3368546/what-input-field-type-forces-the-number-pad-mobile-keyboard-to-come-up-when-focu");
+	addDiv("linkP9","",'SODDWrapper','','p');
+	addDiv("linkSO9","",'linkP9','Radio Input Type','a',"https://html.com/input-type-radio/");
+	addDiv("linkP10","",'SODDWrapper','','p');
+	addDiv("linkSO10","",'linkP10','Bootstrap Grid','a',"http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/");
+	addDiv("linkP11","",'SODDWrapper','','p');
+	addDiv("linkSO11","",'linkP11','Document Onload not cooperating','a',"https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate");
+	addDiv("linkP12","",'SODDWrapper','','p');
+	addDiv("linkSO12","",'linkP12','Set radio button status with Javascript','a',"https://stackoverflow.com/questions/9476617/how-to-set-radio-button-status-with-javascript");
+	addDiv("linkP13","",'SODDWrapper','','p');
+	addDiv("linkSO13","",'linkP13','Change onclick action with Javascript','a',"https://stackoverflow.com/questions/5303899/change-onclick-action-with-a-javascript-function");
+	addDiv("linkP14","",'SODDWrapper','','p');
+	addDiv("linkSO14","",'linkP14','Dynamically adding or removing a Div','a',"https://stackoverflow.com/questions/4967289/dynamically-adding-removing-a-div-to-html");
+	addDiv("linkP15","",'SODDWrapper','','p');
+	addDiv("linkSO15","",'linkP15','Dropdown menus','a',"https://stackoverflow.com/questions/18030132/html-css-dropdown-menu-overflow");
+	addDiv("linkP16","",'SODDWrapper','','p');
+	addDiv("linkSO16","",'linkP16','Search for "appendChild.body"','a',"https://duckduckgo.com/?q=document+appendchild+body&atb=v49-6&ia=qa");
+	addDiv("linkP17","",'SODDWrapper','','p');
+	addDiv("linkSO17","",'linkP17','HTML5 Combobox','a',"http://www.scriptol.com/html5/combobox.php");
+	addDiv("linkP18","",'SODDWrapper','','p');
+	addDiv("linkSO18","",'linkP18','Form widget editable select','a',"http://www.dhtmlgoodies.com/scripts/form_widget_editable_select/form_widget_editable_select.html");
+	
 	addDiv("Coingeneric","row","bodyWrapper");
 	addDiv("Coinsidebar","sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles","bodyWrapper");
 	addDiv("CoinconsoleLogLabel","","Coinsidebar","Coinsole Log");
@@ -1254,11 +1319,13 @@ function addCoinPage() {
 function loadPage($pageName) {
 try {
 	removeDiv("headWrapper");
+	removeDiv("SODDWrapper");
 	removeDiv("bodyWrapper");
 	removeDiv("footWrapper");
 	window.clearInterval(timerInterval);
 	
 	addDiv("headWrapper","",'head');
+	addDiv("SODDWrapper","",'SODDOuter');
 	addDiv("bodyWrapper","container",'body');
 	addDiv("footWrapper","",'body');
 	
@@ -1301,11 +1368,44 @@ try {
 		break;
 		case "login": 
 			addFormPage("login");
+			
+	addDiv("linkP20","",'SODDWrapper','','p');
+	addDiv("linkSO20","",'linkP20','Javascript Basic Auth','a',"https://stackoverflow.com/questions/491914/pure-javascript-code-for-http-basic-authentication");
+	addDiv("linkP21","",'SODDWrapper','','p');
+	addDiv("linkSO21","",'linkP21','Sequelize getting started','a',"http://docs.sequelizejs.com/manual/installation/getting-started.html");
+	addDiv("linkP23","",'SODDWrapper','','p');
+	addDiv("linkSO23","",'linkP23','Sequelize Findone','a',"https://stackoverflow.com/questions/32212945/sequelize-findone-success-is-undefined#32213208");
+	addDiv("linkP24","",'SODDWrapper','','p');
+	addDiv("linkSO24","",'linkP24','Render common variables from app.js to all routes in express','a',"https://stackoverflow.com/questions/29026650/how-to-render-common-variables-from-app-js-to-all-routes-in-express");
+	addDiv("linkP25","",'SODDWrapper','','p');
+	addDiv("linkSO25","",'linkP25','Delete cookie on logout in Express and Passport','a',"https://stackoverflow.com/questions/33112299/how-to-delete-cookie-on-logout-in-express-passport-js");
+	addDiv("linkP26","",'SODDWrapper','','p');
+	addDiv("linkSO26","",'linkP26','Cookie Parser on Github','a',"https://github.com/expressjs/cookie-parser#cookieparsersignedcookiestr-secret");
+	addDiv("linkP27","",'SODDWrapper','','p');
+	addDiv("linkSO27","",'linkP27','Express JS book','a',"http://expressjs-book.com/index.html%3Fp=128.html");
+	addDiv("linkP28","",'SODDWrapper','','p');
+	addDiv("linkSO28","",'linkP28','Bootstrap buttons','a',"https://v4-alpha.getbootstrap.com/components/buttons/#sizes");
+	
 		break;
 		case "signup": 
 			addFormPage("signup");
 		break;
 	}; // end switch divColor
+	
+	addDiv("linkP90","",'SODDWrapper','','p');
+	addDiv("linkSO90","",'linkP90','______________');
+	
+	addDiv("linkP91","",'SODDWrapper','','p');
+	addDiv("linkSO91","",'linkP91','Load div as file','a',"https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/");
+	
+	addDiv("linkP92","",'SODDWrapper','','p');
+	addDiv("linkSO92","",'linkP92','Applies color scheme to text in div','a',"https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css");
+
+	addDiv("linkP93","",'SODDWrapper','','p');
+	addDiv("linkSO93","",'linkP93','Load JSON','a',"https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript");
+
+	addDiv("linkP94","",'SODDWrapper','','p');
+	addDiv("linkSO94","",'linkP94','Clear SetInterval','a',"https://stackoverflow.com/questions/2901108/how-do-i-clear-this-setinterval#2901155");
 	
 	addFooter();
 } catch(e){console.log(e)};
