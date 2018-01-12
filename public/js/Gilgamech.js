@@ -1493,6 +1493,6 @@ try {
 window.onload = function(){ 
 	addHeader();
 	addNav();
-	loadPage("calc")
+	loadPage("rgb")
 }; // end window.onload
 
