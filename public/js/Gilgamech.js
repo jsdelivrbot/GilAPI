@@ -41,9 +41,10 @@ var $pclass2="hidden-md hidden-lg"
 var $cssClassA = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
 var $cssClassB = "img-rounded col-md-12 col-xs-12"
 var $cssClassC = "img-rounded row contentTitles"
-var $btnPrimary = "btn btn-primary"
-var $rowClasses = "row";
 var $cssClassD = "col-md-2 col-xs-2";
+var $btnPrimary = "btn btn-primary"
+var $btnCalc = "btn btn-primary btn-lg"
+var $rowClasses = "row";
 
 // Functions
 // General
@@ -174,12 +175,12 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attri
 	
 }; // end addDiv	
 
-function detectEnter(e){
+function detectEnterChat(e){
     if(e.keyCode === 13){
         e.preventDefault(); // Ensure it is only this code that runs
         updateChat();
     };
-}; // end detectEnter
+}; // end detectEnterChat
 
 function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 	postJSON($postJsonUrl, function(response) {
@@ -755,6 +756,22 @@ function refreshCharts() {
   }catch(e){console.log(e)}; // end try 
 }; // end refreshCharts
 
+// Calculator
+function pressCalcButton($inputNumber,$outputDiv) {
+	document.getElementById($outputDiv).value += $inputNumber
+}
+
+function evalCalc($outputDiv) {
+	$inputToEval = document.getElementById($outputDiv).value
+	document.getElementById($outputDiv).value = eval($inputToEval)
+}
+function detectEnterCalc(e,$outputDiv){
+    if(e.keyCode === 13){
+        e.preventDefault(); // Ensure it is only this code that runs
+        evalCalc($outputDiv);
+    };
+}; // end detectEnterChat
+
 
 // Add pages
 function addHeader() {
@@ -799,6 +816,9 @@ function addNav() {
 
 	addDiv("lip4",$pclass2,'ddc','','p');
 	addDiv("aip4","",'lip4','Chat!','a',"","onclick","loadPage('chat');");
+
+	addDiv("lip1c","",'ddc','','p');
+	addDiv("aip1c","",'lip1c','Calculator','a',"","onclick","loadPage('calc');");
 
 	addDiv("lip13","",'ddc','','p');
 	addDiv("aip13","",'lip13','addDiv Explained','a',"","onclick","loadPage('addDiv');");
@@ -1083,7 +1103,7 @@ function addChatPage() {
 	addDiv("chatUser",$cssClassA + "blueColorRow",'blueCRow',"","input","","placeholder","User Name");
 	
 	addDiv("greenCRow",$rowClasses,'coinArea');
-	addDiv("chatMessage",$cssClassA + "greenColorRow",'greenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
+	addDiv("chatMessage",$cssClassA + "greenColorRow",'greenCRow',"Hello World!","input","","onkeypress","detectEnterChat(event);");
 	
 	refreshChat(document.getElementById("chatRoom").value)
 	
@@ -1191,6 +1211,48 @@ function addJsonLintPage() {
 	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
 		
 }; // end addPage
+
+function addCalcPage() {
+	addDiv("linkP1","",'NavDDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','Cut and paste Javascript calculator','a',"http://javascriptkit.com/script/cut18.shtml");
+	// addDiv("linkP2","",'NavDDWrapper','','p');
+	// addDiv("linkSO2","",'linkP2','copy textarea to clipboard	','a',"https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068");
+	
+	addDiv("content",$cssClassC,'bodyWrapper',"Calculator");
+	addDiv("calcWrapper","img-rounded col-md-12 col-xs-12",'bodyWrapper');
+	
+	addDiv("htmlColorRow",$rowClasses,'calcWrapper');
+	addDiv("output",$cssClassA + "htmlColorRow",'htmlColorRow','',"input","","onkeypress","detectEnterCalc(event,'output')");
+	document.getElementById("output").setAttribute( "style",  "color: #000");
+	
+	addDiv("row1",$rowClasses,'calcWrapper');
+	addDiv("btn1",$btnCalc,'row1',1,"button","","onclick","pressCalcButton(1,'output')");
+	addDiv("btn2",$btnCalc,'row1',2,"button","","onclick","pressCalcButton(2,'output')");
+	addDiv("btn3",$btnCalc,'row1',3,"button","","onclick","pressCalcButton(3,'output')");
+	addDiv("btnDivide",$btnCalc,'row1',"/","button","","onclick","pressCalcButton('/','output')");
+	
+	addDiv("row2",$rowClasses,'calcWrapper');
+	addDiv("btn4",$btnCalc,'row2',4,"button","","onclick","pressCalcButton(4,'output')");
+	addDiv("btn5",$btnCalc,'row2',5,"button","","onclick","pressCalcButton(5,'output')");
+	addDiv("btn6",$btnCalc,'row2',6,"button","","onclick","pressCalcButton(6,'output')");
+	addDiv("btnMult",$btnCalc,'row2',"*","button","","onclick","pressCalcButton('*','output')");
+	
+	addDiv("row3",$rowClasses,'calcWrapper');
+	addDiv("btn7",$btnCalc,'row3',7,"button","","onclick","pressCalcButton(7,'output')");
+	addDiv("btn8",$btnCalc,'row3',8,"button","","onclick","pressCalcButton(8,'output')");
+	addDiv("btn9",$btnCalc,'row3',9,"button","","onclick","pressCalcButton(9,'output')");
+	addDiv("btnSub",$btnCalc,'row3',"-","button","","onclick","pressCalcButton('-','output')");
+	
+	addDiv("row4",$rowClasses,'calcWrapper');
+	addDiv("btnEquals",$btnCalc,'row4',"=","button","","onclick","evalCalc('output')");
+	addDiv("btn0",$btnCalc,'row4'," 0 ","button","","onclick","pressCalcButton(0,'output')");
+	addDiv("btnDot",$btnCalc,'row4',".","button","","onclick","pressCalcButton('.','output')");
+	addDiv("btnAdd",$btnCalc,'row4',"+","button","","onclick","pressCalcButton('+','output')");
+	
+	
+	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
+		
+}; // end addCalcPage
 
 function addCoinPage() {
 	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
@@ -1347,6 +1409,9 @@ try {
 		case "Arkdata": 
 			addArkdataPage();
 		break;
+		case "calc": 
+			addCalcPage();
+		break;
 		case "coin": 
 			addCoinPage();
 		break;
@@ -1418,6 +1483,9 @@ try {
 	addDiv("linkP94","",'NavDDWrapper','','p');
 	addDiv("linkSO94","",'linkP94','Clear SetInterval','a',"https://stackoverflow.com/questions/2901108/how-do-i-clear-this-setinterval#2901155");
 	
+	addDiv("linkP95","",'NavDDWrapper','','p');
+	addDiv("linkSO95","",'linkP95','Make footer stick to the bottom of the page.','a',"https://stackoverflow.com/questions/3443606/make-footer-stick-to-bottom-of-page-correctly#18066619 ");
+	
 	addFooter();
 } catch(e){console.log(e)};
 }; // end loadPage
@@ -1425,6 +1493,6 @@ try {
 window.onload = function(){ 
 	addHeader();
 	addNav();
-	loadPage("rgb")
+	loadPage("calc")
 }; // end window.onload
 
