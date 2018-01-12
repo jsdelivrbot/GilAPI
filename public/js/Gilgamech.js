@@ -184,32 +184,32 @@ function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
   // Post API with user:chat JSON and write reply to textbox.
-  chatUser = document.getElementById("ChatchatUser").value
-  chatMessage = document.getElementById("ChatchatMessage").value
-  chatRoom = document.getElementById("ChatchatRoom").value
+  chatUser = document.getElementById("chatUser").value
+  chatMessage = document.getElementById("chatMessage").value
+  chatRoom = document.getElementById("chatRoom").value
   if (chatMessage) {
     if (chatUser) {
       chatUrl = "https://gil-api.herokuapp.com/chatpost?user=" + chatUser + "&message=" + chatMessage + "&chatroom=" + chatRoom
 	  loadChat(chatUrl,"chatMainBox")
-      document.getElementById("ChatchatMessage").value = ""
-      document.getElementById("ChatuserNameErr").innerText = ""
+      document.getElementById("chatMessage").value = ""
+      document.getElementById("userNameErr").innerText = ""
     } else {
-      document.getElementById("ChatuserNameErr").innerText = "Enter a user name. Then do a barrel roll."
+      document.getElementById("userNameErr").innerText = "Enter a user name. Then do a barrel roll."
     }; //end if chatUser
   }; //end if chatMessage
-}; // end updateChat
+}; // end update
 
 function refreshChat(chatRoom){
   chatUrl = "https://gil-api.herokuapp.com/chatload?chatroom=" + chatRoom
-  loadChat(chatUrl,"ChatchatMainBox")
-}; // end refreshChat
+  loadChat(chatUrl,"chatMainBox")
+}; // end refresh
 
 function loadChat(chatUrl,chatBox){
   loadJSON(chatUrl, function(response) {
     document.getElementById(chatBox).value = response
-    document.getElementById("ChatchatMainBox").value = response
+    document.getElementById("chatMainBox").value = response
   }); // end loadJSON
-}; // end loadChat
+}; // end load
 
 // DSQ
 function addCircle(x, y, r, fill) {
@@ -389,30 +389,30 @@ function updateRgbDivColor($divId) {
 	$Color2 = Math.round(($Color) * $colorRatio)
 	
 	switch ($divId) {
-		case "RgbredRow": 
+		case "redRow": 
 			document.getElementById($divId).style.backgroundColor = rgbToHex(
 				$Color,$Color2,$Color2
 			); // end document.getElementById
 		break;
-		case "RgbgreenRow": 
+		case "greenRow": 
 			document.getElementById($divId).style.backgroundColor = rgbToHex(
 				$Color2,$Color,$Color2
 			); // end document.getElementById
 		break;
-		case "RgbblueRow": 
+		case "blueRow": 
 			document.getElementById($divId).style.backgroundColor = rgbToHex(
 				$Color2,$Color2,$Color
 			); // end document.getElementById
 		break;
 	}; // end switch divColor
 
-    document.getElementById("RgbhtmlRow").value = rgbToHex(
-		(document.getElementById("RgbredRow").value * 1), 
-		(document.getElementById("RgbgreenRow").value * 1),
-		(document.getElementById("RgbblueRow").value * 1),
+    document.getElementById("htmlRow").value = rgbToHex(
+		(document.getElementById("redRow").value * 1), 
+		(document.getElementById("greenRow").value * 1),
+		(document.getElementById("blueRow").value * 1),
 	);
 	
-	document.getElementById("RgbcontentLabel").style.backgroundColor = document.getElementById("RgbhtmlRow").value
+	document.getElementById("contentLabel").style.backgroundColor = document.getElementById("htmlRow").value
 
 }; // end updateRedDivColor
 
@@ -839,7 +839,7 @@ function addFooter() {
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
 	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
-	addDiv("aFooterImg","",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
+	addDiv("aFooterImg","img-rounded",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
 	document.getElementById("aFooterImg").style.height = "150px";
 	addDiv("aFooterCR","copyright",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p');
 	
@@ -889,31 +889,31 @@ function addFruitBotPage() {
 function addRgbColorPage() {
 	var $rowClasses = "row colorRow"
 	
-	addDiv("Rgbspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
-	addDiv("Rgbcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
-	addDiv("RgbcoinArea","",'Rgbcontent');
-	addDiv("RgbcontentLabel",$cssClassC,'RgbcoinArea','RGB Calculator');
+	addDiv("spacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
+	addDiv("content","img-rounded col-md-6 col-xs-12",'bodyWrapper');
+	addDiv("coinArea","",'content');
+	addDiv("contentLabel",$cssClassC,'coinArea','RGB Calculator');
 	
-	addDiv("RgbhtmlColorRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbhtmlRow",$cssClassA + "RgbhtmlColorRow",'RgbhtmlColorRow','',"input","","onchange","updateRgbColor()");
-	document.getElementById("RgbhtmlRow").setAttribute( "style",  "color: #000");
-	document.getElementById("RgbhtmlRow").setAttribute( "maxlength",  "7");
+	addDiv("htmlColorRow",$rowClasses,'coinArea');
+	addDiv("htmlRow",$cssClassA + "htmlColorRow",'htmlColorRow','',"input","","onchange","updateColor()");
+	document.getElementById("htmlRow").setAttribute( "style",  "color: #000");
+	document.getElementById("htmlRow").setAttribute( "maxlength",  "7");
 	
-	addDiv("RgbredCRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbredRow",($cssClassA + "redColorRow"),'RgbredCRow',171,"input","","onchange","updateRgbDivColor('redRow');");
-	document.getElementById("RgbredRow").setAttribute( "type",  "number");
+	addDiv("redCRow",$rowClasses,'coinArea');
+	addDiv("redRow",($cssClassA + "redColorRow"),'redCRow',171,"input","","onchange","updateRgbDivColor('redRow');");
+	document.getElementById("redRow").setAttribute( "type",  "number");
 	
-	addDiv("RgbgreenCRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbgreenRow",$cssClassA + "greenColorRow",'RgbgreenCRow',205,"input","","onchange","updateRgbDivColor('greenRow');");
-	document.getElementById("RgbgreenRow").setAttribute( "type",  "number");
+	addDiv("greenCRow",$rowClasses,'coinArea');
+	addDiv("greenRow",$cssClassA + "greenColorRow",'greenCRow',205,"input","","onchange","updateRgbDivColor('greenRow');");
+	document.getElementById("greenRow").setAttribute( "type",  "number");
 	
-	addDiv("RgbblueCRow",$rowClasses,'RgbcoinArea');
-	addDiv("RgbblueRow",$cssClassA + "blueColorRow",'RgbblueCRow',239,"input","","onchange","updateRgbDivColor('blueRow');");
-	document.getElementById("RgbblueRow").setAttribute( "type",  "number");
+	addDiv("blueCRow",$rowClasses,'coinArea');
+	addDiv("blueRow",$cssClassA + "blueColorRow",'blueCRow',239,"input","","onchange","updateRgbDivColor('blueRow');");
+	document.getElementById("blueRow").setAttribute( "type",  "number");
 	
-	updateRgbDivColor('RgbredRow');
-	updateRgbDivColor('RgbgreenRow');
-	updateRgbDivColor('RgbblueRow');
+	updateRgbDivColor('redRow');
+	updateRgbDivColor('greenRow');
+	updateRgbDivColor('blueRow');
 }; // end addPage
 
 function addArkdataPage() {
@@ -984,16 +984,16 @@ function addAddDivPage() {
 	$bodyText +=  "Add any extra footer elements to wrapperFoot.\n\n"
 	$bodyText +=  "\n\n"
 	
-	addDiv("AddDivspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
-	addDiv("AddDivcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
-	addDiv("AddDivcoinArea","",'AddDivcontent');
-	addDiv("AddDivcontentLabel",$cssClassC,'AddDivcoinArea',$Title);
+	addDiv("spacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
+	addDiv("content","img-rounded col-md-6 col-xs-12",'bodyWrapper');
+	addDiv("coinArea","",'content');
+	addDiv("contentLabel",$cssClassC,'coinArea',$Title);
 	
-	addDiv("AddDivheaderMainRow",$rowClasses,'AddDivcoinArea');
-	addDiv("AddDivheaderRow","img-rounded col-md-12 col-xs-12 ",'AddDivheaderMainRow',$Header,"p","","onchange","updateRgbColor()");
-	document.getElementById("AddDivheaderRow").setAttribute( "style",  "color: #000");
-	addDiv("AddDivtextRow","",'AddDivcoinArea',$bodyText,"p","","onchange","updateRgbColor()");
-	document.getElementById("AddDivtextRow").setAttribute( "style",  "color: #000");
+	addDiv("headerMainRow",$rowClasses,'coinArea');
+	addDiv("headerRow","img-rounded col-md-12 col-xs-12 ",'headerMainRow',$Header,"p","","onchange","updateRgbColor()");
+	document.getElementById("headerRow").setAttribute( "style",  "color: #000");
+	addDiv("textRow","",'coinArea',$bodyText,"p","","onchange","updateRgbColor()");
+	document.getElementById("textRow").setAttribute( "style",  "color: #000");
 	
 }; // end addPage
 
@@ -1032,42 +1032,42 @@ function addMemePage() {
 }; // end addPage
 
 function addBadPWPage() {	
-	addDiv("BadPWcontent",$cssClassC,'bodyWrapper',"Bad Password");
+	addDiv("content",$cssClassC,'bodyWrapper',"Bad Password");
 	
-	addDiv("BadPWgetBadPWInput","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
+	addDiv("getInput","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
 
-	addDiv("BadPWmyRow","row" + $cssClassB,'bodyWrapper');
-	addDiv("BadPWbtnPretty",$btnPrimary,'BadPWmyRow',"Get Bad Password","button","","onclick","updateFormPost('/badpw','getBadPWInput')");
-	addDiv("BadPWbtnClip","btn btn-info",'BadPWmyRow',"Copy to Clipboard","button","","onclick","copyToClipboard('getBadPWInput')");
+	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("btnPretty",$btnPrimary,'myRow',"Get Bad Password","button","","onclick","updateFormPost('/badpw','getInput')");
+	addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('getInput')");
 		
 }; // end addPage
 
 function addChatPage() {
 	var $rowClasses = "row colorRow"
 	
-	addDiv("Chatspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
-	addDiv("Chatcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
-	addDiv("ChatcoinArea","",'Chatcontent');
-	addDiv("ChatcontentLabel",$cssClassC,'ChatcoinArea','Chat Room:');
+	addDiv("spacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
+	addDiv("content","img-rounded col-md-6 col-xs-12",'bodyWrapper');
+	addDiv("coinArea","",'content');
+	addDiv("contentLabel",$cssClassC,'coinArea',' Room:');
 	
-	addDiv("ChathtmlColorRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatRoom",$cssClassA + "htmlColorRow",'ChathtmlColorRow','General',"input","","onchange","updateRgbColor()");
-	document.getElementById("ChatchatRoom").setAttribute( "style",  "color: #000");
+	addDiv("htmlColorRow",$rowClasses,'coinArea');
+	addDiv("chatRoom",$cssClassA + "htmlColorRow",'htmlColorRow','General',"input");
+	document.getElementById("chatRoom").setAttribute( "style",  "color: #000");
 	
-	addDiv("ChatredCRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatMainBox","img-rounded",'ChatredCRow',171,"textarea");
-	document.getElementById("ChatchatMainBox").setAttribute( "style",  "color: #000");
+	addDiv("redCRow",$rowClasses,'coinArea');
+	addDiv("chatMainBox","img-rounded",'redCRow',171,"textarea");
+	document.getElementById("chatMainBox").setAttribute( "style",  "color: #000");
 	
-	addDiv("ChatblueCRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatUser",$cssClassA + "blueColorRow",'ChatblueCRow',"","input","","placeholder","User Name");
+	addDiv("blueCRow",$rowClasses,'coinArea');
+	addDiv("chatUser",$cssClassA + "blueColorRow",'blueCRow',"","input","","placeholder","User Name");
 	
-	addDiv("ChatgreenCRow",$rowClasses,'ChatcoinArea');
-	addDiv("ChatchatMessage",$cssClassA + "greenColorRow",'ChatgreenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
+	addDiv("greenCRow",$rowClasses,'coinArea');
+	addDiv("chatMessage",$cssClassA + "greenColorRow",'greenCRow',"Hello World!","input","","onkeypress","detectEnter(event);");
 	
-	refreshChat(document.getElementById("ChatchatRoom").value)
+	refreshChat(document.getElementById("chatRoom").value)
 	
 	timerInterval = setInterval(function () {
-		refreshChat(document.getElementById("ChatchatRoom").value)
+		refreshChat(document.getElementById("chatRoom").value)
 	}, 5000);
 
 }; // end addPage
@@ -1075,16 +1075,16 @@ function addChatPage() {
 function addDragSqPage() {
 	addDiv("easelScript","","headWrapper","","script","/js/easeljs-0.8.2.min.js")
 
-	addDiv("DragSqbtnSquare","btn","bodyWrapper","Add Square","button","","onclick","addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow');")
-	addDiv("DragSqbtnCircle","btn","bodyWrapper","Add Circle","button","","onclick","addCircle(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 'red');")
-	addDiv("DragSqbtnStar","btn","bodyWrapper","Add Star","button","","onclick",'addStar(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, "blue");')
+	addDiv("btnSquare","btn","bodyWrapper","Add Square","button","","onclick","addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow');")
+	addDiv("btnCircle","btn","bodyWrapper","Add Circle","button","","onclick","addCircle(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 'red');")
+	addDiv("btnStar","btn","bodyWrapper","Add Star","button","","onclick",'addStar(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, "blue");')
 	
-	addDiv("DragSqcanvas","","bodyWrapper" ,"This text is displayed if your browser does not support HTML5 Canvas.","canvas")
-	canvas = document.getElementById('DragSqcanvas');
+	addDiv("canvas","","bodyWrapper" ,"This text is displayed if your browser does not support HTML5 Canvas.","canvas")
+	canvas = document.getElementById('canvas');
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 
-	$stage = new createjs.Stage("DragSqcanvas");
+	$stage = new createjs.Stage("canvas");
 
 	addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, "#f33");
 	addRoundedSquare(canvas.width/2, canvas.height/2 + 100, SIZE * 2, 5, "#3f3");
@@ -1094,47 +1094,45 @@ function addDragSqPage() {
 }; // end addPage
 
 function addGitPage() {
-	
-	
 	addDiv("wrapperGit","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentGit",$cssClassC,'wrapperGit',"Git repo URL");
-	addDiv("GitmyTextAreaGit","div_textarea" + $cssClassB,'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
-	addDiv("GitmyRowGit","row" + $cssClassB,'wrapperGit');
-	addDiv("GitbtnClipGit","btn btn-info",'GitmyRowGit',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaGit')");
-	addDiv("GitbtnUpdateGit",$btnPrimary,'GitmyRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
-	addDiv("GitbtnAddPageGit","btn btn-warning",'GitmyRowGit',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
+	addDiv("contentGit",$cssClassC,'wrapperGit'," repo URL");
+	addDiv("myTextAreaGit","div_textarea" + $cssClassB,'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
+	addDiv("myRowGit","row" + $cssClassB,'wrapperGit');
+	addDiv("btnClipGit","btn btn-info",'myRowGit',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaGit')");
+	addDiv("btnUpdateGit",$btnPrimary,'myRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
+	addDiv("btnAddPageGit","btn btn-warning",'myRowGit',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
 
 	addDiv("wrapperNPN","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentNPN",$cssClassC,'wrapperNPN',"NewPageName","","","contenteditable","true");
-	addDiv("GitmyTextAreaNPN","div_textarea" + $cssClassB,'wrapperNPN','Code goes here.',"textarea");
-	addDiv("GitmyRowNPN","row" + $cssClassB,'wrapperNPN');
-	addDiv("GitbtnPrettyNPN",$btnPrimary,'GitmyRowNPN',"Pretty Print","button","","onclick","prettyPrint('myTextAreaNPN')");
-	addDiv("GitbtnColorifyNPN","btn btn-secondary",'GitmyRowNPN',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaNPN')");
-	addDiv("GitbtnClipNPN","btn btn-info",'GitmyRowNPN',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaNPN')");
+	addDiv("contentNPN",$cssClassC,'wrapperNPN',"NewPageName","","","contenteditable","true");
+	addDiv("myTextAreaNPN","div_textarea" + $cssClassB,'wrapperNPN','Code goes here.',"textarea");
+	addDiv("myRowNPN","row" + $cssClassB,'wrapperNPN');
+	addDiv("btnPrettyNPN",$btnPrimary,'myRowNPN',"Pretty Print","button","","onclick","prettyPrint('myTextAreaNPN')");
+	addDiv("btnColorifyNPN","btn btn-secondary",'myRowNPN',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaNPN')");
+	addDiv("btnClipNPN","btn btn-info",'myRowNPN',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaNPN')");
 
 	addDiv("wrapperIndex","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentIndex",$cssClassC,'wrapperIndex',"Index.js","","","contenteditable","true");
-	addDiv("GitmyTextAreaIndex","div_textarea" + $cssClassB,'wrapperIndex','Code goes here.',"textarea");
-	addDiv("GitmyRowIndex","row" + $cssClassB,'wrapperIndex');
-	addDiv("GitbtnPrettyIndex",$btnPrimary,'GitmyRowIndex',"Pretty Print","button","","onclick","prettyPrint('myTextAreaIndex')");
-	addDiv("GitbtnColorifyIndex","btn btn-secondary",'GitmyRowIndex',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaIndex')");
-	addDiv("GitbtnClipIndex","btn btn-info",'GitmyRowIndex',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaIndex')");
+	addDiv("contentIndex",$cssClassC,'wrapperIndex',"Index.js","","","contenteditable","true");
+	addDiv("myTextAreaIndex","div_textarea" + $cssClassB,'wrapperIndex','Code goes here.',"textarea");
+	addDiv("myRowIndex","row" + $cssClassB,'wrapperIndex');
+	addDiv("btnPrettyIndex",$btnPrimary,'myRowIndex',"Pretty Print","button","","onclick","prettyPrint('myTextAreaIndex')");
+	addDiv("btnColorifyIndex","btn btn-secondary",'myRowIndex',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaIndex')");
+	addDiv("btnClipIndex","btn btn-info",'myRowIndex',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaIndex')");
 
 	addDiv("wrapperTest","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentTest",$cssClassC,'wrapperTest',"Test.js","","","contenteditable","true");
-	addDiv("GitmyTextAreaTest","div_textarea" + $cssClassB,'wrapperTest','Code goes here.',"textarea");
-	addDiv("GitmyRowTest","row" + $cssClassB,'wrapperTest');
-	addDiv("GitbtnPrettyTest",$btnPrimary,'GitmyRowTest',"Pretty Print","button","","onclick","prettyPrint('myTextAreaTest')");
-	addDiv("GitbtnColorifyTest","btn btn-secondary",'GitmyRowTest',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaTest')");
-	addDiv("GitbtnClipTest","btn btn-info",'GitmyRowTest',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaTest')");
+	addDiv("contentTest",$cssClassC,'wrapperTest',"Test.js","","","contenteditable","true");
+	addDiv("myTextAreaTest","div_textarea" + $cssClassB,'wrapperTest','Code goes here.',"textarea");
+	addDiv("myRowTest","row" + $cssClassB,'wrapperTest');
+	addDiv("btnPrettyTest",$btnPrimary,'myRowTest',"Pretty Print","button","","onclick","prettyPrint('myTextAreaTest')");
+	addDiv("btnColorifyTest","btn btn-secondary",'myRowTest',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaTest')");
+	addDiv("btnClipTest","btn btn-info",'myRowTest',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaTest')");
 
 	addDiv("wrapperPagename","container img-rounded",'bodyWrapper');
-	addDiv("GitcontentPagename",$cssClassC,'wrapperPagename',"Pagename.js","","","contenteditable","true");
-	addDiv("GitmyTextAreaPagename","div_textarea" + $cssClassB,'wrapperPagename','Code goes here.',"textarea");
-	addDiv("GitmyRowPagename","row" + $cssClassB,'wrapperPagename');
-	addDiv("GitbtnPrettyPagename",$btnPrimary,'GitmyRowPagename',"Pretty Print","button","","onclick","prettyPrint('myTextAreaPagename')");
-	addDiv("GitbtnColorifyPagename","btn btn-secondary",'GitmyRowPagename',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaPagename')");
-	addDiv("GitbtnClipPagename","btn btn-info",'GitmyRowPagename',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaPagename')");
+	addDiv("contentPagename",$cssClassC,'wrapperPagename',"Pagename.js","","","contenteditable","true");
+	addDiv("myTextAreaPagename","div_textarea" + $cssClassB,'wrapperPagename','Code goes here.',"textarea");
+	addDiv("myRowPagename","row" + $cssClassB,'wrapperPagename');
+	addDiv("btnPrettyPagename",$btnPrimary,'myRowPagename',"Pretty Print","button","","onclick","prettyPrint('myTextAreaPagename')");
+	addDiv("btnColorifyPagename","btn btn-secondary",'myRowPagename',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaPagename')");
+	addDiv("btnClipPagename","btn btn-info",'myRowPagename',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaPagename')");
 	
 	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
 		
@@ -1156,7 +1154,6 @@ function addJsonLintPage() {
 }; // end addPage
 
 function addFormPage($formPost) {
-	
 	addDiv("wrapperForm","",'bodyWrapper',"","form","","action",$formPost);
 	document.getElementById("wrapperForm").setAttribute( "method", "post");
 	
