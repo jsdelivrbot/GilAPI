@@ -835,7 +835,6 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
-	addDiv("footWrapper","",'body',"");
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
@@ -847,7 +846,6 @@ function addFooter() {
 }; // end addFooter
 
 function addFruitBotPage() {
-	addDiv("headWrapper","",'head');
 	addDiv("load1","",'headWrapper',"","link","/assets/css/drawgame.css");
 	addDiv("load2","",'headWrapper',"","script","/assets/js/seedrandom.js");
 	addDiv("load3","",'headWrapper',"","script","/assets/js/board.js");
@@ -857,7 +855,6 @@ function addFruitBotPage() {
 	addDiv("load7","",'headWrapper',"","script","/assets/js/player.js");
 	addDiv("load8","",'headWrapper',"","script","/js/jquery.min.js");
 	
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("contentLabels","img-rounded row contentTitles",'bodyWrapper',"");
 	
 	addDiv("content","container img-rounded",'bodyWrapper');
@@ -892,7 +889,6 @@ function addFruitBotPage() {
 function addRgbColorPage() {
 	var $rowClasses = "row colorRow"
 	
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("Rgbspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("Rgbcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("RgbcoinArea","",'Rgbcontent');
@@ -921,13 +917,12 @@ function addRgbColorPage() {
 }; // end addPage
 
 function addArkdataPage() {
-	addDiv("headWrapper","",'head');
 	addDiv("metaRefresh","",'headWrapper',"","meta","","http-equiv","refresh");
 	document.getElementById("metaRefresh").setAttribute( "content","60");
 	addDiv("Arkdatalink","",'headWrapper','','link','/stylesheets/ARKData.css');
 	addDiv("Arkdatalinkm","",'headWrapper','','link','/stylesheets/ARKDatam.css',"media","handheld");
 	
-	addDiv("Arkdatawrapper","container img-rounded",'body');
+	addDiv("Arkdatawrapper","container img-rounded",'bodyWrapper');
 	addDiv("Arkdataspacer","img-rounded col-md-3 hidden-xs",'Arkdatawrapper');
 	addDiv("Arkdatacontent","img-rounded col-md-6 col-xs-12",'Arkdatawrapper');
 	addDiv("ArkdatacoinArea","",'Arkdatacontent');
@@ -989,7 +984,6 @@ function addAddDivPage() {
 	$bodyText +=  "Add any extra footer elements to wrapperFoot.\n\n"
 	$bodyText +=  "\n\n"
 	
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("AddDivspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("AddDivcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("AddDivcoinArea","",'AddDivcontent');
@@ -1004,7 +998,6 @@ function addAddDivPage() {
 }; // end addPage
 
 function addMemePage() {
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("content",$cssClassC,'bodyWrapper',"MemeGen");
 	
 	addDiv("canvas",$cssClassC,'bodyWrapper',"","canvas");
@@ -1015,7 +1008,6 @@ function addMemePage() {
 	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"Create !","button","","onclick","updateMemeForm('memeUrlInput')");
 
-	//Create the canvas
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 
@@ -1040,7 +1032,6 @@ function addMemePage() {
 }; // end addPage
 
 function addBadPWPage() {	
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("BadPWcontent",$cssClassC,'bodyWrapper',"Bad Password");
 	
 	addDiv("BadPWgetBadPWInput","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
@@ -1054,7 +1045,6 @@ function addBadPWPage() {
 function addChatPage() {
 	var $rowClasses = "row colorRow"
 	
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("Chatspacer","img-rounded col-md-3 hidden-xs",'bodyWrapper');
 	addDiv("Chatcontent","img-rounded col-md-6 col-xs-12",'bodyWrapper');
 	addDiv("ChatcoinArea","",'Chatcontent');
@@ -1083,15 +1073,12 @@ function addChatPage() {
 }; // end addPage
 
 function addDragSqPage() {
-	addDiv("headWrapper","",'head');
 	addDiv("easelScript","","headWrapper","","script","/js/easeljs-0.8.2.min.js")
 
-	addDiv("bodyWrapper","","body","")
 	addDiv("DragSqbtnSquare","btn","bodyWrapper","Add Square","button","","onclick","addRoundedSquare(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow');")
 	addDiv("DragSqbtnCircle","btn","bodyWrapper","Add Circle","button","","onclick","addCircle(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 'red');")
 	addDiv("DragSqbtnStar","btn","bodyWrapper","Add Star","button","","onclick",'addStar(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, "blue");')
 	
-	// addDiv("canvasDiv","container-fluid","body","")
 	addDiv("DragSqcanvas","","bodyWrapper" ,"This text is displayed if your browser does not support HTML5 Canvas.","canvas")
 	canvas = document.getElementById('DragSqcanvas');
 	canvas.width = window.innerWidth;
@@ -1108,7 +1095,6 @@ function addDragSqPage() {
 
 function addGitPage() {
 	
-	addDiv("bodyWrapper","container img-rounded",'body');
 	
 	addDiv("wrapperGit","container img-rounded",'bodyWrapper');
 	addDiv("GitcontentGit",$cssClassC,'wrapperGit',"Git repo URL");
@@ -1159,7 +1145,6 @@ function addGitPage() {
 }; // end addPage
 
 function addJsonLintPage() {
-	addDiv("bodyWrapper","container img-rounded",'body');
 	addDiv("content",$cssClassC,'bodyWrapper',"JSONLint");
 	
 	addDiv("myTextArea","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
@@ -1170,39 +1155,22 @@ function addJsonLintPage() {
 		
 }; // end addPage
 
-function addLoginPage() {
-	addDiv("bodyWrapper","container img-rounded",'body');
+function addFormPage($formPost) {
 	
-	addDiv("signupForm","",'bodyWrapper',"","form","","action","/login");
-	document.getElementById("signupForm").setAttribute( "method", "post");
+	addDiv("wrapperForm","",'bodyWrapper',"","form","","action",$formPost);
+	document.getElementById("wrapperForm").setAttribute( "method", "post");
 	
-	addDiv("emailInput",$cssClassB,'signupForm','',"input","","placeholder","Email");
-	addDiv("passwordInput",$cssClassB,'signupForm','',"input","","placeholder","Password");
+	addDiv("emailInput",$cssClassB,'wrapperForm','',"input","","placeholder","Email");
+	addDiv("passwordInput",$cssClassB,'wrapperForm','',"input","","placeholder","Password");
 
-	addDiv("myRow","row" + $cssClassB,'signupForm');
-	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
-		
-}; // end addPage
-
-function addSignupPage() {
-	addDiv("bodyWrapper","container img-rounded",'body');
-	
-	addDiv("signupForm","",'bodyWrapper',"","form","","action","/signup");
-	document.getElementById("signupForm").setAttribute("method", "post");
-	
-	addDiv("emailInput",$cssClassB,'signupForm','',"input","","placeholder","Email");
-	addDiv("passwordInput",$cssClassB,'signupForm','',"input","","placeholder","Password");
-
-	addDiv("myRow","row" + $cssClassB,'signupForm');
+	addDiv("myRow","row" + $cssClassB,'wrapperForm');
 	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
 		
 }; // end addPage
 
 function addCoinPage() {
-	addDiv("headWrapper","",'head');
 	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
 
-	addDiv("bodyWrapper","container img-rounded","body");
 	addDiv("Coingeneric","row","bodyWrapper");
 	addDiv("Coinsidebar","sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles","bodyWrapper");
 	addDiv("CoinconsoleLogLabel","","Coinsidebar","Coinsole Log");
@@ -1286,17 +1254,16 @@ function addCoinPage() {
 }; // end addCoinPage
 
 
-function removePage() {
+function loadPage($pageName) {
+try {
 	removeDiv("headWrapper");
 	removeDiv("bodyWrapper");
 	removeDiv("footWrapper");
 	window.clearInterval(timerInterval);
-}; // end addPage
-
-function loadPage($pageName) {
-try {
 	
-	removePage();
+	addDiv("headWrapper","",'head');
+	addDiv("bodyWrapper","container",'body');
+	addDiv("footWrapper","",'body');
 	
 	switch ($pageName) {
 		case "demo": 
@@ -1336,20 +1303,19 @@ try {
 			addJsonLintPage();
 		break;
 		case "login": 
-			addLoginPage();
+			addFormPage("login");
 		break;
 		case "signup": 
-			addSignupPage();
+			addFormPage("signup");
 		break;
 	}; // end switch divColor
 	
 	addFooter();
 } catch(e){console.log(e)};
-}; // end removePage
+}; // end loadPage
 
 window.onload = function(){ 
 	addHeader();
 	addNav();
-	addRgbColorPage();
-	addFooter();
-}
+	loadPage("rgb")
+}; // end window.onload
