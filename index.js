@@ -26,7 +26,7 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
-var $GilMain = {apiVersion: "275", googleApiKey = process.env.GOOGLE_API_KEY || 'aSecretToEverybody'};
+var $GilMain = {apiVersion: "275", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody'};
 
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
 
