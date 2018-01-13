@@ -245,7 +245,7 @@ function loadChat(chatUrl,chatBox){
     document.getElementById(chatBox).value = response
     document.getElementById("chatMainBox").value = response
   }); // end loadJSON
-}; // end load
+}; // end loadChat
 
 // DSQ
 function addCircle(x, y, r, fill) {
@@ -297,60 +297,37 @@ function drag(evt) {
 }
 
 // Git
-function loadFileAsText() {
-	var fileToLoad = document.getElementById("fileToLoad").files[0];
-	var fileReader = new FileReader();
-	
-	fileReader.onload = function(fileLoadedEvent) {
-		var textFromFileLoaded = fileLoadedEvent.target.result;
-		document.getElementById("gitFileTextArea").value = textFromFileLoaded;
-	};
-	fileReader.readAsText(fileToLoad, "UTF-8");
-}
-
-function updateNewPageForm() {
-	//Get new page name from element
-  RepoUrlElement = "gitRepoUrl";
-  Pagename = document.getElementById("NewPageNameInput").value;
-  document.getElementById("PagenameEJSNameInput").value = "\\views\\pages\\template.ejs";
-  document.getElementById("PagenameJSNameInput").value = Pagename + ".js";
-
-  // Get each page from Github, populate textarea
-  // updateTextAreaFromRepo("inputTextBoxFileName","divItemToRenameTo1stParam","inputTextBoxGitRepoURL","TextAreaToUpdate")
-  updateTextAreaFromRepo("IndexJSNameInput","IndexJSNameItem",RepoUrlElement,"IndexJSTextArea");
-  updateTextAreaFromRepo("TestJSNameInput","TestJSNameItem",RepoUrlElement,"TestJSTextArea");
-  updateTextAreaFromRepo("NavEJSNameInput","NavEJSNameItem",RepoUrlElement,"NavEJSTextArea");
-  updateTextAreaFromRepo("PagenameEJSNameInput","PagenameEJSNameItem",RepoUrlElement,"PagenameEJSTextArea");
-  
-  document.getElementById("PagenameEJSNameInput").value = Pagename + ".ejs";
-
-  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  colorifyDivTextArea('IndexJSTextArea');
-}; // end updateNewPageForm
-
-function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
+function updateTextAreaFromRepo(FileNameElement,RepoUrlElement,TextAreaElement) {
   // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
-  FileName = document.getElementById(FileNameElement).value
+  FileName = document.getElementById(FileNameElement).innerText
   if (FileName) {
-    document.getElementById(FileNameElement).value = FileName
+    document.getElementById(FileNameElement).innerText = FileName
   } else {
-      FileName = "README.md"
-      document.getElementById(FileNameElement).value = FileName
+	  FileName = "README.md"
+      document.getElementById(FileNameElement).innerText = FileName
   }; //end if FileName
-  document.getElementById(FileNameItem).innerHTML = FileName
   
   // Load file from repo into gitFileTextArea.
   RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
-  loadJSON(RepoUrl, function(response) {
+  loadFile(RepoUrl, function(response) {
     document.getElementById(TextAreaElement).innerText = response
   }); // end loadJSON
   
-}; // end updateForm
+}; // end updateTextAreaFromRepo
 
 function updateNewPageBoilerplate() {  
-  boilerplateIndexTextArea("IndexJSTextArea","NewPageNameInput","//region WIP");
-  boilerplateTestTextArea("IndexJSTextArea","NewPageNameInput","  t.plan(42);\r\n");
+  boilerplateIndexTextArea("myTextArea","pageName","//region WIP");
+  boilerplateTestTextArea("myTextArea","pageName","  t.plan(42);\r\n");
 }; // end updateNewPageBoilerplate
+
+function updateNewPageForm() {
+  RepoUrlElement = "myTextAreaGit";
+  Pagename = document.getElementById("pageName").value;
+
+  updateTextAreaFromRepo("pageName",RepoUrlElement,"myTextArea");
+  
+  colorifyDivTextArea('myTextArea');
+}; // end updateNewPageForm
 
 function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
   //Insert boilerplate at line 10 for now - todo is add a line number textbox to each.
@@ -377,6 +354,17 @@ function colorifyDivTextArea(DivTextArea) {
   };
 }; // end colorifyDivTextArea
 
+function loadFileAsText() {
+	var fileToLoad = document.getElementById("fileToLoad").files[0];
+	var fileReader = new FileReader();
+	
+	fileReader.onload = function(fileLoadedEvent) {
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		document.getElementById("gitFileTextArea").value = textFromFileLoaded;
+	};
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
 function setupLink(textAreaID,downloadLinkID) {
   document.getElementById(textAreaID).value = window.onload + '';
   document.getElementById(downloadLinkID).onclick = function() {
@@ -384,6 +372,21 @@ function setupLink(textAreaID,downloadLinkID) {
 	  + encodeURIComponent(txtval);
   };
 };
+
+function updateForm(nfsCall, nfsName, nfsTextArea) {
+  nfsInput = document.getElementById(nfsName).value
+  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
+  loadJSON(nfsurl, function(response) {
+    document.getElementById(nfsTextArea).value = response //actual_JSON
+  }); // end loadJSON
+}; // end updateForm
+
+function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
+  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName + "&params=" + nfsParams + "&type=" + nfsType
+  loadJSON(nfsurl, function(response) {
+    document.getElementById(nfsTextArea).value = response //actual_JSON
+  }); // end loadJSON
+}; // end updateForm
 
 // RGB
 function componentToHex(c) {
@@ -451,47 +454,6 @@ function updateRgbDivColor($divId) {
 	document.getElementById("contentLabel").style.backgroundColor = document.getElementById("htmlRow").value
 
 }; // end updateRedDivColor
-
-// Git
-function updateGitPage() {
-  updateTextAreaFromRepo("gitFileName","gitFileNameItem","gitRepoUrl","gitFileTextArea")  
-}; // end updateGitPage
-
-function updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaElement) {
-  // If textbox not empty, push contents to cookie, otherwise push from cookie to textbox. Always push to name field.
-  FileName = document.getElementById(FileNameElement).value
-  if (FileName) {
-    document.getElementById(FileNameElement).value = FileName
-  } else {
-	  FileName = "README.md"
-      document.getElementById(FileNameElement).value = FileName
-  }; //end if FileName
-  document.getElementById(FileNameItem).innerHTML = FileName
-  
-  // Load file from repo into gitFileTextArea.
-  RepoUrl = document.getElementById(RepoUrlElement).value + "/" + FileName
-  loadJSON(RepoUrl, function(response) {
-    document.getElementById(TextAreaElement).innerText = response
-  }); // end loadJSON
-  
-}; // end updateTextAreaFromRepo
-
-function updateForm(nfsCall, nfsName, nfsTextArea) {
-  nfsInput = document.getElementById(nfsName).value
-  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsInput
-  loadJSON(nfsurl, function(response) {
-    document.getElementById(nfsTextArea).value = response //actual_JSON
-  }); // end loadJSON
-}; // end updateForm
-
-function updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
-  nfsName = document.getElementById("NFSpageName").value
-  nfsParams = document.getElementById("NFSInput").value
-  nfsurl = "https://gil-api.herokuapp.com/" + nfsCall + "?name=" + nfsName + "&params=" + nfsParams + "&type=" + nfsType
-  loadJSON(nfsurl, function(response) {
-    document.getElementById(nfsTextArea).value = response //actual_JSON
-  }); // end loadJSON
-}; // end updateForm
 
 // Meme
 function updateMemeForm(memeUrlInput) {
@@ -1521,6 +1483,6 @@ try {
 window.onload = function(){ 
 	addHeader();
 	addNav();
-	loadPage("rgb")
+	loadPage("calc")
 }; // end window.onload
 
