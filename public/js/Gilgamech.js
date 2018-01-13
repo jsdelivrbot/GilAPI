@@ -769,6 +769,18 @@ function detectEnterCalc(e,$outputDiv){
     };
 }; // end detectEnterChat
 
+// DiffeRentIal
+function initMap() {
+	var uluru = {lat: -25.363, lng: 131.044};
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 4,
+		center: uluru
+	});
+	var marker = new google.maps.Marker({
+		position: uluru,
+		map: map
+	});
+}; // end initMap
 
 // Add pages
 function addHeader() {
@@ -813,6 +825,9 @@ function addNav() {
 
 	addDiv("lip4",$pclass2,'ddc','','p');
 	addDiv("aip4","",'lip4','Chat!','a',"","onclick","loadPage('chat');");
+
+	addDiv("lip1d","",'ddc','','p');
+	addDiv("aip1d","",'lip1d','DiffeRentIal','a',"","onclick","loadPage('rentalmap');");
 
 	addDiv("lip1c","",'ddc','','p');
 	addDiv("aip1c","",'lip1c','Calculator','a',"","onclick","loadPage('calc');");
@@ -1172,6 +1187,36 @@ function addGitPage() {
 
 }; // end addPage
 
+function addRentalMapPage() {
+	var $GOOGLE_API_KEY = $GilMain.googleApiKey
+	addDiv("scrGoogleMap","",'headWrapper',"","script","https://maps.googleapis.com/maps/api/js?key="+ $GOOGLE_API_KEY + "&callback=initMap");
+	
+	
+	addDiv("wrapper","container img-rounded",'bodyWrapper');
+	addDiv("content",$cssClassC,'wrapper'," DiffeRentIal");
+	
+	addDiv("map","" ,'wrapper');
+	document.getElementById("map").setAttribute( "style",  "width: 75vh");
+	document.getElementById("map").setAttribute( "style",  "height: 75vh");
+
+	
+	// addDiv("myTextArea","div_textarea" + $cssClassB,'wrapper','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
+	
+	
+	// addDiv("myRow","row" + $cssClassB,'wrapper');
+	// addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
+	// addDiv("btnUpdate",$btnPrimary,'myRow',"Load from hub","button","","onclick","updateNewPageForm()");
+	// addDiv("btnAddPage","btn btn-warning",'myRow',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
+
+	
+	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
+		
+	// updateForm('newappget', 'pageName', 'IndexJS')
+	// updateForm('newappget', 'NFSpageName', 'TestJS')
+	// window.onload = setupLink('textAreaID','gitFilelink');
+
+}; // end addRentalMapPage
+
 function addJsonLintPage() {
 	addDiv("linkP1","",'NavDDWrapper','','p');
 	addDiv("linkSO1","",'linkP1','prettify json data in textarea input','a',"https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037");
@@ -1385,6 +1430,9 @@ try {
 		break;
 		case "Arkdata": 
 			addArkdataPage();
+		break;
+		case "rentalmap": 
+			addRentalMapPage();
 		break;
 		case "calc": 
 			addCalcPage();
