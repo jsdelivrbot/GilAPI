@@ -1,6 +1,9 @@
-//Gil.JS build 672
+//Gil.JS
 
 //Init vars
+var $GilMain
+var $pageVersion = "673"
+
 // addDiv
 var timerInterval //Default timer variable, removed in removePage.
 
@@ -48,6 +51,18 @@ var $rowClasses = "row";
 
 // Functions
 // General
+function loadFile(file, callback) {   
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            callback(xobj.responseText);
+          };
+    };
+    xobj.send(null);  
+};// end loadJSON
+
 function loadJSON(file, callback) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -61,6 +76,19 @@ function loadJSON(file, callback) {
 };// end loadJSON
 
 function postJSON(file, callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("text/plain");
+    xobj.open('POST', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(JSON.parse(xobj.responseText));
+          }
+    };
+    xobj.send(null);  
+};// end loadJSON
+
+function postFile(file, callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("text/plain");
     xobj.open('POST', file, true); // Replace 'my_data' with the path to your file
@@ -183,7 +211,7 @@ function detectEnterChat(e){
 }; // end detectEnterChat
 
 function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
-	postJSON($postJsonUrl, function(response) {
+	postFile($postJsonUrl, function(response) {
 		document.getElementById($DivIDtoUpdate).value  = response
 	}); // end loadJSON
 }; // end updateFormPost
@@ -336,7 +364,7 @@ function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {
 function boilerplateTestTextArea(docTextArea,docNewName,splitMarker) {  
   docUpdateTextArea = document.getElementById(docTextArea).innerText;
   docNewPageName = document.getElementById(docNewName).value;
-  // Customized for index.js
+  // Customized for test.js
   docUpdateTextString = splitMarker + lineBreak + "app.get('/" + docNewPageName + "'," + spaceChar + "function(request, response)" + spaceChar + "{" + spaceChar + lineBreak + spaceChar + spaceChar + "response.render('pages/" + docNewPageName + "');" + spaceChar + lineBreak + "});" + spaceChar + spaceChar + lineBreak;
   document.getElementById(docTextArea).innerText = docUpdateTextArea.split(splitMarker)[0] + docUpdateTextString + docUpdateTextArea.split(splitMarker)[1];
 }; // end boilerplateTestTextArea
@@ -801,7 +829,7 @@ function addNav() {
 	addDiv("l2",$pclass1,'nav2','','li');
 	addDiv("a2","",'l2','Bad Password','a',"","onclick","loadPage('badpw');");
 
-	addDiv("l3","",'nav2','','li');
+	addDiv("l3",$pclass1,'nav2','','li');
 	addDiv("a3","",'l3','Chat!','a',"","onclick","loadPage('chat');");
 
 	addDiv("dd","dropdown",'nav2');
