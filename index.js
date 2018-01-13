@@ -26,6 +26,8 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
+var $GilMain = {apiVersion: "275", googleApiKey = process.env.GOOGLE_API_KEY || 'aSecretToEverybody'};
+
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
 
 // Comments are fundamental
@@ -183,6 +185,10 @@ app.get('/logout', function(request, response){
 app.post('/mirror', function(request, response) {
   message = request.query.message,
   response.send(message);
+});
+
+app.post('/settings.json', function(request, response) {
+  response.json($GilMain);
 });
 
 app.post('/badpw', function(request, response) { 
