@@ -216,6 +216,13 @@ function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 	}); // end loadJSON
 }; // end updateFormPost
 
+// Init
+function initPage(){
+	postJSON("https://gil-api.herokuapp.com/settings.json", function(response) {
+		$GilMain = response
+	}); // end loadJSON
+};// end initPage
+
 // Chat
 function updateChat() {
   // /chatpost?user=user&message=message&chatroom=General
@@ -851,12 +858,14 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
+	var $apiVersion = $GilMain.apiVersion
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
 	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
 	addDiv("aFooterImg","img-rounded",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
 	document.getElementById("aFooterImg").style.height = "150px";
+	addDiv("aFooterVer","",'footClan','Gi-API version: ' + $apiVersion + " - Gilgamech.js version: " + $pageVersion,'p');
 	addDiv("aFooterCR","copyright",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p');
 	
 }; // end addFooter
@@ -1459,6 +1468,7 @@ try {
 }; // end loadPage
 
 window.onload = function(){ 
+	initPage()
 	addHeader();
 	addNav();
 	loadPage("calc")
