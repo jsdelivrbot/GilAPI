@@ -1145,37 +1145,15 @@ function addGitPage() {
 	addDiv("btnUpdateGit",$btnPrimary,'myRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
 	addDiv("btnAddPageGit","btn btn-warning",'myRowGit',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
 
-	addDiv("wrapperNPN","container img-rounded",'bodyWrapper');
-	addDiv("contentNPN",$cssClassC,'wrapperNPN',"NewPageName","","","contenteditable","true");
-	addDiv("myTextAreaNPN","div_textarea" + $cssClassB,'wrapperNPN','Code goes here.',"textarea");
-	addDiv("myRowNPN","row" + $cssClassB,'wrapperNPN');
-	addDiv("btnPrettyNPN",$btnPrimary,'myRowNPN',"Pretty Print","button","","onclick","prettyPrint('myTextAreaNPN')");
-	addDiv("btnColorifyNPN","btn btn-secondary",'myRowNPN',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaNPN')");
-	addDiv("btnClipNPN","btn btn-info",'myRowNPN',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaNPN')");
-
-	addDiv("wrapperIndex","container img-rounded",'bodyWrapper');
-	addDiv("contentIndex",$cssClassC,'wrapperIndex',"Index.js","","","contenteditable","true");
-	addDiv("myTextAreaIndex","div_textarea" + $cssClassB,'wrapperIndex','Code goes here.',"textarea");
-	addDiv("myRowIndex","row" + $cssClassB,'wrapperIndex');
-	addDiv("btnPrettyIndex",$btnPrimary,'myRowIndex',"Pretty Print","button","","onclick","prettyPrint('myTextAreaIndex')");
-	addDiv("btnColorifyIndex","btn btn-secondary",'myRowIndex',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaIndex')");
-	addDiv("btnClipIndex","btn btn-info",'myRowIndex',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaIndex')");
-
-	addDiv("wrapperTest","container img-rounded",'bodyWrapper');
-	addDiv("contentTest",$cssClassC,'wrapperTest',"Test.js","","","contenteditable","true");
-	addDiv("myTextAreaTest","div_textarea" + $cssClassB,'wrapperTest','Code goes here.',"textarea");
-	addDiv("myRowTest","row" + $cssClassB,'wrapperTest');
-	addDiv("btnPrettyTest",$btnPrimary,'myRowTest',"Pretty Print","button","","onclick","prettyPrint('myTextAreaTest')");
-	addDiv("btnColorifyTest","btn btn-secondary",'myRowTest',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaTest')");
-	addDiv("btnClipTest","btn btn-info",'myRowTest',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaTest')");
-
-	addDiv("wrapperPagename","container img-rounded",'bodyWrapper');
-	addDiv("contentPagename",$cssClassC,'wrapperPagename',"Pagename.js","","","contenteditable","true");
-	addDiv("myTextAreaPagename","div_textarea" + $cssClassB,'wrapperPagename','Code goes here.',"textarea");
-	addDiv("myRowPagename","row" + $cssClassB,'wrapperPagename');
-	addDiv("btnPrettyPagename",$btnPrimary,'myRowPagename',"Pretty Print","button","","onclick","prettyPrint('myTextAreaPagename')");
-	addDiv("btnColorifyPagename","btn btn-secondary",'myRowPagename',"Colorify!","button","","onclick","colorifyDivTextArea('myTextAreaPagename')");
-	addDiv("btnClipPagename","btn btn-info",'myRowPagename',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaPagename')");
+	addDiv("wrapper","container img-rounded",'bodyWrapper');
+	addDiv("pageName",$cssClassC,'wrapper',"Gilgamech.js","","","contenteditable","true");
+	addDiv("myTextArea","div_textarea dataArea img-rounded" + $cssClassB,'wrapper','Code goes here.',"textarea","","contenteditable","true");
+	document.getElementById("myTextArea").setAttribute( "style",  "background-color: #fff");
+	document.getElementById("myTextArea").setAttribute( "style",  "height: 50vh");
+	addDiv("myRow","row" + $cssClassB,'wrapper');
+	addDiv("btnPretty",$btnPrimary,'myRow',"Pretty Print","button","","onclick","prettyPrint('myTextArea')");
+	addDiv("btnColorify","btn btn-secondary",'myRow',"Colorify!","button","","onclick","colorifyDivTextArea('myTextArea')");
+	addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
 	
 	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
 		
