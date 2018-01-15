@@ -2,7 +2,8 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "673"
+var $pageVersion = "674"
+var $apiVersion
 
 // addDiv
 var timerInterval //Default timer variable, removed in removePage.
@@ -39,8 +40,8 @@ var $botCounter = 0
 var $assetCounter = 0
 
 // CSS classes
-var $pclass1="hidden-sm hidden-xs"
-var $pclass2="hidden-md hidden-lg"
+var $cssSmallHidden=" hidden-sm hidden-xs "
+var $cssLargeHidden=" hidden-md hidden-lg "
 var $cssClassA = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
 var $cssClassB = "img-rounded col-md-12 col-xs-12"
 var $cssClassC = "img-rounded row contentTitles"
@@ -771,7 +772,7 @@ function detectEnterCalc(e,$outputDiv){
 
 // DiffeRentIal
 function initMap() {
-	var uluru = {lat: -25.363, lng: 131.044};
+	var uluru = {lat: 47, lng: -122};
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
 		center: uluru
@@ -789,41 +790,39 @@ function addHeader() {
 	addDiv("scr2","",'head','','script','/js/jquery.min.js');
 	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
 	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','/stylesheets/main.css');
-	addDiv("link4","",'head','','link','/stylesheets/mobile.css');
-	addDiv("link5","",'head','','link','/stylesheets/rgb.css');
+	addDiv("link3","",'head','','link','/stylesheets/Gilgamech.css');
 	
 }; // end addHeader
 
 function addNav() {
 	addDiv("gtBannerWrapper","bodyWrapper container",'body');
-	addDiv("gtBannerLink","img-rounded top",'gtBannerWrapper',"","a","","/");
-	addDiv("gtBanner","img-rounded top",'gtBannerLink',"Gilgamech Technologies");
+	addDiv("gtBannerLinkW","img-rounded top" + $cssSmallHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 7ex; color: #000; text-decoration: none");
+	addDiv("gtBannerLinkM","img-rounded top" + $cssLargeHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 4ex; color: #000; text-decoration: none");
 	
 	addDiv("navbar","navbar navbar-static-top navbar-inverse",'body');
 	addDiv("navWrapper","bodyWrapper container",'navbar');
-	addDiv("nav2","nav navbar-nav",'navWrapper','','ul');
+	addDiv("nav2","nav navbar-nav col-md-6 col-xs-6",'navWrapper','','ul');
 	
-	addDiv("l1",$pclass1,'nav2','','li');
+	addDiv("l1",$cssSmallHidden,'nav2','','li');
 	addDiv("a1","",'l1','Fruitbot!','a',"","onclick","loadPage('fruitbot');");
 	
-	addDiv("l2",$pclass1,'nav2','','li');
+	addDiv("l2",$cssSmallHidden,'nav2','','li');
 	addDiv("a2","",'l2','Bad Password','a',"","onclick","loadPage('badpw');");
 
-	addDiv("l3",$pclass1,'nav2','','li');
+	addDiv("l3",$cssSmallHidden,'nav2','','li');
 	addDiv("a3","",'l3','Chat!','a',"","onclick","loadPage('chat');");
 
 	addDiv("dd","dropdown",'nav2');
 	addDiv("ddp","",'dd','Menu','p');
 	addDiv("ddc","dropdown-content",'dd',);
 	
-	addDiv("lip1",$pclass2,'ddc','','p');
+	addDiv("lip1",$cssLargeHidden,'ddc','','p');
 	addDiv("aip1","",'lip1','Fruitbot!','a',"","onclick","loadPage('fruitbot');");
 		
-	addDiv("lip3",$pclass2,'ddc','','p');
+	addDiv("lip3",$cssLargeHidden,'ddc','','p');
 	addDiv("aip3","",'lip3','Bad Password','a',"","onclick","loadPage('badpw');");
 
-	addDiv("lip4",$pclass2,'ddc','','p');
+	addDiv("lip4",$cssLargeHidden,'ddc','','p');
 	addDiv("aip4","",'lip4','Chat!','a',"","onclick","loadPage('chat');");
 
 	addDiv("lip1d","",'ddc','','p');
@@ -852,19 +851,18 @@ function addNav() {
 	//addDiv("aip9","",'lip9','Arkdata Dynamap','a',"","onclick","loadPage('demo');");
 	//addDiv("lip10","",'ddc','','p');
 	//addDiv("aip10","",'lip10','Arkdata','a',"","onclick","loadPage('Arkdata');");
-	addDiv("lip14",$pclass2,'ddc','','p');
+	
+	
+	addDiv("lip14",$cssLargeHidden,'ddc','','p');
 	addDiv("aip14","",'lip14','Login!','a',"","onclick","loadPage('login');");	
-	addDiv("dd2","dropdown" + $pclass2,'nav2');
-	addDiv("ddr","",'dd2','StackOverflow Links','p');
-	addDiv("ddrc","dropdown-content",'dd2',);
 
 	var $nbr = "navbar-right"
-	addDiv("nav3","nav navbar-nav" + " " + $nbr + " " + $pclass1,'navWrapper','','ul');
+	addDiv("nav3","nav navbar-nav col-md-6 col-xs-6" + " " + $nbr,'navWrapper','','ul');
 	
-	addDiv("lr1",$nbr + " " + $pclass1,'nav3','','li');
-	addDiv("ar1","",'lr1','Login!','a',"","onclick","loadPage('login');");	
-	addDiv("dd42","dropdown" + " " + $nbr + " " + $pclass1,'nav3');
+	addDiv("lr1",$nbr + " " + $cssSmallHidden,'nav3','','li');
+	addDiv("ar1",$cssSmallHidden,'lr1','Login!','a',"","onclick","loadPage('login');");	
 	
+	addDiv("dd42","dropdown" + " " + $nbr,'nav3');
 	addDiv("dd4r","",'dd42','How did I make this page?','p');
 	addDiv("dd4rc","dropdown-content",'dd42',);
 
@@ -873,7 +871,7 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
-	var $apiVersion = $GilMain.apiVersion
+	$apiVersion = ($GilMain.apiVersion || 'err')
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
@@ -1188,15 +1186,20 @@ function addGitPage() {
 }; // end addPage
 
 function addRentalMapPage() {
-	var $GOOGLE_API_KEY = $GilMain.googleApiKey
+	var $GOOGLE_API_KEY = "AIzaSyDtGxRyEPO2-7bLRhRNAimeWpWYZMdZLLM"
 	addDiv("scrGoogleMap","",'headWrapper',"","script","https://maps.googleapis.com/maps/api/js?key="+ $GOOGLE_API_KEY + "&callback=initMap");
+	
+	addDiv("linkP1","",'NavDDWrapper','','p');
+	addDiv("linkSO1","",'linkP1','Adding Google Maps to your website','a',"https://developers.google.com/maps/documentation/javascript/adding-a-google-map#key");
+	// addDiv("linkP2","",'NavDDWrapper','','p');
+	// addDiv("linkSO2","",'linkP2','copy textarea to clipboard	','a',"https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068");
 	
 	
 	addDiv("wrapper","container img-rounded",'bodyWrapper');
-	addDiv("content",$cssClassC,'wrapper'," DiffeRentIal");
+	addDiv("content",$cssClassC,'wrapper'," DiffeRENTial");
 	
 	addDiv("map","" ,'wrapper');
-	document.getElementById("map").setAttribute( "style",  "width: 75vh");
+	document.getElementById("map").setAttribute( "style",  "width: 100vh");
 	document.getElementById("map").setAttribute( "style",  "height: 75vh");
 
 	
@@ -1277,7 +1280,7 @@ function addCalcPage() {
 }; // end addCalcPage
 
 function addCoinPage() {
-	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
+	addDiv("coinCSS","","headWrapper",'','link','./public/stylesheets/coin.css');
 	
 	addDiv("linkP1","",'NavDDWrapper','','p');
 	addDiv("linkSO1","",'linkP1','How do you implement a fixed left sidebar and fluid right content in CSS','a',"https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037");
@@ -1321,7 +1324,7 @@ function addCoinPage() {
 	addDiv("CoinconsoleLogLabel","","Coinsidebar","Coinsole Log");
 	addDiv("CoincoinMainBox","contentRows dataArea scrollToWindow img-rounded","Coinsidebar","Data Loading...");
 	addDiv("Coinspacer","","bodyWrapper");
-
+	
 	addDiv("Coincontent","img-rounded col-md-10 col-xs-10","bodyWrapper");
 
 	addDiv("CoincointentArea","img-rounded col-md-12 col-xs-12 contentRows dataArea row","Coincontent");
@@ -1505,6 +1508,9 @@ try {
 	addDiv("linkP93","",'NavDDWrapper','','p');
 	addDiv("linkSO93","",'linkP93','Load JSON','a',"https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript");
 
+	addDiv("linkP93a","",'NavDDWrapper','','p');
+	addDiv("linkSO93a","",'linkP93a','Javascript Objects','a',"https://www.w3schools.com/js/js_objects.asp");
+
 	addDiv("linkP94","",'NavDDWrapper','','p');
 	addDiv("linkSO94","",'linkP94','Clear SetInterval','a',"https://stackoverflow.com/questions/2901108/how-do-i-clear-this-setinterval#2901155");
 	
@@ -1519,6 +1525,6 @@ window.onload = function(){
 	initPage()
 	addHeader();
 	addNav();
-	loadPage("calc")
+	loadPage("rentalmap")
 }; // end window.onload
 
