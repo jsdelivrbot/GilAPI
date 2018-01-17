@@ -949,15 +949,18 @@ function addRgbColorPage() {
 	document.getElementById("htmlRow").setAttribute( "maxlength",  "7");
 	
 	addDiv("redCRow",$rowClasses,'coinArea');
-	addDiv("redRow",($cssClassA + "redColorRow"),'redCRow',171,"input","","onchange","updateRgbDivColor('redRow');");
+	addDiv("redRow",($cssClassA),'redCRow',171,"input","","onchange","updateRgbDivColor('redRow');");
+	document.getElementById("redRow").setAttribute( "style",  "background-color:#833");
 	document.getElementById("redRow").setAttribute( "type",  "number");
 	
 	addDiv("greenCRow",$rowClasses,'coinArea');
-	addDiv("greenRow",$cssClassA + "greenColorRow",'greenCRow',205,"input","","onchange","updateRgbDivColor('greenRow');");
+	addDiv("greenRow",$cssClassA,'greenCRow',205,"input","","onchange","updateRgbDivColor('greenRow');");
+	document.getElementById("greenRow").setAttribute( "style",  "background-color:#383");
 	document.getElementById("greenRow").setAttribute( "type",  "number");
 	
 	addDiv("blueCRow",$rowClasses,'coinArea');
-	addDiv("blueRow",$cssClassA + "blueColorRow",'blueCRow',239,"input","","onchange","updateRgbDivColor('blueRow');");
+	addDiv("blueRow",$cssClassA,'blueCRow',239,"input","","onchange","updateRgbDivColor('blueRow');");
+	document.getElementById("blueRow").setAttribute( "style",  "background-color:#338");
 	document.getElementById("blueRow").setAttribute( "type",  "number");
 	
 	updateRgbDivColor('redRow');
@@ -1186,7 +1189,6 @@ function addGitPage() {
 }; // end addPage
 
 function addRentalMapPage() {
-	var $GOOGLE_API_KEY = "AIzaSyDtGxRyEPO2-7bLRhRNAimeWpWYZMdZLLM"
 	addDiv("scrGoogleMap","",'headWrapper',"","script","https://maps.googleapis.com/maps/api/js?key="+ $GOOGLE_API_KEY + "&callback=initMap");
 	
 	addDiv("linkP1","",'NavDDWrapper','','p');
@@ -1522,9 +1524,9 @@ try {
 }; // end loadPage
 
 window.onload = function(){ 
-	initPage()
+	initPage();
 	addHeader();
 	addNav();
-	loadPage("rentalmap")
+	loadPage("rentalmap");
 }; // end window.onload
 
