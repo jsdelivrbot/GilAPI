@@ -2,7 +2,7 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "689"
+var $pageVersion = "690"
 var $apiVersion
 var $GOOGLE_API_KEY
 
@@ -220,11 +220,12 @@ function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 
 // Init
 function initPage(){
+	$GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody'};
 	postJSON("https://gil-api.herokuapp.com/settings.json", function(response) {
 		$GilMain = response
-		$apiVersion = ($GilMain.apiVersion || 'err')
-		$GOOGLE_API_KEY = ($GilMain.googleApiKey || "aSecretToEverybody")
 	}); // end loadJSON
+	$apiVersion = $GilMain.apiVersion
+	$GOOGLE_API_KEY = $GilMain.googleApiKey
 };// end initPage
 
 // Chat
