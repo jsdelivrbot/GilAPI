@@ -179,9 +179,9 @@ app.post('/mirror', function(request, response) {
 });
 
 app.post('/settings.json', function(request, response) {
-	$GIlMain.chatGeneral = $chatGeneral
-	$GIlMain.errgoLogic = $errgoLogic
-  response.json($GilMain);
+	$GilMain.chatGeneral = $chatGeneral
+	$GilMain.errgoLogic = $errgoLogic
+	response.json($GilMain);
 });
 
 app.post('/badpw', function(request, response) { 
