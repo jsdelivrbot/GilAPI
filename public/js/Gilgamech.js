@@ -2,9 +2,12 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "692"
+var $pageVersion = "693"
 var $apiVersion
 var $GOOGLE_API_KEY
+
+var $chatGeneral = "";
+var $errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
 
 // addDiv
 var timerInterval //Default timer variable, removed in removePage.
@@ -52,6 +55,18 @@ var $btnCalc = "btn btn-primary btn-lg"
 var $rowClasses = "row";
 
 // Functions
+// Init
+function initPage(){
+	
+	$GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: ""};
+	
+	postJSON("https://gil-api.herokuapp.com/settings.json", function(response) {
+		$GilMain = response
+	}); // end loadJSON
+	$apiVersion = $GilMain.apiVersion
+	$GOOGLE_API_KEY = $GilMain.googleApiKey
+};// end initPage
+
 // General
 function loadFile(file, callback) {   
     var xobj = new XMLHttpRequest();
@@ -265,18 +280,6 @@ function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 		document.getElementById($DivIDtoUpdate).value  = response
 	}); // end loadJSON
 }; // end updateFormPost
-
-// Init
-function initPage(){
-	//AIzaSyDtGxRyEPO2-7bLRhRNAimeWpWYZMdZLLM
-	
-	$GilMain = {apiVersion: "null", googleApiKey: 'AIzaSyDtGxRyEPO2-7bLRhRNAimeWpWYZMdZLLM'};
-	postJSON("https://gil-api.herokuapp.com/settings.json", function(response) {
-		$GilMain = response
-	}); // end loadJSON
-	$apiVersion = $GilMain.apiVersion
-	$GOOGLE_API_KEY = $GilMain.googleApiKey
-};// end initPage
 
 // Chat
 function updateChat() {

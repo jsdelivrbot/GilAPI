@@ -26,7 +26,7 @@ var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
 
-var $GilMain = {apiVersion: "275", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody'};
+var $GilMain = {apiVersion: "276", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: ""};
 
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
 
@@ -59,15 +59,6 @@ User.findAll().then(users => {
   $chatGeneral = $chatGeneral + 'SELECT FROM Users\n\r';
   addErr((users));
 });
-
-var navPages = [
-	{ name: 'jsonlint', page: 'JSON Lint' },
-	{ name: 'git', page: 'Git' },
-	{ name: 'meme', page: 'Meme Maker' },
-	{ name: 'demo', page: 'Arkdata Dynamap' },
-	{ name: 'Arkdata', page: 'Arkdata' },
-	{ name: 'text2', page: 'text2' }
-];
 
 function addErr(err) {
   $errgoLogic += err + "<br>"// lineBreak
@@ -188,6 +179,8 @@ app.post('/mirror', function(request, response) {
 });
 
 app.post('/settings.json', function(request, response) {
+	$GIlMain.chatGeneral = $chatGeneral
+	$GIlMain.errgoLogic = $errgoLogic
   response.json($GilMain);
 });
 
