@@ -65,6 +65,8 @@ function initPage(){
 	}); // end loadJSON
 	$apiVersion = $GilMain.apiVersion
 	$GOOGLE_API_KEY = $GilMain.googleApiKey
+	$chatGeneral = $GilMain.chatGeneral
+	$errgoLogic = $GilMain.errgoLogic
 };// end initPage
 
 // General
