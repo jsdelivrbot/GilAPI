@@ -776,6 +776,7 @@ function detectEnterCalc(e,$outputDiv){
 
 // DiffeRentIal
 function initMap() {
+	$GOOGLE_API_KEY = $GilMain.googleApiKey
 	var uluru = {lat: 47, lng: -122};
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
@@ -875,6 +876,7 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
+	$apiVersion = $GilMain.apiVersion
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
@@ -883,7 +885,7 @@ function addFooter() {
 	document.getElementById("aFooterImg").style.height = "150px";
 	addDiv("aFooterVer","",'footClan','Gi-API version: ' + $apiVersion + " - Gilgamech.js version: " + $pageVersion,'p');
 	addDiv("aFooterCR","copyright",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p');
-	
+
 }; // end addFooter
 
 function addFruitBotPage() {
