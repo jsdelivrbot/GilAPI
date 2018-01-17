@@ -2,9 +2,9 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "688"
+var $pageVersion = "689"
 var $apiVersion
-var $GOOGLE_API_KEY = "aSecretToEverybody"
+var $GOOGLE_API_KEY
 
 // addDiv
 var timerInterval //Default timer variable, removed in removePage.
