@@ -205,6 +205,54 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attri
 	
 }; // end addDiv	
 
+function addElement($elementID,$elementParent,$elementStyle,$elementType,$innerText,$href,$attributeType,$attributeAction) {
+	if (!$elementType) {
+		$elementType = 'div'
+	}; // end if elementType	
+	var $newElement = document.createElement($elementType);
+
+	if ($elementID) {
+		$newElement.id = $elementID;
+	}; // end if onClick
+
+	if ($elementStyle) {
+		$newElement.style = $elementStyle
+	}; // end if onClick
+	
+	if ($elementType == 'input' && $innerText) {
+		$newElement.value = $innerText
+	} else if ($elementType == 'img' && $innerText) {
+		$newElement.title = $innerText
+	} else if ($innerText) {
+		$newElement.innerText = $innerText
+	}; // end if elementType	
+	
+	if ($elementType == 'a' && $href) {
+		$newElement.href = $href
+	} else if ($elementType == 'img' && $href) {
+		$newElement.src = $href
+	} else if ($elementType == 'script' && $href) {
+		$newElement.src = $href
+	} else if ($elementType == 'link' && $href) {
+		$newElement.href = $href
+		$newElement.rel = "stylesheet"
+		$newElement.type="text/css"
+	}; // end if elementType	
+	
+	if ($elementParent == 'body') {
+		document.body.appendChild($newElement);
+	} else if ($elementParent == 'head') {
+		document.head.appendChild($newElement);
+	} else {
+		document.getElementById($elementParent).appendChild($newElement);
+	}; // end if divParent
+	
+	if ($attributeType && $attributeAction) {
+		document.getElementById($elementID).setAttribute($attributeType, $attributeAction);
+	}; // end if onClick
+	
+}; // end addDiv	
+
 function detectEnterChat(e){
     if(e.keyCode === 13){
         e.preventDefault(); // Ensure it is only this code that runs
@@ -220,7 +268,9 @@ function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 
 // Init
 function initPage(){
-	$GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody'};
+	//AIzaSyDtGxRyEPO2-7bLRhRNAimeWpWYZMdZLLM
+	
+	$GilMain = {apiVersion: "null", googleApiKey: 'AIzaSyDtGxRyEPO2-7bLRhRNAimeWpWYZMdZLLM'};
 	postJSON("https://gil-api.herokuapp.com/settings.json", function(response) {
 		$GilMain = response
 	}); // end loadJSON
@@ -687,7 +737,7 @@ function addBot($divBotName) {
 	var $headerRow = ($botName + 'HeaderRow')
 	var $headerClass = 'col-md-2 col-xs-2';
 	
-	addDiv($headerRow,"row contentLabels",$coinAreaID);
+	addDiv($headerRow,"row",$coinAreaID,"","","style","background-color:#090909;color:#fff;");
 	addDiv(($botName + "headerCoin"),$headerClass,$headerRow,":");
 	addDiv(($botName + "headerPrice"),$headerClass,$headerRow,"Price:");
 	addDiv(($botName + "headerManualBuy"),$headerClass,$headerRow,"Manual Buy:");
@@ -800,12 +850,12 @@ function addHeader() {
 }; // end addHeader
 
 function addNav() {
-	addDiv("gtBannerWrapper","bodyWrapper container",'body');
+	addDiv("gtBannerWrapper","container",'body');
 	addDiv("gtBannerLinkW","img-rounded top" + $cssSmallHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 7ex; color: #000; text-decoration: none");
 	addDiv("gtBannerLinkM","img-rounded top" + $cssLargeHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 4ex; color: #000; text-decoration: none");
 	
 	addDiv("navbar","navbar navbar-static-top navbar-inverse",'body');
-	addDiv("navWrapper","bodyWrapper container",'navbar');
+	addDiv("navWrapper","container",'navbar');
 	addDiv("nav2","nav navbar-nav col-md-6 col-xs-6",'navWrapper','','ul');
 	
 	addDiv("l1",$cssSmallHidden,'nav2','','li');
@@ -878,13 +928,13 @@ function addNav() {
 function addFooter() {
 	$apiVersion = $GilMain.apiVersion
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
-	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
-	addDiv("ftBanner","banner",'footClan','','p',"","style","width: 100%;text-align: center;");
+	addDiv("footClan","navbar-static-bottom",'footWrapper',"","","style","left: 0;bottom: 0;width: 100%;overflow: hidden;");
+	addDiv("ftBanner","",'footClan','','p',"","style","width: 100%;text-align: center;");
 	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
 	addDiv("aFooterImg","img-rounded",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
 	document.getElementById("aFooterImg").style.height = "150px";
-	addDiv("aFooterVer","",'footClan','Gi-API version: ' + $apiVersion + " - Gilgamech.js version: " + $pageVersion,'p');
-	addDiv("aFooterCR","copyright",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p');
+	addDiv("aFooterVer","",'footClan','Gi-API version: ' + $apiVersion + " - Gilgamech.js version: " + $pageVersion,'p','','style','font-weight:bold;text-align:center;');
+	addDiv("aFooterCR","",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p','','style','font-weight:bold;text-align:center;');
 
 }; // end addFooter
 
@@ -898,12 +948,12 @@ function addFruitBotPage() {
 	addDiv("load7","",'headWrapper',"","script","/assets/js/player.js");
 	addDiv("load8","",'headWrapper',"","script","/js/jquery.min.js");
 	
-	addDiv("contentLabels","img-rounded row contentTitles",'bodyWrapper',"");
+	addDiv("contentLabels","img-rounded row",'bodyWrapper',"","","style","background-color:#090909;color:#fff;");
 	
 	addDiv("content",$cssClassC,'bodyWrapper',"Fruitbot");
 	
-	addDiv("grid",$cssClassC,'bodyWrapper',"","canvas");
-	addDiv("game_view",$cssClassC,'bodyWrapper',"","canvas");
+	addDiv("grid",$cssClassC,'bodyWrapper',"","canvas","","style","display: block;margin: 0px auto;border: 1px solid black;");
+	addDiv("game_view",$cssClassC,'bodyWrapper',"","canvas","","style","display: block;margin: 0px auto;border: 1px solid black;");
 	
 	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"new","button");
@@ -1062,7 +1112,7 @@ function addMemePage() {
 
 	addDiv("content",$cssClassC,'bodyWrapper',"MemeGen");
 	
-	addDiv("canvas",$cssClassC,'bodyWrapper',"","canvas");
+	addDiv("canvas","img-rounded",'bodyWrapper',"","canvas","","style","display: block;margin: 0px auto;border: 1px solid black;");
 
 	addDiv("memeUrlInput",$cssClassB,'bodyWrapper',"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","input");
 	addDiv("topTextInput",$cssClassB,'bodyWrapper',"Top Text","input");
@@ -1153,7 +1203,7 @@ function addDragSqPage() {
 	addDiv("btnStar","btn","divForButtons","Add Star","button","","onclick",'addStar(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, "blue");')
 	addDiv("HelpfulMessage","","divForButtons" ,"Page has bug - it does not work the first time. Please click the link again.")
 	
-	addDiv("canvas","","bodyWrapper" ,"This text is displayed if your browser does not support HTML5 Canvas.","canvas")
+	addDiv("canvas","","bodyWrapper","","canvas","","style","display: block; margin: 0px auto; border: 1px solid black;");
 	canvas = document.getElementById('canvas');
 	var $halfWidth = canvas.width/2;
 	var $halfHeight = canvas.height/2;
@@ -1332,8 +1382,8 @@ function addCoinPage() {
 	
 	addDiv("generic","row","bodyWrapper");
 	addDiv("sidebar","sidebar col-md-2 hidden-sm hidden-xs  img-rounded contentTitles","bodyWrapper","","style","border:1px solid #333;");
-	addDiv("consoleLogLabel","","sidebar","sole Log");
-	addDiv("coinMainBox","scrollToWindow img-rounded","sidebar","Data Loading...","","style","background-color:#fff;");
+	addDiv("consoleLogLabel","","sidebar","Coinsole Log");
+	addDiv("coinMainBox","img-rounded","sidebar","Data Loading...","","style","background-color:#fff;height: 75vh;font-size: small;overflow-x: hidden;overflow-y: auto;");
 	addDiv("spacer","","bodyWrapper");
 	
 	addDiv("content","img-rounded col-md-10 col-xs-10","bodyWrapper");
@@ -1342,11 +1392,11 @@ function addCoinPage() {
 
 	addDiv("coinTentWrapper","img-rounded","content","","","style","background-color:#fff;");
 	addDiv("titleRow","row contentTitles","coinTentWrapper");
-	addDiv("contentLabel","col-md-10 col-xs-10 contentTitles","titleRow","tent");
+	addDiv("contentLabel","col-md-10 col-xs-10 contentTitles","titleRow","Cointent");
 	addDiv("button1","button" + $cssClassD,"titleRow");
 	addDiv("BtnGeneric","btn btn-success btn-sm","titleRow","Refresh","button","","onclick","refreshCharts();");
 	
-	addDiv("NameRow","row contentLabels","coinTentWrapper");
+	addDiv("NameRow","row","coinTentWrapper","","","style","background-color:#090909;color:#fff;");
 	addDiv("coinLabel",$cssClassD,"NameRow","");
 	addDiv("valueLabel",$cssClassD,"NameRow","Value");
 	addDiv("medianLabel",$cssClassD,"NameRow","My Coins");

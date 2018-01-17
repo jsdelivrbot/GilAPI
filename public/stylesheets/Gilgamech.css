@@ -40,33 +40,6 @@ div.dropdown-content a:visited{
 	color:#7f7f7f;
 }
 
-canvas {
-	display: block;
-	margin: 0px auto;
-	border: 1px solid black;
-	
-}
-video{
-	display: block;
-	margin: 0px auto;
-	border: 1px solid black;
-	
-}
-pre {
-	text-align:left;
-}
-
-p.menu {
- 	color: #7f7f7f;
-	margin:0;
-	padding:0;
-	border:0;
-	text-align:left;
-	background-color:#000;
- 	position: fixed;
-    margin-top: 3.8em; 
-	width: 100%;
-	}
 nav {
 	color: #A3C7B2;
 	margin:0;
@@ -77,26 +50,10 @@ nav {
  	position: fixed;
     margin-top: 3em;
 	width: 100%;
-	}
+}
 div.content {
 	padding-top: 3em; /* top 5px plus height 30px */
-	/*padding-left: 3em; /* top 5px plus height 30px */
-	/* top | right | bottom | left */
 	margin: 2px 1em 0 5px;
-	}
-p.game {
-	text-align:center;
-	background-color:A3C7B2;
-	
-}
-
-p.copyright {
-	font-weight:bold;
-	text-align:center;
-}
-div.game {
-	text-align:center;
-
 }
 
 div.top {
@@ -117,12 +74,6 @@ div.top a:link{
 div.top a:visited {
 	color:#000;
 }
-.footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    overflow: hidden;
-}
 .contentItems {
     font-size: initial;
 	background-color:#fff;
@@ -133,36 +84,12 @@ div.top a:visited {
 	background-color:#337AB7;
 	color:#fff;
 }
-.contentLabels {
-	background-color:#090909;
-	color:#fff;
-}
-.dataArea {
-	background-color:#fff;
-	color:#000;
-}
 .colorRow {
 	text-align: center;
     font-size: x-large;
 	color:#fff;
 	border:white;
 }
-.scrollToWindow {
-	height: 75vh;
-    font-size: small;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-.jsonArea {
-	height: 70px;
-    font-size: small;
-    overflow-x: hidden;
-    overflow-y: auto;
-	word-wrap: break-word;
-}
-
-
-
 
 .jumbotron {
   background: #532F8C;
