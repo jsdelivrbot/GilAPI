@@ -790,7 +790,7 @@ function addHeader() {
 	addDiv("scr2","",'head','','script','/js/jquery.min.js');
 	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
 	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','/stylesheets/gilgamech.css');
+	addDiv("link3","",'head','','link','/stylesheets/Gilgamech.css');
 	
 }; // end addHeader
 
