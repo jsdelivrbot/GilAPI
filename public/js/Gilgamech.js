@@ -790,7 +790,7 @@ function addHeader() {
 	addDiv("scr2","",'head','','script','/js/jquery.min.js');
 	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
 	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','/stylesheets/Gilgamech.css');
+	addDiv("link3","",'head','','link','/stylesheets/gilgamech.css');
 	
 }; // end addHeader
 
@@ -1280,7 +1280,7 @@ function addCalcPage() {
 }; // end addCalcPage
 
 function addCoinPage() {
-	addDiv("coinCSS","","headWrapper",'','link','./public/stylesheets/coin.css');
+	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
 	
 	addDiv("linkP1","",'NavDDWrapper','','p');
 	addDiv("linkSO1","",'linkP1','How do you implement a fixed left sidebar and fluid right content in CSS','a',"https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037");
