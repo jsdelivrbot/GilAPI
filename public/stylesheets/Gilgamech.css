@@ -1,6 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
 <!--
-
 html,body {
 	  width: auto !important;
   overflow-x: hidden !important;
@@ -10,39 +9,6 @@ html {
 body {
 	background-color:#bbb;
 }
-
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .navbar {
-	color: #A3C7B2;
-	margin:0;
-	background-color:#000;
-	}
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -72,10 +38,6 @@ div.dropdown-content a:link{
 div.dropdown-content a:visited{
 	text-decoration:none;
 	color:#7f7f7f;
-}
-
-.dataArea {
-	background-color:#fff;
 }
 
 canvas {
@@ -155,21 +117,11 @@ div.top a:link{
 div.top a:visited {
 	color:#000;
 }
-.banner {
-	width: 100%;
-	text-align: center;
-}
-
 .footer {
     left: 0;
     bottom: 0;
     width: 100%;
     overflow: hidden;
-}
-
-
-.contentRows {
-    border:1px solid #333;
 }
 .contentItems {
     font-size: initial;
@@ -185,7 +137,6 @@ div.top a:visited {
 	background-color:#090909;
 	color:#fff;
 }
-
 .dataArea {
 	background-color:#fff;
 	color:#000;
@@ -209,13 +160,41 @@ div.top a:visited {
     overflow-y: auto;
 	word-wrap: break-word;
 }
-.numberRow {
-	background-color:#3CBE3C;
-}
-.htmlColorRow {
-	background-color:#fff;
-}
 
+
+
+
+.jumbotron {
+  background: #532F8C;
+  color: white;
+  padding-bottom: 80px; }
+  .jumbotron .btn-primary {
+    background: #845ac7;
+    border-color: #845ac7; }
+    .jumbotron .btn-primary:hover {
+      background: #7646c1; }
+  .jumbotron p {
+    color: #d9ccee;
+    max-width: 75%;
+    margin: 1em auto 2em; }
+  .navbar + .jumbotron {
+    margin-top: -20px; }
+  .navbar {
+	color: #A3C7B2;
+	margin:0;
+	background-color:#000;
+	}
+  .jumbotron .lang-logo {
+    display: block;
+    background: #B01302;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 2px solid white; }
+    .jumbotron .lang-logo img {
+      max-width: 100%; }
 
 /* Let's get this party started 
 https://css-tricks.com/custom-scrollbars-in-webkit */

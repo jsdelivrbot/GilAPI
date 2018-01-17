@@ -2,7 +2,7 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "690"
+var $pageVersion = "692"
 var $apiVersion
 var $GOOGLE_API_KEY
 
@@ -43,7 +43,7 @@ var $assetCounter = 0
 // CSS classes
 var $cssSmallHidden=" hidden-sm hidden-xs "
 var $cssLargeHidden=" hidden-md hidden-lg "
-var $cssClassA = "colorRow img-rounded contentRows col-md-12 col-xs-12 "
+var $cssClassA = "colorRow img-rounded  col-md-12 col-xs-12 "
 var $cssClassB = "img-rounded col-md-12 col-xs-12"
 var $cssClassC = "img-rounded row contentTitles"
 var $cssClassD = "col-md-2 col-xs-2";
@@ -645,22 +645,22 @@ function addBot($divBotName) {
 	var $botName = document.getElementById($divBotName).innerText;
 	
 	var $coinAreaID = ($botName + 'CoinArea')
-	var $coinAreaClass = 'img-rounded col-md-12 col-xs-12 contentRows dataArea row' ;
+	var $coinAreaClass = 'img-rounded col-md-12 col-xs-12 row' ;
 	var $titleRowID = ($botName + 'TitleRow')
 	var $titleRowClass = 'row contentTitles';
 	var $contentLabelID = ($botName + 'ContentLabel')
 	var $contentLabelClass = 'col-md-6 col-xs-6';
 	
 	
-	addDiv($coinAreaID,$coinAreaClass,'CoincointentArea2');
+	addDiv($coinAreaID,$coinAreaClass,'CoincointentArea2',"","","style","background-color:#fff;");
 	addDiv($titleRowID,$titleRowClass,$coinAreaID);
 	addDiv($contentLabelID,$contentLabelClass,$titleRowID,$botName);
 	$assetCounter++
 	
 	var $assetLabelID = ($botName + 'AssetLabel')
-	var $assetLabelClass = 'col-md-4 col-xs-4 dataArea img-rounded contentRows';
+	var $assetLabelClass = 'col-md-4 col-xs-4 img-rounded ';
 	// addDiv($assetLabelID,$assetLabelClass,$titleRowID,"Asset"  + $assetCounter);
-	 addDiv($assetLabelID,$assetLabelClass,$titleRowID,"Asset" + $assetCounter,'input');
+	 addDiv($assetLabelID,$assetLabelClass,$titleRowID,"Asset" + $assetCounter,'input',"","style","background-color:#fff;");
 	
 	var $dropdownListName = ('items' + $assetCounter);
 	document.getElementById($assetLabelID).setAttribute( "list", $dropdownListName);
@@ -688,7 +688,7 @@ function addBot($divBotName) {
 	var $headerClass = 'col-md-2 col-xs-2';
 	
 	addDiv($headerRow,"row contentLabels",$coinAreaID);
-	addDiv(($botName + "headerCoin"),$headerClass,$headerRow,"Coin:");
+	addDiv(($botName + "headerCoin"),$headerClass,$headerRow,":");
 	addDiv(($botName + "headerPrice"),$headerClass,$headerRow,"Price:");
 	addDiv(($botName + "headerManualBuy"),$headerClass,$headerRow,"Manual Buy:");
 	addDiv(($botName + "headerBotAmount"),$headerClass,$headerRow,"Bot Amount:");
@@ -713,7 +713,7 @@ function addBotRow($assetLabelID,$parentDivName) {
 
 	//coinAreaRowID is the container for the row.
 	var $coinAreaRowID = ($assetName + 'ContentRow');
-	var $divClass = 'contentRows row';
+	var $divClass = ' row';
 	addDiv($coinAreaRowID,'row',$parentDivName);
 	
 	var $assetManualTrans = ($assetName + 'AssetManualTrans');
@@ -740,21 +740,21 @@ function addBotRow($assetLabelID,$parentDivName) {
 
 function refreshCharts() {
   try {
-    if (document.getElementById("CoinbtcMedian").innerText == "NaN") {document.getElementById("CoinbtcMedian").innerText = 0}	loadCoinData();
-	updateCoinsole("CoincoinMainBox");
+    if (document.getElementById("btcMedian").innerText == "NaN") {document.getElementById("btcMedian").innerText = 0}	loadCoinData();
+	updateCoinsole("coinMainBox");
 	updateCointent();
-	fruitbotChooses($ltc,$ltcOld,$ltcMedian,"CoinfruitbotltcMedian","CoinfruitbotltcBotAmount","CoinfruitbotltcBotAction",function($e,$f){$ltcOld = $e;$ltcMedian = $f});
-    fruitbotChooses($btc,$btcOld,$btcMedian,"CoinfruitbotbtcMedian","CoinfruitbotbtcBotAmount","CoinfruitbotbtcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
-    fruitbotChooses($eth,$ethOld,$ethMedian,"CoinfruitbotethMedian","CoinfruitbotethBotAmount","CoinfruitbotethBotAction",function($e,$f){$ethOld = $e;$ethMedian = $f});
+	fruitbotChooses($ltc,$ltcOld,$ltcMedian,"fruitbotltcMedian","fruitbotltcBotAmount","fruitbotltcBotAction",function($e,$f){$ltcOld = $e;$ltcMedian = $f});
+    fruitbotChooses($btc,$btcOld,$btcMedian,"fruitbotbtcMedian","fruitbotbtcBotAmount","fruitbotbtcBotAction",function($e,$f){$btcOld = $e;$btcMedian = $f});
+    fruitbotChooses($eth,$ethOld,$ethMedian,"fruitbotethMedian","fruitbotethBotAmount","fruitbotethBotAction",function($e,$f){$ethOld = $e;$ethMedian = $f});
   }catch(e){console.log(e)}; // end try 
   try {
 	$fbcOld = $fbc.amount
   }catch(e){console.log(e)}; // end try 
   try {
 	
-	simplebotChooses($ltc,"CoinsimplebotltcBotAmount","CoinsimplebotltcBotAction");
-    simplebotChooses($btc,"CoinsimplebotbtcBotAmount","CoinsimplebotbtcBotAction");
-    simplebotChooses($eth,"CoinsimplebotethBotAmount","CoinsimplebotethBotAction");
+	simplebotChooses($ltc,"simplebotltcBotAmount","simplebotltcBotAction");
+    simplebotChooses($btc,"simplebotbtcBotAmount","simplebotbtcBotAction");
+    simplebotChooses($eth,"simplebotethBotAmount","simplebotethBotAction");
   }catch(e){console.log(e)}; // end try 
 }; // end refreshCharts
 
@@ -791,7 +791,7 @@ function initMap() {
 // Add pages
 function addHeader() {
 	addDiv("titleHead","",'head','Gilgamech Technologies','title');
-	addDiv("scr1","",'head','','script','/js/Gilgamech.js');
+	// addDiv("scr1","",'head','','script','/js/Gilgamech.js');
 	addDiv("scr2","",'head','','script','/js/jquery.min.js');
 	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
 	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
@@ -879,7 +879,7 @@ function addFooter() {
 	$apiVersion = $GilMain.apiVersion
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
-	addDiv("ftBanner","banner",'footClan','','p');
+	addDiv("ftBanner","banner",'footClan','','p',"","style","width: 100%;text-align: center;");
 	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
 	addDiv("aFooterImg","img-rounded",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
 	document.getElementById("aFooterImg").style.height = "150px";
@@ -950,8 +950,8 @@ function addRgbColorPage() {
 	addDiv("contentLabel",$cssClassC,'coinArea','RGB Calculator');
 	
 	addDiv("htmlColorRow",$rowClasses,'coinArea');
-	addDiv("htmlRow",$cssClassA + "htmlColorRow",'htmlColorRow','',"input","","onchange","updateRgbColor()");
-	document.getElementById("htmlRow").setAttribute( "style",  "color: #000");
+	addDiv("htmlRow",$cssClassA,'htmlColorRow','',"input","","onchange","updateRgbColor()");
+	document.getElementById("htmlRow").setAttribute( "style",  "color: #000;background-color:#fff;");
 	document.getElementById("htmlRow").setAttribute( "maxlength",  "7");
 	
 	addDiv("redCRow",$rowClasses,'coinArea');
@@ -989,9 +989,10 @@ function addArkdataPage() {
 	addDiv("ArkdatacontentLabel3","img-rounded row contentItems",'ArkdatacoinArea',"Players currently being tracked:");
 
 	
-	addDiv("ArkdataContentRow","container contentRows row ","ArkdatacoinArea");
+	addDiv("ArkdataContentRow","container  row ","ArkdatacoinArea","","style","border:1px solid #333;");
 	addDiv("ArkdataLabel","contentItems" + $cssClassD,"ArkdataContentRow","BTC");
-	addDiv("ArkdataAmount","img-rounded colorRow numberRow contentItems col-md-12 col-xs-12","ArkdataContentRow","0","number","","readonly");
+	addDiv("ArkdataAmount","img-rounded colorRow contentItems col-md-12 col-xs-12","ArkdataContentRow","0","number","","readonly");
+	document.getElementById("ArkdataAmount").setAttribute( "style", "background-color:#3CBE3C");
 	addDiv("ArkdataMedian","contentItems" + $cssClassD,"ArkdataContentRow","0");
 	addDiv("ArkdataBotAmount","contentItems" + $cssClassD,"ArkdataContentRow","0");
 	addDiv("ArkdataBotAction","contentItems" + $cssClassD,"ArkdataContentRow","0");
@@ -1112,19 +1113,21 @@ function addChatPage() {
 	addDiv("coinArea","",'content');
 	addDiv("contentLabel",$cssClassC,'coinArea',' Room:');
 	
-	addDiv("htmlColorRow",$rowClasses,'coinArea');
-	addDiv("chatRoom",$cssClassA + "htmlColorRow",'htmlColorRow','General',"input");
-	document.getElementById("chatRoom").setAttribute( "style",  "color: #000");
+	addDiv("labelRow",$rowClasses,'coinArea');
+	addDiv("chatRoom",$cssClassA,'labelRow','General',"input");
+	document.getElementById("chatRoom").setAttribute( "style",  "color: #000;background-color:#fff;");
 	
 	addDiv("redCRow",$rowClasses,'coinArea');
 	addDiv("chatMainBox","img-rounded",'redCRow',171,"textarea");
 	document.getElementById("chatMainBox").setAttribute( "style",  "color: #000");
 	
-	addDiv("blueCRow",$rowClasses,'coinArea');
-	addDiv("chatUser",$cssClassA + "blueColorRow",'blueCRow',"","input","","placeholder","User Name");
+	addDiv("nameRow",$rowClasses,'coinArea');
+	addDiv("chatUser",$cssClassA,'nameRow',"","input","","placeholder","User Name");
+	document.getElementById("chatUser").setAttribute( "style",  "background-color: #338");
 	
-	addDiv("greenCRow",$rowClasses,'coinArea');
-	addDiv("chatMessage",$cssClassA + "greenColorRow",'greenCRow',"Hello World!","input","","onkeypress","detectEnterChat(event);");
+	addDiv("messageRow",$rowClasses,'coinArea');
+	addDiv("chatMessage",$cssClassA,'messageRow',"Hello World!","input","","onkeypress","detectEnterChat(event);");
+	document.getElementById("chatMessage").setAttribute( "style",  "background-color: #383");
 	
 	refreshChat(document.getElementById("chatRoom").value)
 	
@@ -1178,7 +1181,7 @@ function addGitPage() {
 
 	addDiv("wrapper","container img-rounded",'bodyWrapper');
 	addDiv("pageName",$cssClassC,'wrapper',"Gilgamech.js","","","contenteditable","true");
-	addDiv("myTextArea","div_textarea dataArea img-rounded" + $cssClassB,'wrapper','Code goes here.',"textarea","","contenteditable","true");
+	addDiv("myTextArea","div_textarea img-rounded" + $cssClassB,'wrapper','Code goes here.',"textarea","","contenteditable","true");
 	document.getElementById("myTextArea").setAttribute( "style",  "background-color: #fff");
 	document.getElementById("myTextArea").setAttribute( "style",  "height: 50vh");
 	addDiv("myRow","row" + $cssClassB,'wrapper');
@@ -1254,9 +1257,9 @@ function addCalcPage() {
 	addDiv("content",$cssClassC,'bodyWrapper',"Calculator");
 	addDiv("calcWrapper","img-rounded col-md-12 col-xs-12",'bodyWrapper');
 	
-	addDiv("htmlColorRow",$rowClasses,'calcWrapper');
-	addDiv("output",$cssClassA + "htmlColorRow",'htmlColorRow','',"input","","onkeypress","detectEnterCalc(event,'output')");
-	document.getElementById("output").setAttribute( "style",  "color: #000");
+	addDiv("outputRow",$rowClasses,'calcWrapper');
+	addDiv("output",$cssClassA,'outputRow','',"input","","onkeypress","detectEnterCalc(event,'output')");
+	document.getElementById("output").setAttribute( "style",  "color: #000;background-color:#fff;");
 	
 	addDiv("row1",$rowClasses,'calcWrapper');
 	addDiv("btn1",$btnCalc,'row1',1,"button","","onclick","pressCalcButton(1,'output')");
@@ -1327,81 +1330,87 @@ function addCoinPage() {
 	addDiv("linkP18","",'NavDDWrapper','','p');
 	addDiv("linkSO18","",'linkP18','Form widget editable select','a',"http://www.dhtmlgoodies.com/scripts/form_widget_editable_select/form_widget_editable_select.html");
 	
-	addDiv("Coingeneric","row","bodyWrapper");
-	addDiv("Coinsidebar","sidebar col-md-2 hidden-sm hidden-xs contentRows img-rounded contentTitles","bodyWrapper");
-	addDiv("CoinconsoleLogLabel","","Coinsidebar","Coinsole Log");
-	addDiv("CoincoinMainBox","contentRows dataArea scrollToWindow img-rounded","Coinsidebar","Data Loading...");
-	addDiv("Coinspacer","","bodyWrapper");
+	addDiv("generic","row","bodyWrapper");
+	addDiv("sidebar","sidebar col-md-2 hidden-sm hidden-xs  img-rounded contentTitles","bodyWrapper","","style","border:1px solid #333;");
+	addDiv("consoleLogLabel","","sidebar","sole Log");
+	addDiv("coinMainBox","scrollToWindow img-rounded","sidebar","Data Loading...","","style","background-color:#fff;");
+	addDiv("spacer","","bodyWrapper");
 	
-	addDiv("Coincontent","img-rounded col-md-10 col-xs-10","bodyWrapper");
+	addDiv("content","img-rounded col-md-10 col-xs-10","bodyWrapper");
 
-	addDiv("CoincointentArea","img-rounded col-md-12 col-xs-12 contentRows dataArea row","Coincontent");
+	addDiv("cointentArea","img-rounded col-md-12 col-xs-12 row","content","","","style","background-color:#fff;");
 
-	addDiv("CointitleRow","row contentTitles","Coincontent");
-	addDiv("CoincontentLabel","col-md-10 col-xs-10 contentTitles","CointitleRow","Cointent");
-	addDiv("Coinbutton1","button" + $cssClassD,"CointitleRow");
-	addDiv("CoinBtnGeneric","btn btn-success btn-sm","CointitleRow","Refresh","button","","onclick","refreshCharts();");
+	addDiv("coinTentWrapper","img-rounded","content","","","style","background-color:#fff;");
+	addDiv("titleRow","row contentTitles","coinTentWrapper");
+	addDiv("contentLabel","col-md-10 col-xs-10 contentTitles","titleRow","tent");
+	addDiv("button1","button" + $cssClassD,"titleRow");
+	addDiv("BtnGeneric","btn btn-success btn-sm","titleRow","Refresh","button","","onclick","refreshCharts();");
 	
-	addDiv("CoinNameRow","row contentLabels","Coincontent");
-	addDiv("CoincoinLabel",$cssClassD,"CoinNameRow","Coin");
-	addDiv("CoinvalueLabel",$cssClassD,"CoinNameRow","Value");
-	addDiv("CoinmedianLabel",$cssClassD,"CoinNameRow","My Coins");
-	addDiv("CoinbotAmountLabel",$cssClassD,"CoinNameRow","MyBot");
-	addDiv("CoinbotActionLabel",$cssClassD,"CoinNameRow","Fruitbot");
-	addDiv("CoinbotPredictionLabel",$cssClassD,"CoinNameRow","SimpleBot");
+	addDiv("NameRow","row contentLabels","coinTentWrapper");
+	addDiv("coinLabel",$cssClassD,"NameRow","");
+	addDiv("valueLabel",$cssClassD,"NameRow","Value");
+	addDiv("medianLabel",$cssClassD,"NameRow","My Coins");
+	addDiv("botAmountLabel",$cssClassD,"NameRow","MyBot");
+	addDiv("botActionLabel",$cssClassD,"NameRow","Fruitbot");
+	addDiv("botPredictionLabel",$cssClassD,"NameRow","SimpleBot");
 
 
-	addDiv("CoinbtcContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinbtcLabel","contentItems" + $cssClassD,"CoinbtcContentRow","BTC");
-	addDiv("CoinbtcAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinbtcContentRow","0","input","","readonly");
-	document.getElementById("CoinbtcAmount").setAttribute( "type", "number");
-	addDiv("CoinbtcMedian","contentItems" + $cssClassD,"CoinbtcContentRow","0");
-	addDiv("CoinbtcBotAmount","contentItems" + $cssClassD,"CoinbtcContentRow","0");
-	addDiv("CoinbtcBotAction","contentItems" + $cssClassD,"CoinbtcContentRow","0");
-	addDiv("CoinbtcBotPrediction","contentItems" + $cssClassD,"CoinbtcContentRow","0");
+	addDiv("btcContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
+	addDiv("btcLabel","contentItems" + $cssClassD,"btcContentRow","BTC");
+	addDiv("btcAmount","img-rounded colorRow contentItems" + $cssClassD,"btcContentRow","0","input","","readonly");
+	document.getElementById("btcAmount").setAttribute( "type", "number");
+	document.getElementById("btcAmount").setAttribute( "style", "background-color:#3CBE3C");
+	addDiv("btcMedian","contentItems" + $cssClassD,"btcContentRow","0");
+	addDiv("btcBotAmount","contentItems" + $cssClassD,"btcContentRow","0");
+	addDiv("btcBotAction","contentItems" + $cssClassD,"btcContentRow","0");
+	addDiv("btcBotPrediction","contentItems" + $cssClassD,"btcContentRow","0");
 
 
-	addDiv("CoinltcContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinltcLabel","contentItems" + $cssClassD,"CoinltcContentRow","LTC");
-	addDiv("CoinltcAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinltcContentRow","0","input","","readonly");
-	document.getElementById("CoinltcAmount").setAttribute( "type", "number");
-	addDiv("CoinltcMedian","contentItems" + $cssClassD,"CoinltcContentRow","0");
-	addDiv("CoinltcBotAmount","contentItems" + $cssClassD,"CoinltcContentRow","0");
-	addDiv("CoinltcBotAction","contentItems" + $cssClassD,"CoinltcContentRow","0");
-	addDiv("CoinltcBotPrediction","contentItems" + $cssClassD,"CoinltcContentRow","0");
+	addDiv("ltcContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
+	addDiv("ltcLabel","contentItems" + $cssClassD,"ltcContentRow","LTC");
+	addDiv("ltcAmount","img-rounded colorRow contentItems" + $cssClassD,"ltcContentRow","0","input","","readonly");
+	document.getElementById("ltcAmount").setAttribute( "type", "number");
+	document.getElementById("ltcAmount").setAttribute( "style", "background-color:#3CBE3C");
+	addDiv("ltcMedian","contentItems" + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcBotAmount","contentItems" + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcBotAction","contentItems" + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcBotPrediction","contentItems" + $cssClassD,"ltcContentRow","0");
 
 
-	addDiv("CoinethContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinethLabel","contentItems" + $cssClassD,"CoinethContentRow","ETH");
-	addDiv("CoinethAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinethContentRow","0","input","","readonly");
-	document.getElementById("CoinethAmount").setAttribute( "type", "number");
-	addDiv("CoinethMedian","contentItems" + $cssClassD,"CoinethContentRow","0");
-	addDiv("CoinethBotAmount","contentItems" + $cssClassD,"CoinethContentRow","0");
-	addDiv("CoinethBotAction","contentItems" + $cssClassD,"CoinethContentRow","0");
-	addDiv("CoinethBotPrediction","contentItems" + $cssClassD,"CoinethContentRow","0");
+	addDiv("ethContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
+	addDiv("ethLabel","contentItems" + $cssClassD,"ethContentRow","ETH");
+	addDiv("ethAmount","img-rounded colorRow contentItems" + $cssClassD,"ethContentRow","0","input","","readonly");
+	document.getElementById("ethAmount").setAttribute( "type", "number");
+	document.getElementById("ethAmount").setAttribute( "style", "background-color:#3CBE3C");
+	addDiv("ethMedian","contentItems" + $cssClassD,"ethContentRow","0");
+	addDiv("ethBotAmount","contentItems" + $cssClassD,"ethContentRow","0");
+	addDiv("ethBotAction","contentItems" + $cssClassD,"ethContentRow","0");
+	addDiv("ethBotPrediction","contentItems" + $cssClassD,"ethContentRow","0");
 
-	addDiv("CoinfbcContentRow","row contentRows dataArea","Coincontent");
-	addDiv("CoinfbcLabel","contentItems" + $cssClassD,"CoinfbcContentRow","FBC");
-	addDiv("CoinfbcAmount","img-rounded colorRow numberRow contentItems" + $cssClassD,"CoinfbcContentRow","0","input","","readonly");
-	document.getElementById("CoinfbcAmount").setAttribute( "type", "number");
-	addDiv("CoinfbcMedian","contentItems" + $cssClassD,"CoinfbcContentRow","0");
-	addDiv("CoinfbcBotAmount","contentItems" + $cssClassD,"CoinfbcContentRow","0");
-	addDiv("CoinfbcBotAction","contentItems" + $cssClassD,"CoinfbcContentRow","0");
-	addDiv("CoinfbcBotPrediction","contentItems" + $cssClassD,"CoinfbcContentRow","0");
-	addDiv("CoinfbcmanualButtonRow","row","CoinfbcContentRow");
-	addDiv("Coinfbcbutton","button" + $cssClassD,"CoinfbcContentRow");
-	addDiv("CoinfbcmanualButtonRow","row","CoinfbcContentRow");
+	addDiv("fbcContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
+	addDiv("fbcLabel","contentItems" + $cssClassD,"fbcContentRow","FBC");
+	addDiv("fbcAmount","img-rounded colorRow contentItems" + $cssClassD,"fbcContentRow","0","input","","readonly");
+	document.getElementById("fbcAmount").setAttribute( "type", "number");
+	document.getElementById("fbcAmount").setAttribute( "style", "background-color:#3CBE3C");
+	addDiv("fbcMedian","contentItems" + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcBotAmount","contentItems" + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcBotAction","contentItems" + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcBotPrediction","contentItems" + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcmanualButtonRow","row","fbcContentRow");
+	addDiv("fbcbutton","button" + $cssClassD,"fbcContentRow");
+	addDiv("fbcmanualButtonRow","row","fbcContentRow");
 
-	addDiv("CoincointentArea2","img-rounded col-md-12 col-xs-12 contentRows dataArea row","Coincontent");
-	addDiv("CointitleRow","row contentTitles","CoincointentArea2");
-	addDiv("CoinbotNameLabel","col-md-10 col-xs-10 dataArea contentTitles img-rounded","CoincointentArea2","MyBotName","","","contenteditable","true");
-	addDiv("Coinbutton2","button" + $cssClassD,"CoincointentArea2");
-	addDiv("CoinBtnAddBot","btn btn-success btn-sm","CoincointentArea2","Add Bot","button","","onclick","addBot('CoinbotNameLabel');");
+	addDiv("cointentArea2","img-rounded col-md-12 col-xs-12 row","coinTentWrapper");
+	addDiv("titleRow","row contentTitles","cointentArea2","","","style","background-color:#fff;");
+	addDiv("botNameLabel","col-md-10 col-xs-10 contentTitles img-rounded","cointentArea2","MyBotName","","","contenteditable","true");
+	document.getElementById("botNameLabel").setAttribute("style","background-color:#fff;");
+	addDiv("button2","button" + $cssClassD,"cointentArea2");
+	addDiv("BtnAddBot","btn btn-success btn-sm","cointentArea2","Add Bot","button","","onclick","addBot('botNameLabel');");
 
 	loadCoinData();
 	refreshCharts();
-	document.getElementById("CoincoinMainBox").innerText = $coin2;
-	document.getElementById("CoinbtcMedian").innerText = 0;
+	document.getElementById("coinMainBox").innerText = $coin2;
+	document.getElementById("btcMedian").innerText = 0;
 	
 	timerInterval = setInterval(function () {
 		refreshCharts()
@@ -1410,7 +1419,7 @@ function addCoinPage() {
 }; // end addCoinPage
 
 function addFormPage($formPost) {
-	addDiv("wrapperForm","",'bodyWrapper',"","form","","action",$formPost);
+	addDiv("wrapperForm",$cssClassC,'bodyWrapper',$formPost,"form","","action",$formPost);
 	document.getElementById("wrapperForm").setAttribute( "method", "post");
 	
 	addDiv("emailInput",$cssClassB,'wrapperForm','',"input","","placeholder","Email");
