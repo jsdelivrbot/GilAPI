@@ -896,10 +896,11 @@ function addFruitBotPage() {
 	
 	addDiv("contentLabels","img-rounded row contentTitles",'bodyWrapper',"");
 	
-	addDiv("content","container img-rounded",'bodyWrapper');
-	addDiv("grid","img-rounded row contentTitles",'content',"","canvas");
-	addDiv("game_view","img-rounded row contentTitles",'content',"","canvas");
-
+	addDiv("content",$cssClassC,'bodyWrapper',"Fruitbot");
+	
+	addDiv("grid",$cssClassC,'bodyWrapper',"","canvas");
+	addDiv("game_view",$cssClassC,'bodyWrapper',"","canvas");
+	
 	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"new","button");
 	addDiv("btnPretty","btn btn-caution",'myRow',"reset","button");
