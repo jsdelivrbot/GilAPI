@@ -2,8 +2,9 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "674"
+var $pageVersion = "685"
 var $apiVersion
+var $GOOGLE_API_KEY = "aSecretToEverybody"
 
 // addDiv
 var timerInterval //Default timer variable, removed in removePage.
@@ -221,6 +222,7 @@ function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 function initPage(){
 	postJSON("https://gil-api.herokuapp.com/settings.json", function(response) {
 		$GilMain = response
+		$apiVersion = ($GilMain.apiVersion || 'err')
 	}); // end loadJSON
 };// end initPage
 
@@ -871,7 +873,6 @@ function addNav() {
 }; // end addPage
 
 function addFooter() {
-	$apiVersion = ($GilMain.apiVersion || 'err')
 	addDiv("Footerspacer","container-fluid",'footWrapper',"");
 	addDiv("footClan","footer navbar-static-bottom",'footWrapper');
 	addDiv("ftBanner","banner",'footClan','','p');
