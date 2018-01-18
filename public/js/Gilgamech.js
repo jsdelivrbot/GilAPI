@@ -2,7 +2,7 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "693"
+var $pageVersion = "697"
 var $apiVersion
 var $GOOGLE_API_KEY
 
@@ -159,15 +159,15 @@ function getNumberFromDiv($numericDiv) {
 	)
 };
 
-function toggleSettingsDisplay($divId) {
+function toggleElement($divId) {
 	if (document.getElementById($divId).style.visibility == "visible") {
 		document.getElementById($divId).style.visibility="hidden";
 	} else { 
 		document.getElementById($divId).style.visibility="visible";
 	} // end if
-}; // end toggleSettingsDisplay
+}; // end toggleElement
 
-function removeDiv($divID) {
+function removeElement($divID) {
 	var $div = document.getElementById($divID);
 	if ($div) {
 		$div.parentNode.removeChild($div);
@@ -270,12 +270,14 @@ function addElement($elementID,$elementParent,$elementStyle,$elementType,$innerT
 	
 }; // end addDiv	
 
-function detectEnterChat(e){
-    if(e.keyCode === 13){
-        e.preventDefault(); // Ensure it is only this code that runs
-        updateChat();
+function detectEnter($keypress,callback){
+    if($keypress.keyCode === 13){
+        $keypress.preventDefault(); // Ensure it is only this code that runs
+		$outputCallback = function () {
+            callback();
+		};
     };
-}; // end detectEnterChat
+}; // end detectEnter
 
 function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
 	postFile($postJsonUrl, function(response) {
@@ -735,7 +737,7 @@ function addBot($divBotName) {
 	
 	var $button2ID = ($botName + 'DeleteButton')
 	var $button2Class = 'btn btn-xs btn-danger';
-	var $onClick = "javascript: removeDiv('" + $coinAreaID + "');"
+	var $onClick = "javascript: removeElement('" + $coinAreaID + "');"
 	addDiv($button2ID,$button2Class,$titleRowID,'Del Bot','button',"","onclick",$onClick)	
 	
 	
@@ -785,7 +787,7 @@ function addBotRow($assetLabelID,$parentDivName) {
 	addDiv(($assetName + 'BotAction'),$divClass,$coinAreaRowID,"0");
 	addDiv($divDeleteBot,$divClass,$coinAreaRowID);
 
-	var $btnAttribute = "javascript: removeDiv('" + $coinAreaRowID + "');";
+	var $btnAttribute = "javascript: removeElement('" + $coinAreaRowID + "');";
 	addDiv($button2ID,'btn btn-xs btn-danger',$divDeleteBot,'Del','button',"","onClick",$btnAttribute);
 	
 	$assetCounter++;
@@ -822,12 +824,6 @@ function evalCalc($outputDiv) {
 	$inputToEval = document.getElementById($outputDiv).value
 	document.getElementById($outputDiv).value = eval($inputToEval)
 }
-function detectEnterCalc(e,$outputDiv){
-    if(e.keyCode === 13){
-        e.preventDefault(); // Ensure it is only this code that runs
-        evalCalc($outputDiv);
-    };
-}; // end detectEnterChat
 
 // DiffeRentIal
 function initMap() {
@@ -846,7 +842,6 @@ function initMap() {
 // Add pages
 function addHeader() {
 	addDiv("titleHead","",'head','Gilgamech Technologies','title');
-	// addDiv("scr1","",'head','','script','/js/Gilgamech.js');
 	addDiv("scr2","",'head','','script','/js/jquery.min.js');
 	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
 	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
@@ -1091,7 +1086,7 @@ function addAddDivPage() {
 	$bodyText +=  "$attributeType- Set a custom attribute, like 'onclick' or 'placeholder' or 'contenteditable'.\n\n"
 	$bodyText +=  "$attributeAction- Set the value for the above attribute type. Leave blank for attributes with no value, such as 'contenteditable'.\n\n"
 	$bodyText +=  "\n\n"
-	$bodyText +=  "Other key parts of this framework are removeDiv, wrapperHead, wrapperBody, and wrapperFoot. These divs are unloaded and rebuilt on each page change.\n\n"
+	$bodyText +=  "Other key parts of this framework are removeElement, wrapperHead, wrapperBody, and wrapperFoot. These divs are unloaded and rebuilt on each page change.\n\n"
 	$bodyText +=  "\n\n"
 	$bodyText +=  "Call other Javascript scripts, CSS files, and other Head-based items in wrapperHead.\n\n"
 	$bodyText +=  "Nest all of your page within wrapperBody.\n\n"
@@ -1181,7 +1176,7 @@ function addChatPage() {
 	document.getElementById("chatUser").setAttribute( "style",  "background-color: #338");
 	
 	addDiv("messageRow",$rowClasses,'coinArea');
-	addDiv("chatMessage",$cssClassA,'messageRow',"Hello World!","input","","onkeypress","detectEnterChat(event);");
+	addDiv("chatMessage",$cssClassA,'messageRow',"Hello World!","input","","onkeypress","detectEnter(event,updateChat());");
 	document.getElementById("chatMessage").setAttribute( "style",  "background-color: #383");
 	
 	refreshChat(document.getElementById("chatRoom").value)
@@ -1313,7 +1308,7 @@ function addCalcPage() {
 	addDiv("calcWrapper","img-rounded col-md-12 col-xs-12",'bodyWrapper');
 	
 	addDiv("outputRow",$rowClasses,'calcWrapper');
-	addDiv("output",$cssClassA,'outputRow','',"input","","onkeypress","detectEnterCalc(event,'output')");
+	addDiv("output",$cssClassA,'outputRow','',"input","","onkeypress","detectEnter(event,evalCalc('output'))");
 	document.getElementById("output").setAttribute( "style",  "color: #000;background-color:#fff;");
 	
 	addDiv("row1",$rowClasses,'calcWrapper');
@@ -1346,7 +1341,6 @@ function addCalcPage() {
 }; // end addCalcPage
 
 function addCoinPage() {
-	addDiv("coinCSS","","headWrapper",'','link','/stylesheets/coin.css');
 	
 	addDiv("linkP1","",'NavDDWrapper','','p');
 	addDiv("linkSO1","",'linkP1','How do you implement a fixed left sidebar and fluid right content in CSS','a',"https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037");
@@ -1488,10 +1482,10 @@ function addFormPage($formPost) {
 //Run SPA
 function loadPage($pageName) {
 try {
-	removeDiv("headWrapper");
-	removeDiv("NavDDWrapper");
-	removeDiv("bodyWrapper");
-	removeDiv("footWrapper");
+	removeElement("headWrapper");
+	removeElement("NavDDWrapper");
+	removeElement("bodyWrapper");
+	removeElement("footWrapper");
 	window.clearInterval(timerInterval);
 	
 	addDiv("headWrapper","",'head');
