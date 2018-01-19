@@ -2,7 +2,7 @@
 
 //Init vars
 var $GilMain
-var $pageVersion = "697"
+var $pageVersion = "698"
 var $apiVersion
 var $GOOGLE_API_KEY
 
@@ -120,7 +120,9 @@ function postFile(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
-function destroyClickedElement(event) {	document.body.removeChild(event.target); }
+function getBadPW() {	  
+	return Math.random().toString(36).slice(-20);
+ }
 
 function copyToClipboard(text) {
     Copied = text.createRange();
@@ -136,10 +138,6 @@ function colorifyDiv(divName, replaceWord, replaceColor) {
   str = str.replace('</span></span>','</span>');
   document.getElementById(divName).innerHTML = str;
 }; // end colorifyDiv
-
-function updateDownloadLink(downloadLinkID,inputFieldID) {
-  document.getElementById(downloadLinkID).download = document.getElementById(inputFieldID).value
-}; // end updateDownloadLink
 
 function prettyPrint($divName) {
 	try {
@@ -222,18 +220,23 @@ function addDiv($divID,$divClass,$divParent,$innerText,$elementType,$href,$attri
 	
 }; // end addDiv	
 
-function addElement($elementID,$elementParent,$elementStyle,$elementType,$innerText,$href,$attributeType,$attributeAction) {
+function addElement($elementParent,$innerText,$elementClass,$elementID,$elementType,$elementStyle,$href,$attributeType,$attributeAction) {
 	if (!$elementType) {
 		$elementType = 'div'
 	}; // end if elementType	
 	var $newElement = document.createElement($elementType);
 
-	if ($elementID) {
-		$newElement.id = $elementID;
+	if (!$elementID) {
+		$elementID = getBadPW();
 	}; // end if onClick
+	$newElement.id = $elementID;
 
 	if ($elementStyle) {
 		$newElement.style = $elementStyle
+	}; // end if onClick
+	
+	if ($elementClass) {
+		$newElement.className = $elementClass
 	}; // end if onClick
 	
 	if ($elementType == 'input' && $innerText) {
@@ -243,6 +246,14 @@ function addElement($elementID,$elementParent,$elementStyle,$elementType,$innerT
 	} else if ($innerText) {
 		$newElement.innerText = $innerText
 	}; // end if elementType	
+	
+	if ($elementParent == 'body') {
+		document.body.appendChild($newElement);
+	} else if ($elementParent == 'head') {
+		document.head.appendChild($newElement);
+	} else {
+		document.getElementById($elementParent).appendChild($newElement);
+	}; // end if divParent
 	
 	if ($elementType == 'a' && $href) {
 		$newElement.href = $href
@@ -256,18 +267,10 @@ function addElement($elementID,$elementParent,$elementStyle,$elementType,$innerT
 		$newElement.type="text/css"
 	}; // end if elementType	
 	
-	if ($elementParent == 'body') {
-		document.body.appendChild($newElement);
-	} else if ($elementParent == 'head') {
-		document.head.appendChild($newElement);
-	} else {
-		document.getElementById($elementParent).appendChild($newElement);
-	}; // end if divParent
-	
 	if ($attributeType && $attributeAction) {
-		document.getElementById($elementID).setAttribute($attributeType, $attributeAction);
-	}; // end if onClick
-	
+		
+			document.getElementById($elementID).setAttribute($attributeType, $attributeAction);
+	}; // end if onClick	
 }; // end addDiv	
 
 function detectEnter($keypress,callback){
@@ -279,9 +282,19 @@ function detectEnter($keypress,callback){
     };
 }; // end detectEnter
 
-function updateFormPost($postJsonUrl,$DivIDtoUpdate) {
+function updateElement($elementId,$source) {	  
+	var $elementType = document.getElementById($elementId).type;
+	
+	if ($elementType == 'text') {
+		document.getElementById($elementId).value = $source;
+	} else {
+		document.getElementById($elementId).innerText = $source;
+	}; // end if divParent
+}; // end getBadPW
+
+function updateFormPost($elementId,$postJsonUrl) {
 	postFile($postJsonUrl, function(response) {
-		document.getElementById($DivIDtoUpdate).value  = response
+		document.getElementById($elementId).value  = response
 	}); // end loadJSON
 }; // end updateFormPost
 
@@ -841,18 +854,18 @@ function initMap() {
 
 // Add pages
 function addHeader() {
-	addDiv("titleHead","",'head','Gilgamech Technologies','title');
-	addDiv("scr2","",'head','','script','/js/jquery.min.js');
-	addDiv("link1","",'head','','link','/stylesheets/bootstrap.min.css');
-	addDiv("link2","",'head','','link','/stylesheets/normalize.css');
-	addDiv("link3","",'head','','link','/stylesheets/Gilgamech.css');
+	addElement("head","Gilgamech Technologies","","","title");
+	addElement("head","","","","script","","/js/jquery.min.js");
+	addElement("head","","","","link","","/stylesheets/bootstrap.min.css");
+	addElement("head","","","","link","","/stylesheets/normalize.css");
+	addElement("head","","","","link","","/stylesheets/Gilgamech.css");
 	
 }; // end addHeader
 
 function addNav() {
 	addDiv("gtBannerWrapper","container",'body');
-	addDiv("gtBannerLinkW","img-rounded top" + $cssSmallHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 7ex; color: #000; text-decoration: none");
-	addDiv("gtBannerLinkM","img-rounded top" + $cssLargeHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 4ex; color: #000; text-decoration: none");
+	addDiv("gtBannerLinkW","img-rounded top " + $cssSmallHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 7ex; color: #000; text-decoration: none");
+	addDiv("gtBannerLinkM","img-rounded top " + $cssLargeHidden,'gtBannerWrapper',"Gilgamech Technologies","a","/","style",  "font-size: 4ex; color: #000; text-decoration: none");
 	
 	addDiv("navbar","navbar navbar-static-top navbar-inverse",'body');
 	addDiv("navWrapper","container",'navbar');
@@ -927,15 +940,14 @@ function addNav() {
 
 function addFooter() {
 	$apiVersion = $GilMain.apiVersion
-	addDiv("Footerspacer","container-fluid",'footWrapper',"");
-	addDiv("footClan","navbar-static-bottom",'footWrapper',"","","style","left: 0;bottom: 0;width: 100%;overflow: hidden;");
-	addDiv("ftBanner","",'footClan','','p',"","style","width: 100%;text-align: center;");
-	addDiv("aFooter","",'ftBanner','','a',"https://www.duckduckgo.com");
-	addDiv("aFooterImg","img-rounded",'aFooter',"C1ick h34r ph0r m04r inph0",'img',"/images/BannerImage.gif","","height","250px");
-	document.getElementById("aFooterImg").style.height = "150px";
-	addDiv("aFooterVer","",'footClan','Gi-API version: ' + $apiVersion + " - Gilgamech.js version: " + $pageVersion,'p','','style','font-weight:bold;text-align:center;');
-	addDiv("aFooterCR","",'footClan','(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.','p','','style','font-weight:bold;text-align:center;');
-
+	addElement("footWrapper","","container-fluid");
+	addElement("footWrapper","","navbar-static-bottom","footClan","","left: 0;bottom: 0;width: 100%;overflow: hidden;");
+	addElement("footClan","","","ftBanner","p","width: 100%;text-align: center;");
+	addElement("ftBanner","","","aFooter","a","https://www.duckduckgo.com");
+	addElement("aFooter","C1ick h34r ph0r m04r inph0","img-rounded","","img","height: 150px","/images/BannerImage.gif");
+	addElement("footClan",'Gil-API version: ' + $apiVersion + " - Gilgamech.js version: " + $pageVersion,"","","","font-weight:bold;text-align:center;");
+	addElement("footClan","(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.","","","p","font-weight:bold;text-align:center;");
+	
 }; // end addFooter
 
 function addFruitBotPage() {
@@ -955,14 +967,14 @@ function addFruitBotPage() {
 	addDiv("grid",$cssClassC,'bodyWrapper',"","canvas","","style","display: block;margin: 0px auto;border: 1px solid black;");
 	addDiv("game_view",$cssClassC,'bodyWrapper',"","canvas","","style","display: block;margin: 0px auto;border: 1px solid black;");
 	
-	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("myRow","row " + $cssClassB,'bodyWrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"new","button");
 	addDiv("btnPretty","btn btn-caution",'myRow',"reset","button");
 	addDiv("btnPretty","btn btn-info",'myRow',"pause","button");
 	addDiv("btnPretty","btn btn-success",'myRow',"play","button");
 	addDiv("btnPretty","btn btn-warning",'myRow',"forward","button");
 
-	addDiv("myBoardRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("myBoardRow","row " + $cssClassB,'bodyWrapper');
 	addDiv("contentLabel2","img-rounded row contentTitles",'myBoardRow',"Board number");
 	addDiv("BottomTextInput",$cssClassB,'myBoardRow',"0","input","","type","number");
 	addDiv("btnPretty","btn btn-caution",'myBoardRow',"Set","button");
@@ -1040,13 +1052,13 @@ function addArkdataPage() {
 
 	
 	addDiv("ArkdataContentRow","container  row ","ArkdatacoinArea","","style","border:1px solid #333;");
-	addDiv("ArkdataLabel","contentItems" + $cssClassD,"ArkdataContentRow","BTC");
+	addDiv("ArkdataLabel","contentItems " + $cssClassD,"ArkdataContentRow","BTC");
 	addDiv("ArkdataAmount","img-rounded colorRow contentItems col-md-12 col-xs-12","ArkdataContentRow","0","number","","readonly");
 	document.getElementById("ArkdataAmount").setAttribute( "style", "background-color:#3CBE3C");
-	addDiv("ArkdataMedian","contentItems" + $cssClassD,"ArkdataContentRow","0");
-	addDiv("ArkdataBotAmount","contentItems" + $cssClassD,"ArkdataContentRow","0");
-	addDiv("ArkdataBotAction","contentItems" + $cssClassD,"ArkdataContentRow","0");
-	addDiv("ArkdataBotPrediction","contentItems" + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataMedian","contentItems " + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataBotAmount","contentItems " + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataBotAction","contentItems " + $cssClassD,"ArkdataContentRow","0");
+	addDiv("ArkdataBotPrediction","contentItems " + $cssClassD,"ArkdataContentRow","0");
 
 }; // end addArkdataPage
 /*
@@ -1117,7 +1129,7 @@ function addMemePage() {
 	addDiv("memeUrlInput",$cssClassB,'bodyWrapper',"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","input");
 	addDiv("topTextInput",$cssClassB,'bodyWrapper',"Top Text","input");
 	addDiv("BottomTextInput",$cssClassB,'bodyWrapper',"Bottom Text","input");
-	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("myRow","row " + $cssClassB,'bodyWrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"Create !","button","","onclick","updateMemeForm('memeUrlInput')");
 
 	canvas = document.getElementById("canvas");
@@ -1145,13 +1157,12 @@ function addMemePage() {
 }; // end addPage
 
 function addBadPWPage() {	
-	addDiv("content",$cssClassC,'bodyWrapper',"Bad Password");
 	
-	addDiv("getInput","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
-
-	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
-	addDiv("btnPretty",$btnPrimary,'myRow',"Get Bad Password","button","","onclick","updateFormPost('/badpw','getInput')");
-	addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('getInput')");
+	addElement('bodyWrapper',"Bad Password",$cssClassC);
+	addElement('bodyWrapper','"JSON goes here"',"div_textarea " + $cssClassB,"getInput","input");
+	addElement('bodyWrapper','',"row " + $cssClassB,"myRow");
+	addElement('myRow','Get Bad Password',$btnPrimary,"","button","","","onclick","updateElement('getInput',getBadPW());");
+	addElement('myRow','Copy to Clipboard',"btn btn-info","","button","","","onclick","copyToClipboard('getInput')");
 		
 }; // end addPage
 
@@ -1223,23 +1234,23 @@ function addDragSqPage() {
 function addGitPage() {
 	addDiv("wrapperGit","container img-rounded",'bodyWrapper');
 	addDiv("contentGit",$cssClassC,'wrapperGit'," repo URL");
-	addDiv("myTextAreaGit","div_textarea" + $cssClassB,'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
-	addDiv("myRowGit","row" + $cssClassB,'wrapperGit');
+	addDiv("myTextAreaGit","div_textarea " + $cssClassB,'wrapperGit','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
+	addDiv("myRowGit","row " + $cssClassB,'wrapperGit');
 	addDiv("btnClipGit","btn btn-info",'myRowGit',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextAreaGit')");
 	addDiv("btnUpdateGit",$btnPrimary,'myRowGit',"Load from Github","button","","onclick","updateNewPageForm()");
 	addDiv("btnAddPageGit","btn btn-warning",'myRowGit',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
 
 	addDiv("wrapper","container img-rounded",'bodyWrapper');
 	addDiv("pageName",$cssClassC,'wrapper',"Gilgamech.js","","","contenteditable","true");
-	addDiv("myTextArea","div_textarea img-rounded" + $cssClassB,'wrapper','Code goes here.',"textarea","","contenteditable","true");
+	addDiv("myTextArea","div_textarea img-rounded " + $cssClassB,'wrapper','Code goes here.',"textarea","","contenteditable","true");
 	document.getElementById("myTextArea").setAttribute( "style",  "background-color: #fff");
 	document.getElementById("myTextArea").setAttribute( "style",  "height: 50vh");
-	addDiv("myRow","row" + $cssClassB,'wrapper');
+	addDiv("myRow","row " + $cssClassB,'wrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"Pretty Print","button","","onclick","prettyPrint('myTextArea')");
 	addDiv("btnColorify","btn btn-secondary",'myRow',"Colorify!","button","","onclick","colorifyDivTextArea('myTextArea')");
 	addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
 	
-	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
+	addDiv("myErrDiv","row " + $cssClassB,'bodyWrapper');
 		
 	// updateForm('newappget', 'pageName', 'IndexJS')
 	// updateForm('newappget', 'NFSpageName', 'TestJS')
@@ -1264,16 +1275,16 @@ function addRentalMapPage() {
 	document.getElementById("map").setAttribute( "style",  "height: 75vh");
 
 	
-	// addDiv("myTextArea","div_textarea" + $cssClassB,'wrapper','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
+	// addDiv("myTextArea","div_textarea " + $cssClassB,'wrapper','https://raw.githubusercontent.com/Gilgamech/GilAPI/master',"input");
 	
 	
-	// addDiv("myRow","row" + $cssClassB,'wrapper');
+	// addDiv("myRow","row " + $cssClassB,'wrapper');
 	// addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
 	// addDiv("btnUpdate",$btnPrimary,'myRow',"Load from hub","button","","onclick","updateNewPageForm()");
 	// addDiv("btnAddPage","btn btn-warning",'myRow',"Add New Page","button","","onclick","updateNewPageBoilerplate()");
 
 	
-	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
+	addDiv("myErrDiv","row " + $cssClassB,'bodyWrapper');
 		
 	// updateForm('newappget', 'pageName', 'IndexJS')
 	// updateForm('newappget', 'NFSpageName', 'TestJS')
@@ -1290,11 +1301,11 @@ function addJsonLintPage() {
 	
 	addDiv("content",$cssClassC,'bodyWrapper',"JSONLint");
 	
-	addDiv("myTextArea","div_textarea" + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
-	addDiv("myRow","row" + $cssClassB,'bodyWrapper');
+	addDiv("myTextArea","div_textarea " + $cssClassB,'bodyWrapper','"JSON goes here"',"textarea");
+	addDiv("myRow","row " + $cssClassB,'bodyWrapper');
 	addDiv("btnPretty",$btnPrimary,'myRow',"Pretty Print","button","","onclick","prettyPrint('myTextArea')");
 	addDiv("btnClip","btn btn-info",'myRow',"Copy to Clipboard","button","","onclick","copyToClipboard('myTextArea')");
-	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
+	addDiv("myErrDiv","row " + $cssClassB,'bodyWrapper');
 		
 }; // end addPage
 
@@ -1336,7 +1347,7 @@ function addCalcPage() {
 	addDiv("btnAdd",$btnCalc,'row4',"+","button","","onclick","pressCalcButton('+','output')");
 	
 	
-	addDiv("myErrDiv","row" + $cssClassB,'bodyWrapper');
+	addDiv("myErrDiv","row " + $cssClassB,'bodyWrapper');
 		
 }; // end addCalcPage
 
@@ -1392,7 +1403,7 @@ function addCoinPage() {
 	addDiv("coinTentWrapper","img-rounded","content","","","style","background-color:#fff;");
 	addDiv("titleRow","row contentTitles","coinTentWrapper");
 	addDiv("contentLabel","col-md-10 col-xs-10 contentTitles","titleRow","Cointent");
-	addDiv("button1","button" + $cssClassD,"titleRow");
+	addDiv("button1","button " + $cssClassD,"titleRow");
 	addDiv("BtnGeneric","btn btn-success btn-sm","titleRow","Refresh","button","","onclick","refreshCharts();");
 	
 	addDiv("NameRow","row","coinTentWrapper","","","style","background-color:#090909;color:#fff;");
@@ -1405,55 +1416,55 @@ function addCoinPage() {
 
 
 	addDiv("btcContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
-	addDiv("btcLabel","contentItems" + $cssClassD,"btcContentRow","BTC");
-	addDiv("btcAmount","img-rounded colorRow contentItems" + $cssClassD,"btcContentRow","0","input","","readonly");
+	addDiv("btcLabel","contentItems " + $cssClassD,"btcContentRow","BTC");
+	addDiv("btcAmount","img-rounded colorRow contentItems " + $cssClassD,"btcContentRow","0","input","","readonly");
 	document.getElementById("btcAmount").setAttribute( "type", "number");
 	document.getElementById("btcAmount").setAttribute( "style", "background-color:#3CBE3C");
-	addDiv("btcMedian","contentItems" + $cssClassD,"btcContentRow","0");
-	addDiv("btcBotAmount","contentItems" + $cssClassD,"btcContentRow","0");
-	addDiv("btcBotAction","contentItems" + $cssClassD,"btcContentRow","0");
-	addDiv("btcBotPrediction","contentItems" + $cssClassD,"btcContentRow","0");
+	addDiv("btcMedian","contentItems " + $cssClassD,"btcContentRow","0");
+	addDiv("btcBotAmount","contentItems " + $cssClassD,"btcContentRow","0");
+	addDiv("btcBotAction","contentItems " + $cssClassD,"btcContentRow","0");
+	addDiv("btcBotPrediction","contentItems " + $cssClassD,"btcContentRow","0");
 
 
 	addDiv("ltcContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
-	addDiv("ltcLabel","contentItems" + $cssClassD,"ltcContentRow","LTC");
-	addDiv("ltcAmount","img-rounded colorRow contentItems" + $cssClassD,"ltcContentRow","0","input","","readonly");
+	addDiv("ltcLabel","contentItems " + $cssClassD,"ltcContentRow","LTC");
+	addDiv("ltcAmount","img-rounded colorRow contentItems " + $cssClassD,"ltcContentRow","0","input","","readonly");
 	document.getElementById("ltcAmount").setAttribute( "type", "number");
 	document.getElementById("ltcAmount").setAttribute( "style", "background-color:#3CBE3C");
-	addDiv("ltcMedian","contentItems" + $cssClassD,"ltcContentRow","0");
-	addDiv("ltcBotAmount","contentItems" + $cssClassD,"ltcContentRow","0");
-	addDiv("ltcBotAction","contentItems" + $cssClassD,"ltcContentRow","0");
-	addDiv("ltcBotPrediction","contentItems" + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcMedian","contentItems " + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcBotAmount","contentItems " + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcBotAction","contentItems " + $cssClassD,"ltcContentRow","0");
+	addDiv("ltcBotPrediction","contentItems " + $cssClassD,"ltcContentRow","0");
 
 
 	addDiv("ethContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
-	addDiv("ethLabel","contentItems" + $cssClassD,"ethContentRow","ETH");
-	addDiv("ethAmount","img-rounded colorRow contentItems" + $cssClassD,"ethContentRow","0","input","","readonly");
+	addDiv("ethLabel","contentItems " + $cssClassD,"ethContentRow","ETH");
+	addDiv("ethAmount","img-rounded colorRow contentItems " + $cssClassD,"ethContentRow","0","input","","readonly");
 	document.getElementById("ethAmount").setAttribute( "type", "number");
 	document.getElementById("ethAmount").setAttribute( "style", "background-color:#3CBE3C");
-	addDiv("ethMedian","contentItems" + $cssClassD,"ethContentRow","0");
-	addDiv("ethBotAmount","contentItems" + $cssClassD,"ethContentRow","0");
-	addDiv("ethBotAction","contentItems" + $cssClassD,"ethContentRow","0");
-	addDiv("ethBotPrediction","contentItems" + $cssClassD,"ethContentRow","0");
+	addDiv("ethMedian","contentItems " + $cssClassD,"ethContentRow","0");
+	addDiv("ethBotAmount","contentItems " + $cssClassD,"ethContentRow","0");
+	addDiv("ethBotAction","contentItems " + $cssClassD,"ethContentRow","0");
+	addDiv("ethBotPrediction","contentItems " + $cssClassD,"ethContentRow","0");
 
 	addDiv("fbcContentRow","row","coinTentWrapper","","","style","background-color:#fff;");
-	addDiv("fbcLabel","contentItems" + $cssClassD,"fbcContentRow","FBC");
-	addDiv("fbcAmount","img-rounded colorRow contentItems" + $cssClassD,"fbcContentRow","0","input","","readonly");
+	addDiv("fbcLabel","contentItems " + $cssClassD,"fbcContentRow","FBC");
+	addDiv("fbcAmount","img-rounded colorRow contentItems " + $cssClassD,"fbcContentRow","0","input","","readonly");
 	document.getElementById("fbcAmount").setAttribute( "type", "number");
 	document.getElementById("fbcAmount").setAttribute( "style", "background-color:#3CBE3C");
-	addDiv("fbcMedian","contentItems" + $cssClassD,"fbcContentRow","0");
-	addDiv("fbcBotAmount","contentItems" + $cssClassD,"fbcContentRow","0");
-	addDiv("fbcBotAction","contentItems" + $cssClassD,"fbcContentRow","0");
-	addDiv("fbcBotPrediction","contentItems" + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcMedian","contentItems " + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcBotAmount","contentItems " + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcBotAction","contentItems " + $cssClassD,"fbcContentRow","0");
+	addDiv("fbcBotPrediction","contentItems " + $cssClassD,"fbcContentRow","0");
 	addDiv("fbcmanualButtonRow","row","fbcContentRow");
-	addDiv("fbcbutton","button" + $cssClassD,"fbcContentRow");
+	addDiv("fbcbutton","button " + $cssClassD,"fbcContentRow");
 	addDiv("fbcmanualButtonRow","row","fbcContentRow");
 
 	addDiv("cointentArea2","img-rounded col-md-12 col-xs-12 row","coinTentWrapper");
 	addDiv("titleRow","row contentTitles","cointentArea2","","","style","background-color:#fff;");
 	addDiv("botNameLabel","col-md-10 col-xs-10 contentTitles img-rounded","cointentArea2","MyBotName","","","contenteditable","true");
 	document.getElementById("botNameLabel").setAttribute("style","background-color:#fff;");
-	addDiv("button2","button" + $cssClassD,"cointentArea2");
+	addDiv("button2","button " + $cssClassD,"cointentArea2");
 	addDiv("BtnAddBot","btn btn-success btn-sm","cointentArea2","Add Bot","button","","onclick","addBot('botNameLabel');");
 
 	loadCoinData();
@@ -1474,7 +1485,7 @@ function addFormPage($formPost) {
 	addDiv("emailInput",$cssClassB,'wrapperForm','',"input","","placeholder","Email");
 	addDiv("passwordInput",$cssClassB,'wrapperForm','',"input","","placeholder","Password");
 
-	addDiv("myRow","row" + $cssClassB,'wrapperForm');
+	addDiv("myRow","row " + $cssClassB,'wrapperForm');
 	addDiv("btnSubmit","btn btn-success",'myRow',"Submit","button");
 		
 }; // end addPage
@@ -1564,6 +1575,9 @@ try {
 	
 	addDiv("linkP90","",'NavDDWrapper','','p');
 	addDiv("linkSO90","",'linkP90','______________');
+	
+	addDiv("linkP91a","",'NavDDWrapper','','p');
+	addDiv("linkSO91a","",'linkP91a','Custom scrollbars in Webkit','a',"https://css-tricks.com/custom-scrollbars-in-webkit/");
 	
 	addDiv("linkP91","",'NavDDWrapper','','p');
 	addDiv("linkSO91","",'linkP91','Load div as file','a',"https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/");

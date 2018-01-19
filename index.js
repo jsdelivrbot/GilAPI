@@ -16,6 +16,8 @@ User.sync();
 
 var app = express();
 
+var $GilMain = {apiVersion: "277", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: ""};
+
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 
@@ -25,8 +27,6 @@ var $errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
 var fruitbotwin = 0;
 var fruitbotloss = 0;
 var fruitbottie = 0;
-
-var $GilMain = {apiVersion: "276", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: ""};
 
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
 
@@ -92,6 +92,12 @@ app.get('/', function(request, response) {
     });
 });
 
+app.post('/settings.json', function(request, response) {
+	$GilMain.chatGeneral = $chatGeneral
+	$GilMain.errgoLogic = $errgoLogic
+	response.json($GilMain);
+});
+
 app.post('/login', function(request, response) {
     var username = request.body.username
     var enteredPassword = request.body.password;
@@ -142,26 +148,6 @@ app.post('/signup', function (request, response) {
   }); // end bcrypt.hash
 }); // end app.post
 
-app.get('/logintest', function(request, response) {
-    if (request.session) {
-	response.redirect('/chat');
-	} else {
-	response.redirect('/signup');
-	};
-});
-
-app.get('/loginFailure', function(request, response, next) {
-  response.send('Failed to authenticate');
-});
-
-app.get('/loginSuccess', function(request, response, next) {
-  response.send('Successfully authenticated');
-});  
-
-app.get('/err', function(request, response) {
-  response.send($errgoLogic);
-});
-
 app.get('/logout', function(request, response){
 	addErr("User logout: " + request.session.user);
   // request.logout();
@@ -171,26 +157,11 @@ app.get('/logout', function(request, response){
     });
 });
 
+// Need to roll into pages
 
 //region WIP
-app.post('/mirror', function(request, response) {
-  message = request.query.message,
-  response.send(message);
-});
 
-app.post('/settings.json', function(request, response) {
-	$GilMain.chatGeneral = $chatGeneral
-	$GilMain.errgoLogic = $errgoLogic
-	response.json($GilMain);
-});
-
-app.post('/badpw', function(request, response) { 
-  var $loggedin = testLoggedIn(request);
-  var randomstring = Math.random().toString(36).slice(-20);
-  response.send(randomstring);
-}); 
-
-//region chat 
+//chat 
 app.get('/chatpost', function(request, response) { 
 // /chatpost?user=user&message=message&chatroom=General
   chatMessage = request.query.message
@@ -222,30 +193,7 @@ app.get('/chatpost', function(request, response) {
   response.send($chatGeneral);
 });  
 
-app.get('/chatload', function(request, response) { 
-// /chatpost?user=user&message=message&chatroom=General
-  chatRoom = request.query.chatroom
-  response.json($chatGeneral);
-});  
-
-//region Fruitbot
-app.get('/fruitbotwin', function(request, response) {
-  fruitbotwin++
-  response.json(fruitbotwin);
-});
-app.get('/fruitbotloss', function(request, response) {
-  fruitbotloss++
-  response.json(fruitbotloss);
-});
-app.get('/fruitbottie', function(request, response) {
-  fruitbottie++
-  response.json(fruitbottie);
-});
-app.get('/fruitbottotals', function(request, response) {
-  response.json([fruitbotwin,fruitbotloss,fruitbottie]);
-});
-
-//region FizzBuzz
+//FizzBuzz
 app.get('/fizzbuzz', function(request, response) {
   fizzbuzznumber = request.query.n
   outstring = fizzbuzznumber
@@ -258,6 +206,7 @@ app.get('/fizzbuzz', function(request, response) {
   response.json(outstring);
 });
 
+//fakecoin
 app.get('/fakecoin', function(request, response) {
   $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
   response.json($dataVar);
@@ -277,39 +226,7 @@ app.get('/fakecoinsell', function(request, response) {
   response.json($dataVar);
 });
 
-//region ModuleBuilding
-app.get('/nfs', function(request, response) {
-  functionType = request.query.type
-  functionName = request.query.name
-  functionParams = request.query.params
-  spaceChar = " "
-  OpenParens = "("
-  CloseParens = ")"
-  LineBreak =  + lineBreak 
-  OpenCurlBracket = "{"
-  CloseCurlBracket = "}"
-  SemiColon = ";"
-  EndComment = "//end"
-  nfsreturn = functionType + spaceChar + OpenParens + functionName + CloseParens + spaceChar + OpenCurlBracket + LineBreak + functionParams + SemiColon + LineBreak + CloseCurlBracket + SemiColon + spaceChar + EndComment + spaceChar + functionType + spaceChar + functionName
-  // https://gil-api.herokuapp.com/nfs?type=if&name=fizzbuzznumber&params=outstring%20=%20%27Fizz%27
-  // "if (fizzbuzznumber) { <br> outstring = 'Fizz' <br> }; //end if fizzbuzznumber " 
-  response.send(nfsreturn);
-});
-
-app.get('/newfunction', function(request, response) {
-  functionName = request.query.name
-  functionParams = request.query.params
-  nfsreturn = "function " + functionName + "(" + functionParams + ") { \r\n  response.json(" + functionParams + "); \r\n}; "
-  response.send(nfsreturn);
-});
-
-app.get('/newappget', function(request, response) {
-  newAppName = request.query.name
-  newappgetreturn = "index.js \r\napp.get('/" + newAppName + "', function(request, response) { \r\n  response.render(testUA(request.header('user-agent')) + '/" + newAppName + "'); \r\n});  \r\n\r\ntest.js \r\nrequest('http://127.0.0.1:5000/" + newAppName + "', (error, response, body) => { \r\n  t.false(error); \r\n  t.equal(response.statusCode, 200);  \r\n  t.notEqual(body.indexOf('<title>Gilgamech Technologies</title>'), -1);  \r\n  t.notEqual(body.indexOf('Gilgamech Technologies'), -1);  \r\n});"
-
-  response.send(newappgetreturn);
-});
-
+// Error capture
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
