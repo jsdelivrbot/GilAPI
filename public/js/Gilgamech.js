@@ -3,8 +3,8 @@
 // addElement($parentElement,"",$classRow,"elementType","elementStyle","href","attributeType","attributeAction");
 	
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEveryone',chatGeneral: "", errgoLogic: ""};
-var $pageVersion = "700"
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEveryone',chatGeneral: "", errgoLogic: "", GilJSVersion: "701"};
+var $pageVersion = $GilMain.GilJSVersion
 var $apiVersion
 var $GOOGLE_API_KEY
 var $errDiv
@@ -118,9 +118,14 @@ var $classNarrowContent = $classContentItems + $classNarrowCol;
 
 // Styles
 var $styleBlackText = "color: #000; ";
-var $styleWhiteBack = "background-color: #fff; ";
 var $styleWhiteText = "color: #fff; ";
+var $styleWhiteBack = "background-color: #fff; ";
+
 var $styleBlackBack = "background-color: #000; ";
+var $styleRedField = "background-color: #833";
+var $styleGreenField = "background-color: #383";
+var $styleBlueField = "background-color: #338";
+
 var $styleBlackTextWhiteBack = $styleBlackText + $styleWhiteBack;
 var $styleWhiteTextBlackBack = $styleWhiteText + $styleBlackBack;
 
@@ -852,7 +857,6 @@ function buildRow($rowName,$nameItem,$onclickItem) {
 	return $elementId
 }; // end addRow
 
-
 // Page features
 function addHeader($parentElement,$headerTitle) {
 	addElement($parentElement,$headerTitle,"","title");
@@ -1112,13 +1116,13 @@ function addRgbColorPage($parentElement) {
 	$htmlInput = addElement(addElement($coinArea,"",$classColorRow2x),"",$classInputFieldPLUSColorRow,"input",$styleBlackTextWhiteBack,"maxlength","7");
 	document.getElementById($htmlInput).setAttribute("onchange","updateRgbColor();");
 	
-	$redInput = addElement(addElement($coinArea,"",$classColorRow2x),171,$classInputFieldPLUSColorRow,"input","background-color:#833","type","number");
+	$redInput = addElement(addElement($coinArea,"",$classColorRow2x),171,$classInputFieldPLUSColorRow,"input","","type","number");
 	document.getElementById($redInput).setAttribute("onchange","updateRgbDivColor('" + $redInput + "');");
 	
-	$greenInput = addElement(addElement($coinArea,"",$classColorRow2x),205,$classInputFieldPLUSColorRow,"input","background-color:#383","type","number");
+	$greenInput = addElement(addElement($coinArea,"",$classColorRow2x),205,$classInputFieldPLUSColorRow,"input","","type","number");
 	document.getElementById($greenInput).setAttribute("onchange","updateRgbDivColor('" + $greenInput + "');");
 	
-	$blueInput = addElement(addElement($coinArea,"",$classColorRow2x),239,$classInputFieldPLUSColorRow,"input","background-color:#338","type","number");
+	$blueInput = addElement(addElement($coinArea,"",$classColorRow2x),239,$classInputFieldPLUSColorRow,"input","","type","number");
 	document.getElementById($blueInput).setAttribute("onchange","updateRgbDivColor('" + $blueInput + "');");
 	
 	updateRgbDivColor($redInput);
@@ -1202,8 +1206,9 @@ function addAdminPage($parentElement) {
 	addElement($contentOuter,"Admin Page",$classContentRow);
 	var $textArea = addElement($contentOuter,"",$classColorRow2x);
 	$chatBox = addElement($textArea,"Chat loading...",$classInputFieldPLUSColorRow,"textarea",$styleBlackText);
-	
-	var $chatMessage = addElement(addElement($contentOuter,"",$classColorRow2x),"Hello World!",$classInputFieldPLUSColorRow,"input","background-color: #383","","onkeypress","detectEnter(event,writeElement('" + $pageHeaderTitle + "','" + $chatMessage + "');");
+	addRow($contentOuter,"refreshPage","initPage($pageSettingsJson);","","","","","","");
+		
+	var $chatMessage = addElement(addElement($contentOuter,"",$classColorRow2x),"Hello World!",$classInputFieldPLUSColorRow,"input",$styleGreenField,"","onkeypress","detectEnter(event,writeElement('" + $pageHeaderTitle + "','" + $chatMessage + "');");
 	
 	timerInterval = setInterval(function () {
 		writeElement($chatBox,$GilMain.errgoLogic)
@@ -1458,6 +1463,11 @@ try {
 	addMenuItem($NavDDWrapper,'Make footer stick to the bottom of the page.',"https://stackoverflow.com/questions/3443606/make-footer-stick-to-bottom-of-page-correctly#18066619 ");
 	
 	addFooter($footWrapper);
+	
+	if ($GilMain.GilJSVersion != $pageVersion) {
+		document.getElementById($errDiv).innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";
+	}; // end if GilJSVersion
+	
 } catch(e){console.log(e)};
 }; // end loadPage
 
