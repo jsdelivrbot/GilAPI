@@ -1,9 +1,10 @@
 //Gil.JS
 
 // addElement($parentElement,"",$classRow,"elementType","elementStyle","href","attributeType","attributeAction");
-	
+// aSecretToEverybody
+
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEveryone',chatGeneral: "", errgoLogic: "", GilJSVersion: "701"};
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "702"};
 var $pageVersion = $GilMain.GilJSVersion
 var $apiVersion
 var $GOOGLE_API_KEY
@@ -1376,11 +1377,7 @@ try {
 	removeElement($bodyWrapper);
 	removeElement($footWrapper);
 	window.clearInterval(timerInterval);
-	
-	if ($settingsURL) {
-		initPage($settingsURL);
-	}; // end if settingsURL
-	
+		
 	$headWrapper = addElement("head");
 	$bodyWrapper = addElement("body");
 	$footWrapper = addElement("body");
@@ -1471,13 +1468,14 @@ try {
 } catch(e){console.log(e)};
 }; // end loadPage
 
-function buildPage($pageTitle,$firstPage,$settingsURL){ 
+function buildPage($pageTitle,$firstPage){ 
 	addHeader("head",$pageTitle);
 	addNav("body",$pageTitle);	
-	loadPage($pageTitle,$firstPage,$settingsURL);
+	loadPage($pageTitle,$firstPage);
 }; // end loadPage
 
 window.onload = function(){ 
-	buildPage($pageHeaderTitle,$pageStarting,$pageSettingsJson);
+	buildPage($pageHeaderTitle,$pageStarting);
+	initPage($pageSettingsJson);
 }; // end window.onload
 
