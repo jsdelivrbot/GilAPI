@@ -4,7 +4,7 @@
 // aSecretToEverybody
 
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "703"};
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "704"};
 var $pageVersion = $GilMain.GilJSVersion
 var $apiVersion
 var $GOOGLE_API_KEY
@@ -17,7 +17,7 @@ var $footWrapper
 var $testVar
 
 var $pageHeaderTitle = 'Gilgamech Technologies';
-var $pageStarting = "admin";
+var $pageStarting = "rgb";
 var $pageSettingsJson = "/settings.json";
 
 var $chatGeneral = "";
@@ -144,6 +144,34 @@ var $btnXs = "btn-xs ";
 var $btnCalc = $btnPrimary + $btnLg;
 
 // Pages
+
+var $testVar = {
+	"elements" : [
+		{"elementParent": "parentElement","innerText": "Add newElementJson here.","elementType": "textarea"}
+	]
+}
+
+var $adminPageVar = {
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": $classSpacer, "id":"contentOuter"},
+		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd},
+		{"elementParent": "parentElement","elementClass": $classHalfDesktopFullMobileRnd, "id":"contentInner"},
+		{"elementParent": "contentInner","innerText": "Admin Page","elementClass": $classContentRow},
+		{"elementParent": "contentInner","elementClass": $classInputField},
+		{"elementParent": "contentInner","elementClass": $classInputFieldPLUSColorRow,"id":"outputRow"},
+		{"elementParent": "outputRow","innerText": "Log loading...","elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id":"output"},
+		{"elementParent": "contentInner","elementClass": $classInputFieldPLUSColorRow,"id":"outputRow2"},
+		{"elementParent": "outputRow2","innerText": JSON.stringify($testVar),"elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id": "output2"},
+		{"elementParent": "contentInner","id":"outputDiv"}
+	],
+	"rows" : [
+		{"elementParent": "outputRow","firstName":"refreshPage","firstOnclick":"initPage($pageSettingsJson);"},
+		{"elementParent": "outputRow2","firstName":"loadPage","firstOnclick":"cje('outputDiv',JSON.parse(readElement('output2')));","secondName":"parseHtml","secondOnclick":"parseHtml('outputDiv','outputDiv');"}
+	],
+	"timers" : [
+		{"interval": "10000","callback":"writeElement('output','" + $GilMain.errgoLogic + "');"}
+	]
+}
 
 // Functions
 // Init
@@ -755,9 +783,13 @@ function removeElement($divID) {
 }; // end removeBot
 
 //createJsonElement - shortened to CJE.
-function cje($jsonVar) {
+function cje($parentElement,$jsonVar) {
 	if	($jsonVar) {
 		
+	$jsonVar = JSON.stringify($jsonVar);
+	$jsonVar = $jsonVar.replace(/parentElement/g,$parentElement);
+	$jsonVar = JSON.parse($jsonVar);
+	
 	if	($jsonVar.menu) {
 	try {
 		$jsonVar.menu.forEach(function($element){
@@ -766,7 +798,6 @@ function cje($jsonVar) {
 	} catch(e) { 
 		console.log(e);
 	};
-	console.log("Menu done.");
 	}; // end if jsonVar.menu
 		
 	if	($jsonVar.elements) {
@@ -777,7 +808,6 @@ function cje($jsonVar) {
 	} catch(e) { 
 		console.log(e);
 	};
-	console.log("Elements done.");
 	}; // end if jsonVar.elements
 		
 	if	($jsonVar.rows) {
@@ -788,7 +818,16 @@ function cje($jsonVar) {
 	} catch(e) { 
 		console.log(e);
 	};
-	console.log("Rows done.");
+	}; // end if rows
+
+	if	($jsonVar.timers) {
+	try {
+		$jsonVar.timers.forEach(function($element){
+	timerInterval = setInterval($element.callback,$element.interval);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
 	}; // end if rows
 	}; // end if jsonVar
 }; // end cje
@@ -929,7 +968,7 @@ function addNav($parentElement,$headerTitle) {
 	var $NavDDOuter = addElement($navBar,"",$classContainer);
 	
 	var $nav2 = addElement($NavDDOuter,"",$classNavBar + " col-md-6 col-xs-6","ul");
-	// addMenuItem($nav2,'Fruitbot!',loadPageOpen('fruitbot'),$classSmallHidden);
+	//addMenuItem($nav2,'Fruitbot!',loadPageOpen('fruitbot'),$classSmallHidden);
 	addMenuItem($nav2,'Bad Password',loadPageOpen('badpw'),$classSmallHidden);
 	addMenuItem($nav2,'Chat!',loadPageOpen('chat'),$classSmallHidden);	
 	
@@ -937,7 +976,7 @@ function addNav($parentElement,$headerTitle) {
 	addElement($nav2dd,"Menu","","p");
 	var $nav2ddc = addElement($nav2dd,"",$classDropdownContent);
 	
-	// addMenuItem($nav2ddc,'Fruitbot!',loadPageOpen('fruitbot'),$classLargeHidden);
+	//addMenuItem($nav2ddc,'Fruitbot!',loadPageOpen('fruitbot'),$classLargeHidden);
 	addMenuItem($nav2ddc,'Bad Password',loadPageOpen('badpw'),$classLargeHidden);
 	addMenuItem($nav2ddc,'Chat!',loadPageOpen('chat'),$classLargeHidden);
 	
@@ -954,7 +993,7 @@ function addNav($parentElement,$headerTitle) {
 	//addMenuItem($nav2ddc,'Arkdata Dynamap',loadPageOpen('demo'));
 	addMenuItem($nav2ddc,'Arkdata',loadPageOpen('Arkdata'));
 	addMenuItem($nav2ddc,'Sandbox',loadPageOpen('sandbox'));
-	addMenuItem($nav2ddc,'Admin',loadPageOpen('admin'));
+	addMenuItem($nav2ddc,'Admin',"cje($bodyWrapper,$adminPageVar);");
 	addMenuItem($nav2ddc,'Login!',loadPageOpen('login'),$classLargeHidden);
 
 	var $nav3 = addElement($NavDDOuter,"",$classNavBar + $classHalfWidth + $nbr,"ul");
@@ -1272,49 +1311,6 @@ function addElementSandboxPage($parentElement) {
 	
 }; // end addPage
 
-function addAdminPage($parentElement) {
-	
-	var $contentOuter = getBadPW();
-	var $nestArea = getBadPW();
-	var $outputRow = getBadPW();
-	var $outputRow2 = getBadPW();
-	var $output = getBadPW();
-	var $output2 = getBadPW();
-	var $outputDiv = getBadPW();
-
-	var $testVar = {
-		"elements" : [
-			{"elementParent": $outputDiv,"innerText": "Add newElementJson here.","elementType": "textarea"}
-		]
-	}
-
-	var $adminPageVar = {
-		"elements" : [
-			{"elementParent": $parentElement,"elementClass": $classSpacer, "id":$contentOuter},
-			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd},
-			{"elementParent": $parentElement,"elementClass": $classHalfDesktopFullMobileRnd, "id":$nestArea},
-			{"elementParent": $nestArea,"innerText": "Admin Page","elementClass": $classContentRow},
-			{"elementParent": $nestArea,"elementClass": $classInputField},
-			{"elementParent": $nestArea,"elementClass": $classInputFieldPLUSColorRow,"id":$outputRow},
-			{"elementParent": $outputRow,"innerText": "Log loading...","elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id":$output},
-			{"elementParent": $nestArea,"elementClass": $classInputFieldPLUSColorRow,"id":$outputRow2},
-			{"elementParent": $outputRow2,"innerText": JSON.stringify($testVar),"elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id": $output2},
-			{"elementParent": $nestArea,"id":$outputDiv},
-			{"elementParent": $outputDiv}
-		],
-		"rows" : [
-			{"elementParent": $outputRow,"firstName":"refreshPage","firstOnclick":"initPage($pageSettingsJson);"},
-			{"elementParent": $outputRow2,"firstName":"loadPage","firstOnclick":"cje(JSON.parse(readElement('" + $output2 + "')));","secondName":"parseHtml","secondOnclick":"parseHtml('" + $outputDiv + "','" + $outputDiv + "');"}
-		]
-	}
-	
-	cje($adminPageVar)
-	
-	timerInterval = setInterval(function () {
-		writeElement($output,$GilMain.errgoLogic)
-	}, 10000);
-}; // end addPage
-
 function addRentalMapPage($parentElement) {
 	addElement($headWrapper,"","","script","","https://maps.googleapis.com/maps/api/js?key="+ $GOOGLE_API_KEY + "&callback=initMap");
 	addMenuItem($NavDDWrapper,"Adding Google Maps to your website","","","https://developers.google.com/maps/documentation/javascript/adding-a-google-map#key");
@@ -1370,7 +1366,6 @@ function addBotRow($assetLabelID,$parentElement) {
 
 // Add applications
 function addFruitBotPage($parentElement) {
-	addElement($headWrapper,"","","link","/assets/css/drawgame.css");
 	addElement($headWrapper,"","","script","/assets/js/seedrandom.js");
 	addElement($headWrapper,"","","script","/assets/js/board.js");
 	addElement($headWrapper,"","","script","/assets/js/grid.js");
@@ -1493,7 +1488,6 @@ try {
 	
 	switch ($firstPage) {
 		case "admin": 
-			addAdminPage($bodyWrapper);
 		break;
 		case "sandbox": 
 			addElementSandboxPage($bodyWrapper);
@@ -1585,7 +1579,7 @@ function buildPage($pageTitle,$firstPage){
 	loadPage($pageTitle,$firstPage);
 }; // end loadPage
 
-window.onload = function(){ 
+window.onload = function(){
 	buildPage($pageHeaderTitle,$pageStarting);
 	initPage($pageSettingsJson);
 }; // end window.onload
