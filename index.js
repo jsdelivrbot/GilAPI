@@ -16,7 +16,7 @@ User.sync();
 
 var app = express();
 
-var $GilMain = {apiVersion: "278", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "702"};
+var $GilMain = {apiVersion: "279", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "703"};
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
@@ -84,12 +84,7 @@ function testLoggedIn(request) {
 
 // Page calls
 app.get('/', function(request, response) {
-  var $loggedin = testLoggedIn(request);
-  var $cssType = "/stylesheets/" + testUA(request.header('user-agent')) + ".css";
-  response.render( 'page', {
-       cssType: $cssType,
-       loggedin: $loggedin
-    });
+	response.send('<!DOCTYPE html> <html lang="en"> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <link rel="shortcut icon" href="./public/favicon.ico" type="image/x-icon"> <meta name="viewport" content="width=device-width, initial-scale=1"> </head><script src="/js/Gilgamech.js"></script> <body> </body> </html> ')
 });
 
 app.post('/settings.json', function(request, response) {

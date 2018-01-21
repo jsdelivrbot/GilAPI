@@ -4,7 +4,7 @@
 // aSecretToEverybody
 
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "702"};
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "703"};
 var $pageVersion = $GilMain.GilJSVersion
 var $apiVersion
 var $GOOGLE_API_KEY
@@ -14,9 +14,10 @@ var $NavDDWrapper
 var $nav3dd
 var $bodyWrapper
 var $footWrapper
+var $testVar
 
 var $pageHeaderTitle = 'Gilgamech Technologies';
-var $pageStarting = "rgb";
+var $pageStarting = "admin";
 var $pageSettingsJson = "/settings.json";
 
 var $chatGeneral = "";
@@ -74,7 +75,6 @@ var $ltc
 var $fbc
 var $eth
 var $coin2 = "Data loading..."
-var $botCounter = 0
 var $assetCounter = 0
 
 // CSS classes
@@ -143,10 +143,11 @@ var $btnXl = "btn-xl ";
 var $btnXs = "btn-xs ";
 var $btnCalc = $btnPrimary + $btnLg;
 
+// Pages
+
 // Functions
 // Init
 function initPage($initUrl){
-	//aSecretToEveryone
 		
 	if ($initUrl.length > 6) {
 	postJSON($initUrl, function(response) {
@@ -260,7 +261,7 @@ function writeElement($elementId,$source) {
 function readElement($elementId) {	  
 	var $elementType = document.getElementById($elementId).type;
 	
-	if ($elementType == 'text') {
+	if (($elementType == 'text') || ($elementType == 'textarea')) {
 		return document.getElementById($elementId).value;
 	} else {
 		return document.getElementById($elementId).innerText;
@@ -365,9 +366,9 @@ function updateNewPageBoilerplate() {
   boilerplateTestTextArea("myTextArea","pageName","  t.plan(42);\r\n");
 }; // end updateNewPageBoilerplate
 
-function updateNewPageForm($pageName,$RepoUrlElement,$textArea) {
-  updateTextAreaFromRepo($pageName,$RepoUrlElement,$textArea);  
-  colorifyDivTextArea($textArea);
+function updateNewPageForm($pageName,$RepoUrlElement,$nestArea) {
+  updateTextAreaFromRepo($pageName,$RepoUrlElement,$nestArea);  
+  colorifyDivTextArea($nestArea);
 }; // end updateNewPageForm
 
 function boilerplateIndexTextArea(docTextArea,docNewName,splitMarker) {  
@@ -406,8 +407,8 @@ function loadFileAsText() {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
-function setupLink($textAreaID,$downloadLinkID) {
-  document.getElementById($textAreaID).value = window.onload + '';
+function setupLink($nestAreaID,$downloadLinkID) {
+  document.getElementById($nestAreaID).value = window.onload + '';
   document.getElementById($downloadLinkID).onclick = function() {
 	this.href = 'data:text/plain;charset=utf-8,'
 	  + encodeURIComponent(txtval);
@@ -715,6 +716,13 @@ function evalCalc($elementId) {
 	document.getElementById($elementId).value = eval($inputToEval)
 }
 
+// Html
+function parseHtml($inputId,$outputId) {
+	var $inputToEval = document.getElementById($inputId).innerHTML;
+	var $jsonOutput = $inputToEval.replace("<","").replace(">","");
+	writeElement($outputId,$jsonOutput);
+}; // end parseHtml
+
 // DiffeRentIal
 function initMap() {
 	$GOOGLE_API_KEY = $GilMain.googleApiKey
@@ -746,13 +754,54 @@ function removeElement($divID) {
 	}	
 }; // end removeBot
 
-function addElement($elementParent,$innerText,$elementClass,$elementType,$elementStyle,$href,$attributeType,$attributeAction) {
+//createJsonElement - shortened to CJE.
+function cje($jsonVar) {
+	if	($jsonVar) {
+		
+	if	($jsonVar.menu) {
+	try {
+		$jsonVar.menu.forEach(function($element){
+			addMenuItem($element.elementParent,$element.innerText,$element.onclick,$element.elementClass,$element.href);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
+	console.log("Menu done.");
+	}; // end if jsonVar.menu
+		
+	if	($jsonVar.elements) {
+	try {
+		$jsonVar.elements.forEach(function($element){
+			addElement($element.elementParent,$element.innerText,$element.elementClass,$element.elementType,$element.elementStyle,$element.href,$element.attributeType,$element.attributeAction,$element.id);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
+	console.log("Elements done.");
+	}; // end if jsonVar.elements
+		
+	if	($jsonVar.rows) {
+	try {
+		$jsonVar.rows.forEach(function($element){
+			addRow($element.elementParent,$element.firstName,$element.firstOnclick,$element.secondName,$element.secondOnclick,$element.thirdName,$element.thirdOnclick,$element.fourthName,$element.fourthOnclick,$element.fifthName,$element.fifthOnclick,$element.sixthName,$element.sixthOnclick);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
+	console.log("Rows done.");
+	}; // end if rows
+	}; // end if jsonVar
+}; // end cje
+
+function addElement($elementParent,$innerText,$elementClass,$elementType,$elementStyle,$href,$attributeType,$attributeAction,$elementId) {
 	if (!$elementType) {
 		$elementType = 'div'
 	}; // end if elementType	
 	var $newElement = document.createElement($elementType);
 
-	$elementId = getBadPW();
+	if (!$elementId) {
+		$elementId = getBadPW();
+	}; // end if divParent
 	$newElement.id = $elementId;
 
 	if ($elementStyle) {
@@ -904,6 +953,7 @@ function addNav($parentElement,$headerTitle) {
 	addMenuItem($nav2ddc,'Meme Maker',loadPageOpen('meme'));
 	//addMenuItem($nav2ddc,'Arkdata Dynamap',loadPageOpen('demo'));
 	addMenuItem($nav2ddc,'Arkdata',loadPageOpen('Arkdata'));
+	addMenuItem($nav2ddc,'Sandbox',loadPageOpen('sandbox'));
 	addMenuItem($nav2ddc,'Admin',loadPageOpen('admin'));
 	addMenuItem($nav2ddc,'Login!',loadPageOpen('login'),$classLargeHidden);
 
@@ -918,8 +968,12 @@ function addNav($parentElement,$headerTitle) {
 
 function addFooter($parentElement) {
 	$apiVersion = $GilMain.apiVersion
-
+	
 	addElement($parentElement,"","container-fluid");
+	var $spacerName = addElement($parentElement);
+	addElement($spacerName,"","",'br');
+	addElement($spacerName,"","",'br');
+	
 	$errDiv = addElement($bodyWrapper,"",$classRow + $classInputField);
 	var $footerStatic = addElement($footWrapper,"","navbar-static-bottom","","left: 0;bottom: 0;width: 100%;overflow: hidden;");
 	var $footerBanner = addElement($footerStatic,"","","p","width: 100%;text-align: center;");
@@ -943,53 +997,63 @@ function addBlogPage($parentElement,$Title,$Header,$bodyText) {
 }; // end addBlogPage
 
 function addJsonLintPage($parentElement) {
-	addMenuItem($NavDDWrapper,'prettify json data in textarea input','','',"https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037");
-	addMenuItem($NavDDWrapper,'copy textarea to clipboard','','',"https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068");
+	var $nestArea = getBadPW();
+	var $contentOuter = getBadPW();
+	var $nestArea = getBadPW();
+	var $output = getBadPW();
+	var $jsonLintVar = {
+		"menu" : [
+			{"elementParent": $NavDDWrapper,"innerText": "prettify json data in textarea input","href":"https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037"},
+			{"elementParent": $NavDDWrapper,"innerText": "copy textarea to clipboard","href": "https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068"}
+		],
+		"elements" : [
+			{"elementParent": $parentElement,"elementClass": $classSpacer, "id": $contentOuter},
+			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd},
+			{"elementParent": $parentElement,"elementClass": $classHalfDesktopFullMobileRnd,"id":$nestArea},
+			{"elementParent": $nestArea},
+			{"elementParent": $nestArea, "innerText": "JSONLint","elementClass": $classContentRow},
+			{"elementParent": $nestArea, "innerText": '{"innerText":"JSON goes here"}',"elementClass": "div_textarea" + $classInputField,"elementType": "textarea","id":$output}
+		],
+		"rows" : [
+			{"elementParent": $nestArea,"firstName": "Pretty Print","firstOnclick": "prettyPrint('" + $output + "')","secondName": "Copy to Clipboard","secondOnclick": "copyToClipboard('" + $output + "')"}
+		]
+	}
 	
-	addElement($parentElement,"JSONLint",$classContentRow);
-	
-	var $textArea = addElement($parentElement,'"JSON goes here"',"div_textarea" + $classInputField,"textarea");
-	var $btnRow = addElement($parentElement,"",$classRow + $classInputField);
-	addElement($btnRow,"Pretty Print",$btnPrimary,"button","","","onclick","prettyPrint('" + $textArea + "')");
-	addElement($btnRow,"Copy to Clipboard",$btnInfo,"button","","","onclick","copyToClipboard('" + $textArea + "')");
+	cje($jsonLintVar);
 		
 }; // end addPage
 
 function addCalcPage($parentElement) {
-	addMenuItem($NavDDWrapper,'Cut and paste Javascript calculator','','',"http://javascriptkit.com/script/cut18.shtml");
 	
-	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
-	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
+	var $nestArea = getBadPW();
+	var $contentOuter = getBadPW();
+	var $nestArea = getBadPW();
+	var $outputRow = getBadPW();
+	var $output = getBadPW();
+	var $jsonLintVar = {
+		"menu" : [
+			{"elementParent": $NavDDWrapper,"innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
+		],
+		"elements" : [
+			{"elementParent": $parentElement,"elementClass": $classSpacer, "id":$contentOuter},
+			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd},
+			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd, "id":$nestArea},
+			{"elementParent": $nestArea,"innerText": "Calculator","elementClass": $classContentRow},
+			{"elementParent": $nestArea,"elementClass": $classInputField},
+			{"elementParent": $nestArea,"elementClass": $classInputFieldPLUSColorRow,"id":$outputRow},
+			{"elementParent": $outputRow,"elementClass": "div_textarea" + $classInputField,"elementType": "input","id":$output}
+		],
+		"rows" : [
+			{"elementParent": $nestArea,"firstName":"1","firstOnclick":"appendElement(1,'" + $output + "')","secondName":"2","secondOnclick":"appendElement(2,'" + $output + "')","thirdName":"3","thirdOnclick":"appendElement(3,'" + $output + "')","fourthName":"/","fourthOnclick":"appendElement('/','" + $output + "')"},	
+			{"elementParent": $nestArea,"firstName":"4","firstOnclick":"appendElement(4,'" + $output + "')","secondName":"5","secondOnclick":"appendElement(5,'" + $output + "')","thirdName":"6","thirdOnclick":"appendElement(6,'" + $output + "')","fourthName":"*","fourthOnclick":"appendElement('*','" + $output + "')"},
+			{"elementParent": $nestArea,"firstName":"7","firstOnclick":"appendElement(7,'" + $output + "')","secondName":"8","secondOnclick":"appendElement(8,'" + $output + "')","thirdName":"9","thirdOnclick":"appendElement(9,'" + $output + "')","fourthName":"-","fourthOnclick":"appendElement('-','" + $output + "')"},
+			{"elementParent": $nestArea,"firstName":"=","firstOnclick":"evalCalc('" + $output + "')","secondName":"0","secondOnclick":"appendElement(0,'" + $output + "')","thirdName":".","thirdOnclick":"appendElement('.','" + $output + "')","fourthName":"+","fourthOnclick":"appendElement('+','" + $output + "')"}
+		]
+	}
 	
-	var $content = addElement($contentOuter,"Calculator",$classContentRow);
-	var $calcWrapper = addElement($contentOuter,"",$classInputField);
+	// var $output = addElement($outputRow,"",$classInputFieldPLUSColorRow,"input",$styleBlackTextWhiteBack,"","onkeypress","detectEnter(event,evalCalc('output'))");
+	cje($jsonLintVar);
 	
-	var $outputRow = addElement($calcWrapper,"",$classRow);
-	var $output = addElement($outputRow,"",$classInputFieldPLUSColorRow,"input",$styleBlackTextWhiteBack,"","onkeypress","detectEnter(event,evalCalc('output'))");
-	
-	var $row1 = addElement($calcWrapper,"",$classRow);
-	addElement($row1,"1",$btnCalc,"button","","","onclick","appendElement(1,'" + $output + "')");
-	addElement($row1,"2",$btnCalc,"button","","","onclick","appendElement(2,'" + $output + "')");
-	addElement($row1,"3",$btnCalc,"button","","","onclick","appendElement(3,'" + $output + "')");
-	addElement($row1,"/",$btnCalc,"button","","","onclick","appendElement('/','" + $output + "')");
-	
-	var $row2 = addElement($calcWrapper,"",$classRow);
-	addElement($row2,"4",$btnCalc,"button","","","onclick","appendElement(4,'" + $output + "')");
-	addElement($row2,"5",$btnCalc,"button","","","onclick","appendElement(5,'" + $output + "')");
-	addElement($row2,"6",$btnCalc,"button","","","onclick","appendElement(6,'" + $output + "')");
-	addElement($row2,"*",$btnCalc,"button","","","onclick","appendElement('*','" + $output + "')");
-
-	var $row3 = addElement($calcWrapper,"",$classRow);
-	addElement($row3,"7",$btnCalc,"button","","","onclick","appendElement(7,'" + $output + "')");
-	addElement($row3,"8",$btnCalc,"button","","","onclick","appendElement(8,'" + $output + "')");
-	addElement($row3,"9",$btnCalc,"button","","","onclick","appendElement(9,'" + $output + "')");
-	addElement($row3,"-",$btnCalc,"button","","","onclick","appendElement('-','" + $output + "')");
-	
-	var $row4 = addElement($calcWrapper,"",$classRow);
-	addElement($row4,"=",$btnCalc,"button","","","onclick","evalCalc('" + $output + "')");
-	addElement($row4,"0",$btnCalc,"button","","","onclick","appendElement(0,'" + $output + "')");
-	addElement($row4,".",$btnCalc,"button","","","onclick","appendElement('.','" + $output + "')");
-	addElement($row4,"+",$btnCalc,"button","","","onclick","appendElement('+','" + $output + "')");
 	
 }; // end addCalcPage
 
@@ -1002,8 +1066,8 @@ function addChatPage($parentElement) {
 	var $chatWrapper = addElement($contentOuter,"",$classColorRow2x);
 	var $chatRoom = addElement($chatWrapper,"General",$classInputFieldPLUSColorRow,"input",$styleBlackText);
 	
-	var $textArea = addElement($contentOuter,"",$classColorRow2x);
-	$chatBox = addElement($textArea,"Chat loading...",$classInputFieldPLUSColorRow,"textarea",$styleBlackText);
+	var $nestArea = addElement($contentOuter,"",$classColorRow2x);
+	$chatBox = addElement($nestArea,"Chat loading...",$classInputFieldPLUSColorRow,"textarea",$styleBlackText);
 	
 	var $nameRow = addElement($contentOuter,"",$classColorRow2x);
 	addElement($nameRow,"",$classInputFieldPLUSColorRow,"input","background-color: #338","","placeholder","User Name");
@@ -1145,12 +1209,12 @@ function addArkdataPage($parentElement) {
 	var $contentLabel2 = addElement($coinArea,"Gil's player and tribe tracker",$classImgRnd + $classRow + $classContentTitle);
 	var $contentLabel3 = addElement($coinArea,"Players currently being tracked:",$classImgRnd + $classRow + $classContentTitle);
 	
-	addRow($coinArea,"","PlayerName","","ServerName","","Firstseen","","Timeseen");
-	addRow($coinArea,"","dopey.tim","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 13:25:45","","10/24/2017 22:46:34");
-	addRow($coinArea,"","MFrider88","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 21:41:57","","10/23/2017 23:02:46");
-	addRow($coinArea,"","MacNCheese3","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","9/1/2017 14:42:06","","10/24/2017 15:21:50");
-	addRow($coinArea,"","GenMaxiu","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","6/10/2017 10:09:07","","10/24/2017 0:10:12");
-	addRow($coinArea,"","FMFrider88","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 21:23:43","","10/23/2017 23:39:49");
+	addRow($coinArea,"PlayerName","","ServerName","","Firstseen","","Timeseen");
+	addRow($coinArea,"dopey.tim","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 13:25:45","","10/24/2017 22:46:34");
+	addRow($coinArea,"MFrider88","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 21:41:57","","10/23/2017 23:02:46");
+	addRow($coinArea,"MacNCheese3","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","9/1/2017 14:42:06","","10/24/2017 15:21:50");
+	addRow($coinArea,"GenMaxiu","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","6/10/2017 10:09:07","","10/24/2017 0:10:12");
+	addRow($coinArea,"FMFrider88","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 21:23:43","","10/23/2017 23:39:49");
 
 
 }; // end addArkdataPage
@@ -1191,29 +1255,64 @@ function addElementSandboxPage($parentElement) {
 	
 	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
 	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
-	addElement($contentOuter,$Title,$classContentRow);
+	addElement($contentOuter,"",$classContentRow);
 	
 	var $contentInner = addElement($contentOuter);
-	addElement($contentInner,$Header,$classInputField,"p",$styleBlackText);
-	addElement($contentInner,$bodyText,"","p",$styleBlackText);
+	var $contentUpper = addElement($contentInner,"",$classContainer);
+	var $contentUpperLeft = addElement($contentUpper,"",$classHalfWidth);
+	
+	var $contentUpperRight = addElement($contentUpper,"",$classHalfWidth);
+	
+	var $contentLower = addElement($contentInner,"",$classContainer);
+	var $contentLowerLeft = addElement($contentLower,"",$classHalfWidth);
+	
+	var $contentLowerRight = addElement($contentLower,"",$classHalfWidth);
+	
+	addRow($contentInner,"JsonLint","addJsonLintPage('" + $contentUpperLeft + "')","RGB","addRgbColorPage('" + $contentUpperRight + "')","Calc","addCalcPage('" + $contentLowerLeft + "')","BadPW","addBadPWPage('" + $contentLowerRight + "')","Meme","addMemePage('" + $contentLowerRight + "')");
 	
 }; // end addPage
 
 function addAdminPage($parentElement) {
-
-	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
-	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
 	
-	addElement($contentOuter,"Admin Page",$classContentRow);
-	var $textArea = addElement($contentOuter,"",$classColorRow2x);
-	$chatBox = addElement($textArea,"Chat loading...",$classInputFieldPLUSColorRow,"textarea",$styleBlackText);
-	addRow($contentOuter,"refreshPage","initPage($pageSettingsJson);","","","","","","");
-		
-	var $chatMessage = addElement(addElement($contentOuter,"",$classColorRow2x),"Hello World!",$classInputFieldPLUSColorRow,"input",$styleGreenField,"","onkeypress","detectEnter(event,writeElement('" + $pageHeaderTitle + "','" + $chatMessage + "');");
+	var $contentOuter = getBadPW();
+	var $nestArea = getBadPW();
+	var $outputRow = getBadPW();
+	var $outputRow2 = getBadPW();
+	var $output = getBadPW();
+	var $output2 = getBadPW();
+	var $outputDiv = getBadPW();
+
+	var $testVar = {
+		"elements" : [
+			{"elementParent": $outputDiv,"innerText": "Add newElementJson here.","elementType": "textarea"}
+		]
+	}
+
+	var $adminPageVar = {
+		"elements" : [
+			{"elementParent": $parentElement,"elementClass": $classSpacer, "id":$contentOuter},
+			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd},
+			{"elementParent": $parentElement,"elementClass": $classHalfDesktopFullMobileRnd, "id":$nestArea},
+			{"elementParent": $nestArea,"innerText": "Admin Page","elementClass": $classContentRow},
+			{"elementParent": $nestArea,"elementClass": $classInputField},
+			{"elementParent": $nestArea,"elementClass": $classInputFieldPLUSColorRow,"id":$outputRow},
+			{"elementParent": $outputRow,"innerText": "Log loading...","elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id":$output},
+			{"elementParent": $nestArea,"elementClass": $classInputFieldPLUSColorRow,"id":$outputRow2},
+			{"elementParent": $outputRow2,"innerText": JSON.stringify($testVar),"elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id": $output2},
+			{"elementParent": $nestArea,"id":$outputDiv},
+			{"elementParent": $outputDiv}
+		],
+		"rows" : [
+			{"elementParent": $outputRow,"firstName":"refreshPage","firstOnclick":"initPage($pageSettingsJson);"},
+			{"elementParent": $outputRow2,"firstName":"loadPage","firstOnclick":"cje(JSON.parse(readElement('" + $output2 + "')));","secondName":"parseHtml","secondOnclick":"parseHtml('" + $outputDiv + "','" + $outputDiv + "');"}
+		]
+	}
+	
+	cje($adminPageVar)
 	
 	timerInterval = setInterval(function () {
-		writeElement($chatBox,$GilMain.errgoLogic)
-	}, 60000);
+		writeElement($output,$GilMain.errgoLogic)
+	}, 10000);
 }; // end addPage
 
 function addRentalMapPage($parentElement) {
@@ -1241,8 +1340,12 @@ function addBot($parentElement) {
 	// <input type="text" name="myText" value="Norway" selectBoxOptions="Canada;Denmark;Finland;Germany;Mexico;Norway;Sweden;United Kingdom;United States"> 
 
 
-	addRow($titleRowID,"Add Asset","addBotRow('" + $assetLabelID + "','" + $coinAreaID + "');","Del Bot","removeElement('" + $coinAreaID + "');");
-	$botCounter++;
+	var $addRow = {
+		"rows" : [
+			{"elementParent": $titleRowID,"firstName":"Add Asset","firstOnclick":"addBotRow('" + $assetLabelID + "','" + $coinAreaID + "');","secondName":"Del Bot","secondOnclick":"removeElement('" + $coinAreaID + "');"}
+		]
+	}
+	cje($addRow);
 	
 	var $spacerName = addElement($coinAreaID);
 	addElement($spacerName,"","",'br');
@@ -1254,8 +1357,12 @@ function addBot($parentElement) {
 function addBotRow($assetLabelID,$parentElement) {
 	// = addElement($parentElement,"innerText",$classNarrowContent,"elementType","elementStyle","href","attributeType","attributeAction","elementId");
 	// addRow($parentElement,"firstName","firstOnclick","secondName","secondOnclick","thirdName","thirdOnclick","fourthName","fourthOnclick","fifthName","fifthOnclick","sixthName","sixthOnclick")
-	$assetName = readElement($assetLabelID);
-	var $coinAreaRowID = addRow($parentElement,$assetName,"","0","","Buy","thirdOnclick","Sell","fourthOnclick","0","",'Del',"removeElement('" + $coinAreaRowID + "');");
+	var $addRow = {
+		"rows" : [
+			{"elementParent": $parentElement,"firstName":readElement($assetLabelID),"secondName":"0","thirdName":"Buy","thirdOnclick":"thirdOnclick","fourthName":"Sell","fourthOnclick":"fourthOnclick","fifthName":"0","sixthName":"Del","sixthOnclick":"removeElement('" + $parentElement + "');"}
+		]
+	}
+	cje($addRow);
 	$assetCounter++;
 
 	writeElement($assetLabelID,$assetName + $assetCounter);
@@ -1305,7 +1412,7 @@ function addGitPage($parentElement) {
 	
 	var $myRow = addElement($wrapper,"",$classRow + $classInputField);
 
-	addRow($myRowGit,"Copy to Clipboard","copyToClipboard('" + $myTextAreaGit + "');","Load from Github","updateNewPageForm('" + $pageName + "');,'" + $myTextAreaGit + "','" + $myTextArea + "');","Add New Page","updateNewPageBoilerplate();");
+	addRow($myRowGit,"Copy to Clipboard","copyToClipboard('" + $myTextAreaGit + "');","Load from Github","updateNewPageForm('" + $pageName + "','" + $myTextAreaGit + "','" + $myTextArea + "');","Add New Page","updateNewPageBoilerplate();");
 	
 	addRow($myRow,"Pretty Print","prettyPrint('" + $myTextArea + "');","Colorify!","colorifyDivTextArea('" + $myTextArea + "');","Copy to Clipboard","copyToClipboard('" + $myTextArea + "');");
 	
@@ -1370,14 +1477,15 @@ function addCoinPage($parentElement) {
 }; // end addCoinPage
 
 //Run SPA
-function loadPage($pageTitle,$firstPage,$settingsURL) {
+function loadPage($pageTitle,$firstPage) {
 try {
 	removeElement($headWrapper);
 	removeElement($NavDDWrapper);
 	removeElement($bodyWrapper);
 	removeElement($footWrapper);
 	window.clearInterval(timerInterval);
-		
+	
+	
 	$headWrapper = addElement("head");
 	$bodyWrapper = addElement("body");
 	$footWrapper = addElement("body");
@@ -1386,6 +1494,9 @@ try {
 	switch ($firstPage) {
 		case "admin": 
 			addAdminPage($bodyWrapper);
+		break;
+		case "sandbox": 
+			addElementSandboxPage($bodyWrapper);
 		break;
 		case "demo": 
 			addArkDynaPage($bodyWrapper);
