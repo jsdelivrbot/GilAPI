@@ -2,7 +2,7 @@
 // aSecretToEverybody
 
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "707",pageHeaderTitle: 'Gilgamech Testing'};
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "708",pageHeaderTitle: 'Gilgamech Testing'};
 
 var $pageSettingsJson = "/settings.json";
 
