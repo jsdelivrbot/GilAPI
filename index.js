@@ -16,7 +16,7 @@ User.sync();
 
 var app = express();
 
-var $GilMain = {apiVersion: "279", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "703"};
+var $GilMain = {apiVersion: "279", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "704",pageHeaderTitle = 'Gilgamech Technologies'};
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)

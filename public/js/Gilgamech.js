@@ -2,13 +2,8 @@
 // aSecretToEverybody
 
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "705"};
-var $errDiv
-var $nav3dd
-var $testVar
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "707",pageHeaderTitle: 'Gilgamech Testing'};
 
-var $pageHeaderTitle = 'Gilgamech Technologies';
-var $pageStarting = "rgb";
 var $pageSettingsJson = "/settings.json";
 
 // addElement
@@ -24,18 +19,8 @@ var CloseCurlBracket = "}"
 var SemiColon = ";"
 var EndComment = "//end"
 
-// RGB page
-var $redInput
-var $greenInput
-var $blueInput
-var $contentLabel
-
-// Coin page
-var $cointentArea2
-
 // Fruitbot, Meme, DSQ 
 var bgImage;
-var bgReady;
 var canvas;
 var ctx;
 var $stage;
@@ -65,32 +50,34 @@ var $eth
 var $coin2 = "Data loading..."
 
 // CSS classes
-// Bootstrap
-var $classSmallHidden = "hidden-sm hidden-xs ";
-var $classLargeHidden = "hidden-md hidden-lg ";
-var $classSmallHiddenLargeQuarter = "col-md-3 hidden-xs ";
-var $classQuarterWidth = 'col-md-3 col-xs-3 ';
-var $classHalfWidth = 'col-md-6 col-xs-6 ';
-var $classNarrowCol = "col-md-2 col-xs-2 ";
-var $classThirdWidth = 'col-md-4 col-xs-4 ';
-var $classHalfDesktopFullMobile = "col-md-6 col-xs-12 ";
-var $classFullDesktopFullMobile = "col-md-12 col-xs-12 ";
-var $classRow = 'row ';
-var $classImgRnd = 'img-rounded ';
-var $classContainer = "container ";
-var $classDropdown = "dropdown ";
-var $classDropdownContent = "dropdown-content ";
-var $classNavBar = "nav navbar-nav "
-var $classNavbarRight = "navbar-right "
+// Bootstrapvar 
+$class = {
+	"SmallHidden":"hidden-sm hidden-xs ",
+	"LargeHidden":"hidden-md hidden-lg ",
+	"SmallHiddenLargeQuarter":"col-md-3 hidden-xs ",
+	"QuarterWidth":"col-md-3 col-xs-3 ",
+	"HalfWidth":"col-md-6 col-xs-6 ",
+	"NarrowCol":"col-md-2 col-xs-2 ",
+	"ThirdWidth":"col-md-4 col-xs-4 ",
+	"HalfDesktopFullMobile":"col-md-6 col-xs-12 ",
+	"FullDesktopFullMobile":"col-md-12 col-xs-12 ",
+	"Row":"row ",
+	"ImgRnd":"img-rounded ",
+	"Container":"container ",
+	"Dropdown":"dropdown ",
+	"DropdownContent":"dropdown-content ",
+	"NavBar":"nav navbar-nav ",
+	"NavbarRight":"navbar-right "
+}
 
 // Composite
-var $classContainerRow = $classContainer + $classRow;
-var $classRow = $classImgRnd + $classRow;
-var $classSpacer = $classImgRnd + $classSmallHiddenLargeQuarter;
-var $classHalfDesktopFullMobileRnd = $classImgRnd + $classHalfDesktopFullMobile;
-var $classInputField = $classImgRnd + $classFullDesktopFullMobile;
+var $classRow = $class.ImgRnd + $class.Row;
+var $classContainerRow = $class.Container + $classRow;
+var $classSpacer = $class.ImgRnd + $class.SmallHiddenLargeQuarter;
+var $classHalfDesktopFullMobileRnd = $class.ImgRnd + $class.HalfDesktopFullMobile;
+var $classInputField = $class.ImgRnd + $class.FullDesktopFullMobile;
 var $classInputFieldPLUSRow = $classInputField + $classRow;
-var $classThirdWidthRnd = $classThirdWidth + $classImgRnd;
+var $classThirdWidthRnd = $class.ThirdWidth + $class.ImgRnd;
 
 // Gil's
 var $classContentTitle = 'contentTitles ';
@@ -99,11 +86,10 @@ var $classColorRow = "colorRow ";
 var $classTop = "top ";
 
 // Gil's Composite
-var $classContentRow = $classImgRnd + $classRow + $classContentTitle;
-var $classNarrowContent = $classContentItems + $classNarrowCol
+var $classContentRow = $classRow + $classContentTitle;
+var $classNarrowContent = $classContentItems + $class.NarrowCol
 var $classInputFieldPLUSColorRow = $classInputField + $classColorRow;
 var $classColorRow2x = $classRow + $classColorRow;
-var $classNarrowContent = $classContentItems + $classNarrowCol;
 
 // Styles
 var $style = {
@@ -159,11 +145,11 @@ var $blankPageVar = {
 var $headerVar = {
 	"version" : "21JAN2018",
 	"elements" : [
-		{"elementParent": "parentElement","elementType":"title","innerText":$pageHeaderTitle},
-		{"elementParent": "parentElement","elementType":"script","href":"afp/js/jquery.min.js"},
-		{"elementParent": "parentElement","elementType":"link","href":"afp/stylesheets/bootstrap.min.css"},
-		{"elementParent": "parentElement","elementType":"link","href":"afp/stylesheets/normalize.css"},
-		{"elementParent": "parentElement","elementType":"link","href":"afp/stylesheets/Gilgamech.css"}
+		{"elementParent": "parentElement","elementType":"title","innerText":$GilMain.pageHeaderTitle},
+		{"elementParent": "parentElement","elementType":"script","href":"/js/jquery.min.js"},
+		{"elementParent": "parentElement","elementType":"link","href":"/stylesheets/bootstrap.min.css"},
+		{"elementParent": "parentElement","elementType":"link","href":"/stylesheets/normalize.css"},
+		{"elementParent": "parentElement","elementType":"link","href":"/stylesheets/Gilgamech.css"}
 	]
 }
 
@@ -177,8 +163,8 @@ var $footerVar = {
 		{"elementParent": "footWrapper","elementClass": $classRow + $classInputField,"id":"errDiv"},
 		{"elementParent": "footWrapper","elementClass": "navbar-static-bottom","elementStyle":"left: 0;bottom: 0;width: 100%;overflow: hidden;","id":"footerStatic"},
 		{"elementParent": "footerStatic","elementType":"p","elementClass":"width: 100%;text-align: center;","id":"footerBanner"},
-		{"elementParent": "footerBanner","elementType":"a","href":"https://www.duckduckgo.com","src":"afp/images/BannerImage.gif","id":"footerLink"},
-		{"elementParent": "footerLink","elementType":"img","innerText":"C1ick h34r ph0r m04r inph0","elementStyle":"height: 150px","elementClass":$classImgRnd},
+		{"elementParent": "footerBanner","elementType":"a","href":"https://www.duckduckgo.com","src":"/images/BannerImage.gif","id":"footerLink"},
+		{"elementParent": "footerLink","elementType":"img","innerText":"C1ick h34r ph0r m04r inph0","elementStyle":"height: 150px","elementClass":$class.ImgRnd},
 		{"elementParent": "footerStatic","innerText":'Gil-API version: ' + $GilMain.apiVersion + " - Gilgamech.js version:" + $GilMain.GilJSVersion,"elementStyle":"font-weight:bold;text-align:center;","elementType":"p"},
 		{"elementParent": "footerStatic","innerText":"(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.","elementStyle":"font-weight:bold;text-align:center;","elementType":"p"}
 	]
@@ -187,12 +173,12 @@ var $footerVar = {
 var $navBarVar = {
 	"version" : "21JAN2018",
 	"menu" : [
-		{"elementParent":"nav2","innerText":"Fruitbot!","onclick":"rbp('bodyWrapper',$fruitBotVar);","elementClass":$classSmallHidden},
-		{"elementParent":"nav2","innerText":"Bad Password","onclick":"rbp('bodyWrapper',$badPwVar);","elementClass":$classSmallHidden},
-		{"elementParent":"nav2","innerText":"Chat!","onclick":"rbp('bodyWrapper',$chatPageVar);","elementClass":$classSmallHidden},	
-		{"elementParent":"nav2ddc","innerText":"Fruitbot!","onclick":"rbp('bodyWrapper',$fruitBotVar);","elementClass":$classLargeHidden},
-		{"elementParent":"nav2ddc","innerText":"Bad Password","onclick":"rbp('bodyWrapper',$badPwVar);","elementClass":$classLargeHidden},
-		{"elementParent":"nav2ddc","innerText":"Chat!","onclick":"rbp('bodyWrapper',$chatPageVar);","elementClass":$classLargeHidden},
+		{"elementParent":"nav2","innerText":"Fruitbot!","onclick":"rbp('bodyWrapper',$fruitBotVar);","elementClass":$class.SmallHidden},
+		{"elementParent":"nav2","innerText":"Bad Password","onclick":"rbp('bodyWrapper',$badPwVar);","elementClass":$class.SmallHidden},
+		{"elementParent":"nav2","innerText":"Chat!","onclick":"rbp('bodyWrapper',$chatPageVar);","elementClass":$class.SmallHidden},	
+		{"elementParent":"nav2ddc","innerText":"Fruitbot!","onclick":"rbp('bodyWrapper',$fruitBotVar);","elementClass":$class.LargeHidden},
+		{"elementParent":"nav2ddc","innerText":"Bad Password","onclick":"rbp('bodyWrapper',$badPwVar);","elementClass":$class.LargeHidden},
+		{"elementParent":"nav2ddc","innerText":"Chat!","onclick":"rbp('bodyWrapper',$chatPageVar);","elementClass":$class.LargeHidden},
 		{"elementParent":"nav2ddc","innerText":"DiffeRentIal","onclick":"rbp('bodyWrapper',$rentalMapVar);"},
 		{"elementParent":"nav2ddc","innerText":"Calculator","onclick":"rbp('bodyWrapper',$calcPageVar);"},
 		{"elementParent":"nav2ddc","innerText":"Coins","onclick":"rbp('bodyWrapper',$coinPageVar);"},
@@ -205,24 +191,24 @@ var $navBarVar = {
 		{"elementParent":"nav2ddc","innerText":"RGB Calculator","onclick":'rbp("bodyWrapper",$rgbColorVar);addRgbColorPage("bodyWrapper");'},
 		{"elementParent":"nav2ddc","innerText":"Draggable Squares","onclick":"rbp('bodyWrapper',$dsqPageVar);buildDsqPage('canvas');"},
 		{"elementParent":"nav2ddc","innerText":"Meme Maker","onclick":'rbp("bodyWrapper",$memePageVar);buildMemePage("canvas","topTextInput","bottomTextInput","urlInput",bgImage);'},
-		{"elementParent":"nav2ddc","innerText":"Login!","onclick":'afp("login","bodyWrapper");rbp("bodyWrapper",$loginMenuVar);',"elementClass":$classLargeHidden},
-		{"elementParent":"nav2ddc","innerText":"Signup!","onclick":'afp("signup","bodyWrapper");',"elementClass":$classSmallHidden + $classLargeHidden},
-		{"elementParent":"nav3","innerText":"Login!","onclick":'afp("login","bodyWrapper");rbp("bodyWrapper",$loginMenuVar);',"elementClass":$classSmallHidden + $classNavbarRight}
+		{"elementParent":"nav2ddc","innerText":"Login!","onclick":'afp("login","bodyWrapper");rbp("bodyWrapper",$loginMenuVar);',"elementClass":$class.LargeHidden},
+		{"elementParent":"nav2ddc","innerText":"Signup!","onclick":'afp("signup","bodyWrapper");',"elementClass":$class.SmallHidden + $class.LargeHidden},
+		{"elementParent":"nav3","innerText":"Login!","onclick":'afp("login","bodyWrapper");rbp("bodyWrapper",$loginMenuVar);',"elementClass":$class.SmallHidden + $class.NavbarRight}
 	],
 	"elements" : [
-		{"elementParent":"parentElement","elementClass":$classContainer,"id":"titleParent"},
-		{"elementParent":"titleParent","innerText":$pageHeaderTitle,"elementClass":$classImgRnd + $classTop + $classSmallHidden,"elementType":"a","elementStyle":"font-size: 7ex; color: #000; text-decoration: none","href":"/"},
-		{"elementParent":"titleParent","innerText":$pageHeaderTitle,"elementClass":$classImgRnd + $classTop + $classLargeHidden,"elementType":"a","elementStyle":"font-size: 4ex; color: #000; text-decoration: none","href":"/"},
+		{"elementParent":"parentElement","elementClass":$class.Container,"id":"titleParent"},
+		{"elementParent":"titleParent","innerText":$GilMain.pageHeaderTitle,"elementClass":$class.ImgRnd + $classTop + $class.SmallHidden,"elementType":"a","elementStyle":"font-size: 7ex; color: #000; text-decoration: none","href":"/"},
+		{"elementParent":"titleParent","innerText":$GilMain.pageHeaderTitle,"elementClass":$class.ImgRnd + $classTop + $class.LargeHidden,"elementType":"a","elementStyle":"font-size: 4ex; color: #000; text-decoration: none","href":"/"},
 		{"elementParent":"parentElement","elementClass":"navbar navbar-static-top navbar-inverse","id":"navBar"},
-		{"elementParent":"navBar","elementClass":$classContainer,"id":"NavDDOuter"},
-		{"elementParent":"NavDDOuter","elementClass":$classNavBar + " col-md-6 col-xs-6","elementType":"ul","id":"nav2"},
-		{"elementParent":"nav2","elementClass":$classDropdown,"id":"nav2dd"},
+		{"elementParent":"navBar","elementClass":$class.Container,"id":"NavDDOuter"},
+		{"elementParent":"NavDDOuter","elementClass":$class.NavBar + " col-md-6 col-xs-6","elementType":"ul","id":"nav2"},
+		{"elementParent":"nav2","elementClass":$class.Dropdown,"id":"nav2dd"},
 		{"elementParent":"nav2dd","innerText":"Menu","elementType":"p"},
-		{"elementParent":"nav2dd","elementClass":$classDropdownContent,"id":"nav2ddc"},
-		{"elementParent":"NavDDOuter","elementClass":$classNavBar + $classHalfWidth + $classNavbarRight,"elementType":"ul","id":"nav3"},
-		{"elementParent":"nav3","elementClass":$classDropdown,"id":"nav3dd"},
+		{"elementParent":"nav2dd","elementClass":$class.DropdownContent,"id":"nav2ddc"},
+		{"elementParent":"NavDDOuter","elementClass":$class.NavBar + $class.HalfWidth + $class.NavbarRight,"elementType":"ul","id":"nav3"},
+		{"elementParent":"nav3","elementClass":$class.Dropdown,"id":"nav3dd"},
 		{"elementParent":"nav3dd","innerText":"How did I make this page?","elementType":"p"},
-		{"elementParent":"nav3dd","elementClass":$classDropdownContent,"id":"NavDDWrapper"}
+		{"elementParent":"nav3dd","elementClass":$class.DropdownContent,"id":"NavDDWrapper"}
 	]
 }
 
@@ -232,7 +218,7 @@ var $wrapperVar = {
 		{"elementParent": "body","id":"headWrapper"},
 		{"elementParent": "body","id":"bodyWrapper"},
 		{"elementParent": "body","id":"footWrapper"},
-		{"elementParent": "nav3dd","elementClass":$classDropdownContent,"id":"NavDDWrapper"}
+		{"elementParent": "nav3dd","elementClass":$class.DropdownContent,"id":"NavDDWrapper"}
 	]
 }
 
@@ -301,7 +287,7 @@ var $calcPageVar = {
 		{"elementParent": "NavDDWrapper","innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
 	],
 	"elements" : [
-		{"elementParent": "parentElement","elementClass": $classQuarterWidth,"id":"contentOuter"},
+		{"elementParent": "parentElement","elementClass": $class.QuarterWidth,"id":"contentOuter"},
 		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd},
 		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd,"id":"contentInner"},
 		{"elementParent": "contentInner","innerText": "Calculator","elementClass": $classContentRow},
@@ -344,26 +330,26 @@ var $dsqPageVar = {
 		{"elementParent": "NavDDWrapper","innerText": "Codepen demo","href":"https://codepen.io/anon/pen/rpMmvr"}
 	],
 	"elements" : [
-		{"elementParent": "parentElement","elementClass": $classInputFieldPLUSColorRow,"elementType":"script","href":"afp/js/easeljs-0.8.2.min.js"},
+		{"elementParent": "parentElement","elementClass": $classInputFieldPLUSColorRow,"elementType":"script","href":"/js/easeljs-0.8.2.min.js"},
 		{"elementParent": "parentElement","id":"divForButtons"},
 		{"elementParent": "divForButtons","innerText":"Add Square","elementClass":"btn","elementType":"button","attributeType":"onclick","attributeAction":"addShape(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow','square');"},
 		{"elementParent": "divForButtons","innerText":"Add Circle","elementClass":"btn","elementType":"button","attributeType":"onclick","attributeAction":"addShape(canvas.width/2 + (SIZE * 2.5),canvas.height/2,0,SIZE * 2, 'red','circle');"},
 		{"elementParent": "divForButtons","innerText":"Add Star","elementClass":"btn","elementType":"button","attributeType":"onclick","attributeAction":"addShape(canvas.width/2 + (SIZE * 2.5),canvas.height/2,0,SIZE * 2, 'blue','star');"},
 		{"elementParent": "divForButtons","innerText":"Page has bug - it does not work the first time. Please click the link again."},
-		{"elementParent": "parentElement","id":"canvas","elementClass":$classImgRnd,"elementType":"canvas","elementStyle":"display: block,margin: 0px auto,border: 1px solid black,"}
+		{"elementParent": "parentElement","id":"canvas","elementClass":$class.ImgRnd,"elementType":"canvas","elementStyle":"display: block,margin: 0px auto,border: 1px solid black,"}
 	]
 }
 
 var $arkDataVar = {
 	"version" : "21JAN2018",
 	"elements" : [
-		{"id":"wrapper","elementParent":"parentElement","elementClass":$classContainer + $classImgRnd},
+		{"id":"wrapper","elementParent":"parentElement","elementClass":$class.Container + $class.ImgRnd},
 		{"id":"spacer","elementParent":"wrapper","elementClass":$classSpacer},
 		{"id":"content","elementParent":"wrapper","elementClass":$classHalfDesktopFullMobileRnd},
 		{"id":"coinArea","elementParent":"content"},
 		{"id":"contentLabel1","elementParent":"coinArea","innerText":"Welcome to ARKData","elementClass":$classContentRow},
-		{"id":"contentLabel2","elementParent":"coinArea","innerText":"Gil's player and tribe tracker","elementClass":$classImgRnd + $classRow + $classContentTitle},
-		{"id":"contentLabel3","elementParent":"coinArea","innerText":"Players currently being tracked:","elementClass":$classImgRnd + $classRow + $classContentTitle},
+		{"id":"contentLabel2","elementParent":"coinArea","innerText":"Gil's player and tribe tracker","elementClass":$classRow + $classContentTitle},
+		{"id":"contentLabel3","elementParent":"coinArea","innerText":"Players currently being tracked:","elementClass":$classRow + $classContentTitle},
 		
 	],
 	"rows" : [
@@ -383,7 +369,7 @@ var $rentalMapVar = {
 	],
 	"elements" : [
 		{"elementParent": "headWrapper","elementType":"script","href":"https://maps.googleapis.com/maps/api/js?key="+ $GilMain.googleApiKey + "&callback=initMap"},
-		{"elementParent": "parentElement","elementClass":$classContainer + $classImgRnd,"id":"wrapper"},
+		{"elementParent": "parentElement","elementClass":$class.Container + $class.ImgRnd,"id":"wrapper"},
 		{"elementParent": "wrapper","innerText":"DiffeRENTial","elementClass":$classContentRow},
 		{"elementParent": "wrapper","elementStyle":"width: 100vh;height: 75vh","id":"map"},
 	]
@@ -396,7 +382,7 @@ var $memePageVar = {
 	],
 	"elements" : [
 		{"elementParent":"parentElement","innerText":"MemeGen","elementClass":$classContentRow},
-		{"elementParent":"parentElement","id":"canvas","elementClass":$classImgRnd,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;"},
+		{"elementParent":"parentElement","id":"canvas","elementClass":$class.ImgRnd,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;"},
 		{"elementParent":"parentElement","id":"urlInput","innerText":"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","elementClass":$classInputField,"elementType":"input"},
 		{"elementParent":"parentElement","id":"topTextInput","innerText":"Top Text","elementClass":$classInputField,"elementType":"input"},
 		{"elementParent":"parentElement","id":"bottomTextInput","innerText":"Bottom Text","elementClass":$classInputField,"elementType":"input"},
@@ -412,13 +398,13 @@ var $gitPageVar = {
 		{"elementParent": "NavDDWrapper","innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
 	],
 	"elements" : [
-		{"elementParent":"parentElement","id":"contentOuter","elementClass":$classContainer + $classImgRnd},
+		{"elementParent":"parentElement","id":"contentOuter","elementClass":$class.Container + $class.ImgRnd},
 		{"elementParent":"contentOuter","innerText":"repo URL","elementClass":$classContentRow},
 		{"elementParent":"contentOuter","id":"contentTextArea","innerText":"https://raw.githubusercontent.com/Gilgamech/GilAPI/master/public/js","elementClass":"div_textarea" + $classInputField,"elementType":"input"},
 		{"elementParent":"contentOuter","id":"contentRow","elementClass":$classRow + $classInputField},
-		{"elementParent":"parentElement","id":"contentInner","elementClass":$classContainer + $classImgRnd},
+		{"elementParent":"parentElement","id":"contentInner","elementClass":$class.Container + $class.ImgRnd},
 		{"elementParent":"contentInner","id":"pageNameTitle","innerText":"Gilgamech.js","elementClass":$classContentRow,"attributeType":"contenteditable","attributeAction":"true"},
-		{"elementParent":"contentInner","id":"pageNameTextArea","innerText":"Code goes here.","elementClass":"div_textarea" + $classImgRnd + $classInputField,"elementType":"textarea","elementStyle":$style.WhiteBack + "height: 50vh;","attributeType":"contenteditable","attributeAction":"true"},	
+		{"elementParent":"contentInner","id":"pageNameTextArea","innerText":"Code goes here.","elementClass":"div_textarea" + $class.ImgRnd + $classInputField,"elementType":"textarea","elementStyle":$style.WhiteBack + "height: 50vh;","attributeType":"contenteditable","attributeAction":"true"},	
 		{"elementParent":"contentInner","id":"pageNameRow","elementClass":$classRow + $classInputField}
 	],
 	"rows" : [
@@ -452,18 +438,18 @@ var $coinPageVar = {
 	],
 	"elements" : [
 		{"elementParent":"parentElement","elementClass":$classRow},
-		{"elementParent":"parentElement","elementClass":"sidebar col-md-2 hidden-sm hidden-xs" + $classImgRnd + $classContentTitle,"elementStyle":"border:1px solid #333;","id":"sidebar"},
+		{"elementParent":"parentElement","elementClass":"sidebar col-md-2 hidden-sm hidden-xs" + $class.ImgRnd + $classContentTitle,"elementStyle":"border:1px solid #333;","id":"sidebar"},
 		{"elementParent":"sidebar","innerText":"Coinsole Log"},
-		{"elementParent":"sidebar","innerText":"Data Loading...","elementClass":$classImgRnd,"elementStyle":"background-color:#fff;height:75vh;font-size: small;overflow-x: hidden;overflow-y:auto;"},
+		{"elementParent":"sidebar","innerText":"Data Loading...","elementClass":$class.ImgRnd,"elementStyle":"background-color:#fff;height:75vh;font-size: small;overflow-x: hidden;overflow-y:auto;"},
 		{"elementParent":"parentElement"},
-		{"elementParent":"parentElement","elementClass":$classImgRnd + " col-md-10 col-xs-10","id":"content"},
+		{"elementParent":"parentElement","elementClass":$class.ImgRnd + " col-md-10 col-xs-10","id":"content"},
 		{"elementParent":"content","elementClass":$classInputFieldPLUSRow,"elementStyle":$style.BlackTextWhiteBack,"id":"cointentArea"},
-		{"elementParent":"content","elementClass":$classImgRnd,"elementStyle":$style.BlackTextWhiteBack,"id":"coinTentWrapper"},
+		{"elementParent":"content","elementClass":$class.ImgRnd,"elementStyle":$style.BlackTextWhiteBack,"id":"coinTentWrapper"},
 		{"elementParent":"coinTentWrapper","elementClass":$classRow + $classContentTitle,"id":"titleRow"},
 		{"elementParent":"titleRow","innerText":"Cointent","elementClass":"col-md-10 col-xs-10 " + $classContentTitle},
 		{"elementParent":"coinTentWrapper","elementClass":$classInputFieldPLUSRow,"id":"cointentArea2"},
 		{"elementParent":"cointentArea2","elementClass":$classRow + $classContentTitle,"elementStyle":$style.BlackTextWhiteBack},
-		{"elementParent":"cointentArea2","innerText":"MyBotName","elementClass":"col-md-10 col-xs-10" + $classContentTitle + $classImgRnd,"elementStyle":$style.BlackTextWhiteBack,"attributeType":"contenteditable","attributeAction":"true"}
+		{"elementParent":"cointentArea2","innerText":"MyBotName","elementClass":"col-md-10 col-xs-10" + $classContentTitle + $class.ImgRnd,"elementStyle":$style.BlackTextWhiteBack,"attributeType":"contenteditable","attributeAction":"true"}
 	],
 	"rows" : [
 		{"elementParent":"titleRow","firstName":"Refresh","firstOnclick":"refreshCharts();"},
@@ -482,21 +468,21 @@ var $coinPageVar = {
 var $fruitBotVar = {
 	"version" : "21JAN2018",
 	"elements" : [
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/seedrandom.js"},
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/board.js"},
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/grid.js"},
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/mybot.js"},
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/simplebot.js"},
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/player.js"},
-	{"elementParent": "headWrapper","elementType":"script","href":"afp/js/jquery.min.js"},
-	{"elementParent": "parentElement","elementClass":$classImgRnd + $classRow,"elementStyle":$style.WhiteTextBlackBack},
+	{"elementParent": "headWrapper","elementType":"script","href":"/assets/js/seedrandom.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"/assets/js/board.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"/assets/js/grid.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"/mybot.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"/assets/js/simplebot.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"/assets/js/player.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"/js/jquery.min.js"},
+	{"elementParent": "parentElement","elementClass":$classRow,"elementStyle":$style.WhiteTextBlackBack},
 	{"elementParent": "parentElement","innerText":"Fruitbot","elementClass":$classContentRow},
 	{"elementParent": "parentElement","elementClass":$classContentRow,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;","id":"grid"},
 	{"elementParent": "parentElement","elementClass":$classContentRow,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;","id":"game_view"},
 	{"elementParent": "parentElement","elementClass":$classRow + $classInputField,"id":"myBoardRow"},
-	{"elementParent": "myBoardRow","innerText":"Board number","elementClass":$classImgRnd + $classRow + $classContentTitle},
+	{"elementParent": "myBoardRow","innerText":"Board number","elementClass":$classRow + $classContentTitle},
 	{"elementParent": "myBoardRow","innerText":"0","elementClass":$classInputField,"elementType":"input","attributeType":"type","attributeAction":"number"},
-	{"elementParent": "parentElement","elementClass":$classRow + $classImgRnd + "col-md-4 col-xs-6","id":"myScoreRow"}
+	{"elementParent": "parentElement","elementClass":$classRow + $class.ImgRnd + "col-md-4 col-xs-6","id":"myScoreRow"}
 	],
 	"rows" : [
 		{"elementParent": "parentElement","firstName":"Set","firstOnclick":"firstOnclick","secondName":"new","secondOnclick":"secondOnclick","thirdName":"reset","thirdOnclick":"thirdOnclick","fourthName":"pause","fourthOnclick":"fourthOnclick","fifthName":"forward","fifthOnclick":"fifthOnclick","sixthName":"sixthName","sixthOnclick":"sixthOnclick"},		
@@ -593,7 +579,7 @@ var $addBotVar = {
 	"elements" : [
 		{"elementParent":"parentElement","elementClass":$classInputFieldPLUSRow,"elementStyle":$style.BlackTextWhiteBack,"id":"coinAreaID"},
 		{"elementParent":"coinAreaID","elementClass":$classContentRow,"id":"titleRowID"},
-		{"elementParent":"titleRowID","elementClass":$classHalfWidth,"id":"contentLabelID"},
+		{"elementParent":"titleRowID","elementClass":$class.HalfWidth,"id":"contentLabelID"},
 		{"elementParent":"titleRowID","elementType":'datalist',"id":"dropdownListName"},
 		{"elementParent":"dropdownListName","innerText":"Coin","elementType":'option'},
 		{"elementParent":"dropdownListName","innerText":"firefox","elementType":'option'},
@@ -691,9 +677,9 @@ function prettyPrint($divName) {
 		var obj = JSON.parse(ugly);
 		var pretty = JSON.stringify(obj);
 		document.getElementById($divName).innerText = pretty;
-		document.getElementById($errDiv).innerText = "";	
+		document.getElementById("errDiv").innerText = "";	
 	} catch($err) {
-		document.getElementById($errDiv).innerText = $err;
+		document.getElementById("errDiv").innerText = $err;
 	};
 }
 
@@ -732,19 +718,19 @@ function appendElement($inputString,$elementId) {
 // Chat
 function updateChat() {
 	
-	var $chatUser = document.getElementById($chatUser).value
-	var $chatMessage = document.getElementById($chatMessage).value
-	var $chatRoom = document.getElementById($chatRoom).value
+	var $chatUser = document.getElementById("chatUser").value
+	var $chatMessage = document.getElementById("chatMessage").value
+	var $chatRoom = document.getElementById("chatRoom").value
 	  if ($chatMessage) {
 		if ($chatUser) {
 			$chatUrl = "/chatpost?user=" + $chatUser + "&message=" + $chatMessage + "&chatroom=" + $chatRoom
   loadJSON(chatUrl, function(response) {
     document.getElementById($chatBox).value = response
   }); // end loadJSON
-			  document.getElementById($chatMessage).value = ""
-			  document.getElementById($errDiv).innerText = ""
+			  document.getElementById("chatMessage").value = ""
+			  document.getElementById("errDiv").innerText = ""
 		} else {
-			document.getElementById($errDiv).innerText = "Enter a user name. Then do a barrel roll."
+			document.getElementById("errDiv").innerText = "Enter a user name. Then do a barrel roll."
 		}; //end if chatUser
 	}; //end if chatMessage
 }; // end update
@@ -907,13 +893,13 @@ function hexToRgb(hex) {
 };// end hexToRgb
 
 function updateRgbColor() { 
-	$hex = hexToRgb(document.getElementById($htmlRow).value);
-	document.getElementById($redRow).value = $hex.r
-	document.getElementById($greenRow).value = $hex.g
-	document.getElementById($blueRow).value = $hex.b
+	$hex = hexToRgb(document.getElementById("htmlRow").value);
+	document.getElementById("redRow").value = $hex.r
+	document.getElementById("greenRow").value = $hex.g
+	document.getElementById("blueRow").value = $hex.b
 	
-	document.getElementById($contentLabel).style.backgroundColor  
-	= document.getElementById($htmlRow).value
+	document.getElementById("contentLabel").style.backgroundColor  
+	= document.getElementById("htmlRow").value
 }; // end updateRgbColor
 
 function updateRgbDivColor($divId) { 
@@ -1190,7 +1176,6 @@ function buildCanvas($canvasId) {
 	canvas.width = (window.innerWidth * 0.75);
 	// load background
 	bgImage = new Image();
-	bgReady = false;
 	bgImage.onload = function () {
 		var ImageRatio = bgImage.width / bgImage.height;
 		canvas.width = canvas.height * ImageRatio;
@@ -1417,7 +1402,7 @@ try {
 	cje($parentElement,$jsonVar);
 	
 	if ($GilMain.GilJSVersion > $GilMain.GilJSVersion) {
-		document.getElementById($errDiv).innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";
+		document.getElementById("errDiv").innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";
 	}; // end if GilJSVersion
 	
 } catch(e){console.log(e)};
