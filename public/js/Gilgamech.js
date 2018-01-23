@@ -1,27 +1,15 @@
 //Gil.JS
-
-// addElement($parentElement,"",$classRow,"elementType","elementStyle","href","attributeType","attributeAction");
 // aSecretToEverybody
 
 //Init vars
-var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "704"};
-var $pageVersion = $GilMain.GilJSVersion
-var $apiVersion
-var $GOOGLE_API_KEY
+var $GilMain = {apiVersion: "null", googleApiKey: 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "705"};
 var $errDiv
-var $headWrapper
-var $NavDDWrapper
 var $nav3dd
-var $bodyWrapper
-var $footWrapper
 var $testVar
 
 var $pageHeaderTitle = 'Gilgamech Technologies';
 var $pageStarting = "rgb";
 var $pageSettingsJson = "/settings.json";
-
-var $chatGeneral = "";
-var $errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
 
 // addElement
 var timerInterval //Default timer variable, removed in removePage.
@@ -75,13 +63,13 @@ var $ltc
 var $fbc
 var $eth
 var $coin2 = "Data loading..."
-var $assetCounter = 0
 
 // CSS classes
 // Bootstrap
 var $classSmallHidden = "hidden-sm hidden-xs ";
 var $classLargeHidden = "hidden-md hidden-lg ";
 var $classSmallHiddenLargeQuarter = "col-md-3 hidden-xs ";
+var $classQuarterWidth = 'col-md-3 col-xs-3 ';
 var $classHalfWidth = 'col-md-6 col-xs-6 ';
 var $classNarrowCol = "col-md-2 col-xs-2 ";
 var $classThirdWidth = 'col-md-4 col-xs-4 ';
@@ -93,7 +81,7 @@ var $classContainer = "container ";
 var $classDropdown = "dropdown ";
 var $classDropdownContent = "dropdown-content ";
 var $classNavBar = "nav navbar-nav "
-var $nbr = "navbar-right "
+var $classNavbarRight = "navbar-right "
 
 // Composite
 var $classContainerRow = $classContainer + $classRow;
@@ -118,50 +106,184 @@ var $classColorRow2x = $classRow + $classColorRow;
 var $classNarrowContent = $classContentItems + $classNarrowCol;
 
 // Styles
-var $styleBlackText = "color: #000; ";
-var $styleWhiteText = "color: #fff; ";
-var $styleWhiteBack = "background-color: #fff; ";
-
-var $styleBlackBack = "background-color: #000; ";
-var $styleRedField = "background-color: #833";
-var $styleGreenField = "background-color: #383";
-var $styleBlueField = "background-color: #338";
-
-var $styleBlackTextWhiteBack = $styleBlackText + $styleWhiteBack;
-var $styleWhiteTextBlackBack = $styleWhiteText + $styleBlackBack;
+var $style = {
+	"BlackText" : "color: #000, ",
+	"WhiteText" : "color: #fff, ",
+	"WhiteBack" : "background-color: #fff, ",
+	"BlackBack" : "background-color: #000, ",
+	"RedField" : "background-color: #833",
+	"GreenField" : "background-color: #383",
+	"BlueField" : "background-color: #338"
+}
 
 // Bootstrap Buttons
-var $btnCaution = "btn btn-caution ";
-var $btnDanger = 'btn btn-danger';
-var $btnInfo = "btn btn-info ";
-var $btnPrimary = "btn btn-primary ";
-var $btnSecondary = "btn btn-secondary ";
-var $btnSuccess = "btn btn-success ";
-var $btnWarning = "btn btn-warning ";
-var $btnLg = "btn-lg ";
-var $btnXl = "btn-xl ";
-var $btnXs = "btn-xs ";
-var $btnCalc = $btnPrimary + $btnLg;
+var $btn = {
+	"primary" : "btn btn-primary ",
+	"danger" : "btn btn-danger ",
+	"caution" : "btn btn-caution ",
+	"info" : "btn btn-info ",
+	"secondary" : "btn btn-secondary ",
+	"success" : "btn btn-success ",
+	"warning" : "btn btn-warning ",
+	"lg" : "btn-lg ",
+	"xl" : "btn-xl ",
+	"xs" : "btn-xs "
+}
+
+var $styleBlackTextWhiteBack = $style.BlackText + $style.WhiteBack;
+var $styleWhiteTextBlackBack = $style.WhiteText + $style.BlackBack;
+
+var $btnCalc = $btn.primary + $btn.lg;
 
 // Pages
 
+var $blankPageVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
+	],
+	"elements" : [
+		{"elementParent": "contentInner","elementClass": $classInputFieldPLUSColorRow,"id":"outputRow","attributeType":"onkeypress","attributeAction":"detectEnter(event,evalCalc('output'))"},
+		{"elementParent": "outputRow","elementClass": "div_textarea" + $classInputField,"elementType": "input","id":"output"}
+	],
+	"rows" : [
+		{"elementParent": "contentInner","firstName":"=","firstOnclick":"evalCalc('output')","secondName":"0","secondOnclick":"appendElement(0,'output')","thirdName":".","thirdOnclick":"appendElement('.','output')","fourthName":"+","fourthOnclick":"appendElement('+','output')"}
+	],
+	"timers" : [
+		{"interval": "10000","callback":"writeElement('output','" + $GilMain.errgoLogic + "');"}
+	]
+}
+//rbp("bodyWrapper",$blankPageVar)
+
+// Page Elements
+var $headerVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent": "parentElement","elementType":"title","innerText":$pageHeaderTitle},
+		{"elementParent": "parentElement","elementType":"script","href":"afp/js/jquery.min.js"},
+		{"elementParent": "parentElement","elementType":"link","href":"afp/stylesheets/bootstrap.min.css"},
+		{"elementParent": "parentElement","elementType":"link","href":"afp/stylesheets/normalize.css"},
+		{"elementParent": "parentElement","elementType":"link","href":"afp/stylesheets/Gilgamech.css"}
+	]
+}
+
+var $footerVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": "container-fluid"},
+		{"elementParent": "parentElement","id":"spacerName"},
+		{"elementParent": "spacerName","elementType":"br"},
+		{"elementParent": "spacerName","elementType":"br"},
+		{"elementParent": "footWrapper","elementClass": $classRow + $classInputField,"id":"errDiv"},
+		{"elementParent": "footWrapper","elementClass": "navbar-static-bottom","elementStyle":"left: 0;bottom: 0;width: 100%;overflow: hidden;","id":"footerStatic"},
+		{"elementParent": "footerStatic","elementType":"p","elementClass":"width: 100%;text-align: center;","id":"footerBanner"},
+		{"elementParent": "footerBanner","elementType":"a","href":"https://www.duckduckgo.com","src":"afp/images/BannerImage.gif","id":"footerLink"},
+		{"elementParent": "footerLink","elementType":"img","innerText":"C1ick h34r ph0r m04r inph0","elementStyle":"height: 150px","elementClass":$classImgRnd},
+		{"elementParent": "footerStatic","innerText":'Gil-API version: ' + $GilMain.apiVersion + " - Gilgamech.js version:" + $GilMain.GilJSVersion,"elementStyle":"font-weight:bold;text-align:center;","elementType":"p"},
+		{"elementParent": "footerStatic","innerText":"(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.","elementStyle":"font-weight:bold;text-align:center;","elementType":"p"}
+	]
+}
+
+var $navBarVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent":"nav2","innerText":"Fruitbot!","onclick":"rbp('bodyWrapper',$fruitBotVar);","elementClass":$classSmallHidden},
+		{"elementParent":"nav2","innerText":"Bad Password","onclick":"rbp('bodyWrapper',$badPwVar);","elementClass":$classSmallHidden},
+		{"elementParent":"nav2","innerText":"Chat!","onclick":"rbp('bodyWrapper',$chatPageVar);","elementClass":$classSmallHidden},	
+		{"elementParent":"nav2ddc","innerText":"Fruitbot!","onclick":"rbp('bodyWrapper',$fruitBotVar);","elementClass":$classLargeHidden},
+		{"elementParent":"nav2ddc","innerText":"Bad Password","onclick":"rbp('bodyWrapper',$badPwVar);","elementClass":$classLargeHidden},
+		{"elementParent":"nav2ddc","innerText":"Chat!","onclick":"rbp('bodyWrapper',$chatPageVar);","elementClass":$classLargeHidden},
+		{"elementParent":"nav2ddc","innerText":"DiffeRentIal","onclick":"rbp('bodyWrapper',$rentalMapVar);"},
+		{"elementParent":"nav2ddc","innerText":"Calculator","onclick":"rbp('bodyWrapper',$calcPageVar);"},
+		{"elementParent":"nav2ddc","innerText":"Coins","onclick":"rbp('bodyWrapper',$coinPageVar);"},
+		{"elementParent":"nav2ddc","innerText":"JSON Lint","onclick":"rbp('bodyWrapper',$jsonLintVar);"},
+		{"elementParent":"nav2ddc","innerText":"Git","onclick":"rbp('bodyWrapper',$gitPageVar);"},
+		{"elementParent":"nav2ddc","innerText":"Arkdata","onclick":"rbp('bodyWrapper',$arkDataVar);"},
+		{"elementParent":"nav2ddc","innerText":"Admin","onclick":"rbp('bodyWrapper',$adminPageVar);"},
+		{"elementParent":"nav2ddc","innerText":"addElement Explained","onclick":'abp("bodyWrapper",$addElementBlogVar);'},
+		{"elementParent":"nav2ddc","innerText":"Minimalism","onclick":'abp("bodyWrapper",$minimalismBlogVar);'},
+		{"elementParent":"nav2ddc","innerText":"RGB Calculator","onclick":'rbp("bodyWrapper",$rgbColorVar);addRgbColorPage("bodyWrapper");'},
+		{"elementParent":"nav2ddc","innerText":"Draggable Squares","onclick":"rbp('bodyWrapper',$dsqPageVar);buildDsqPage('canvas');"},
+		{"elementParent":"nav2ddc","innerText":"Meme Maker","onclick":'rbp("bodyWrapper",$memePageVar);buildMemePage("canvas","topTextInput","bottomTextInput","urlInput",bgImage);'},
+		{"elementParent":"nav2ddc","innerText":"Login!","onclick":'afp("login","bodyWrapper");rbp("bodyWrapper",$loginMenuVar);',"elementClass":$classLargeHidden},
+		{"elementParent":"nav2ddc","innerText":"Signup!","onclick":'afp("signup","bodyWrapper");',"elementClass":$classSmallHidden + $classLargeHidden},
+		{"elementParent":"nav3","innerText":"Login!","onclick":'afp("login","bodyWrapper");rbp("bodyWrapper",$loginMenuVar);',"elementClass":$classSmallHidden + $classNavbarRight}
+	],
+	"elements" : [
+		{"elementParent":"parentElement","elementClass":$classContainer,"id":"titleParent"},
+		{"elementParent":"titleParent","innerText":$pageHeaderTitle,"elementClass":$classImgRnd + $classTop + $classSmallHidden,"elementType":"a","elementStyle":"font-size: 7ex; color: #000; text-decoration: none","href":"/"},
+		{"elementParent":"titleParent","innerText":$pageHeaderTitle,"elementClass":$classImgRnd + $classTop + $classLargeHidden,"elementType":"a","elementStyle":"font-size: 4ex; color: #000; text-decoration: none","href":"/"},
+		{"elementParent":"parentElement","elementClass":"navbar navbar-static-top navbar-inverse","id":"navBar"},
+		{"elementParent":"navBar","elementClass":$classContainer,"id":"NavDDOuter"},
+		{"elementParent":"NavDDOuter","elementClass":$classNavBar + " col-md-6 col-xs-6","elementType":"ul","id":"nav2"},
+		{"elementParent":"nav2","elementClass":$classDropdown,"id":"nav2dd"},
+		{"elementParent":"nav2dd","innerText":"Menu","elementType":"p"},
+		{"elementParent":"nav2dd","elementClass":$classDropdownContent,"id":"nav2ddc"},
+		{"elementParent":"NavDDOuter","elementClass":$classNavBar + $classHalfWidth + $classNavbarRight,"elementType":"ul","id":"nav3"},
+		{"elementParent":"nav3","elementClass":$classDropdown,"id":"nav3dd"},
+		{"elementParent":"nav3dd","innerText":"How did I make this page?","elementType":"p"},
+		{"elementParent":"nav3dd","elementClass":$classDropdownContent,"id":"NavDDWrapper"}
+	]
+}
+
+var $wrapperVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent": "body","id":"headWrapper"},
+		{"elementParent": "body","id":"bodyWrapper"},
+		{"elementParent": "body","id":"footWrapper"},
+		{"elementParent": "nav3dd","elementClass":$classDropdownContent,"id":"NavDDWrapper"}
+	]
+}
+
+// Page sections
+var $loginMenuVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText":"Javascript Basic Auth","href":"https://stackoverflow.com/questions/491914/pure-javascript-code-for-http-basic-authentication"},
+		{"elementParent": "NavDDWrapper","innerText":"Sequelize getting started","href":"http://docs.sequelizejs.com/manual/installation/getting-started.html"},
+		{"elementParent": "NavDDWrapper","innerText":"Sequelize Findone","href":"https://stackoverflow.com/questions/32212945/sequelize-findone-success-is-undefined#32213208"},
+		{"elementParent": "NavDDWrapper","innerText":"Render common variables from app.js to all routes in express","href":"https://stackoverflow.com/questions/29026650/how-to-render-common-variables-from-app-js-to-all-routes-in-express"},
+		{"elementParent": "NavDDWrapper","innerText":"Delete cookie on logout in Express and Passport","href":"https://stackoverflow.com/questions/33112299/how-to-delete-cookie-on-logout-in-express-passport-js"},
+		{"elementParent": "NavDDWrapper","innerText":"Cookie Parser on Github","href":"https://github.com/expressjs/cookie-parser#cookieparsersignedcookiestr-secret"},
+		{"elementParent": "NavDDWrapper","innerText":"Express JS book","href":"http://expressjs-book.com/index.html%3Fp=128.html"},
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap buttons","href":"https://v4-alpha.getbootstrap.com/components/buttons/#sizes"}
+	]
+}
+
+var $pageMenuVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText":"______________"},	
+		{"elementParent": "NavDDWrapper","innerText":"'Custom scrollbars in Webkit","href":"https://css-tricks.com/custom-scrollbars-in-webkit/"},
+		{"elementParent": "NavDDWrapper","innerText":"'Load div as file","href":"https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/"},
+		{"elementParent": "NavDDWrapper","innerText":"'Applies color scheme to text in div","href":"https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css"},
+		{"elementParent": "NavDDWrapper","innerText":"'Load JSON","href":"https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript"},
+		{"elementParent": "NavDDWrapper","innerText":"'Javascript Objects","href":"https://www.w3schools.com/js/js_objects.asp"},
+		{"elementParent": "NavDDWrapper","innerText":"'Clear SetInterval","href":"https://stackoverflow.com/questions/2901108/how-do-i-clear-this-setinterval#2901155"},
+		{"elementParent": "NavDDWrapper","innerText":"'Make footer stick to the bottom of the page.","href":"https://stackoverflow.com/questions/3443606/make-footer-stick-to-bottom-of-page-correctly#18066619 "}
+	]
+}
+
 var $testVar = {
+	"version" : "21JAN2018",
 	"elements" : [
 		{"elementParent": "parentElement","innerText": "Add newElementJson here.","elementType": "textarea"}
 	]
 }
 
 var $adminPageVar = {
+	"version" : "21JAN2018",
 	"elements" : [
-		{"elementParent": "parentElement","elementClass": $classSpacer, "id":"contentOuter"},
+		{"elementParent": "parentElement","elementClass": $classSpacer,"id":"contentOuter"},
 		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd},
-		{"elementParent": "parentElement","elementClass": $classHalfDesktopFullMobileRnd, "id":"contentInner"},
+		{"elementParent": "parentElement","elementClass": $classHalfDesktopFullMobileRnd,"id":"contentInner"},
 		{"elementParent": "contentInner","innerText": "Admin Page","elementClass": $classContentRow},
 		{"elementParent": "contentInner","elementClass": $classInputField},
 		{"elementParent": "contentInner","elementClass": $classInputFieldPLUSColorRow,"id":"outputRow"},
-		{"elementParent": "outputRow","innerText": "Log loading...","elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id":"output"},
+		{"elementParent": "outputRow","innerText": "Log loading...","elementClass": $classInputField,"elementStyle": $style.BlackText,"elementType": "textarea","id":"output"},
 		{"elementParent": "contentInner","elementClass": $classInputFieldPLUSColorRow,"id":"outputRow2"},
-		{"elementParent": "outputRow2","innerText": JSON.stringify($testVar),"elementClass": $classInputField,"elementStyle": $styleBlackText,"elementType": "textarea","id": "output2"},
+		{"elementParent": "outputRow2","innerText": JSON.stringify($testVar),"elementClass": $classInputField,"elementStyle": $style.BlackText,"elementType": "textarea","id": "output2"},
 		{"elementParent": "contentInner","id":"outputDiv"}
 	],
 	"rows" : [
@@ -173,73 +295,327 @@ var $adminPageVar = {
 	]
 }
 
+var $calcPageVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
+	],
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": $classQuarterWidth,"id":"contentOuter"},
+		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd},
+		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd,"id":"contentInner"},
+		{"elementParent": "contentInner","innerText": "Calculator","elementClass": $classContentRow},
+		{"elementParent": "contentInner","elementClass": $classInputField},
+		{"elementParent": "contentInner","elementClass": $classInputFieldPLUSColorRow,"id":"outputRow","attributeType":"onkeypress","attributeAction":"detectEnter(event,evalCalc('output'))"},
+		{"elementParent": "outputRow","elementClass": "div_textarea" + $classInputField,"elementType": "input","id":"output"}
+	],
+	"rows" : [
+		{"elementParent": "contentInner","firstName":"1","firstOnclick":"appendElement(1,'output')","secondName":"2","secondOnclick":"appendElement(2,'output')","thirdName":"3","thirdOnclick":"appendElement(3,'output')","fourthName":"/","fourthOnclick":"appendElement('/','output')"},	
+		{"elementParent": "contentInner","firstName":"4","firstOnclick":"appendElement(4,'output')","secondName":"5","secondOnclick":"appendElement(5,'output')","thirdName":"6","thirdOnclick":"appendElement(6,'output')","fourthName":"*","fourthOnclick":"appendElement('*','output')"},
+		{"elementParent": "contentInner","firstName":"7","firstOnclick":"appendElement(7,'output')","secondName":"8","secondOnclick":"appendElement(8,'output')","thirdName":"9","thirdOnclick":"appendElement(9,'output')","fourthName":"-","fourthOnclick":"appendElement('-','output')"},
+		{"elementParent": "contentInner","firstName":"=","firstOnclick":"evalCalc('output')","secondName":"0","secondOnclick":"appendElement(0,'output')","thirdName":".","thirdOnclick":"appendElement('.','output')","fourthName":"+","fourthOnclick":"appendElement('+','output')"}
+	]
+}
+
+var $jsonLintVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "prettify json data in textarea input","href":"https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037"},
+		{"elementParent": "NavDDWrapper","innerText": "copy textarea to clipboard","href": "https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068"}
+	],
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": $classSpacer,"id": "contentOuter"},
+		{"elementParent": "contentOuter","elementClass": $classHalfDesktopFullMobileRnd},
+		{"elementParent": "parentElement","elementClass": $classHalfDesktopFullMobileRnd,"id":"nestArea"},
+		{"elementParent": "nestArea"},
+		{"elementParent": "nestArea", "innerText": "JSONLint","elementClass": $classContentRow},
+		{"elementParent": "nestArea", "innerText": '{"innerText":"JSON goes here"}',"elementClass": "div_textarea" + $classInputField,"elementType": "textarea","id":"output"}
+	],
+	"rows" : [
+		{"elementParent": "nestArea","firstName": "Pretty Print","firstOnclick": "prettyPrint('" + "output" + "')","secondName": "Copy to Clipboard","secondOnclick": "copyToClipboard('" + "output" + "')"}
+	]
+}
+
+var $dsqPageVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "Making draggable shapes with CreateJS","href":"https://superdevresources.com/draggable-shapes-canvas-createjs"},
+		{"elementParent": "NavDDWrapper","innerText": "CreateJS website","href":"https://www.createjs.com"},
+		{"elementParent": "NavDDWrapper","innerText": "Codepen demo","href":"https://codepen.io/anon/pen/rpMmvr"}
+	],
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": $classInputFieldPLUSColorRow,"elementType":"script","href":"afp/js/easeljs-0.8.2.min.js"},
+		{"elementParent": "parentElement","id":"divForButtons"},
+		{"elementParent": "divForButtons","innerText":"Add Square","elementClass":"btn","elementType":"button","attributeType":"onclick","attributeAction":"addShape(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow','square');"},
+		{"elementParent": "divForButtons","innerText":"Add Circle","elementClass":"btn","elementType":"button","attributeType":"onclick","attributeAction":"addShape(canvas.width/2 + (SIZE * 2.5),canvas.height/2,0,SIZE * 2, 'red','circle');"},
+		{"elementParent": "divForButtons","innerText":"Add Star","elementClass":"btn","elementType":"button","attributeType":"onclick","attributeAction":"addShape(canvas.width/2 + (SIZE * 2.5),canvas.height/2,0,SIZE * 2, 'blue','star');"},
+		{"elementParent": "divForButtons","innerText":"Page has bug - it does not work the first time. Please click the link again."},
+		{"elementParent": "parentElement","id":"canvas","elementClass":$classImgRnd,"elementType":"canvas","elementStyle":"display: block,margin: 0px auto,border: 1px solid black,"}
+	]
+}
+
+var $arkDataVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"id":"wrapper","elementParent":"parentElement","elementClass":$classContainer + $classImgRnd},
+		{"id":"spacer","elementParent":"wrapper","elementClass":$classSpacer},
+		{"id":"content","elementParent":"wrapper","elementClass":$classHalfDesktopFullMobileRnd},
+		{"id":"coinArea","elementParent":"content"},
+		{"id":"contentLabel1","elementParent":"coinArea","innerText":"Welcome to ARKData","elementClass":$classContentRow},
+		{"id":"contentLabel2","elementParent":"coinArea","innerText":"Gil's player and tribe tracker","elementClass":$classImgRnd + $classRow + $classContentTitle},
+		{"id":"contentLabel3","elementParent":"coinArea","innerText":"Players currently being tracked:","elementClass":$classImgRnd + $classRow + $classContentTitle},
+		
+	],
+	"rows" : [
+		{"elementParent":"coinArea","firstName":"PlayerName","secondName":"ServerName","thirdName":"Firstseen","fourthName":"Timeseen"},
+		{"elementParent":"coinArea","firstName":"dopey.tim","secondName":"Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","thirdName":"10/23/2017 13:25:45","fourthName":"10/24/2017 22:46:34"},
+		{"elementParent":"coinArea","firstName":"MFrider88","secondName":"Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","thirdName":"10/23/2017 21:41:57","fourthName":"10/23/2017 23:02:46"},
+		{"elementParent":"coinArea","firstName":"MacNCheese3","secondName":"Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","thirdName":"9/1/2017 14:42:06","fourthName":"10/24/2017 15:21:50"},
+		{"elementParent":"coinArea","firstName":"GenMaxiu","secondName":"Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","thirdName":"6/10/2017 10:09:07","fourthName":"10/24/2017 0:10:12"},
+		{"elementParent":"coinArea","firstName":"FMFrider88","secondName":"Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","thirdName":"10/23/2017 21:23:43","fourthName":"10/23/2017 23:39:49"},
+	]
+}
+
+var $rentalMapVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "Adding Google Maps to your website","href":"https://developers.google.com/maps/documentation/javascript/adding-a-google-map#key"}
+	],
+	"elements" : [
+		{"elementParent": "headWrapper","elementType":"script","href":"https://maps.googleapis.com/maps/api/js?key="+ $GilMain.googleApiKey + "&callback=initMap"},
+		{"elementParent": "parentElement","elementClass":$classContainer + $classImgRnd,"id":"wrapper"},
+		{"elementParent": "wrapper","innerText":"DiffeRENTial","elementClass":$classContentRow},
+		{"elementParent": "wrapper","elementStyle":"width: 100vh;height: 75vh","id":"map"},
+	]
+}
+
+var $memePageVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "How to add a border on html5 canvas text?","href":"https://stackoverflow.com/questions/1421082/how-to-add-a-border-on-html5-canvas-text#1421598"}
+	],
+	"elements" : [
+		{"elementParent":"parentElement","innerText":"MemeGen","elementClass":$classContentRow},
+		{"elementParent":"parentElement","id":"canvas","elementClass":$classImgRnd,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;"},
+		{"elementParent":"parentElement","id":"urlInput","innerText":"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg","elementClass":$classInputField,"elementType":"input"},
+		{"elementParent":"parentElement","id":"topTextInput","innerText":"Top Text","elementClass":$classInputField,"elementType":"input"},
+		{"elementParent":"parentElement","id":"bottomTextInput","innerText":"Bottom Text","elementClass":$classInputField,"elementType":"input"},
+	],
+	"rows" : [
+		{"elementParent": "parentElement","firstName":"Create Meme!","firstOnclick":"updateMemeForm('urlInput','canvas'},"}
+	]
+}
+
+var $gitPageVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
+	],
+	"elements" : [
+		{"elementParent":"parentElement","id":"contentOuter","elementClass":$classContainer + $classImgRnd},
+		{"elementParent":"contentOuter","innerText":"repo URL","elementClass":$classContentRow},
+		{"elementParent":"contentOuter","id":"contentTextArea","innerText":"https://raw.githubusercontent.com/Gilgamech/GilAPI/master/public/js","elementClass":"div_textarea" + $classInputField,"elementType":"input"},
+		{"elementParent":"contentOuter","id":"contentRow","elementClass":$classRow + $classInputField},
+		{"elementParent":"parentElement","id":"contentInner","elementClass":$classContainer + $classImgRnd},
+		{"elementParent":"contentInner","id":"pageNameTitle","innerText":"Gilgamech.js","elementClass":$classContentRow,"attributeType":"contenteditable","attributeAction":"true"},
+		{"elementParent":"contentInner","id":"pageNameTextArea","innerText":"Code goes here.","elementClass":"div_textarea" + $classImgRnd + $classInputField,"elementType":"textarea","elementStyle":$style.WhiteBack + "height: 50vh;","attributeType":"contenteditable","attributeAction":"true"},	
+		{"elementParent":"contentInner","id":"pageNameRow","elementClass":$classRow + $classInputField}
+	],
+	"rows" : [
+		{"elementParent": "contentRow","firstName":"Copy to Clipboard","firstOnclick":"copyToClipboard('contentTextArea'},","secondName":"Load from Github","secondOnclick":"updateNewPageForm('pageNameTitle','contentTextArea','pageNameTextArea'},","thirdName":"Add New Page","thirdOnclick":"updateNewPageBoilerplate(},"},
+		
+		{"elementParent": "pageNameRow","firstName":"Pretty Print","firstOnclick":"prettyPrint('pageNameTextArea'},","secondName":"Colorify!","secondOnclick":"colorifyDivTextArea('pageNameTextArea'},","thirdName":"Copy to Clipboard","thirdOnclick":"copyToClipboard('pageNameTextArea'},"}
+	]
+}
+
+var $coinPageVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText":"How do you implement a fixed left sidebar and fluid right content in CSS","href":"https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037"},
+		{"elementParent": "NavDDWrapper","innerText":"updateMePlease","href":"https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp"},	
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap","href":"https://getbootstrap.com/docs/3.3/css/"},
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap Buttons","href":"https://v4-alpha.getbootstrap.com/components/buttons/"},
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap Navbar","href":"https://www.w3schools.com/bootstrap/bootstrap_navbar.asp"},
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap Number Validation","href":"https://stackoverflow.com/questions/16517718/bootstrap-number-validation"},
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap rounded corners","href":"https://stackoverflow.com/questions/12084121/correct-way-to-create-rounded-corners-in-twitter-bootstrap"},
+		{"elementParent": "NavDDWrapper","innerText":"Number Input Type","href":"https://stackoverflow.com/questions/3368546/what-input-field-type-forces-the-number-pad-mobile-keyboard-to-come-up-when-focu"},
+		{"elementParent": "NavDDWrapper","innerText":"Radio Input Type","href":"https://html.com/input-type-radio/"},
+		{"elementParent": "NavDDWrapper","innerText":"Bootstrap Grid","href":"http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/"},
+		{"elementParent": "NavDDWrapper","innerText":"Document Onload not cooperating","href":"https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate"},
+		{"elementParent": "NavDDWrapper","innerText":"Set radio button status with Javascript","href":"https://stackoverflow.com/questions/9476617/how-to-set-radio-button-status-with-javascript"},
+		{"elementParent": "NavDDWrapper","innerText":"Change onclick action with Javascript","href":"https://stackoverflow.com/questions/5303899/change-onclick-action-with-a-javascript-function"},
+		{"elementParent": "NavDDWrapper","innerText":"Dynamically adding or removing a Div","href":"https://stackoverflow.com/questions/4967289/dynamically-adding-removing-a-div-to-html"},
+		{"elementParent": "NavDDWrapper","innerText":"Dropdown menus","href":"https://stackoverflow.com/questions/18030132/html-css-dropdown-menu-overflow"},
+		{"elementParent": "NavDDWrapper","innerText":"Search for 'appendChild.body'","href":"https://duckduckgo.com/?q=document+appendchild+body&atb=v49-6&ia=qa"},
+		{"elementParent": "NavDDWrapper","innerText":"HTML5 Combobox","href":"http://www.scriptol.com/html5/combobox.php"},
+		{"elementParent": "NavDDWrapper","innerText":"Form widget editable select","href":"http://www.dhtmlgoodies.com/scripts/form_widget_editable_select/form_widget_editable_select.html"}
+	],
+	"elements" : [
+		{"elementParent":"parentElement","elementClass":$classRow},
+		{"elementParent":"parentElement","elementClass":"sidebar col-md-2 hidden-sm hidden-xs" + $classImgRnd + $classContentTitle,"elementStyle":"border:1px solid #333;","id":"sidebar"},
+		{"elementParent":"sidebar","innerText":"Coinsole Log"},
+		{"elementParent":"sidebar","innerText":"Data Loading...","elementClass":$classImgRnd,"elementStyle":"background-color:#fff;height:75vh;font-size: small;overflow-x: hidden;overflow-y:auto;"},
+		{"elementParent":"parentElement"},
+		{"elementParent":"parentElement","elementClass":$classImgRnd + " col-md-10 col-xs-10","id":"content"},
+		{"elementParent":"content","elementClass":$classInputFieldPLUSRow,"elementStyle":$style.BlackTextWhiteBack,"id":"cointentArea"},
+		{"elementParent":"content","elementClass":$classImgRnd,"elementStyle":$style.BlackTextWhiteBack,"id":"coinTentWrapper"},
+		{"elementParent":"coinTentWrapper","elementClass":$classRow + $classContentTitle,"id":"titleRow"},
+		{"elementParent":"titleRow","innerText":"Cointent","elementClass":"col-md-10 col-xs-10 " + $classContentTitle},
+		{"elementParent":"coinTentWrapper","elementClass":$classInputFieldPLUSRow,"id":"cointentArea2"},
+		{"elementParent":"cointentArea2","elementClass":$classRow + $classContentTitle,"elementStyle":$style.BlackTextWhiteBack},
+		{"elementParent":"cointentArea2","innerText":"MyBotName","elementClass":"col-md-10 col-xs-10" + $classContentTitle + $classImgRnd,"elementStyle":$style.BlackTextWhiteBack,"attributeType":"contenteditable","attributeAction":"true"}
+	],
+	"rows" : [
+		{"elementParent":"titleRow","firstName":"Refresh","firstOnclick":"refreshCharts();"},
+		{"elementParent":"cointentArea2","firstName":"Add Bot","firstOnclick":'rbp("bodyWrapper",$addBotVar);'},
+		{"elementParent":"content","firstName":"Coin","secondName":"Value","thirdName":"My Coins","fourthName":"MyBot","fifthName":"Fruitbot","sixthName":"SimpleBot"},
+		{"elementParent":"content","firstName":"BTC","secondName":"0","thirdName":"0","fourthName":"0","fifthName":"0","sixthName":"0"},
+		{"elementParent":"content","firstName":"LTC","secondName":"0","thirdName":"0","fourthName":"0","fifthName":"0","sixthName":"0"},
+		{"elementParent":"content","firstName":"ETH","secondName":"0","thirdName":"0","fourthName":"0","fifthName":"0","sixthName":"0"},
+		{"elementParent":"content","firstName":"FBC","secondName":"0","thirdName":"0","fourthName":"0","fifthName":"0","sixthName":"0"}
+	],
+	"timers" : [
+		{"interval": "30000","callback":"refreshCharts();"}
+	]
+}
+
+var $fruitBotVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/seedrandom.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/board.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/grid.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/mybot.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/simplebot.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/assets/js/player.js"},
+	{"elementParent": "headWrapper","elementType":"script","href":"afp/js/jquery.min.js"},
+	{"elementParent": "parentElement","elementClass":$classImgRnd + $classRow,"elementStyle":$style.WhiteTextBlackBack},
+	{"elementParent": "parentElement","innerText":"Fruitbot","elementClass":$classContentRow},
+	{"elementParent": "parentElement","elementClass":$classContentRow,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;","id":"grid"},
+	{"elementParent": "parentElement","elementClass":$classContentRow,"elementType":"canvas","elementStyle":"display: block;margin: 0px auto;border: 1px solid black;","id":"game_view"},
+	{"elementParent": "parentElement","elementClass":$classRow + $classInputField,"id":"myBoardRow"},
+	{"elementParent": "myBoardRow","innerText":"Board number","elementClass":$classImgRnd + $classRow + $classContentTitle},
+	{"elementParent": "myBoardRow","innerText":"0","elementClass":$classInputField,"elementType":"input","attributeType":"type","attributeAction":"number"},
+	{"elementParent": "parentElement","elementClass":$classRow + $classImgRnd + "col-md-4 col-xs-6","id":"myScoreRow"}
+	],
+	"rows" : [
+		{"elementParent": "parentElement","firstName":"Set","firstOnclick":"firstOnclick","secondName":"new","secondOnclick":"secondOnclick","thirdName":"reset","thirdOnclick":"thirdOnclick","fourthName":"pause","fourthOnclick":"fourthOnclick","fifthName":"forward","fifthOnclick":"fifthOnclick","sixthName":"sixthName","sixthOnclick":"sixthOnclick"},		
+		{"elementParent": "myScoreRow","firstName":"Wins","firstOnclick":"firstOnclick","secondName":"0","secondOnclick":"secondOnclick","thirdName":"Losses","thirdOnclick":"thirdOnclick","fourthName":"0","fourthOnclick":"fourthOnclick","fifthName":"Ties","fifthOnclick":"fifthOnclick","sixthName":"sixthName","sixthOnclick":"0"}
+	]
+}
+
+var $rgbColorVar = {
+	"version" : "21JAN2018",
+	"menu" : [
+		{"elementParent": "NavDDWrapper","innerText":"Search Convert to Hex","href":"https://duckduckgo.com/?q=javascript+convert+to+he&atb=v49-6&ia=qa"},
+		{"elementParent": "NavDDWrapper","innerText":"RGB to HEX and HEX to RGB","href":"https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb#5624139"},
+		{"elementParent": "NavDDWrapper","innerText":"Change Div color on keypress","href":"https://stackoverflow.com/questions/42521420/change-div-bgcolor-onkeypress"},
+		{"elementParent": "NavDDWrapper","innerText":"Prop style background color","href":"https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp"},
+		{"elementParent": "NavDDWrapper","innerText":"RGB coder","href":"https://www.easycalculation.com/colorconverter/rgb-coder.php"}
+	],
+	"elements" : [
+		{"elementParent": "parentElement","elementClass":$classSpacer},
+		{"elementParent": "parentElement","elementClass":$classHalfDesktopFullMobileRnd,"id":"content"},
+		{"elementParent": "content","id":"coinArea"},
+		{"elementParent": "coinArea","innerText":"RGB Calculator","elementClass":$classContentRow,"id":"contentLabel"},
+		{"elementParent": "coinArea","elementClass":$classInputFieldPLUSColorRow,"elementType":"input","elementStyle":$style.BlackTextWhiteBack,"attributeType":"maxlength","attributeAction":"7","id":"htmlInput"},
+		{"elementParent": "coinArea","innerText":171,"elementClass":$classInputFieldPLUSColorRow,"elementType":"input","attributeType":"type","attributeAction":"number","id":"redInput"},
+		{"elementParent": "coinArea","innerText":205,"elementClass":$classInputFieldPLUSColorRow,"elementType":"input","attributeType":"type","attributeAction":"number","id":"greenInput"},
+		{"elementParent": "coinArea","innerText":239,"elementClass":$classInputFieldPLUSColorRow,"elementType":"input","attributeType":"type","attributeAction":"number","id":"blueInput"},
+	]
+}
+
+// page parts
+var $testBlogVar = {
+	"version" : "22JAN2018",
+	"titleText" : "Hello World!",
+	"headerText" : "This is a test blog",
+	"bodyText" : "Testing out how this goes. Let me know what you think!"
+};
+
+var $minimalismBlogVar = {
+	"version" : "22JAN2018",
+	"titleText" : "Minimalism",
+	"headerText" : "1 year rule.",
+	"bodyText" : "If I don't use something once every 12 months (or so, I'm not exact), I get rid of it. Having so many objects cluttering the room is reminiscent of Victorian Era homes, which were cluttered with tables and chairs and curiosities. Stanley Kubrick in the 1970s flirted with the agoraphobia of large, empty living spaces - but so long as the space isn't completely empty, square footage is a luxury. \n\n"
+};
+
+var $addElementBlogVar = {
+	"version" : "22JAN2018",
+	"titleText" : "addElement explained",
+	"headerText" : "addElement($elementParent,$innerText,$elementClass,$elementType,$elementStyle,$href,$attributeType,$attributeAction,$elementId);",
+	"bodyText" : "This can  be complex to look at, but will make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n $divID - The only mandatory one is the first one.\n\n $divClass- Specify CSS classes here.\n\n $divParent- Nest under parent div. Specify just 'head' or 'body' to attach directly to the document.\n\n $innerText- This will be the innerText if it's a Div, or if it's an IMG this will be the title, or if it's Input this will be the Value.\n\n $elementType- Specify element type. Default is Div, but can be anything from an A to Canvas to Link.\n\n $href- Specify HRef link if A type, HRef link and CSS type for Link type, or Source if IMG or Script type.\n\n $attributeType- Set a custom attribute, like 'onclick' or 'placeholder' or 'contenteditable'.\n\n $attributeAction- Set the value for the above attribute type. Leave blank for attributes with no value, such as 'contenteditable'.\n\n \n\n Other key parts of this framework are removeElement, wrapperHead, wrapperBody, and wrapperFoot. These divs are unloaded and rebuilt on each page change.\n\n \n\n Call other Javascript scripts, CSS files, and other Head-based items in wrapperHead.\n\n Nest all of your page within wrapperBody.\n\n Add any extra footer elements to wrapperFoot.\n\n \n\n"
+};
+
+var $botRowVar = {
+	"rows" : [
+		{"elementParent": "parentElement","firstName":"Coin","secondName":"0","thirdName":"Buy","thirdOnclick":"thirdOnclick","fourthName":"Sell","fourthOnclick":"fourthOnclick","fifthName":"0","sixthName":"Del","sixthOnclick":"removeElement('parentElement');"}
+	]
+}
+
+var $chatPageVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent": "parentElement","id":"contentOuter","elementClass":$classHalfDesktopFullMobileRnd},
+		{"elementParent": "contentOuter","innerText":"Room:","elementClass":$classContentRow},
+		{"elementParent": "contentOuter","id":"chatWrapper","elementClass":$classColorRow2x},
+		{"elementParent": "chatWrapper","id":"chatRoom","innerText":"General","elementClass":$classInputFieldPLUSColorRow,"elementType":"input","elementStyle":$style.BlackText},
+		{"elementParent": "contentOuter","id":"contentInner","elementClass":$classColorRow2x},
+		{"elementParent": "contentInner","id":"chatBox","innerText":"Chat loading...","elementClass":$classInputFieldPLUSColorRow,"elementType":"textarea","elementStyle":$style.BlackText},
+		{"elementParent": "contentOuter","id":"nameRow","elementClass":$classColorRow2x},
+		{"elementParent": "nameRow","elementClass":$classInputFieldPLUSColorRow,"elementType":"input","elementStyle":"background-color: #338","attributeType":"placeholder","attributeAction":"User Name"},
+		{"elementParent": "contentInner","id":"chatMessage","elementClass":$classColorRow2x},
+		{"elementParent": "contentInner","innerText":"Hello World!",$classInputFieldPLUSColorRow,"elementType":"input","elementStyle":"background-color: #383","attributeType":"onkeypress","attributeAction":"detectEnter(event,updateChat(},"}
+	]
+}
+
+var $badPwVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": $classSpacer},
+		{"elementParent": "parentElement","elementClass": $classHalfDesktopFullMobileRnd,"id":"contentOuter"},
+		{"elementParent": "contentOuter","innerText": "Bad Password","elementClass": $classContentRow},
+		{"elementParent": "contentOuter","innerText": "Entropy not guaranteed","elementType": "input","id": "textField","elementClass": $classInputField},
+	],
+	"rows" : [
+		{"elementParent": "contentOuter","firstName":"Get Bad Password","firstOnclick":"writeElement('textField',getBadPW());","secondName":"Copy to Clipboard","secondOnclick":"copyToClipboard('textField');"}
+	]
+}
+
+var $addBotRowVar = {
+	"rows" : [
+		{"elementParent": "parentElement","firstName":"Add Asset","firstOnclick":"cje('coinAreaID','assetLabelID');","secondName":"Del Bot","secondOnclick":"removeElement('coinAreaID');"}
+	]
+}
+
+var $addBotVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent":"parentElement","elementClass":$classInputFieldPLUSRow,"elementStyle":$style.BlackTextWhiteBack,"id":"coinAreaID"},
+		{"elementParent":"coinAreaID","elementClass":$classContentRow,"id":"titleRowID"},
+		{"elementParent":"titleRowID","elementClass":$classHalfWidth,"id":"contentLabelID"},
+		{"elementParent":"titleRowID","elementType":'datalist',"id":"dropdownListName"},
+		{"elementParent":"dropdownListName","innerText":"Coin","elementType":'option'},
+		{"elementParent":"dropdownListName","innerText":"firefox","elementType":'option'},
+		{"elementParent":"titleRowID","innerText":"Coin","elementClass":$classThirdWidthRnd,"elementType":'input',"elementStyle":$style.BlackTextWhiteBack,"attributeType":"list","attributeAction":"dropdownListName","id":"assetLabelID"},
+		{"elementParent":"coinAreaID","id":"spacerName"},
+		{"elementParent":"spacerName","elementType":'br'},
+		{"elementParent":"spacerName","elementType":'br'}
+	]
+}
+
 // Functions
 // Init
 function initPage($initUrl){
-		
 	if ($initUrl.length > 6) {
 	postJSON($initUrl, function(response) {
 		$GilMain = response
 	}); // end loadJSON
-	$apiVersion = $GilMain.apiVersion
-	$GOOGLE_API_KEY = $GilMain.googleApiKey
-	$chatGeneral = $GilMain.chatGeneral
-	$errgoLogic = $GilMain.errgoLogic
-	}; // end if onClick
+	}; // end if initUrl
 };// end initPage
 
 // General
 //createJsonElement - shortened to CJE.
-function cje($parentElement,$jsonVar) {
-	
-	if	($jsonVar) {
-		
-	$jsonVar = JSON.stringify($jsonVar);
-	$jsonVar = $jsonVar.replace(/parentElement/g,$parentElement);
-	$jsonVar = JSON.parse($jsonVar);
-	
-	if	($jsonVar.menu) {
-	try {
-		$jsonVar.menu.forEach(function($element){
-			addMenuItem($element.elementParent,$element.innerText,$element.onclick,$element.elementClass,$element.href);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if jsonVar.menu
-		
-	try {
-	if	($jsonVar.elements) {
-		$jsonVar.elements.forEach(function($element){
-			addElement($element.elementParent,$element.innerText,$element.elementClass,$element.elementType,$element.elementStyle,$element.href,$element.attributeType,$element.attributeAction,$element.id);
-		}); // end foreach jsonVar
-	}; // end if jsonVar.elements
-	} catch(e) { 
-		console.log(e);
-	};
-		
-	if	($jsonVar.rows) {
-	try {
-		$jsonVar.rows.forEach(function($element){
-			addRow($element.elementParent,$element.firstName,$element.firstOnclick,$element.secondName,$element.secondOnclick,$element.thirdName,$element.thirdOnclick,$element.fourthName,$element.fourthOnclick,$element.fifthName,$element.fifthOnclick,$element.sixthName,$element.sixthOnclick);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if rows
-
-	if	($jsonVar.timers) {
-	try {
-		$jsonVar.timers.forEach(function($element){
-	timerInterval = setInterval($element.callback,$element.interval);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if rows
-	}; // end if jsonVar
-}; // end cje
-
 function loadFile(file, callback) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -332,6 +708,8 @@ function writeElement($elementId,$source) {
 	
 	if ($elementType == 'text') {
 		document.getElementById($elementId).value = $source;
+	} else if ($elementType == 'Imageundefined') {
+		document.getElementById($elementId).src = $source;
 	} else {
 		document.getElementById($elementId).innerText = $source;
 	}; // end if divParent
@@ -529,7 +907,6 @@ function hexToRgb(hex) {
 };// end hexToRgb
 
 function updateRgbColor() { 
-	
 	$hex = hexToRgb(document.getElementById($htmlRow).value);
 	document.getElementById($redRow).value = $hex.r
 	document.getElementById($greenRow).value = $hex.g
@@ -549,37 +926,32 @@ function updateRgbDivColor($divId) {
 	$Color2 = Math.round(($Color) * $colorRatio)
 	
 	switch ($divId) {
-		case $redInput: 
+		case "redInput": 
 			document.getElementById($divId).style.backgroundColor = rgbToHex(
 				$Color,$Color2,$Color2
 			); // end document.getElementById
 		break;
-		case $greenInput: 
+		case "greenInput": 
 			document.getElementById($divId).style.backgroundColor = rgbToHex(
 				$Color2,$Color,$Color2
 			); // end document.getElementById
 		break;
-		case $blueInput: 
+		case "blueInput": 
 			document.getElementById($divId).style.backgroundColor = rgbToHex(
 				$Color2,$Color2,$Color
 			); // end document.getElementById
 		break;
 	}; // end switch divColor
 
-    document.getElementById($htmlInput).value = rgbToHex(
-		(document.getElementById($redInput).value * 1), 
-		(document.getElementById($greenInput).value * 1),
-		(document.getElementById($blueInput).value * 1),
+    document.getElementById("htmlInput").value = rgbToHex(
+		(document.getElementById("redInput").value * 1), 
+		(document.getElementById("greenInput").value * 1),
+		(document.getElementById("blueInput").value * 1),
 	);
 	
-	document.getElementById($contentLabel).style.backgroundColor = document.getElementById($htmlInput).value
+	document.getElementById("contentLabel").style.backgroundColor = document.getElementById("htmlInput").value
 
 }; // end updateRedDivColor
-
-// Meme
-function updateMemeForm(memeUrlInput) {
-	bgImage.src = document.getElementById(memeUrlInput).value;
-};
 
 function addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
 	ctx.font="100px Impact";
@@ -590,6 +962,17 @@ function addImpactWithBorder(fromInputBox,pixelsFromLeft,pixelsFromTop) {
 	ctx.fillText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
     ctx.strokeText(document.getElementById(fromInputBox).value,pixelsFromLeft,pixelsFromTop);
 };
+
+function addRgbColorPage($parentElement) {	
+	document.getElementById("htmlInput").setAttribute("onchange","updateRgbColor();");
+	document.getElementById("redInput").setAttribute("onchange","updateRgbDivColor('redInput');");
+	document.getElementById("greenInput").setAttribute("onchange","updateRgbDivColor('greenInput');");
+	document.getElementById("blueInput").setAttribute("onchange","updateRgbDivColor('blueInput');");
+	updateRgbDivColor("redInput");
+	updateRgbDivColor("greenInput");
+	updateRgbDivColor("blueInput");
+}; // end addPage
+
 
 // NFS
 function getNFS($functionType,$spaceChar,$OpenParens,$functionName,$CloseParens,$spaceChar,$OpenCurlBracket,$LineBreak,$functionParams,$SemiColon,$LineBreak,$CloseCurlBracket,$SemiColon,$spaceChar,$EndComment,$spaceChar,$functionType,$spaceChar,$functionName) {
@@ -789,12 +1172,6 @@ function refreshCharts() {
   }catch(e){console.log(e)}; // end try 
 }; // end refreshCharts
 
-// Calculator
-function evalCalc($elementId) {
-	$inputToEval = document.getElementById($elementId).value
-	document.getElementById($elementId).value = eval($inputToEval)
-}
-
 // Html
 function parseHtml($inputId,$outputId) {
 	var $inputToEval = document.getElementById($inputId).innerHTML;
@@ -802,9 +1179,59 @@ function parseHtml($inputId,$outputId) {
 	writeElement($outputId,$jsonOutput);
 }; // end parseHtml
 
+// Canvas
+function buildCanvas($canvasId) {
+	canvas = document.getElementById($canvasId);
+	ctx = canvas.getContext("2d");
+
+	var $halfWidth = canvas.width/2;
+	var $halfHeight = canvas.height/2;	
+	canvas.height = (window.innerHeight * 0.75);
+	canvas.width = (window.innerWidth * 0.75);
+	// load background
+	bgImage = new Image();
+	bgReady = false;
+	bgImage.onload = function () {
+		var ImageRatio = bgImage.width / bgImage.height;
+		canvas.width = canvas.height * ImageRatio;
+		ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
+		0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
+	};
+}; // end buildCanvas
+	
+// DSQ
+function buildDsqPage($canvasId) {
+	buildCanvas($canvasId);
+	$stage = new createjs.Stage($canvasId);
+	
+	addShape(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, "#f33",'square');
+	addShape(canvas.width/2, canvas.height/2 + 100, SIZE * 2, 5, "#3f3",'square');
+	addShape(canvas.width/2, canvas.height/2, SIZE * 2, 5, "#33f",'square');
+	
+	$stage.update();
+}; // end buildDsqPage
+		
+// Meme
+function buildMemePage($canvasId,$topTextInputId,$bottomTextInputId,$urlInputId,$bgImageId) {
+	buildCanvas($canvasId);
+	addImpactWithBorder($topTextInputId,10,100);
+	addImpactWithBorder($bottomTextInputId,10,(ctx.canvas.height - 20));
+	updateMemeForm($urlInputId,$bgImageId);
+}; // end buildMemePage
+
+function updateMemeForm($urlInputId,$bgImageId) {
+	document.getElementById($bgImageId).src = document.getElementById($urlInputId).value;
+}; // end updateMemeForm
+
+// Calculator
+function evalCalc($elementId) {
+	var $inputToEval = document.getElementById($elementId).value
+	document.getElementById($elementId).value = eval($inputToEval)
+}
+
 // DiffeRentIal
 function initMap() {
-	$GOOGLE_API_KEY = $GilMain.googleApiKey
+	$GilMain.googleApiKey = $GilMain.googleApiKey
 	var uluru = {lat: 47, lng: -122};
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
@@ -939,7 +1366,7 @@ function buildRow($rowName,$nameItem,$onclickItem) {
 	var $elementId
 	if ($nameItem) {
 		if ($onclickItem) {
-			$elementId = addElement($rowName,$nameItem,$btnPrimary,"button","","","onclick",$onclickItem);
+			$elementId = addElement($rowName,$nameItem,$btn.primary,"button","","","onclick",$onclickItem);
 		} else {
 			$elementId = addElement($rowName,$nameItem,$classNarrowContent);
 		}; // end if firstButtonName
@@ -947,649 +1374,108 @@ function buildRow($rowName,$nameItem,$onclickItem) {
 	return $elementId
 }; // end addRow
 
-// Page features
-function addHeader($parentElement,$headerTitle) {
-	addElement($parentElement,$headerTitle,"","title");
-	addElement($parentElement,"","","script","","/js/jquery.min.js");
-	addElement($parentElement,"","","link","","/stylesheets/bootstrap.min.css");
-	addElement($parentElement,"","","link","","/stylesheets/normalize.css");
-	addElement($parentElement,"","","link","","/stylesheets/Gilgamech.css");
-	
-}; // end addHeader
-
-function addNav($parentElement,$headerTitle) {
-	var $loadPageClose = "loadPage('" + $headerTitle;
-	function loadPageOpen($pageName) {return $loadPageClose + "','" + $pageName + "');" }; // end loadPageOpen
-	
-	var $titleParent = addElement($parentElement,"",$classContainer);
-	addElement($titleParent,$headerTitle,$classImgRnd + $classTop + $classSmallHidden,"a","font-size: 7ex; color: #000; text-decoration: none","/");
-	addElement($titleParent,$headerTitle,$classImgRnd + $classTop + $classLargeHidden,"a","font-size: 4ex; color: #000; text-decoration: none","/");
-	
-	var $navBar = addElement($parentElement,"","navbar navbar-static-top navbar-inverse");
-	var $NavDDOuter = addElement($navBar,"",$classContainer);
-	
-	var $nav2 = addElement($NavDDOuter,"",$classNavBar + " col-md-6 col-xs-6","ul");
-	//addMenuItem($nav2,'Fruitbot!',loadPageOpen('fruitbot'),$classSmallHidden);
-	addMenuItem($nav2,'Bad Password',loadPageOpen('badpw'),$classSmallHidden);
-	addMenuItem($nav2,'Chat!',loadPageOpen('chat'),$classSmallHidden);	
-	
-	var $nav2dd = addElement($nav2,"",$classDropdown);
-	addElement($nav2dd,"Menu","","p");
-	var $nav2ddc = addElement($nav2dd,"",$classDropdownContent);
-	
-	//addMenuItem($nav2ddc,'Fruitbot!',loadPageOpen('fruitbot'),$classLargeHidden);
-	addMenuItem($nav2ddc,'Bad Password',loadPageOpen('badpw'),$classLargeHidden);
-	addMenuItem($nav2ddc,'Chat!',loadPageOpen('chat'),$classLargeHidden);
-	
-	addMenuItem($nav2ddc,'DiffeRentIal',loadPageOpen('rentalmap'));
-	addMenuItem($nav2ddc,'Calculator',loadPageOpen('calc'));
-	addMenuItem($nav2ddc,'addElement Explained',loadPageOpen('addElement'));
-	addMenuItem($nav2ddc,'Minimalism',loadPageOpen('minimalism'));
-	addMenuItem($nav2ddc,'RGB Calculator',loadPageOpen('rgb'));
-	addMenuItem($nav2ddc,'Draggable Squares',loadPageOpen('dsq'));
-	addMenuItem($nav2ddc,'Coins',loadPageOpen('coin'));
-	addMenuItem($nav2ddc,'JSON Lint',loadPageOpen('jsonlint'));
-	addMenuItem($nav2ddc,'Git',loadPageOpen('git'));
-	addMenuItem($nav2ddc,'Meme Maker',loadPageOpen('meme'));
-	//addMenuItem($nav2ddc,'Arkdata Dynamap',loadPageOpen('demo'));
-	addMenuItem($nav2ddc,'Arkdata',loadPageOpen('Arkdata'));
-	addMenuItem($nav2ddc,'Sandbox',loadPageOpen('sandbox'));
-	addMenuItem($nav2ddc,'Admin',"cje('bodyWrapper',$adminPageVar);");
-	addMenuItem($nav2ddc,'Login!',loadPageOpen('login'),$classLargeHidden);
-
-	var $nav3 = addElement($NavDDOuter,"",$classNavBar + $classHalfWidth + $nbr,"ul");
-	addMenuItem($nav3,'Login!',loadPageOpen('login'),$classSmallHidden + $nbr);
-	
-	$nav3dd = addElement($nav3,"",$classDropdown);
-	addElement($nav3dd,"How did I make this page?","","p");
-	$NavDDWrapper = addElement($nav3dd,"",$classDropdownContent);
-
-}; // end addPage
-
-function addFooter($parentElement) {
-	$apiVersion = $GilMain.apiVersion
-	
-	addElement($parentElement,"","container-fluid");
-	var $spacerName = addElement($parentElement);
-	addElement($spacerName,"","",'br');
-	addElement($spacerName,"","",'br');
-	
-	$errDiv = addElement($bodyWrapper,"",$classRow + $classInputField);
-	var $footerStatic = addElement($footWrapper,"","navbar-static-bottom","","left: 0;bottom: 0;width: 100%;overflow: hidden;");
-	var $footerBanner = addElement($footerStatic,"","","p","width: 100%;text-align: center;");
-	var $footerLink = addElement($footerBanner,"","","a","https://www.duckduckgo.com");
-	addElement($footerLink,"C1ick h34r ph0r m04r inph0",$classImgRnd,"img","height: 150px","/images/BannerImage.gif");
-	addElement($footerStatic,'Gil-API version: ' + $apiVersion + " - Gilgamech.js version:" + $pageVersion,"","","font-weight:bold;text-align:center;");
-	addElement($footerStatic,"(c) 2013-2018 Gilgamech Technologies - We are the gears that make our world go around.","","p","font-weight:bold;text-align:center;");
-	
-}; // end addFooter
-
 // Page parts
-function addBlogPage($parentElement,$Title,$Header,$bodyText) {
-	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
-	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
-	addElement($contentOuter,$Title,$classContentRow);
-	
-	var $contentInner = addElement($contentOuter);
-	addElement($contentInner,$Header,$classInputField,"p",$styleBlackText);
-	addElement($contentInner,$bodyText,"","p",$styleBlackText);
-	
-}; // end addBlogPage
+function abp($parentElement,$blogVar) {
+var $blogPageVar = {
+	"version" : "21JAN2018",
+	"elements" : [
+		{"elementParent": "parentElement","elementClass": $classSpacer},
+		{"elementParent": "parentElement","elementClass": $classHalfDesktopFullMobileRnd,"id":"contentOuter"},
+		{"elementParent": "contentOuter","elementClass": $classContentRow,"innerText":$blogVar.titleText},
+		{"elementParent": "contentOuter","id":"contentInner"},
+		{"elementParent": "contentInner","elementClass": $classInputField,"elementType": "p","innerText":$blogVar.headerText,"elementStyle":$style.BlackText},
+		{"elementParent": "contentInner","elementClass": "bp","elementType": "p","innerText":$blogVar.bodyText,"elementStyle":$style.BlackText}
+	]
+}
+rbp("bodyWrapper",$blogPageVar)
+}; // end abp
 
-function addJsonLintPage($parentElement) {
-	var $nestArea = getBadPW();
-	var $contentOuter = getBadPW();
-	var $nestArea = getBadPW();
-	var $output = getBadPW();
-	var $jsonLintVar = {
-		"menu" : [
-			{"elementParent": $NavDDWrapper,"innerText": "prettify json data in textarea input","href":"https://stackoverflow.com/questions/26320525/prettify-json-data-in-textarea-input#26324037"},
-			{"elementParent": $NavDDWrapper,"innerText": "copy textarea to clipboard","href": "https://stackoverflow.com/questions/7218061/javascript-copy-text-to-clipboard#7218068"}
-		],
-		"elements" : [
-			{"elementParent": $parentElement,"elementClass": $classSpacer, "id": $contentOuter},
-			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd},
-			{"elementParent": $parentElement,"elementClass": $classHalfDesktopFullMobileRnd,"id":$nestArea},
-			{"elementParent": $nestArea},
-			{"elementParent": $nestArea, "innerText": "JSONLint","elementClass": $classContentRow},
-			{"elementParent": $nestArea, "innerText": '{"innerText":"JSON goes here"}',"elementClass": "div_textarea" + $classInputField,"elementType": "textarea","id":$output}
-		],
-		"rows" : [
-			{"elementParent": $nestArea,"firstName": "Pretty Print","firstOnclick": "prettyPrint('" + $output + "')","secondName": "Copy to Clipboard","secondOnclick": "copyToClipboard('" + $output + "')"}
-		]
-	}
-	
-	cje($jsonLintVar);
-		
-}; // end addPage
-
-function addCalcPage($parentElement) {
-	
-	var $nestArea = getBadPW();
-	var $contentOuter = getBadPW();
-	var $nestArea = getBadPW();
-	var $outputRow = getBadPW();
-	var $output = getBadPW();
-	var $jsonLintVar = {
-		"menu" : [
-			{"elementParent": $NavDDWrapper,"innerText": "Cut and paste Javascript calculator","href":"http://javascriptkit.com/script/cut18.shtml"}
-		],
-		"elements" : [
-			{"elementParent": $parentElement,"elementClass": $classSpacer, "id":$contentOuter},
-			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd},
-			{"elementParent": $contentOuter,"elementClass": $classHalfDesktopFullMobileRnd, "id":$nestArea},
-			{"elementParent": $nestArea,"innerText": "Calculator","elementClass": $classContentRow},
-			{"elementParent": $nestArea,"elementClass": $classInputField},
-			{"elementParent": $nestArea,"elementClass": $classInputFieldPLUSColorRow,"id":$outputRow},
-			{"elementParent": $outputRow,"elementClass": "div_textarea" + $classInputField,"elementType": "input","id":$output}
-		],
-		"rows" : [
-			{"elementParent": $nestArea,"firstName":"1","firstOnclick":"appendElement(1,'" + $output + "')","secondName":"2","secondOnclick":"appendElement(2,'" + $output + "')","thirdName":"3","thirdOnclick":"appendElement(3,'" + $output + "')","fourthName":"/","fourthOnclick":"appendElement('/','" + $output + "')"},	
-			{"elementParent": $nestArea,"firstName":"4","firstOnclick":"appendElement(4,'" + $output + "')","secondName":"5","secondOnclick":"appendElement(5,'" + $output + "')","thirdName":"6","thirdOnclick":"appendElement(6,'" + $output + "')","fourthName":"*","fourthOnclick":"appendElement('*','" + $output + "')"},
-			{"elementParent": $nestArea,"firstName":"7","firstOnclick":"appendElement(7,'" + $output + "')","secondName":"8","secondOnclick":"appendElement(8,'" + $output + "')","thirdName":"9","thirdOnclick":"appendElement(9,'" + $output + "')","fourthName":"-","fourthOnclick":"appendElement('-','" + $output + "')"},
-			{"elementParent": $nestArea,"firstName":"=","firstOnclick":"evalCalc('" + $output + "')","secondName":"0","secondOnclick":"appendElement(0,'" + $output + "')","thirdName":".","thirdOnclick":"appendElement('.','" + $output + "')","fourthName":"+","fourthOnclick":"appendElement('+','" + $output + "')"}
-		]
-	}
-	
-	// var $output = addElement($outputRow,"",$classInputFieldPLUSColorRow,"input",$styleBlackTextWhiteBack,"","onkeypress","detectEnter(event,evalCalc('output'))");
-	cje($jsonLintVar);
-	
-	
-}; // end addCalcPage
-
-function addChatPage($parentElement) {
-	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
-	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
-
-	addElement($contentOuter,"Room:",$classContentRow);
-	
-	var $chatWrapper = addElement($contentOuter,"",$classColorRow2x);
-	var $chatRoom = addElement($chatWrapper,"General",$classInputFieldPLUSColorRow,"input",$styleBlackText);
-	
-	var $nestArea = addElement($contentOuter,"",$classColorRow2x);
-	$chatBox = addElement($nestArea,"Chat loading...",$classInputFieldPLUSColorRow,"textarea",$styleBlackText);
-	
-	var $nameRow = addElement($contentOuter,"",$classColorRow2x);
-	addElement($nameRow,"",$classInputFieldPLUSColorRow,"input","background-color: #338","","placeholder","User Name");
-	
-	var $chatMessage = addElement(addElement($contentOuter,"",$classColorRow2x),"Hello World!",$classInputFieldPLUSColorRow,"input","background-color: #383","","onkeypress","detectEnter(event,updateChat());");
-	
-	refreshChat(document.getElementById($chatRoom).value)
-	
-	timerInterval = setInterval(function () {
-		refreshChat(document.getElementById($chatRoom).value)
-	}, 5000);
-}; // end addPage
-
-function addDragSqPage($parentElement) {
-	addElement($parentElement,"","","script","","/js/easeljs-0.8.2.min.js")
-
-	addMenuItem($NavDDWrapper,'Making draggable shapes with CreateJS',"","","https://superdevresources.com/draggable-shapes-canvas-createjs/");
-	addMenuItem($NavDDWrapper,'CreateJS website',"","","https://www.createjs.com/");
-	addMenuItem($NavDDWrapper,'Codepen demo',"","","https://codepen.io/anon/pen/rpMmvr");
-	
-	var $divForButtons = addElement($parentElement);
-	addElement($divForButtons,"Add Square","btn","button","","","onclick","addShape(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, 'yellow','square');")
-	addElement($divForButtons,"Add Circle","btn","button","","","onclick","addShape(canvas.width/2 + (SIZE * 2.5),canvas.height/2,0,SIZE * 2, 'red','circle');")
-	addElement($divForButtons,"Add Star","btn","button","","","onclick","addShape(canvas.width/2 + (SIZE * 2.5),canvas.height/2,0,SIZE * 2, 'blue','star');")
-	addElement($divForButtons,"Page has bug - it does not work the first time. Please click the link again.");
-	
-	var $canvas = addElement($parentElement,"",$classImgRnd,"canvas","display: block;margin: 0px auto;border: 1px solid black;");
-	canvas = document.getElementById($canvas);
-	var $halfWidth = canvas.width/2;
-	var $halfHeight = canvas.height/2;
-	
-	canvas.width = (window.innerWidth * 0.75);
-	canvas.height = (window.innerHeight * 0.75);
-
-	$stage = new createjs.Stage($canvas);
-
-	addShape(canvas.width/2 + (SIZE * 2.5), canvas.height/2, SIZE * 2, 5, "#f33",'square');
-	addShape(canvas.width/2, canvas.height/2 + 100, SIZE * 2, 5, "#3f3",'square');
-	addShape(canvas.width/2, canvas.height/2, SIZE * 2, 5, "#33f",'square');
-	
-	$stage.update();
-}; // end addPage
-
-function addFormPage($formPost,$elementParent) {
+function afp($formPost,$elementParent) {
 // 
 	var $wrapper = addElement($elementParent,$formPost,$classContentRow,"","","method","post");	
 	addElement($wrapper,"",$classInputField,"input","","","placeholder","Email","emailInput");
 	addElement($wrapper,"",$classInputField,"input","","","placeholder","Password","passwordInput");
 
 	var $btnRow = addElement($wrapper,"",$classRow + $classInputField);
-	addElement($btnRow,"Submit",$btnSuccess,"button");
+	addElement($btnRow,"Submit",$btn.success,"button");
 		
 }; // end addPage
 
-function addMemePage($parentElement) {
-	addMenuItem($NavDDWrapper,'How to add a border on html5 canvas text?',"","","https://stackoverflow.com/questions/1421082/how-to-add-a-border-on-html5-canvas-text#1421598");
-	
-	addElement($parentElement,"MemeGen",$classContentRow);
-	var $canvas = addElement($parentElement,"",$classImgRnd,"canvas","display: block;margin: 0px auto;border: 1px solid black;");
-	var $urlInput = addElement($parentElement,"https://technabob.com/blog/wp-content/uploads/2014/08/picard1.jpg",$classInputField,"input");
-	var $topTextInput = addElement($parentElement,"Top Text",$classInputField,"input");
-	var $bottomTextInput = addElement($parentElement,"Bottom Text",$classInputField,"input");
-	addRow($parentElement,'Create Meme!',"updateMemeForm('" + $urlInput + "')");
-	
-	canvas = document.getElementById($canvas);
-	ctx = canvas.getContext("2d");
-
-	canvas.height = (window.innerHeight * 0.75);
-	canvas.width = (window.innerWidth * 0.75);
-	// canvas.height = bgImage.height;
-	// canvas.width = bgImage.width;
-
-	// load background
-	bgImage = new Image();
-	bgReady = false;
-	bgImage.onload = function () {
-		var ImageRatio = bgImage.width / bgImage.height;
-		canvas.width = canvas.height * ImageRatio;
-		ctx.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height, // source rectangle
-		0, 0, canvas.width, (canvas.width * ImageRatio)); // destination rectangle
-		
-		addImpactWithBorder($topTextInput,10,100);
-		addImpactWithBorder($bottomTextInput,10,(ctx.canvas.height - 20));
-	};
-	updateMemeForm($urlInput);
-
-}; // end addPage
-
-function addBadPWPage($parentElement) {
-	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
-	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
-	
-	addElement($contentOuter,"Bad Password",$classContentRow);
-	var $textField = addElement($contentOuter,'Entropy not guaranteed.',$classInputField,"input");	
-	addRow($contentOuter,'Get Bad Password',"writeElement('" + $textField + "',getBadPW());",'Copy to Clipboard',"copyToClipboard('" + $textField + "')");
-	
-}; // end addPage
-
-function addRgbColorPage($parentElement) {	
-	addMenuItem($NavDDWrapper,'Search Convert to Hex',"https://duckduckgo.com/?q=javascript+convert+to+he&atb=v49-6&ia=qa");
-	addMenuItem($NavDDWrapper,'RGB to HEX and HEX to RGB',"https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb#5624139");
-	addMenuItem($NavDDWrapper,'Change Div color on keypress',"https://stackoverflow.com/questions/42521420/change-div-bgcolor-onkeypress");
-	addMenuItem($NavDDWrapper,'Prop style background color',"https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp");
-	addMenuItem($NavDDWrapper,'RGB coder',"https://www.easycalculation.com/colorconverter/rgb-coder.php");
-
-	var $spacer = addElement($parentElement,"",$classSpacer);
-	var $content = addElement($parentElement,"",$classHalfDesktopFullMobileRnd);
-	var $coinArea = addElement($content);
-	$contentLabel = addElement($coinArea,"RGB Calculator",$classContentRow);
-		
-	$htmlInput = addElement(addElement($coinArea,"",$classColorRow2x),"",$classInputFieldPLUSColorRow,"input",$styleBlackTextWhiteBack,"maxlength","7");
-	document.getElementById($htmlInput).setAttribute("onchange","updateRgbColor();");
-	
-	$redInput = addElement(addElement($coinArea,"",$classColorRow2x),171,$classInputFieldPLUSColorRow,"input","","type","number");
-	document.getElementById($redInput).setAttribute("onchange","updateRgbDivColor('" + $redInput + "');");
-	
-	$greenInput = addElement(addElement($coinArea,"",$classColorRow2x),205,$classInputFieldPLUSColorRow,"input","","type","number");
-	document.getElementById($greenInput).setAttribute("onchange","updateRgbDivColor('" + $greenInput + "');");
-	
-	$blueInput = addElement(addElement($coinArea,"",$classColorRow2x),239,$classInputFieldPLUSColorRow,"input","","type","number");
-	document.getElementById($blueInput).setAttribute("onchange","updateRgbDivColor('" + $blueInput + "');");
-	
-	updateRgbDivColor($redInput);
-	updateRgbDivColor($greenInput);
-	updateRgbDivColor($blueInput);
-}; // end addPage
-
-function addArkdataPage($parentElement) {
-	var $metaRefresh = addElement($headWrapper,"","","meta","","","http-equiv","refresh");
-	document.getElementById($metaRefresh).setAttribute("content","60");
-	
-	var $wrapper = addElement($parentElement,"",$classContainer + $classImgRnd);
-	var $spacer = addElement($wrapper,"",$classSpacer);
-	var $content = addElement($wrapper,"",$classHalfDesktopFullMobileRnd);
-	var $coinArea = addElement($content);
-	var $contentLabel1 = addElement($coinArea,"Welcome to ARKData",$classContentRow);
-	var $contentLabel2 = addElement($coinArea,"Gil's player and tribe tracker",$classImgRnd + $classRow + $classContentTitle);
-	var $contentLabel3 = addElement($coinArea,"Players currently being tracked:",$classImgRnd + $classRow + $classContentTitle);
-	
-	addRow($coinArea,"PlayerName","","ServerName","","Firstseen","","Timeseen");
-	addRow($coinArea,"dopey.tim","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 13:25:45","","10/24/2017 22:46:34");
-	addRow($coinArea,"MFrider88","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 21:41:57","","10/23/2017 23:02:46");
-	addRow($coinArea,"MacNCheese3","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","9/1/2017 14:42:06","","10/24/2017 15:21:50");
-	addRow($coinArea,"GenMaxiu","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","6/10/2017 10:09:07","","10/24/2017 0:10:12");
-	addRow($coinArea,"FMFrider88","","Asgard Awakens-Ragnarok (Cluster-x5,XP&amp;H,x10T) - (v272.3)","","10/23/2017 21:23:43","","10/23/2017 23:39:49");
-
-
-}; // end addArkdataPage
-
-function addAddElementPage($parentElement) {
-	var $Title = "addElement explained";
-	var $Header = "addElement($elementParent,$innerText,$elementClass,$elementType,$elementStyle,$href,$attributeType,$attributeAction,$elementId);"
-	var $bodyText = "This can  be complex to look at, but will make sense as we work through it. You'll almost never use all of these parameters at the same time, but even being able to use a few of them will give you a powerful tool.\n\n"
-	$bodyText +=  "$divID - The only mandatory one is the first one.\n\n"
-	
-	$bodyText +=  "$divClass- Specify CSS classes here.\n\n"
-	$bodyText +=  "$divParent- Nest under parent div. Specify just 'head' or 'body' to attach directly to the document.\n\n"
-	$bodyText +=  "$innerText- This will be the innerText if it's a Div, or if it's an IMG this will be the title, or if it's Input this will be the Value.\n\n"
-	$bodyText +=  "$elementType- Specify element type. Default is Div, but can be anything from an A to Canvas to Link.\n\n"
-	$bodyText +=  "$href- Specify HRef link if A type, HRef link and CSS type for Link type, or Source if IMG or Script type.\n\n"
-	$bodyText +=  "$attributeType- Set a custom attribute, like 'onclick' or 'placeholder' or 'contenteditable'.\n\n"
-	$bodyText +=  "$attributeAction- Set the value for the above attribute type. Leave blank for attributes with no value, such as 'contenteditable'.\n\n"
-	$bodyText +=  "\n\n"
-	$bodyText +=  "Other key parts of this framework are removeElement, wrapperHead, wrapperBody, and wrapperFoot. These divs are unloaded and rebuilt on each page change.\n\n"
-	$bodyText +=  "\n\n"
-	$bodyText +=  "Call other Javascript scripts, CSS files, and other Head-based items in wrapperHead.\n\n"
-	$bodyText +=  "Nest all of your page within wrapperBody.\n\n"
-	$bodyText +=  "Add any extra footer elements to wrapperFoot.\n\n"
-	$bodyText +=  "\n\n"
-	
-	addBlogPage($parentElement,$Title,$Header,$bodyText)
-}; // end addPage
-	
-function addMinimalismPage($parentElement) {
-	var $Title = "Minimalism";
-	var $Header = "1 year rule."
-	var $bodyText = "If I don't use something once every 12 months (or so, I'm not exact), I get rid of it. Having so many objects cluttering the room is reminiscent of Victorian Era homes, which were cluttered with tables and chairs and curiosities. Stanley Kubrick in the 1970s flirted with the agoraphobia of large, empty living spaces - but so long as the space isn't completely empty, square footage is a luxury. \n\n"
-	
-	addBlogPage($parentElement,$Title,$Header,$bodyText)
-}; // end addPage
-
-function addElementSandboxPage($parentElement) {
-	
-	addElement($parentElement,"",$classSpacer); //spacer to manually center div.
-	var $contentOuter = addElement(addElement($parentElement,"",$classHalfDesktopFullMobileRnd));
-	addElement($contentOuter,"",$classContentRow);
-	
-	var $contentInner = addElement($contentOuter);
-	var $contentUpper = addElement($contentInner,"",$classContainer);
-	var $contentUpperLeft = addElement($contentUpper,"",$classHalfWidth);
-	
-	var $contentUpperRight = addElement($contentUpper,"",$classHalfWidth);
-	
-	var $contentLower = addElement($contentInner,"",$classContainer);
-	var $contentLowerLeft = addElement($contentLower,"",$classHalfWidth);
-	
-	var $contentLowerRight = addElement($contentLower,"",$classHalfWidth);
-	
-	addRow($contentInner,"JsonLint","addJsonLintPage('" + $contentUpperLeft + "')","RGB","addRgbColorPage('" + $contentUpperRight + "')","Calc","addCalcPage('" + $contentLowerLeft + "')","BadPW","addBadPWPage('" + $contentLowerRight + "')","Meme","addMemePage('" + $contentLowerRight + "')");
-	
-}; // end addPage
-
-function addRentalMapPage($parentElement) {
-	addElement($headWrapper,"","","script","","https://maps.googleapis.com/maps/api/js?key="+ $GOOGLE_API_KEY + "&callback=initMap");
-	addMenuItem($NavDDWrapper,"Adding Google Maps to your website","","","https://developers.google.com/maps/documentation/javascript/adding-a-google-map#key");
-	
-	var $wrapper = addElement($parentElement,"",$classContainer + $classImgRnd);
-	addElement($wrapper,"DiffeRENTial",$classContentRow);
-	addElement($wrapper,"","","","width: 100vh;height: 75vh","","id","map");
-
-}; // end addRentalMapPage
-
-function addBot($parentElement) {
-	var $coinAreaID = addElement($parentElement,"",$classInputFieldPLUSRow,"",$styleBlackTextWhiteBack);
-	var $titleRowID = addElement($coinAreaID,"",$classContentRow);
-	var $contentLabelID = addElement($titleRowID,"",$classHalfWidth);
-	$assetCounter++
-	
-	var $dropdownListName = addElement($titleRowID,"","",'datalist');
-	addElement($dropdownListName,"Asset" + $assetCounter,"",'option');
-	addElement($dropdownListName,"firefox","",'option');
-	var $assetLabelID = addElement($titleRowID,"Asset" + $assetCounter,$classThirdWidthRnd,'input',$styleBlackTextWhiteBack,"","list",$dropdownListName);
-
-	// <input type=text list=browsers ><datalist id=browsers >   <option> Google   <option> IE9</datalist>
-	// <input type="text" name="myText" value="Norway" selectBoxOptions="Canada;Denmark;Finland;Germany;Mexico;Norway;Sweden;United Kingdom;United States"> 
-
-
-	var $addRow = {
-		"rows" : [
-			{"elementParent": $titleRowID,"firstName":"Add Asset","firstOnclick":"addBotRow('" + $assetLabelID + "','" + $coinAreaID + "');","secondName":"Del Bot","secondOnclick":"removeElement('" + $coinAreaID + "');"}
-		]
-	}
-	cje($addRow);
-	
-	var $spacerName = addElement($coinAreaID);
-	addElement($spacerName,"","",'br');
-	addElement($spacerName,"","",'br');
-
-	$assetName = readElement($assetLabelID);
-}; // end addBot
-
-function addBotRow($assetLabelID,$parentElement) {
-	// = addElement($parentElement,"innerText",$classNarrowContent,"elementType","elementStyle","href","attributeType","attributeAction","elementId");
-	// addRow($parentElement,"firstName","firstOnclick","secondName","secondOnclick","thirdName","thirdOnclick","fourthName","fourthOnclick","fifthName","fifthOnclick","sixthName","sixthOnclick")
-	var $addRow = {
-		"rows" : [
-			{"elementParent": $parentElement,"firstName":readElement($assetLabelID),"secondName":"0","thirdName":"Buy","thirdOnclick":"thirdOnclick","fourthName":"Sell","fourthOnclick":"fourthOnclick","fifthName":"0","sixthName":"Del","sixthOnclick":"removeElement('" + $parentElement + "');"}
-		]
-	}
-	cje($addRow);
-	$assetCounter++;
-
-	writeElement($assetLabelID,$assetName + $assetCounter);
-}; // end addBotRow
-
-// Add applications
-function addFruitBotPage($parentElement) {
-	addElement($headWrapper,"","","script","/assets/js/seedrandom.js");
-	addElement($headWrapper,"","","script","/assets/js/board.js");
-	addElement($headWrapper,"","","script","/assets/js/grid.js");
-	addElement($headWrapper,"","","script","/mybot.js");
-	addElement($headWrapper,"","","script","/assets/js/simplebot.js");
-	addElement($headWrapper,"","","script","/assets/js/player.js");
-	addElement($headWrapper,"","","script","/js/jquery.min.js");
-	
-	var $contentLabels = addElement($parentElement,"",$classImgRnd + $classRow,"",$styleWhiteTextBlackBack);
-	
-	var $content = addElement($parentElement,"Fruitbot",$classContentRow);
-	
-	var $grid = addElement($parentElement,"",$classContentRow,"canvas","","display: block;margin: 0px auto;border: 1px solid black;");
-	var $game_view = addElement($parentElement,"",$classContentRow,"canvas","","display: block;margin: 0px auto;border: 1px solid black;");
-	
-	addRow($parentElement,"new","","reset","","pause","","play","","forward");
-
-	var $myBoardRow = addElement($parentElement,"",$classRow + $classInputField);
-	var $contentLabel2 = addElement($myBoardRow,"Board number",$classImgRnd + $classRow + $classContentTitle);
-	var $BottomTextInput = addElement($myBoardRow,"0",$classInputField,"input","","","type","number");
-	addRow($parentElement,"","","","","Set");
-	
-	var $myScoreRow = addElement($parentElement,"","","",$classRow + $classImgRnd + "col-md-4 col-xs-6");
-	addRow($myScoreRow,"Wins","","0");
-	addRow($myScoreRow,"Losses","","0");
-	addRow($myScoreRow,"Ties","","0");
-		
-}; // end addPage
-
-function addGitPage($parentElement) {
-	var $wrapperGit = addElement($parentElement,"",$classContainer + $classImgRnd);
-	addElement($wrapperGit,"repo URL",$classContentRow);
-	var $myTextAreaGit = addElement($wrapperGit,"https:raw.githubusercontent.com/Gilgamech/GilAPI/master/public/js","div_textarea" + $classInputField,"input");
-	var $myRowGit = addElement($wrapperGit,"",$classRow + $classInputField);
-	
-	var $wrapper = addElement($parentElement,"",$classContainer + $classImgRnd);
-	var $pageName = addElement($wrapper,"Gilgamech.js",$classContentRow,"","","","contenteditable","true");
-	var $myTextArea = addElement($wrapper,"Code goes here.","div_textarea" + $classImgRnd + $classInputField,"textarea",$styleWhiteBack + "height: 50vh;","href","contenteditable","true");
-	
-	var $myRow = addElement($wrapper,"",$classRow + $classInputField);
-
-	addRow($myRowGit,"Copy to Clipboard","copyToClipboard('" + $myTextAreaGit + "');","Load from Github","updateNewPageForm('" + $pageName + "','" + $myTextAreaGit + "','" + $myTextArea + "');","Add New Page","updateNewPageBoilerplate();");
-	
-	addRow($myRow,"Pretty Print","prettyPrint('" + $myTextArea + "');","Colorify!","colorifyDivTextArea('" + $myTextArea + "');","Copy to Clipboard","copyToClipboard('" + $myTextArea + "');");
-	
-};  //end addPage
-
-function addCoinPage($parentElement) {
-	addMenuItem($NavDDWrapper,'How do you implement a fixed left sidebar and fluid right content in CSS',"","","https://stackoverflow.com/questions/3393025/how-do-you-implement-a-fixed-left-sidebar-and-fluid-right-content-in-css#3393037");
-	addMenuItem($NavDDWrapper,'updateMePlease',"","","https://www.w3schools.com/Bootstrap/bootstrap_forms_inputs.asp");	
-	addMenuItem($NavDDWrapper,'Bootstrap',"","","https://getbootstrap.com/docs/3.3/css/");
-	addMenuItem($NavDDWrapper,'Bootstrap Buttons',"","","https://v4-alpha.getbootstrap.com/components/buttons/");
-	addMenuItem($NavDDWrapper,'Bootstrap Navbar',"","","https://www.w3schools.com/bootstrap/bootstrap_navbar.asp");
-	addMenuItem($NavDDWrapper,'Bootstrap Number Validation',"","","https://stackoverflow.com/questions/16517718/bootstrap-number-validation");
-	addMenuItem($NavDDWrapper,'Bootstrap rounded corners',"","","https://stackoverflow.com/questions/12084121/correct-way-to-create-rounded-corners-in-twitter-bootstrap");
-	addMenuItem($NavDDWrapper,'Number Input Type',"","","https://stackoverflow.com/questions/3368546/what-input-field-type-forces-the-number-pad-mobile-keyboard-to-come-up-when-focu");
-	addMenuItem($NavDDWrapper,'Radio Input Type',"","","https://html.com/input-type-radio/");
-	addMenuItem($NavDDWrapper,'Bootstrap Grid',"","","http://kimbryant.net/on-bootstraps-grid-using-display-inline-block-instead-of-floats/");
-	addMenuItem($NavDDWrapper,'Document Onload not cooperating',"","","https://bytes.com/topic/javascript/answers/441839-document-onload-getelementbyid-dont-cooperate");
-	addMenuItem($NavDDWrapper,'Set radio button status with Javascript',"","","https://stackoverflow.com/questions/9476617/how-to-set-radio-button-status-with-javascript");
-	addMenuItem($NavDDWrapper,'Change onclick action with Javascript',"","","https://stackoverflow.com/questions/5303899/change-onclick-action-with-a-javascript-function");
-	addMenuItem($NavDDWrapper,'Dynamically adding or removing a Div',"","","https://stackoverflow.com/questions/4967289/dynamically-adding-removing-a-div-to-html");
-	addMenuItem($NavDDWrapper,'Dropdown menus',"","","https://stackoverflow.com/questions/18030132/html-css-dropdown-menu-overflow");
-	addMenuItem($NavDDWrapper,'Search for "appendChild.body"',"","","https://duckduckgo.com/?q=document+appendchild+body&atb=v49-6&ia=qa");
-	addMenuItem($NavDDWrapper,'HTML5 Combobox',"","","http://www.scriptol.com/html5/combobox.php");
-	addMenuItem($NavDDWrapper,'Form widget editable select',"","","http://www.dhtmlgoodies.com/scripts/form_widget_editable_select/form_widget_editable_select.html");
-	
-	var $generic = addElement($parentElement,"",$classRow);
-	var $sidebar = addElement($parentElement,"","sidebar col-md-2 hidden-sm hidden-xs" + $classImgRnd + $classContentTitle,"","border:1px solid #333;");
-	var $consoleLogLabel = addElement($sidebar,"Coinsole Log");
-	var $coinMainBox = addElement($sidebar,"Data Loading...",$classImgRnd,"","background-color:#fff;height:75vh;font-size: small;overflow-x: hidden;overflow-y:auto;");
-	var $spacer = addElement($parentElement);
-	
-	var $content = addElement($parentElement,"",$classImgRnd + " col-md-10 col-xs-10");
-
-	var $cointentArea = addElement($content,"",$classInputFieldPLUSRow,"",$styleBlackTextWhiteBack);
-
-	var $coinTentWrapper = addElement($content,"",$classImgRnd,"",$styleBlackTextWhiteBack);
-	var $titleRow = addElement($coinTentWrapper,"",$classRow + $classContentTitle);
-	var $contentLabel = addElement($titleRow,"Cointent","col-md-10 col-xs-10" + $classContentTitle);
-	addRow($contentLabel,"","","","","Refresh","refreshCharts();");
-	
-	var $nameRow = addRow($content,"Coin","","Value","","My Coins","","MyBot","","Fruitbot","","SimpleBot");
-	var $btcRow = addRow($content,"BTC","","0","","0","","0","","0","","0");
-	var $ltcRow = addRow($content,"LTC","","0","","0","","0","","0","","0");
-	var $ethRow = addRow($content,"ETH","","0","","0","","0","","0","","0");
-	var $fbcRow = addRow($content,"FBC","","0","","0","","0","","0","","0");
-
-	$cointentArea2 = addElement($coinTentWrapper,"",$classInputFieldPLUSRow);
-	var $titleRow = addElement($cointentArea2,"",$classRow + $classContentTitle,"",$styleBlackTextWhiteBack);
-	var $botNameLabel = addElement($cointentArea2,"MyBotName","col-md-10 col-xs-10" + $classContentTitle + $classImgRnd,"",$styleBlackTextWhiteBack,"","contenteditable","true");
-	
-	addRow($cointentArea2,"Add Bot","addBot('" + $botNameLabel + "');");	
-	
-	loadCoinData();
-	refreshCharts();
-	document.getElementById($coinMainBox).innerText = $coin2;
-	document.getElementById($btcMedian).innerText = 0;
-	
-	timerInterval = setInterval(function () {
-		refreshCharts()
-	}, 30000);
-	
-}; // end addCoinPage
-
-//Run SPA
-function rebuildPage(){ 
+function rbp($parentElement,$jsonVar) {
 
 try {
-	removeElement($headWrapper);
-	removeElement($NavDDWrapper);
+	removeElement("headWrapper");
+	removeElement("NavDDWrapper");
 	removeElement("bodyWrapper");
-	removeElement($footWrapper);
+	removeElement("footWrapper");
 	window.clearInterval(timerInterval);
 	
-
-	$headWrapper = addElement("head");
-	$bodyWrapper = addElement("body","","","","","","","","bodyWrapper");
-	$footWrapper = addElement("body");
-	$NavDDWrapper = addElement($nav3dd,"",$classDropdownContent);
-	addFooter($footWrapper);
+	cje("bodyWrapper",$wrapperVar);
 	
-	if ($GilMain.GilJSVersion != $pageVersion) {
+	cje("footWrapper",$footerVar);
+	cje("bodyWrapper",$pageMenuVar)
+	cje($parentElement,$jsonVar);
+	
+	if ($GilMain.GilJSVersion > $GilMain.GilJSVersion) {
 		document.getElementById($errDiv).innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";
 	}; // end if GilJSVersion
 	
 } catch(e){console.log(e)};
-}; // end rebuildPage
+}; // end rbp
 
-function loadPage($pageTitle,$firstPage) {
-	rebuildPage();
-try {
-	switch ($firstPage) {
-		case "admin": 
-		break;
-		case "sandbox": 
-			addElementSandboxPage($bodyWrapper);
-		break;
-		case "demo": 
-			addArkDynaPage($bodyWrapper);
-		break;
-		case "Arkdata": 
-			addArkdataPage($bodyWrapper);
-		break;
-		case "rentalmap": 
-			addRentalMapPage($bodyWrapper);
-		break;
-		case "calc": 
-			addCalcPage($bodyWrapper);
-		break;
-		case "coin": 
-			addCoinPage($bodyWrapper);
-		break;
-		case "meme": 
-			addMemePage($bodyWrapper);
-		break;
-		case "fruitbot": 
-			addFruitBotPage($bodyWrapper);
-		break;
-		case "rgb": 
-			addRgbColorPage($bodyWrapper);
-		break;
-		case "addElement": 
-			addAddElementPage($bodyWrapper);
-		break;
-		case "minimalism": 
-			addMinimalismPage($bodyWrapper);
-		break;
-		case "badpw": 
-			addBadPWPage($bodyWrapper);
-		break;
-		case "chat": 
-			addChatPage($bodyWrapper);
-		break;
-		case "dsq": 
-			addDragSqPage($bodyWrapper);
-		break;
-		case "git": 
-			addGitPage($bodyWrapper);
-		break;
-		case "jsonlint": 
-			addJsonLintPage($bodyWrapper);
-		break;
-		case "login": 
-			addFormPage("login",$bodyWrapper);
-			
-	addMenuItem($NavDDWrapper,'Javascript Basic Auth',"https://stackoverflow.com/questions/491914/pure-javascript-code-for-http-basic-authentication");
-	addMenuItem($NavDDWrapper,'Sequelize getting started',"http://docs.sequelizejs.com/manual/installation/getting-started.html");
-	addMenuItem($NavDDWrapper,'Sequelize Findone',"https://stackoverflow.com/questions/32212945/sequelize-findone-success-is-undefined#32213208");
-	addMenuItem($NavDDWrapper,'Render common variables from app.js to all routes in express',"https://stackoverflow.com/questions/29026650/how-to-render-common-variables-from-app-js-to-all-routes-in-express");
-	addMenuItem($NavDDWrapper,'Delete cookie on logout in Express and Passport',"https://stackoverflow.com/questions/33112299/how-to-delete-cookie-on-logout-in-express-passport-js");
-	addMenuItem($NavDDWrapper,'Cookie Parser on Github',"https://github.com/expressjs/cookie-parser#cookieparsersignedcookiestr-secret");
-	addMenuItem($NavDDWrapper,'Express JS book',"http://expressjs-book.com/index.html%3Fp=128.html");
-	addMenuItem($NavDDWrapper,'Bootstrap buttons',"https://v4-alpha.getbootstrap.com/components/buttons/#sizes");
+function cje($parentElement,$jsonVar) {
+	if	($jsonVar) {
+		
+	$jsonVar = JSON.stringify($jsonVar);
+	$jsonVar = $jsonVar.replace(/parentElement/g,$parentElement);
+	$jsonVar = JSON.parse($jsonVar);
 	
-		break;
-		case "signup": 
-			addFormPage("signup",$bodyWrapper);
-		break;
-	}; // end switch divColor
-	addMenuItem($NavDDWrapper,"______________");
-	
-	addMenuItem($NavDDWrapper,'Custom scrollbars in Webkit',"https://css-tricks.com/custom-scrollbars-in-webkit/");
-	addMenuItem($NavDDWrapper,'Load div as file',"https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/");
-	addMenuItem($NavDDWrapper,'Applies color scheme to text in div',"https://stackoverflow.com/questions/23737776/how-to-color-specific-word-in-a-container-using-css");
-	addMenuItem($NavDDWrapper,'Load JSON',"https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript");
-	addMenuItem($NavDDWrapper,'Javascript Objects',"https://www.w3schools.com/js/js_objects.asp");
-	addMenuItem($NavDDWrapper,'Clear SetInterval',"https://stackoverflow.com/questions/2901108/how-do-i-clear-this-setinterval#2901155");
-	addMenuItem($NavDDWrapper,'Make footer stick to the bottom of the page.',"https://stackoverflow.com/questions/3443606/make-footer-stick-to-bottom-of-page-correctly#18066619 ");
-	
-	if ($GilMain.GilJSVersion != $pageVersion) {
-		document.getElementById($errDiv).innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";
-	}; // end if GilJSVersion
-	
-} catch(e){console.log(e)};
-}; // end loadPage
+	try {
+	if	($jsonVar.elements) {
+		$jsonVar.elements.forEach(function($element){
+			addElement($element.elementParent,$element.innerText,$element.elementClass,$element.elementType,$element.elementStyle,$element.href,$element.attributeType,$element.attributeAction,$element.id);
+		}); // end foreach jsonVar
+	}; // end if jsonVar.elements
+	} catch(e) { 
+		console.log(e);
+		}; // end try
 
-function buildPage($pageTitle,$firstPage){ 
-	addHeader("head",$pageTitle);
-	addNav("body",$pageTitle);	
-	loadPage($pageTitle,$firstPage);
-}; // end loadPage
+	try {
+	if	($jsonVar.menu) {
+		$jsonVar.menu.forEach(function($element){
+			addMenuItem($element.elementParent,$element.innerText,$element.onclick,$element.elementClass,$element.href);
+		}); // end foreach jsonVar
+	}; // end if jsonVar.menu
+	} catch(e) { 
+		console.log(e);
+		}; // end try
+				
+	try {
+	if	($jsonVar.rows) {
+		$jsonVar.rows.forEach(function($element){
+			addRow($element.elementParent,$element.firstName,$element.firstOnclick,$element.secondName,$element.secondOnclick,$element.thirdName,$element.thirdOnclick,$element.fourthName,$element.fourthOnclick,$element.fifthName,$element.fifthOnclick,$element.sixthName,$element.sixthOnclick);
+		}); // end foreach jsonVar
+	}; // end if rows
+	} catch(e) { 
+		console.log(e);
+		}; // end try
+
+		try {
+	if	($jsonVar.timers) {
+		$jsonVar.timers.forEach(function($element){
+	timerInterval = setInterval($element.callback,$element.interval);
+		}); // end foreach jsonVar
+	}; // end if timers
+	} catch(e) { 
+		console.log(e);
+		}; // end try
+	}; // end if jsonVar
+}; // end cje
 
 window.onload = function(){
-	buildPage($pageHeaderTitle,$pageStarting);
+	cje("head",$headerVar);
+	cje("body",$navBarVar);
+	rbp("bodyWrapper",$rgbColorVar);addRgbColorPage("bodyWrapper");
 	initPage($pageSettingsJson);
 }; // end window.onload
 
