@@ -189,6 +189,57 @@ function initPage($initUrl){
 };// end initPage
 
 // General
+//createJsonElement - shortened to CJE.
+function cje($parentElement,$jsonVar) {
+	
+	if	($jsonVar) {
+		
+	$jsonVar = JSON.stringify($jsonVar);
+	$jsonVar = $jsonVar.replace(/parentElement/g,$parentElement);
+	$jsonVar = JSON.parse($jsonVar);
+	
+	if	($jsonVar.menu) {
+	try {
+		$jsonVar.menu.forEach(function($element){
+			addMenuItem($element.elementParent,$element.innerText,$element.onclick,$element.elementClass,$element.href);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
+	}; // end if jsonVar.menu
+		
+	try {
+	if	($jsonVar.elements) {
+		$jsonVar.elements.forEach(function($element){
+			addElement($element.elementParent,$element.innerText,$element.elementClass,$element.elementType,$element.elementStyle,$element.href,$element.attributeType,$element.attributeAction,$element.id);
+		}); // end foreach jsonVar
+	}; // end if jsonVar.elements
+	} catch(e) { 
+		console.log(e);
+	};
+		
+	if	($jsonVar.rows) {
+	try {
+		$jsonVar.rows.forEach(function($element){
+			addRow($element.elementParent,$element.firstName,$element.firstOnclick,$element.secondName,$element.secondOnclick,$element.thirdName,$element.thirdOnclick,$element.fourthName,$element.fourthOnclick,$element.fifthName,$element.fifthOnclick,$element.sixthName,$element.sixthOnclick);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
+	}; // end if rows
+
+	if	($jsonVar.timers) {
+	try {
+		$jsonVar.timers.forEach(function($element){
+	timerInterval = setInterval($element.callback,$element.interval);
+		}); // end foreach jsonVar
+	} catch(e) { 
+		console.log(e);
+	};
+	}; // end if rows
+	}; // end if jsonVar
+}; // end cje
+
 function loadFile(file, callback) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -782,56 +833,6 @@ function removeElement($divID) {
 	}	
 }; // end removeBot
 
-//createJsonElement - shortened to CJE.
-function cje($parentElement,$jsonVar) {
-	if	($jsonVar) {
-		
-	$jsonVar = JSON.stringify($jsonVar);
-	$jsonVar = $jsonVar.replace(/parentElement/g,$parentElement);
-	$jsonVar = JSON.parse($jsonVar);
-	
-	if	($jsonVar.menu) {
-	try {
-		$jsonVar.menu.forEach(function($element){
-			addMenuItem($element.elementParent,$element.innerText,$element.onclick,$element.elementClass,$element.href);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if jsonVar.menu
-		
-	if	($jsonVar.elements) {
-	try {
-		$jsonVar.elements.forEach(function($element){
-			addElement($element.elementParent,$element.innerText,$element.elementClass,$element.elementType,$element.elementStyle,$element.href,$element.attributeType,$element.attributeAction,$element.id);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if jsonVar.elements
-		
-	if	($jsonVar.rows) {
-	try {
-		$jsonVar.rows.forEach(function($element){
-			addRow($element.elementParent,$element.firstName,$element.firstOnclick,$element.secondName,$element.secondOnclick,$element.thirdName,$element.thirdOnclick,$element.fourthName,$element.fourthOnclick,$element.fifthName,$element.fifthOnclick,$element.sixthName,$element.sixthOnclick);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if rows
-
-	if	($jsonVar.timers) {
-	try {
-		$jsonVar.timers.forEach(function($element){
-	timerInterval = setInterval($element.callback,$element.interval);
-		}); // end foreach jsonVar
-	} catch(e) { 
-		console.log(e);
-	};
-	}; // end if rows
-	}; // end if jsonVar
-}; // end cje
-
 function addElement($elementParent,$innerText,$elementClass,$elementType,$elementStyle,$href,$attributeType,$attributeAction,$elementId) {
 	if (!$elementType) {
 		$elementType = 'div'
@@ -993,7 +994,7 @@ function addNav($parentElement,$headerTitle) {
 	//addMenuItem($nav2ddc,'Arkdata Dynamap',loadPageOpen('demo'));
 	addMenuItem($nav2ddc,'Arkdata',loadPageOpen('Arkdata'));
 	addMenuItem($nav2ddc,'Sandbox',loadPageOpen('sandbox'));
-	addMenuItem($nav2ddc,'Admin',"cje($bodyWrapper,$adminPageVar);");
+	addMenuItem($nav2ddc,'Admin',"cje('bodyWrapper',$adminPageVar);");
 	addMenuItem($nav2ddc,'Login!',loadPageOpen('login'),$classLargeHidden);
 
 	var $nav3 = addElement($NavDDOuter,"",$classNavBar + $classHalfWidth + $nbr,"ul");
@@ -1237,8 +1238,6 @@ function addRgbColorPage($parentElement) {
 function addArkdataPage($parentElement) {
 	var $metaRefresh = addElement($headWrapper,"","","meta","","","http-equiv","refresh");
 	document.getElementById($metaRefresh).setAttribute("content","60");
-	addElement($headWrapper,'','','link','','/stylesheets/ARKData.css');
-	addElement($headWrapper,'','','link','','/stylesheets/ARKDatam.css',"media","handheld");
 	
 	var $wrapper = addElement($parentElement,"",$classContainer + $classImgRnd);
 	var $spacer = addElement($wrapper,"",$classSpacer);
@@ -1472,20 +1471,32 @@ function addCoinPage($parentElement) {
 }; // end addCoinPage
 
 //Run SPA
-function loadPage($pageTitle,$firstPage) {
+function rebuildPage(){ 
+
 try {
 	removeElement($headWrapper);
 	removeElement($NavDDWrapper);
-	removeElement($bodyWrapper);
+	removeElement("bodyWrapper");
 	removeElement($footWrapper);
 	window.clearInterval(timerInterval);
 	
-	
+
 	$headWrapper = addElement("head");
-	$bodyWrapper = addElement("body");
+	$bodyWrapper = addElement("body","","","","","","","","bodyWrapper");
 	$footWrapper = addElement("body");
 	$NavDDWrapper = addElement($nav3dd,"",$classDropdownContent);
+	addFooter($footWrapper);
 	
+	if ($GilMain.GilJSVersion != $pageVersion) {
+		document.getElementById($errDiv).innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";
+	}; // end if GilJSVersion
+	
+} catch(e){console.log(e)};
+}; // end rebuildPage
+
+function loadPage($pageTitle,$firstPage) {
+	rebuildPage();
+try {
 	switch ($firstPage) {
 		case "admin": 
 		break;
@@ -1563,8 +1574,6 @@ try {
 	addMenuItem($NavDDWrapper,'Javascript Objects',"https://www.w3schools.com/js/js_objects.asp");
 	addMenuItem($NavDDWrapper,'Clear SetInterval',"https://stackoverflow.com/questions/2901108/how-do-i-clear-this-setinterval#2901155");
 	addMenuItem($NavDDWrapper,'Make footer stick to the bottom of the page.',"https://stackoverflow.com/questions/3443606/make-footer-stick-to-bottom-of-page-correctly#18066619 ");
-	
-	addFooter($footWrapper);
 	
 	if ($GilMain.GilJSVersion != $pageVersion) {
 		document.getElementById($errDiv).innerText = "Version " + $GilMain.GilJSVersion + " of Gilgamech.js is available. Refresh the page to update.";

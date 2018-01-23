@@ -426,6 +426,9 @@ updateTextAreaFromRepo(FileNameElement,FileNameItem,RepoUrlElement,TextAreaEleme
 updateForm(nfsCall, nfsName, nfsTextArea) {
 updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 
+	// <input type=text list=browsers ><datalist id=browsers >   <option> Google   <option> IE9</datalist>
+	// <input type="text" name="myText" value="Norway" selectBoxOptions="Canada;Denmark;Finland;Germany;Mexico;Norway;Sweden;United Kingdom;United States"> 
+
 
 
 
