@@ -1,4 +1,5 @@
 //Gil.JS
+// Comments are fundamental
 // aSecretToEverybody
 
 var express = require('express');
@@ -28,20 +29,16 @@ var $GilMain = {
 	chatGeneral: "", 
 	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
 	GilJSVersion: "709",
-	pageHeaderTitle:'Gilgamech Technologies'
+	pageHeaderTitle:'Gilgamech Technologies',
+	fruitbotwin:0,
+	fruitbotloss:0,
+	fruitbottie:0
 };
-
-// Fruitbot scores
-var fruitbotwin = 0;
-var fruitbotloss = 0;
-var fruitbottie = 0;
 
 app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
 
-// Comments are fundamental
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
-// views directory where all template files live
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -123,16 +120,16 @@ app.post('/login', function(request, response) {
                         request.session.regenerate(function(){
                         addErr(("User password matches: " + username));
                         request.session.user = found.username;
-                        response.redirect('/');
+                        response.send('Login Successful');
                     }); // end request.session.regenerate
                 } else {
                     addErr(("User password not match: " + username));
-                    response.redirect('/signup');
+                    response.send('Login Failed');
                 }; //end if userFound
             }); // end bcrypt.compare
         } else {
             addErr(("User not found: " + username));
-            response.redirect('/signup');
+            response.send('Login Failed');
         }; // end if found
     }); // end new User
 }); // end app post login 
@@ -153,82 +150,13 @@ app.post('/signup', function (request, response) {
   }); // end bcrypt.hash
 }); // end app.post
 
-app.get('/logout', function(request, response){
+app.post('/logout', function(request, response){
 	addErr("User logout: " + request.session.user);
   // request.logout();
 	request.session.destroy(function (err) {
 		addErr(err);
-        response.redirect('/'); 
+        response.send('Logout Successful'); 
     });
-});
-
-// Need to roll into pages
-
-//region WIP
-
-//chat 
-app.get('/chatpost', function(request, response) { 
-// /chatpost?user=user&message=message&chatroom=General
-  chatMessage = request.query.message
-  chatUser = request.query.user
-  chatRoom = request.query.chatroom
-
-  $GilMain.chatGeneral = $GilMain.chatGeneral + chatUser + ": " + chatMessage + lineBreak 
-  
-  client.connect();
-  client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
-    if (err) addErr((err));
-    $GilMain.chatGeneral = $GilMain.chatGeneral + 'INSERT INTO chatroom_General\n\r';
-	try {
-    for (let row of queryOutput.rows) {
-      $GilMain.chatGeneral = $GilMain.chatGeneral + row + lineBreak;
-    }
-	} catch(err) {addErr((err))}
-  });
-  client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
-    if (err) addErr((err));
-    $GilMain.chatGeneral = $GilMain.chatGeneral + 'SELECT FROM chatroom_General\n\r';
-	try {
-    for (let row of queryOutput.rows) {
-      $GilMain.chatGeneral = $GilMain.chatGeneral + row + lineBreak;
-    }
-	} catch(err) {addErr((err))}
-  });
-  client.end();
-  response.send($GilMain.chatGeneral);
-});  
-
-//FizzBuzz
-app.get('/fizzbuzz', function(request, response) {
-  fizzbuzznumber = request.query.n
-  outstring = fizzbuzznumber
-  if (!(fizzbuzznumber % 3)) {
-    outstring = "Fizz"
-  }; //end if 3  
-  if (!(fizzbuzznumber % 5)) {
-    outstring = "Buzz"
-  }; //end if 5  
-  response.json(outstring);
-});
-
-//fakecoin
-app.get('/fakecoin', function(request, response) {
-  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
-  response.json($dataVar);
-});
-
-app.get('/fakecoinbuy', function(request, response) {
-  $basePrice = $basePrice + Math.random();
-  Math.round($basePrice = Math.round($basePrice*100)/100);
-  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}};	
-  response.json($dataVar);
-});
-
-app.get('/fakecoinsell', function(request, response) {
-  $basePrice = $basePrice - Math.random();
-  Math.round($basePrice = Math.round($basePrice*100)/100);
-  $dataVar = {"data":{"base":"FBC","currency":"USD","amount": $basePrice}};	
-  response.json($dataVar);
 });
 
 // Error capture
