@@ -1,3 +1,6 @@
+//Gil.JS
+// aSecretToEverybody
+
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -16,13 +19,18 @@ User.sync();
 
 var app = express();
 
-var $GilMain = {apiVersion: "280", googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',chatGeneral: "", errgoLogic: "", GilJSVersion: "708",pageHeaderTitle:'Gilgamech Technologies'};
-
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 
-var $chatGeneral = "";
-var $errgoLogic = "--- Err and Log Output --- " + lineBreak + lineBreak;
+var $GilMain = {
+	apiVersion: "280", 
+	googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
+	chatGeneral: "", 
+	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
+	GilJSVersion: "709",
+	pageHeaderTitle:'Gilgamech Technologies'
+};
+
 // Fruitbot scores
 var fruitbotwin = 0;
 var fruitbotloss = 0;
@@ -47,7 +55,7 @@ const client = new Client({
 });
 client.connect();
 client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
-  $chatGeneral = $chatGeneral + "Connected successfully to server" + lineBreak;
+  $GilMain.chatGeneral = $GilMain.chatGeneral + "Connected successfully to server" + lineBreak;
   if (err) addErr((err));
   addErr(("Connected successfully to DB server"));
   // for (let row of queryOutput.rows) {
@@ -56,12 +64,12 @@ client.query('SELECT table_name FROM information_schema.tables;', (err, queryOut
 });
 
 User.findAll().then(users => {
-  $chatGeneral = $chatGeneral + 'SELECT FROM Users\n\r';
+  $GilMain.chatGeneral = $GilMain.chatGeneral + 'SELECT FROM Users\n\r';
   addErr((users));
 });
 
 function addErr(err) {
-  $errgoLogic += err + "<br>"// lineBreak
+  $GilMain.errgoLogic += err + "<br>"// lineBreak
 };
 
 function testUA(ua) {
@@ -84,12 +92,14 @@ function testLoggedIn(request) {
 
 // Page calls
 app.get('/', function(request, response) {
-	response.send('<!DOCTYPE html> <html lang="en"> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <link rel="shortcut icon" href="./public/favicon.ico" type="image/x-icon"> <meta name="viewport" content="width=device-width, initial-scale=1"> </head><script src="/js/Gilgamech.js"></script> <body> </body> </html> ')
+  var $queryString = request.path
+	if ($queryString == "/") {
+		var $queryString = "root"
+	}; //end if siteName
+	response.send('<!DOCTYPE html> <html lang="en"> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <link rel="shortcut icon" href="https://s3.amazonaws.com/gilpublic/favicon.ico" type="image/x-icon"> <link href="https://s3.amazonaws.com/gilpublic/' + $queryString + "/" + $queryString + '.css" rel="stylesheet" type="text/css"> <meta name="viewport" content="width=device-width, initial-scale=1"> </head> <body> <div id="deleteme" hidden><p1>Page requires Javascript and load files (XHR) to function.</p1> <br> <p3>This page composes itself entirely from Javascript -  a true single-page application, not only is it entirely one page in the browser. Where most websites use HTML for structure, CSS for style, and Javascript for operations, this page uses JSON to express every element. This uses a small (less than 500 lines) Javascript engine to interpret the JSON. To see this in action, please permit the site to run Javascript, and load files from the data source: </p3><br> <div id="pageSettingsJson" >https://s3.amazonaws.com/gilpublic/' + $queryString + "/" + $queryString + '.json</div></div> </body> </html> <script src="https://s3.amazonaws.com/gilpublic/Gilgamech.js"></script> ')
 });
 
 app.post('/settings.json', function(request, response) {
-	$GilMain.chatGeneral = $chatGeneral
-	$GilMain.errgoLogic = $errgoLogic
 	response.json($GilMain);
 });
 
@@ -163,29 +173,29 @@ app.get('/chatpost', function(request, response) {
   chatUser = request.query.user
   chatRoom = request.query.chatroom
 
-  $chatGeneral = $chatGeneral + chatUser + ": " + chatMessage + lineBreak 
+  $GilMain.chatGeneral = $GilMain.chatGeneral + chatUser + ": " + chatMessage + lineBreak 
   
   client.connect();
   client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
     if (err) addErr((err));
-    $chatGeneral = $chatGeneral + 'INSERT INTO chatroom_General\n\r';
+    $GilMain.chatGeneral = $GilMain.chatGeneral + 'INSERT INTO chatroom_General\n\r';
 	try {
     for (let row of queryOutput.rows) {
-      $chatGeneral = $chatGeneral + row + lineBreak;
+      $GilMain.chatGeneral = $GilMain.chatGeneral + row + lineBreak;
     }
 	} catch(err) {addErr((err))}
   });
   client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
     if (err) addErr((err));
-    $chatGeneral = $chatGeneral + 'SELECT FROM chatroom_General\n\r';
+    $GilMain.chatGeneral = $GilMain.chatGeneral + 'SELECT FROM chatroom_General\n\r';
 	try {
     for (let row of queryOutput.rows) {
-      $chatGeneral = $chatGeneral + row + lineBreak;
+      $GilMain.chatGeneral = $GilMain.chatGeneral + row + lineBreak;
     }
 	} catch(err) {addErr((err))}
   });
   client.end();
-  response.send($chatGeneral);
+  response.send($GilMain.chatGeneral);
 });  
 
 //FizzBuzz
