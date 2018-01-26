@@ -432,3 +432,67 @@ updateNFSForm(nfsCall, nfsName, nfsTextArea, nfsParams, nfsType) {
 
 
 
+//chat 
+app.get('/chatpost', function(request, response) { 
+// /chatpost?user=user&message=message&chatroom=General
+  chatMessage = request.query.message
+  chatUser = request.query.user
+  chatRoom = request.query.chatroom
+
+  $GilMain.chatGeneral = $GilMain.chatGeneral + chatUser + ": " + chatMessage + lineBreak 
+  
+  client.connect();
+  client.query("INSERT INTO chatroom_General (username, message) VALUES (chatUser, chatMessage);", (err, queryOutput) => {
+    if (err) addErr((err));
+    $GilMain.chatGeneral = $GilMain.chatGeneral + 'INSERT INTO chatroom_General\n\r';
+	try {
+    for (let row of queryOutput.rows) {
+      $GilMain.chatGeneral = $GilMain.chatGeneral + row + lineBreak;
+    }
+	} catch(err) {addErr((err))}
+  });
+  client.query('SELECT * FROM chatroom_General;', (err, queryOutput) => {
+    if (err) addErr((err));
+    $GilMain.chatGeneral = $GilMain.chatGeneral + 'SELECT FROM chatroom_General\n\r';
+	try {
+    for (let row of queryOutput.rows) {
+      $GilMain.chatGeneral = $GilMain.chatGeneral + row + lineBreak;
+    }
+	} catch(err) {addErr((err))}
+  });
+  client.end();
+  response.send($GilMain.chatGeneral);
+});  
+//fakecoin
+app.get('/fakecoin', function(request, response) {
+  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}}
+  response.json($dataVar);
+});
+
+app.get('/fakecoinbuy', function(request, response) {
+  $basePrice = $basePrice + Math.random();
+  Math.round($basePrice = Math.round($basePrice*100)/100);
+  $dataVar = {"data":{"base":"FTC","currency":"USD","amount": $basePrice}};	
+  response.json($dataVar);
+});
+
+app.get('/fakecoinsell', function(request, response) {
+  $basePrice = $basePrice - Math.random();
+  Math.round($basePrice = Math.round($basePrice*100)/100);
+  $dataVar = {"data":{"base":"FBC","currency":"USD","amount": $basePrice}};	
+  response.json($dataVar);
+});
+
+//FizzBuzz
+app.post('/fizzbuzz', function(request, response) {
+  fizzbuzznumber = request.query.n
+  outstring = fizzbuzznumber
+  if (!(fizzbuzznumber % 3)) {
+    outstring = "Fizz"
+  }; //end if 3  
+  if (!(fizzbuzznumber % 5)) {
+    outstring = "Buzz"
+  }; //end if 5  
+  response.json(outstring);
+});
+
