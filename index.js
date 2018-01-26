@@ -89,7 +89,7 @@ function testLoggedIn(request) {
 
 // Page calls
 app.get('/', function(request, response) {
-  var $queryString = request.params
+  var $queryString = request.params.name
 	if ($queryString == "/") {
 		var $queryString = "root"
 	}; //end if siteName
@@ -97,7 +97,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/mirror', function(request, response) {
-	response.json(request)
+	response.json(request.params)
 });
 
 app.post('/settings.json', function(request, response) {
