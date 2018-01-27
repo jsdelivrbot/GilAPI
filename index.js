@@ -21,12 +21,22 @@ User.sync();
 var app = express();
 
 var AWS = require('aws-sdk');
-var s3 = new AWS.S3();
+var $bucketName = "gilpublic";
+// var s3 = new AWS.S3();
+var s3 = new AWS.S3({
+  apiVersion: '2006-03-01',
+  params: {Bucket: $bucketName}
+});
 
+AWS.config.update({
+    "accessKeyId": process.env.AWS_S3_KEY || "AAAAAAAAAAAAA", 
+    "secretAccessKey": process.env.AWS_S3_SECRET_KEY || "rc0jbosmx9o09gf72ov1xkp0dz2tirm6",
+    "region": process.env.AWS_S3_REGION || "us-east-1"
+});
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
-var $siteBase = "https://s3.amazonaws.com/gilpublic"
+var $siteBase = "https://s3.amazonaws.com/" + $bucketName
 var $rootPage = "root"
 
 var $settingsVar = {
