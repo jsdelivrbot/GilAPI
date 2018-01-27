@@ -89,7 +89,7 @@ function testLoggedIn(request) {
 };
 
 // Page calls
-app.get(/\S+/g, function(request, response) {
+app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
 	var $queryString = request.path
 	if ($queryString == "/") {
