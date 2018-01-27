@@ -20,6 +20,10 @@ User.sync();
 
 var app = express();
 
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
+
+
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/gilpublic"
