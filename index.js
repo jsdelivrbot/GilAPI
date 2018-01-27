@@ -90,7 +90,8 @@ function testLoggedIn(request) {
 
 // Page calls
 app.get('/', function(request, response) {
-  var $queryString = request.query.id
+	//https://gil-api.herokuapp.com/?p=giltech
+	var $queryString = request.query.p
 	if ($queryString == "/") {
 		var $queryString = "root"
 	}; //end if siteName
@@ -98,7 +99,8 @@ app.get('/', function(request, response) {
 });
 
 app.get('/mirror', function(request, response) {
-	response.json(request.query)
+	$rvar = "request params: " + JSON.stringify(request.params) + "request path: " + JSON.stringify(request.path);
+	response.send($rvar);
 });
 
 app.post('/settings.json', function(request, response) {
