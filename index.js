@@ -40,12 +40,14 @@ var $siteBase = "https://s3.amazonaws.com/" + $bucketName
 var $rootPage = "root"
 
 var $settingsVar = {
+	userName: "Login",
+	deviceType: "null",
 	apiVersion: "280", 
 	googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
 	chatGeneral: "", 
 	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
-	GilJSVersion: "709",
-	pageHeaderTitle:'Gilgamech Technologies',
+	awsS3Key: "",
+	session: "",
 	fruitbotwin:0,
 	fruitbotloss:0,
 	fruitbottie:0
@@ -97,9 +99,10 @@ function testUA(ua) {
 function testLoggedIn(request) {
     // Check the user-agent string to identyfy the device.
     if (request.session) {
-		return ("Welcome, " + request.session.user); //true;
+		$settingsVar.session = request.session
+		return (request.session.user); //true;
     } else {
-		return "Login!"; //false;
+		return "Login"; //false;
     }; // end if request
 };
 
