@@ -39,6 +39,8 @@ var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
 var $rootPage = "root"
 
+var $userPWHTable = {"initUser": "initPass"}
+
 var $settingsVar = {
 	userName: "Login",
 	deviceType: "null",
