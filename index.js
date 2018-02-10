@@ -39,8 +39,6 @@ var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
 var $rootPage = "root"
 
-var $userPWHTable = {"initUser": "initPass"}
-
 var $settingsVar = {
 	userName: "Login",
 	deviceType: "null",
@@ -65,7 +63,25 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
 
+// PostGre SQL stuff.
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+client.connect();
+client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
+  $settingsVar.chatGeneral = $settingsVar.chatGeneral + "Connected successfully to server" + lineBreak;
+  if (err) addErr((err));
+  addErr(("Connected successfully to DB server"));
+  // for (let row of queryOutput.rows) {
+    // addErr((row.table_name));
+  // }
+});
 
+User.findAll().then(users => {
+  $settingsVar.chatGeneral = $settingsVar.chatGeneral + 'SELECT FROM Users\n\r';
+  addErr((users));
+});
 
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
@@ -82,8 +98,8 @@ function testUA(ua) {
 
 function testLoggedIn(request) {
     // Check the user-agent string to identyfy the device.
-	$settingsVar.session = request.session
     if (request.session) {
+		$settingsVar.session = request.session
 		return (request.session.user); //true;
     } else {
 		return "Login"; //false;
@@ -132,25 +148,27 @@ app.post('/login', function(request, response) {
                 }; //end if userFound
             }); // end bcrypt.compare
         } else {
-			//Signup
-			addErr(("User not found: " + $userName + " - starting signup."));
-			bcrypt.hash(enteredPassword, null, null, function(err, hash){
-			  // $userPWHTable.add({$userName,$enteredPassword}).then(function(newUser){
-				  {
-			  //var user = new User({localemail:username, localpassword:hash})
-			  //user.save().then(function(newUser){
-				  
-				addErr(("User signup: " + $userName));
-				request.session.regenerate(function(){
-					request.session.user = $userName;
-					response.send('Signup Successful');
-					  
-				  }) // end request.session.regenerate
-			  }) // end user.save
-		  }); // end bcrypt.hash
+            addErr(("User not found: " + username));
+            response.send('Login Failed');
         }; // end if found
     }); // end new User
 }); // end app post login 
+
+app.post('/signup', function (request, response) {
+  var username = request.body.username
+  bcrypt.hash(request.body.password, null, null, function(err, hash){
+	  var user = new User({localemail:username, localpassword:hash})
+	  user.save().then(function(newUser){
+		  
+		  addErr(("User signup: " + username));
+		  request.session.regenerate(function(){
+			  response.redirect('/');
+			  request.session.user = username;
+			  
+		  }) // end request.session.regenerate
+	  }) // end user.save
+  }); // end bcrypt.hash
+}); // end app.post
 
 app.post('/logout', function(request, response){
 	addErr("User logout: " + request.session.user);
