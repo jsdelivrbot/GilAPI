@@ -65,25 +65,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
 
-// PostGre SQL stuff.
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-});
-client.connect();
-client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
-  $settingsVar.chatGeneral = $settingsVar.chatGeneral + "Connected successfully to server" + lineBreak;
-  if (err) addErr((err));
-  addErr(("Connected successfully to DB server"));
-  // for (let row of queryOutput.rows) {
-    // addErr((row.table_name));
-  // }
-});
 
-User.findAll().then(users => {
-  $settingsVar.chatGeneral = $settingsVar.chatGeneral + 'SELECT FROM Users\n\r';
-  addErr((users));
-});
 
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
