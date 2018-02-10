@@ -82,8 +82,8 @@ function testUA(ua) {
 
 function testLoggedIn(request) {
     // Check the user-agent string to identyfy the device.
+	$settingsVar.session = request.session
     if (request.session) {
-		$settingsVar.session = request.session
 		return (request.session.user); //true;
     } else {
 		return "Login"; //false;
