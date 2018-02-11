@@ -11,10 +11,8 @@ var session = require("express-session");
 var bookshelf = require("bookshelf");
 const { Client } = require('pg');
 
-var Sequelize = require('sequelize');
 var pg = require('pg').native;
 var pghstore = require('pg-hstore');
-var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
 
 var app = express();
 
