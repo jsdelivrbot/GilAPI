@@ -5,7 +5,6 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var auth = require('http-auth');
 var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
 
