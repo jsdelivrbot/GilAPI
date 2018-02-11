@@ -9,10 +9,6 @@ var auth = require('http-auth');
 var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
 var bookshelf = require("bookshelf");
-const { Client } = require('pg');
-
-var pg = require('pg').native;
-var pghstore = require('pg-hstore');
 
 var app = express();
 
