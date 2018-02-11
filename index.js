@@ -106,55 +106,49 @@ app.post('/settings.json', function(request, response) {
 });
 
 app.post('/login', function(request, response) {
-    var username = request.body.username
-    var enteredPassword = request.body.password;
-	addErr(("Login for user: " + username));
-    
-    User.findOne( {where:{ localemail: username }}).then(function(found){
-	addErr(("Searching for user: " + username));
-        if (found) {
-			pwhash = found.get('localpassword');
-			userfromdb = found.get('localemail');
-            addErr(("User found: " + username +  " " + userfromdb));
-          
-            bcrypt.compare(enteredPassword, pwhash, function(err, userFound) {
-                if (err) {
-                        addErr(err);
-                }; //end if err
-                if (userFound) {
-                        request.session.regenerate(function(){
-                        addErr(("User password matches: " + username));
-                        request.session.user = found.username;
-                        response.send('Login Successful');
-                    }); // end request.session.regenerate
-                } else {
-                    addErr(("User password not match: " + username));
-                    response.send('Login Failed');
-                }; //end if userFound
-            }); // end bcrypt.compare
-        } else {
-            addErr(("User not found: " + username));
-            response.send('Login Failed');
-        }; // end if found
-    }); // end new User
-}); // end app post login 
-
-app.post('/signup', function (request, response) {
-  var username = request.body.username
-  bcrypt.hash(request.body.password, null, null, function(err, hash){
-	  var user = new User({localemail:username, localpassword:hash})
-	  user.save().then(function(newUser){
+    var $userName = request.body.userName
+    var $enteredPassword = request.body.password;
+	addErr(("Login for user: " + $userName));
+	
+		addErr(("Searching for user: " + $userName));
+	if ($userPWHTable[$userName]) {
+		$pwhash = $userPWHTable[$userName];
+		addErr(("User found: " + $userName));
+	  
+		bcrypt.compare($enteredPassword, $pwhash, function($err, $userFound) {
+			if ($err) {
+					addErr($err);
+			}; //end if err
+			if ($userFound) {
+					request.session.regenerate(function(){
+					addErr(("User password matches: " + $userName));
+					request.session.user = $userName;
+					response.send('Login Successful');
+				}); // end request.session.regenerate
+			} else {
+				addErr(("User password not match: " + $userName));
+				response.send('Login Failed');
+			}; //end if userFound
+		}); // end bcrypt.compare
+	} else {
+		//Signup
+		addErr(("User not found: " + $userName + " - starting signup."));
+		bcrypt.hash($enteredPassword, null, null, function($err, $hash){
+		if ($err) {
+				addErr($err);
+		}; //end if err
+		$userPWHTable[$userName] = $hash
 		  
-		  addErr(("User signup: " + username));
-		  request.session.regenerate(function(){
-			  response.redirect('/');
-			  request.session.user = username;
+		addErr(("User signup: " + $userName));
+		request.session.regenerate(function(){
+			request.session.user = $userName;
+			response.send('Signup Successful');
 			  
 		  }) // end request.session.regenerate
-	  }) // end user.save
-  }); // end bcrypt.hash
-}); // end app.post
-
+	  }); // end bcrypt.hash
+	}; // end if userPWHTable
+}); // end app post login 
+	  
 app.post('/logout', function(request, response){
 	addErr("User logout: " + request.session.user);
   // request.logout();
