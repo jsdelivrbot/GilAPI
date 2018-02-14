@@ -35,7 +35,7 @@ var $userACLTable = {"initUser": "initSite"};
 var $settingsVar = {
 	userName: "Login",
 	deviceType: "null",
-	apiVersion: "280", 
+	apiVersion: "290", 
 	googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
 	chatGeneral: "", 
 	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -96,7 +96,7 @@ app.post('/settings.json', function(request, response) {
 });
 
 app.post('/login', function(request, response) {
-    var $userName = request.body.userName
+    var $userName = request.body.username
     var $enteredPassword = request.body.password;
 	addErr(("Login for user: " + $userName));
 	
@@ -123,7 +123,7 @@ app.post('/login', function(request, response) {
 	} else {
 		//Signup
 		addErr(("User not found: " + $userName + " - starting signup."));
-		bcrypt.hash($enteredPassword, null, null, function($err, $hash){
+		bcrypt.hash($enteredPassword, 10, function($err, $hash){
 		if ($err) {
 				addErr($err);
 		}; //end if err
