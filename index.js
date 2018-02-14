@@ -141,7 +141,7 @@ app.post('/login', function(request, response) {
 
 app.post('/login2', function(request, response) {
 	var $r2 = request
-	response.JSON($r2);
+	response.json($r2);
 }); // end app post login 
 	  
 app.post('/logout', function(request, response){
