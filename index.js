@@ -140,7 +140,7 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.post('/login2', function(request, response) {
-	response.send(request);
+	response.send(JSON.stringify(request));
 }); // end app post login 
 	  
 app.post('/logout', function(request, response){
