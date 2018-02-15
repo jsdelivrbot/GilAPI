@@ -140,7 +140,8 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.post('/login2', function(request, response) {
-	response.send('login2 POST successful');
+	var $r2 = JSON.stringify(response);
+	response.send('login2 POST successful' + $r2);
 }); // end app post login 
 	  
 app.post('/logout', function(request, response){
