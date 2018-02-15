@@ -142,8 +142,8 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.post('/login2', function(request, response) {
-	var $r2 = request.body;
-	response.send($r2);
+	var $r2 = request.headers;
+	response.json($r2);
 }); // end app post login 
 	  
 app.post('/logout', function(request, response){
