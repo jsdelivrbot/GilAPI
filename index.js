@@ -142,7 +142,7 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.post('/login2', function(request, response) {
-	var $r2 = JSON.stringify(request.query);
+	var $r2 = JSON.stringify(request.body);
 	response.send('login2 POST successful' + $r2);
 }); // end app post login 
 	  
