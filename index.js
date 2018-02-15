@@ -96,7 +96,7 @@ app.post('/settings.json', function(request, response) {
 });
 
 app.post('/login', function(request, response) {
-    var $userName = request.body.username
+    var $userName = request.body.username;
     var $enteredPassword = request.body.password;
 	addErr(("Login for user: " + $userName));
 	
