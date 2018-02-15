@@ -41,6 +41,7 @@ var $settingsVar = {
 	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
 	awsS3Key: "",
 	session: "",
+	clientIP: "",
 	fruitbotwin:0,
 	fruitbotloss:0,
 	fruitbottie:0
@@ -92,6 +93,7 @@ app.get(/\S+/, function(request, response) {
 });
 
 app.post('/settings.json', function(request, response) {
+	$settingsVar.clientIP = request.ip;
 	response.json($settingsVar);
 });
 
