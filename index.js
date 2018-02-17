@@ -139,11 +139,6 @@ app.post('/login', function(request, response) {
 	  }); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
-
-app.post('/login2', function(request, response) {
-	var $r2 = request.query;
-	response.json($r2);
-}); // end app post login 
 	  
 app.post('/logout', function(request, response){
 	addErr("User logout: " + request.session.user);
