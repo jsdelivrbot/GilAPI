@@ -114,7 +114,9 @@ app.post('/login', function(request, response) {
 					request.session.regenerate(function(){
 					addErr(("User password matches: " + $userName));
 					request.session.user = $userName;
-					response.send('Login Successful');
+			$settingsVar.clientIP = request.ip;
+			$settingsVar.session = request.session;
+			response.json($settingsVar);
 				}); // end request.session.regenerate
 			} else {
 				addErr(("User password not match: " + $userName));
