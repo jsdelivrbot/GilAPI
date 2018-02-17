@@ -124,7 +124,7 @@ app.post('/login', function(request, response) {
 	} else {
 		//Signup
 		addErr(("User not found: " + $userName + " - starting signup."));
-		bcrypt.hash($enteredPassword, null, 10, function($err, $hash){
+		bcrypt.hash($enteredPassword, null, null, function($err, $hash){
 		if ($err) {
 				addErr($err);
 		}; //end if err
