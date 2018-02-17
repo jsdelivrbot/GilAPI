@@ -58,7 +58,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // get information from html
 app.use(cookieParser()); // read cookies (needed for auth)
 
 
-
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
@@ -98,8 +97,8 @@ app.post('/settings.json', function(request, response) {
 });
 
 app.post('/login', function(request, response) {
-    var $userName = request.body.username;
-    var $enteredPassword = request.body.password;
+    var $userName = request.query.username;
+    var $enteredPassword = request.query.password;
 	addErr(("Login for user: " + $userName));
 	
 		addErr(("Searching for user: " + $userName));
@@ -142,7 +141,7 @@ app.post('/login', function(request, response) {
 }); // end app post login 
 
 app.post('/login2', function(request, response) {
-	var $r2 = request.headers;
+	var $r2 = request.query;
 	response.json($r2);
 }); // end app post login 
 	  
