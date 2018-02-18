@@ -28,13 +28,6 @@ var $s3 = new $AWS.S3({
 
 $s3.createBucket($params);
 
-var $userPWHTable = {"initUser": "initPass"};
-var $urlPWHParams = {Bucket: $bucketName, Key: 'userPWHTable.json'};
-$s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
-  addErr('the url of the image is' + url);
-});
-
-
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
@@ -83,6 +76,12 @@ function loadJSON(file, callback) {
     };
     xobj.send(null);  
 };// end loadJSON
+
+var $userPWHTable = {"initUser": "initPass"};
+var $urlPWHParams = {Bucket: $bucketName, Key: 'userPWHTable.json'};
+$s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
+	addErr('the url of the image is' + url);
+});
 
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
