@@ -40,6 +40,7 @@ $s3.getSignedUrl('getObject', urlPWHParams, function(err, url){
 		$userPWHTable = file
 	});
 })
+
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
