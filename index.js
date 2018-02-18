@@ -29,6 +29,9 @@ var $s3 = new $AWS.S3({
 $s3.createBucket($params);
 
 var urlParams = {Bucket: $bucketName, Key: 'Gilgamech.js'};
+$s3.getSignedUrl('getObject', urlParams, function(err, url){
+  addErr('the url of the image is' + url);
+})
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
