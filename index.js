@@ -67,18 +67,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
 
-function loadJSON(file, callback) {   
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            callback(JSON.parse(xobj.responseText));
-          };
-    };
-    xobj.send(null);  
-};// end loadJSON
-
 var $urlPWHTable
 var $userPWHTable = {"initUser": "initPass"};
 var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
