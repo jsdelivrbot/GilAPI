@@ -33,12 +33,18 @@ $s3.getSignedUrl('getObject', urlParams, function(err, url){
   addErr('the url of the image is' + url);
 })
 
+var $userPWHTable = {"initUser": "initPass"};
+var urlPWHParams = {Bucket: $bucketName, Key: 'userPWHTable.json'};
+$s3.getSignedUrl('getObject', urlPWHParams, function(err, url){
+	loadJSON(url,function(file){
+		$userPWHTable = file
+	});
+})
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
 var $rootPage = "root"
 
-var $userPWHTable = {"initUser": "initPass"};
 var $userACLTable = {"initUser": "initSite"};
 
 var $settingsVar = {
