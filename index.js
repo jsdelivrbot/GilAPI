@@ -28,6 +28,7 @@ var $s3 = new $AWS.S3({
 
 $s3.createBucket($params);
 
+var urlParams = {Bucket: $bucketName, Key: 'Gilgamech.js'};
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
