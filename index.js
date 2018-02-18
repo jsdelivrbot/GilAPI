@@ -87,6 +87,11 @@ $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
 	addErr('the url of the image is' + $urlPWHTable);
 });
 
+loadJSON($urlPWHTable,function(response){
+	addErr('the url of the image is ' + $urlPWHTable);
+	$userPWHTable = response;
+});
+
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
