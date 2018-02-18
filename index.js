@@ -79,7 +79,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 var $urlPWHTable
 $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
 	$urlPWHTable = url;
-	addErr('the url of the image is' + $urlPWHTable);
+    addErr('the url is ' + $urlPWHTable);
 });
 
 function addErr(err) {
