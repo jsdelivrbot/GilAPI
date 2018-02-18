@@ -12,9 +12,7 @@ var $AWS = require('aws-sdk');
 var app = express();
 
 var $privateBucket = "gilprivate";
-var $publicBucket = "gilpublic";
 var $privateParams = {Bucket: $privateBucket};
-var $publicParams = {Bucket: $publicBucket};
 
 $AWS.config.update({
     "accessKeyId": process.env.AWS_S3_KEY || "AAAAAAAAAAAAA", 
@@ -33,6 +31,8 @@ var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $rootPage = "root"
+var $publicBucket = "gilpublic";
+var $publicParams = {Bucket: $publicBucket};
 
 var $userACLTable = {"initUser": "initSite"};
 
