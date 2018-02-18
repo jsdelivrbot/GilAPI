@@ -79,13 +79,12 @@ function loadJSON(file, callback) {
     xobj.send(null);  
 };// end loadJSON
 
+var $urlPWHTable
 var $userPWHTable = {"initUser": "initPass"};
 var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
 $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
-	loadJSON(url,function(response){
-		addErr('the url of the image is ' + response);
-		// $userPWHTable = response;
-	});
+	$urlPWHTable = url;
+	addErr('the url of the image is' + $urlPWHTable);
 });
 
 function addErr(err) {
