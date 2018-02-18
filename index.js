@@ -11,8 +11,10 @@ var session = require("express-session");
 var app = express();
 
 var $AWS = require('aws-sdk');
-var $bucketName = "gilprivate";
-var $params = {Bucket: $bucketName};
+var $privateBucket = "gilprivate";
+var $publicBucket = "gilprivate";
+var $privateParams = {Bucket: $privateBucket};
+var $publicParams = {Bucket: $publicBucket};
 // var s3 = new AWS.S3();
 
 $AWS.config.update({
@@ -23,14 +25,14 @@ $AWS.config.update({
 
 var $s3 = new $AWS.S3({
   apiVersion: '2006-03-01',
-  params: $params
+  params: $privateParams
 });
 
-$s3.createBucket($params);
+$s3.createBucket($privateParams);
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
-var $siteBase = "https://s3.amazonaws.com/" + $bucketName
+var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $rootPage = "root"
 
 var $userACLTable = {"initUser": "initSite"};
@@ -78,7 +80,7 @@ function loadJSON(file, callback) {
 };// end loadJSON
 
 var $userPWHTable = {"initUser": "initPass"};
-var $urlPWHParams = {Bucket: $bucketName, Key: 'userPWHTable.json'};
+var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
 $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
 	addErr('the url of the image is' + url);
 });
