@@ -34,13 +34,6 @@ $s3.getSignedUrl('getObject', urlParams, function(err, url){
 })
 
 var $userPWHTable = {"initUser": "initPass"};
-var urlPWHParams = {Bucket: $bucketName, Key: 'userPWHTable.json'};
-$s3.getSignedUrl('getObject', urlPWHParams, function(err, url){
-	loadJSON(url,function(file){
-		$userPWHTable = file
-	});
-})
-
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
@@ -77,33 +70,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
-
-function loadJSON(file, callback) {   
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            callback(JSON.parse(xobj.responseText));
-          };
-    };
-    xobj.send(null);  
-};// end loadJSON
-
-function postJSON(file, callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("text/plain");
-    xobj.open('POST', file, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(JSON.parse(xobj.responseText));
-          }
-    };
-    xobj.send(null);  
-};// end loadJSON
-
-
 
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
