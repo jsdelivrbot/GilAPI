@@ -28,6 +28,7 @@ var $s3 = new $AWS.S3({
 $s3.createBucket($privateParams);
 
 var $userPWHTable;
+var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
@@ -68,7 +69,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // get information from html
 app.use(cookieParser()); // read cookies (needed for auth)
 
 var $urlPWHTable
-var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
 $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
 	$urlPWHTable = url;
 	addErr('the url of the image is' + $urlPWHTable);
