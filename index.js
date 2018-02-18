@@ -25,6 +25,9 @@ var $s3 = new $AWS.S3({
   apiVersion: '2006-03-01',
   params: $params
 });
+
+$s3.createBucket($params);
+
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $siteBase = "https://s3.amazonaws.com/" + $bucketName
