@@ -48,7 +48,12 @@ var $settingsVar = {
 	fruitbottie:0
 };
 
-app.use(require('express-session')({ secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', resave: true, saveUninitialized: true, maxAge: null}));
+app.use(require('express-session')({
+	secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', 
+	resave: true, 
+	saveUninitialized: true, 
+	maxAge: null
+}));
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
@@ -57,7 +62,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
-
 
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
