@@ -76,10 +76,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.use(cookieParser()); // read cookies (needed for auth)
 
-var $urlPWHTable
 $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
-	$urlPWHTable = url;
-    addErr('the url is ' + $urlPWHTable);
+    addErr('the url is ' + url);
 });
 
 function addErr(err) {
