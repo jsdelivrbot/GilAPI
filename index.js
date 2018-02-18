@@ -12,6 +12,7 @@ var app = express();
 
 var AWS = require('aws-sdk');
 var $bucketName = "gilpublic";
+var $params = {Bucket: $bucketName};
 // var s3 = new AWS.S3();
 var s3 = new AWS.S3({
   apiVersion: '2006-03-01',
