@@ -31,9 +31,9 @@ var $userPWHTable;
 var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
-var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $rootPage = "root"
 var $publicBucket = "gilpublic";
+var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
 var $userACLTable = {"initUser": "initSite"};
