@@ -7,15 +7,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
+var $AWS = require('aws-sdk');
 
 var app = express();
 
-var $AWS = require('aws-sdk');
 var $privateBucket = "gilprivate";
 var $publicBucket = "gilpublic";
 var $privateParams = {Bucket: $privateBucket};
 var $publicParams = {Bucket: $publicBucket};
-// var s3 = new AWS.S3();
 
 $AWS.config.update({
     "accessKeyId": process.env.AWS_S3_KEY || "AAAAAAAAAAAAA", 
