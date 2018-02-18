@@ -12,7 +12,7 @@ var app = express();
 
 var $AWS = require('aws-sdk');
 var $privateBucket = "gilprivate";
-var $publicBucket = "gilprivate";
+var $publicBucket = "gilpublic";
 var $privateParams = {Bucket: $privateBucket};
 var $publicParams = {Bucket: $publicBucket};
 // var s3 = new AWS.S3();
