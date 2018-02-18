@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
+var Gilgamech = require("https://s3.amazonaws.com/gilpublic/Gilgamech.js");
 
 var app = express();
 
