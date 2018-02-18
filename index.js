@@ -29,6 +29,14 @@ $s3.createBucket($privateParams);
 
 var $userPWHTable;
 var $urlPWHParams = {Bucket: $privateBucket, Key: 'userPWHTable.json'};
+$s3.getObject($urlPWHParams, function(err, dataStream){
+	$urlPWHTable = dataStream;
+	addErr(dataStream);
+	if (err) {
+		addErr(err);
+	}; // end if err
+}); // end s3 getObject
+
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $rootPage = "root"
@@ -73,14 +81,6 @@ $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
 	$urlPWHTable = url;
 	addErr('the url of the image is' + $urlPWHTable);
 });
-
-$s3.getObject($urlPWHParams, function(err, dataStream){
-	$urlPWHTable = dataStream;
-	addErr(dataStream);
-	if (err) {
-		addErr(err);
-	}; // end if err
-}); // end s3 getObject
 
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
