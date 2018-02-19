@@ -154,7 +154,13 @@ app.post('/login', function(request, response) {
 		}; //end if err
 		$userPWHTable[$userName] = $hash
 		  
-$s3.putObject({ Bucket: $privateBucket, Key: "userPWHTable.json", Body: JSON.stringify($userPWHTable) }, function(err, data) {
+	var $putParams = {
+		Bucket: $privateBucket,
+		Key: "userPWHTable.json", 
+		Body: JSON.stringify($userPWHTable)
+		ContentType: "application/json"
+	};
+$s3.putObject($putParams, function(err, data) {
 	if (err) {
 		addErr(err);
 	}; // end if err
