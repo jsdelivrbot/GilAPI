@@ -33,9 +33,9 @@ var $urlPWHParams = {
 	Key: 'userPWHTable.json'
 };
 $s3.getObject($urlPWHParams, function(err, dataStream){
-	addErr(JSON.stringify(dataStream));
 try {
 	
+	addErr(JSON.stringify(dataStream.Body.toString('utf-8')));
 	if (err) {
 		addErr(err);
 	}; // end if err
