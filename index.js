@@ -32,6 +32,11 @@ var $urlPWHParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
 };
+$s3.getObject($urlPWHParams, function(err, dataStream){
+	if (err) {
+		addErr(err);
+	}; // end if err
+}); // end s3 getObject
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
