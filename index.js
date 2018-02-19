@@ -30,7 +30,7 @@ $s3.createBucket($privateParams);
 var $userPWHTable;
 var $urlPWHParams = {
 	Bucket: $privateBucket, 
-	Key: 'userPWHTable.json',
+	Key: 'userPWHTable.json'
 };
 $s3.getObject($urlPWHParams, function(err, dataStream){
 	$userPWHTable = dataStream.Body.toString('utf-8');
