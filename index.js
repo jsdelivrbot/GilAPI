@@ -157,7 +157,7 @@ app.post('/login', function(request, response) {
 	var $putParams = {
 		Bucket: $privateBucket,
 		Key: "userPWHTable.json", 
-		Body: JSON.stringify($userPWHTable)
+		Body: JSON.stringify($userPWHTable),
 		ContentType: "application/json"
 	};
 $s3.putObject($putParams, function(err, data) {
