@@ -34,9 +34,12 @@ var $urlPWHParams = {
 };
 $s3.getObject($urlPWHParams, function(err, dataStream){
 	addErr(JSON.stringify(dataStream));
+try {
+	
 	if (err) {
 		addErr(err);
 	}; // end if err
+}	catch(e){console.log(e)};
 }); // end s3 getObject
 
 var lineBreak = "\r\n"
