@@ -31,10 +31,9 @@ var $userPWHTable;
 var $urlPWHParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json',
-	ResponseContentType: "application/json"
 };
 $s3.getObject($urlPWHParams, function(err, dataStream){
-	$userPWHTable = dataStream;
+	$userPWHTable = dataStream.Body.toString('utf-8');
 	addErr(JSON.stringify(dataStream));
 	if (err) {
 		addErr(err);
