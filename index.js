@@ -50,6 +50,17 @@ var $serverParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
 };
+$s3.getObject($serverParams, function(err, dataStream){
+try {
+	
+	$serverSettings = JSON.parse(dataStream.Body.toString('utf-8'));
+	addErr(JSON.stringify($serverSettings));
+	if (err) {
+		addErr(err);
+	}; // end if err
+}	catch(e){console.log(e)};
+}); // end s3 getObject
+
 var $aclParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
