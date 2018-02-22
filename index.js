@@ -50,6 +50,10 @@ var $serverParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
 };
+var $aclParams = {
+	Bucket: $privateBucket, 
+	Key: 'userPWHTable.json'
+};
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $rootPage = "root"
