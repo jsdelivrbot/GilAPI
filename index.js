@@ -48,7 +48,7 @@ try {
 
 var $serverParams = {
 	Bucket: $privateBucket, 
-	Key: 'userPWHTable.json'
+	Key: 'settings.json'
 };
 $s3.getObject($serverParams, function(err, dataStream){
 try {
@@ -63,7 +63,7 @@ try {
 
 var $aclParams = {
 	Bucket: $privateBucket, 
-	Key: 'userPWHTable.json'
+	Key: 'ACL.json'
 };
 $s3.getObject($aclParams, function(err, dataStream){
 try {
