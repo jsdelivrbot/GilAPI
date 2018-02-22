@@ -28,6 +28,9 @@ var $s3 = new $AWS.S3({
 $s3.createBucket($privateParams);
 
 var $userPWHTable;
+var $serverSettings; 
+var $aclTable;
+
 var $urlPWHParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
