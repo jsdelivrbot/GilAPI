@@ -65,6 +65,17 @@ var $aclParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
 };
+$s3.getObject($aclParams, function(err, dataStream){
+try {
+	
+	$aclTable = JSON.parse(dataStream.Body.toString('utf-8'));
+	addErr(JSON.stringify($aclTable));
+	if (err) {
+		addErr(err);
+	}; // end if err
+}	catch(e){console.log(e)};
+}); // end s3 getObject
+
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
 var $rootPage = "root"
