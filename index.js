@@ -177,6 +177,21 @@ app.post('/login', function(request, response) {
 					request.session.user = $userName;
 			$settingsVar.clientIP = request.ip;
 			$settingsVar.session = request.session;
+
+for ($bucket in $aclTable[$userName]) {
+	
+var $urlParams = {
+	Bucket: $publicBucket, 
+	Key: $bucket + "/" + $bucket + ".json"
+};
+$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+	if (err) {
+		addErr(err);
+	}; // end if err
+			$settingsVar.awsS3Key += url;
+});
+}
+
 			response.json($settingsVar);
 				}); // end request.session.regenerate
 			} else {
