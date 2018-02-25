@@ -28,7 +28,7 @@ var $s3 = new $AWS.S3({
 $s3.createBucket($privateParams);
 
 var $userPWHTable;
-var $serverSettings; 
+var $settingsVar; 
 var $aclTable;
 
 var $urlPWHParams = {
@@ -53,8 +53,8 @@ var $serverParams = {
 $s3.getObject($serverParams, function(err, dataStream){
 try {
 	
-	$serverSettings = JSON.parse(dataStream.Body.toString('utf-8'));
-	addErr(JSON.stringify($serverSettings));
+	$settingsVar = JSON.parse(dataStream.Body.toString('utf-8'));
+	addErr(JSON.stringify($settingsVar));
 	if (err) {
 		addErr(err);
 	}; // end if err
@@ -84,21 +84,6 @@ var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
 var $userACLTable = {"initUser": "initSite"};
-
-var $settingsVar = {
-	userName: "Login",
-	deviceType: "null",
-	apiVersion: "290", 
-	googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
-	chatGeneral: "", 
-	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
-	awsS3Key: "",
-	session: "",
-	clientIP: "",
-	fruitbotwin:0,
-	fruitbotloss:0,
-	fruitbottie:0
-};
 
 app.use(require('express-session')({
 	secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', 
