@@ -85,6 +85,36 @@ var $publicParams = {Bucket: $publicBucket};
 
 var $userACLTable = {"initUser": "initSite"};
 
+var $settingsVar = {
+	userName: "Login",
+	deviceType: "null",
+	apiVersion: "290", 
+	googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
+	chatGeneral: "", 
+	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
+	awsS3Key: "",
+	session: "",
+	clientIP: "",
+	fruitbotwin:0,
+	fruitbotloss:0,
+	fruitbottie:0
+};
+
+var $settingsVar = {
+	userName: "Login",
+	deviceType: "null",
+	apiVersion: "290", 
+	googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
+	chatGeneral: "", 
+	errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
+	awsS3Key: "",
+	session: "",
+	clientIP: "",
+	fruitbotwin:0,
+	fruitbotloss:0,
+	fruitbottie:0
+};
+
 app.use(require('express-session')({
 	secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', 
 	resave: true, 
