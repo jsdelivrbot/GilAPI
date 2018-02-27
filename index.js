@@ -193,11 +193,9 @@ app.post('/login', function(request, response) {
 			$settingsVar.clientIP = request.ip;
 			$settingsVar.session = request.session;
 
-for ($bucket in $aclTable[$userName]) {
-	
 var $urlParams = {
 	Bucket: $publicBucket, 
-	Key: $bucket + "/" + $bucket + ".json"
+	Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
 };
 $s3.getSignedUrl('putObject', $urlParams, function(err, url){
 	if (err) {
@@ -205,7 +203,6 @@ $s3.getSignedUrl('putObject', $urlParams, function(err, url){
 	}; // end if err
 			$settingsVar.awsS3Key += url;
 });
-}
 
 			response.json($settingsVar);
 				}); // end request.session.regenerate
