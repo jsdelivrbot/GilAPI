@@ -196,7 +196,7 @@ app.post('/login', function(request, response) {
 for ($bucket in $aclTable[$userName]) {
 	
 var $urlParams = {
-	ContentType: "application/json"
+	ContentType: "application/json",
 	Bucket: $publicBucket, 
 	Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
 };
