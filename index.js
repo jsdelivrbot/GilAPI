@@ -196,6 +196,7 @@ app.post('/login', function(request, response) {
 for ($bucket in $aclTable[$userName]) {
 	
 var $urlParams = {
+	headers: {'Content-Type': 'text/plain;charset=UTF-8'},
 	Bucket: $publicBucket, 
 	Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
 };
