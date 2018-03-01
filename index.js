@@ -183,6 +183,7 @@ if ($aclTable[$userName]) {
 	
 var $urlParams = {
 	ContentType: "text/plain;charset=UTF-8",
+	ACL: 'public-read',
 	Bucket: $publicBucket, 
 	Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
 };
