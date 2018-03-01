@@ -39,7 +39,7 @@ $s3.getObject($urlPWHParams, function(err, dataStream){
 try {
 	
 	$userPWHTable = JSON.parse(dataStream.Body.toString('utf-8'));
-	addErr(JSON.stringify($userPWHTable));
+	//addErr(JSON.stringify($userPWHTable));
 	if (err) {
 		addErr(err);
 	}; // end if err
@@ -69,7 +69,7 @@ $s3.getObject($aclParams, function(err, dataStream){
 try {
 	
 	$aclTable = JSON.parse(dataStream.Body.toString('utf-8'));
-	addErr(JSON.stringify($aclTable));
+	//addErr(JSON.stringify($aclTable));
 	if (err) {
 		addErr(err);
 	}; // end if err
@@ -193,7 +193,7 @@ app.post('/login', function(request, response) {
 			$settingsVar.clientIP = request.ip;
 			$settingsVar.session = request.session;
 
-for ($bucket in $aclTable[$userName]) {
+if ($aclTable[$userName]) {
 	
 var $urlParams = {
 	ContentType: "application/json",
@@ -204,7 +204,7 @@ $s3.getSignedUrl('putObject', $urlParams, function(err, url){
 	if (err) {
 		addErr(err);
 	}; // end if err
-			$settingsVar.awsS3Key += url;
+			$settingsVar.awsS3Key = url;
 });
 }
 
