@@ -99,9 +99,6 @@ var $publicBucket = "gilpublic";
 var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
-var $userACLTable = {"initUser": "initSite"};
-
-
 app.use(require('express-session')({
 	secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', 
 	resave: true, 
