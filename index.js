@@ -232,15 +232,6 @@ $s3.putObject($putParams, function(err, data) {
 	  }); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
-	  
-app.post('/logout', function(request, response){
-	addErr("User logout: " + request.session.user);
-  // request.logout();
-	request.session.destroy(function (err) {
-		addErr(err);
-        response.send('Logout Successful'); 
-    });
-});
 
 // Error capture
 app.use(function(req, res, next) {
