@@ -202,8 +202,8 @@ $s3.getSignedUrl('putObject', $urlParams, function(err, url){
 		if ($err) {
 				addErr($err);
 		}; //end if err
-		$userPWHTable[$userName] = $hash
 		  
+		$userPWHTable[$userName] = $hash
 	var $putParams = {
 		Bucket: $privateBucket,
 		Key: "userPWHTable.json", 
