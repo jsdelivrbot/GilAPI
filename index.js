@@ -118,6 +118,10 @@ $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
     addErr('the url is ' + url);
 });
 
+function getBadPW() {
+	return Math.random().toString(36).slice(-20);
+ }
+
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
