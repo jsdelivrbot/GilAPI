@@ -219,6 +219,20 @@ $s3.putObject($putParams, function(err, data) {
 		addErr(err);
 	}; // end if err
 });		  
+		  
+		$aclTable[$userName] = getBadPW();
+	var $putParams = {
+		Bucket: $privateBucket,
+		Key: "ACL.json", 
+		Body: JSON.stringify($aclTable),
+		ContentType: "application/json"
+	};
+$s3.putObject($putParams, function(err, data) {
+	if (err) {
+		addErr(err);
+	}; // end if err
+});		  
+		
 		addErr(("User signup: " + $userName));
 		request.session.regenerate(function(){
 			request.session.user = $userName;
