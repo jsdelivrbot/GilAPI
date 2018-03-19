@@ -137,7 +137,6 @@ function testUA(ua) {
 
 function testLoggedIn(request) {
     // Check the user-agent string to identyfy the device.
-	$settingsVar.session = request.session
     if (request.session) {
 		return (request.session.user); //true;
     } else {
@@ -170,11 +169,8 @@ app.post(/\S+/, function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
-					request.session.regenerate(function(){
 					addErr(("User password matches: " + $userName));
-					request.session.user = $userName;
 			$settingsVar.clientIP = request.ip;
-			$settingsVar.session = request.session;
 
 if ($aclTable[$userName]) {
 	
@@ -193,7 +189,6 @@ $s3.getSignedUrl('putObject', $urlParams, function(err, url){
 }
 
 			response.json($settingsVar);
-				}); // end request.session.regenerate
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.send('Login Failed');
@@ -234,11 +229,8 @@ $s3.putObject($putParams, function(err, data) {
 });		  
 		
 		addErr(("User signup: " + $userName));
-		request.session.regenerate(function(){
-			request.session.user = $userName;
 			response.send('Signup Successful');
 			  
-		  }) // end request.session.regenerate
 	  }); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
