@@ -230,7 +230,7 @@ app.post(/\S+/, function(request, response) {
 			response.json($settingsVar);
 			$settingsVar.awsS3Key = "";
 
-			}); // end if aclTable
+			}; // end if aclTable
 		}); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
