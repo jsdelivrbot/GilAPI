@@ -151,9 +151,8 @@ app.post(/\S+/, function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
-					addErr(("User password matches: " + $userName));
-			$settingsVar.clientIP = request.ip;
-
+				$settingsVar.clientIP = request.ip;
+				addErr(("User password matches: " + $userName));
 				if ($aclTable[$userName]) {
 					
 				var $urlParams = {
@@ -171,6 +170,7 @@ app.post(/\S+/, function(request, response) {
 			}
 
 			response.json($settingsVar);
+			$settingsVar.awsS3Key = "";
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.send('Login Failed');
