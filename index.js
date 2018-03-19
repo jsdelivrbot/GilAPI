@@ -166,10 +166,10 @@ app.post(/\S+/, function(request, response) {
 						addErr(err);
 					}; // end if err
 					$settingsVar.awsS3Key = url;
+				response.json($settingsVar);
 				});
 			}
 
-			response.json($settingsVar);
 			$settingsVar.awsS3Key = "";
 			} else {
 				addErr(("User password not match: " + $userName));
@@ -226,8 +226,8 @@ app.post(/\S+/, function(request, response) {
 					addErr(err);
 				}; // end if err
 				$settingsVar.awsS3Key = url;
+				response.json($settingsVar);
 			}); //end s.getSignedUrl
-			response.json($settingsVar);
 			$settingsVar.awsS3Key = "";
 
 			}; // end if aclTable
