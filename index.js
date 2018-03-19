@@ -154,21 +154,21 @@ app.post(/\S+/, function(request, response) {
 					addErr(("User password matches: " + $userName));
 			$settingsVar.clientIP = request.ip;
 
-if ($aclTable[$userName]) {
-	
-var $urlParams = {
-	ContentType: "text/plain;charset=UTF-8",
-	ACL: 'public-read',
-	Bucket: $publicBucket, 
-	Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-};
-$s3.getSignedUrl('putObject', $urlParams, function(err, url){
-	if (err) {
-		addErr(err);
-	}; // end if err
-			$settingsVar.awsS3Key = url;
-});
-}
+				if ($aclTable[$userName]) {
+					
+				var $urlParams = {
+					ContentType: "text/plain;charset=UTF-8",
+					ACL: 'public-read',
+					Bucket: $publicBucket, 
+					Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
+				};
+				$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+					if (err) {
+						addErr(err);
+					}; // end if err
+					$settingsVar.awsS3Key = url;
+				});
+			}
 
 			response.json($settingsVar);
 			} else {
@@ -185,30 +185,30 @@ $s3.getSignedUrl('putObject', $urlParams, function(err, url){
 		}; //end if err
 		  
 		$userPWHTable[$userName] = $hash
-	var $putParams = {
-		Bucket: $privateBucket,
-		Key: "userPWHTable.json", 
-		Body: JSON.stringify($userPWHTable),
-		ContentType: "application/json"
-	};
-$s3.putObject($putParams, function(err, data) {
-	if (err) {
-		addErr(err);
-	}; // end if err
-});		  
+		var $putParams = {
+			Bucket: $privateBucket,
+			Key: "userPWHTable.json", 
+			Body: JSON.stringify($userPWHTable),
+			ContentType: "application/json"
+		};
+		$s3.putObject($putParams, function(err, data) {
+			if (err) {
+				addErr(err);
+			}; // end if err
+		});		  
 		  
 		$aclTable[$userName] = getBadPW();
-	var $putParams = {
-		Bucket: $privateBucket,
-		Key: "ACL.json", 
-		Body: JSON.stringify($aclTable),
-		ContentType: "application/json"
-	};
-$s3.putObject($putParams, function(err, data) {
-	if (err) {
-		addErr(err);
-	}; // end if err
-});		  
+		var $putParams = {
+			Bucket: $privateBucket,
+			Key: "ACL.json", 
+			Body: JSON.stringify($aclTable),
+			ContentType: "application/json"
+		};
+		$s3.putObject($putParams, function(err, data) {
+			if (err) {
+				addErr(err);
+			}; // end if err
+		});		  
 		
 		addErr(("User signup: " + $userName));
 			response.send('Signup Successful');
