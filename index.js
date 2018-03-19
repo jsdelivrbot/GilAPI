@@ -126,24 +126,6 @@ function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
 
-function testUA(ua) {
-    // Check the user-agent string to identyfy the device.
-    if(/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile|ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i.test(ua)) {
-		return 'mobile'
-    } else {
-		return  'web'
-    }
-};
-
-function testLoggedIn(request) {
-    // Check the user-agent string to identyfy the device.
-    if (request.session) {
-		return (request.session.user); //true;
-    } else {
-		return "Login"; //false;
-    }; // end if request
-};
-
 // Page calls
 app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
