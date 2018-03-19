@@ -215,21 +215,22 @@ app.post(/\S+/, function(request, response) {
 		$settingsVar.clientIP = request.ip;
 		if ($aclTable[$userName]) {
 			
-		var $urlParams = {
-			ContentType: "text/plain;charset=UTF-8",
-			ACL: 'public-read',
-			Bucket: $publicBucket, 
-			Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-		};
-		$s3.getSignedUrl('putObject', $urlParams, function(err, url){
-			if (err) {
-				addErr(err);
-			}; // end if err
-			$settingsVar.awsS3Key = url;
-		});
-		response.json($settingsVar);
-		$settingsVar.awsS3Key = "";
+			var $urlParams = {
+				ContentType: "text/plain;charset=UTF-8",
+				ACL: 'public-read',
+				Bucket: $publicBucket, 
+				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
+			}; //end urlParams
+			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+				if (err) {
+					addErr(err);
+				}; // end if err
+				$settingsVar.awsS3Key = url;
+			}); //end s.getSignedUrl
+			response.json($settingsVar);
+			$settingsVar.awsS3Key = "";
 
+			}); // end if aclTable
 		}); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
