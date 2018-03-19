@@ -211,9 +211,26 @@ app.post(/\S+/, function(request, response) {
 		});		  
 		
 		addErr(("User signup: " + $userName));
-			response.send('Signup Successful');
-			  
-	  }); // end bcrypt.hash
+
+		$settingsVar.clientIP = request.ip;
+		if ($aclTable[$userName]) {
+			
+		var $urlParams = {
+			ContentType: "text/plain;charset=UTF-8",
+			ACL: 'public-read',
+			Bucket: $publicBucket, 
+			Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
+		};
+		$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+			if (err) {
+				addErr(err);
+			}; // end if err
+			$settingsVar.awsS3Key = url;
+		});
+		response.json($settingsVar);
+		$settingsVar.awsS3Key = "";
+
+		}); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
 
