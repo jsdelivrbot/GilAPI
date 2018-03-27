@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
 var $AWS = require('aws-sdk');
+var stripe = require("stripe")(process.env.STRIPE_KEY || 'sk_test_abcdef1234567890');
 
 var app = express();
 
