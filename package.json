@@ -17,7 +17,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.18.2",
     "express-session": "1.15.6",
-    "express-limiter": "1.6.1",
+    "stripe": "5.6.1",
     "aws-sdk": "2.188.0"
   },
   "devDependencies": {
