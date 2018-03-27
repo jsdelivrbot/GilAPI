@@ -32,7 +32,6 @@ var $userPWHTable;
 var $settingsVar; 
 var $aclTable;
 
-if (process.env.STRIPE_KEY) {
 var $urlPWHParams = {
 	Bucket: $privateBucket, 
 	Key: 'userPWHTable.json'
@@ -93,7 +92,6 @@ try {
 	}; // end if err
 }	catch(e){console.log(e)};
 }); // end s3 getObject
-}
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
