@@ -142,7 +142,6 @@ app.post(/\S+/, function(request, response) {
     var $enteredPassword = request.query.password;
 	addErr(("Login for user: " + $userName));
 	
-		addErr(("Searching for user: " + $userName));
 	if ($userPWHTable[$userName]) {
 		$pwhash = $userPWHTable[$userName];
 		addErr(("User found: " + $userName));
@@ -152,8 +151,12 @@ app.post(/\S+/, function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
-				$settingsVar.clientIP = request.ip;
 				addErr(("User password matches: " + $userName));
+				request.session.user = $userName;
+				$settingsVar.clientIP = request.ip;
+				$settingsVar.request = request;
+				$settingsVar.requestInfo = JSON.stringify(request);
+				$settingsVar.session = request.session;
 				if ($aclTable[$userName]) {
 					var $urlParams = {
 						ContentType: "text/plain;charset=UTF-8",
