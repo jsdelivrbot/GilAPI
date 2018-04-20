@@ -152,8 +152,9 @@ app.post(/\S+/, function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
-				$settingsVar.clientIP = request.ip;
 				addErr(("User password matches: " + $userName));
+				$settingsVar.clientIP = request.ip;
+				$settingsVar.requestInfo = JSON.stringify(request);
 				if ($aclTable[$userName]) {
 					var $urlParams = {
 						ContentType: "text/plain;charset=UTF-8",
@@ -212,6 +213,7 @@ app.post(/\S+/, function(request, response) {
 		addErr(("User signup: " + $userName));
 
 		$settingsVar.clientIP = request.ip;
+				$settingsVar.requestInfo = JSON.stringify(request);
 		if ($aclTable[$userName]) {
 			
 			var $urlParams = {
