@@ -154,7 +154,6 @@ app.post(/\S+/, function(request, response) {
 				addErr(("User password matches: " + $userName));
 				request.session.user = $userName;
 				$settingsVar.clientIP = request.ip;
-				$settingsVar.request = request;
 				$settingsVar.requestInfo = JSON.stringify(request);
 				$settingsVar.session = request.session;
 				if ($aclTable[$userName]) {
