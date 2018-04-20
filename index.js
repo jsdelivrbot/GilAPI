@@ -153,24 +153,23 @@ app.post(/\S+/, function(request, response) {
 			}; //end if err
 			if ($userFound) {
 				addErr(("User password matches: " + $userName));
-				$settingsVar.clientIP = request.ip;
-				console.log(request);
-				if ($aclTable[$userName]) {
-					var $urlParams = {
-						ContentType: "text/plain;charset=UTF-8",
-						ACL: 'public-read',
-						Bucket: $publicBucket, 
-						Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-					};
-					$s3.getSignedUrl('putObject', $urlParams, function(err, url){
-						if (err) {
-							addErr(err);
-						}; // end if err
-						$settingsVar.awsS3Key = url;
-						response.json($settingsVar);
-					}); // end s3
-				}; // end if aclTable
 				$settingsVar.awsS3Key = "";
+					$settingsVar.clientIP = request.ip;
+					console.log(request);
+					if ($aclTable[$userName]) {
+						var $urlParams = {
+							ContentType: "text/plain;charset=UTF-8",
+							ACL: 'public-read',
+							Bucket: $publicBucket, 
+							Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
+						};
+						$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+							if (err) {
+								addErr(err);
+							}; // end if err
+							$settingsVar.awsS3Key[$site] = url;
+						}); // end s3
+					}; // end if aclTable
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.send('Login Failed');
@@ -180,55 +179,54 @@ app.post(/\S+/, function(request, response) {
 		//Signup
 		addErr(("User not found: " + $userName + " - starting signup."));
 		bcrypt.hash($enteredPassword, null, null, function($err, $hash){
-		if ($err) {
-				addErr($err);
-		}; //end if err
-		  
-		$userPWHTable[$userName] = $hash
-		var $putParams = {
-			Bucket: $privateBucket,
-			Key: "userPWHTable.json", 
-			Body: JSON.stringify($userPWHTable),
-			ContentType: "application/json"
-		};
-		$s3.putObject($putParams, function(err, data) {
-			if (err) {
-				addErr(err);
-			}; // end if err
-		});		  
-		
-		$aclTable[$userName] = getBadPW();
-		var $putParams = {
-			Bucket: $privateBucket,
-			Key: "ACL.json", 
-			Body: JSON.stringify($aclTable),
-			ContentType: "application/json"
-		};
-		$s3.putObject($putParams, function(err, data) {
-			if (err) {
-				addErr(err);
-			}; // end if err
-		}); // end s3
-		
-		addErr(("User signup: " + $userName));
-
-		$settingsVar.clientIP = request.ip;
-		if ($aclTable[$userName]) {
+			if ($err) {
+					addErr($err);
+			}; //end if err
+			  
+			$userPWHTable[$userName] = $hash
+			var $putParams = {
+				Bucket: $privateBucket,
+				Key: "userPWHTable.json", 
+				Body: JSON.stringify($userPWHTable),
+				ContentType: "application/json"
+			};
+			$s3.putObject($putParams, function(err, data) {
+				if (err) {
+					addErr(err);
+				}; // end if err
+			});		  
 			
-			var $urlParams = {
-				ContentType: "text/plain;charset=UTF-8",
-				ACL: 'public-read',
-				Bucket: $publicBucket, 
-				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-			}; //end urlParams
-			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+			$aclTable[$userName] = getBadPW();
+			var $putParams = {
+				Bucket: $privateBucket,
+				Key: "ACL.json", 
+				Body: JSON.stringify($aclTable),
+				ContentType: "application/json"
+			};
+			$s3.putObject($putParams, function(err, data) {
 				if (err) {
 					addErr(err);
 				}; // end if err
 				$settingsVar.awsS3Key = url;
 				response.json($settingsVar);
-			}); //end s.getSignedUrl
 			$settingsVar.awsS3Key = "";
+			}); // end s3
+			
+			addErr(("User signup: " + $userName));
+
+			$settingsVar.clientIP = request.ip;
+			if ($aclTable[$userName]) {
+				var $urlParams = {
+					ContentType: "text/plain;charset=UTF-8",
+					ACL: 'public-read',
+					Bucket: $publicBucket, 
+					Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
+				}; //end urlParams
+				$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+					if (err) {
+						addErr(err);
+					}; // end if err
+				}); //end s.getSignedUrl
 
 			}; // end if aclTable
 	  }); // end bcrypt.hash
