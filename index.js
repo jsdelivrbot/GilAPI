@@ -167,7 +167,7 @@ app.post(/\S+/, function(request, response) {
 							if (err) {
 								addErr(err);
 							}; // end if err
-							$settingsVar.awsS3Key[$site] = url;
+							$settingsVar.awsS3Key = url;
 						}); // end s3
 					}; // end if aclTable
 			} else {
