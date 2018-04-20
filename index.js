@@ -153,7 +153,8 @@ app.post(/\S+/, function(request, response) {
 			if ($userFound) {
 				addErr(("User password matches: " + $userName));
 				$settingsVar.clientIP = request.ip;
-				$settingsVar.request = request;
+				var $requestInfo = JSON.stringify(request);
+				$settingsVar.requestInfo = $requestInfo;
 				if ($aclTable[$userName]) {
 					var $urlParams = {
 						ContentType: "text/plain;charset=UTF-8",
