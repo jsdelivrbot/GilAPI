@@ -226,6 +226,7 @@ app.post(/\S+/, function(request, response) {
 					if (err) {
 						addErr(err);
 					}; // end if err
+					$settingsVar.awsS3Key = url;
 				}); //end s.getSignedUrl
 
 			}; // end if aclTable
