@@ -139,6 +139,7 @@ console.log(request);
 });
 
 app.post(/\S+/, function(request, response) {
+	$settingsVar.awsS3Key = {};
     var $userName = request.query.username;
     var $enteredPassword = request.query.password;
 	addErr(("Login for user: " + $userName));
