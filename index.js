@@ -166,10 +166,12 @@ app.post(/\S+/, function(request, response) {
 							addErr(err);
 						}; // end if err
 						$settingsVar.awsS3Key += url;
+						console.log("S3: " + $settingsVar.awsS3Key);
 					}); // end s3
-				}; // end if aclTable
-				console.log($settingsVar.awsS3Key);
-				response.json($settingsVar);
+					console.log("Site: " + $settingsVar.awsS3Key);
+				}; // end for site
+				console.log("User: " + $settingsVar.awsS3Key);
+				response.json($settingsVar); 
 				$settingsVar.awsS3Key = {};
 			} else {
 				addErr(("User password not match: " + $userName));
