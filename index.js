@@ -167,10 +167,10 @@ app.post(/\S+/, function(request, response) {
 							addErr(err);
 						}; // end if err
 						$settingsVar.awsS3Key = url;
-						response.json($settingsVar);
 					}); // end s3
 				}; // end if aclTable
 				$settingsVar.awsS3Key = "";
+				response.json($settingsVar);
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.send('Login Failed');
