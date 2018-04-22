@@ -138,7 +138,7 @@ app.get(/\S+/, function(request, response) {
 });
 
 app.post(/\S+/, function(request, response) {
-	$settingsVar.awsS3Key = {};
+	$settingsVar.awsS3Key = [];
     var $userName = request.query.username;
     var $enteredPassword = request.query.password;
 	addErr(("Login for user: " + $userName));
@@ -172,7 +172,7 @@ app.post(/\S+/, function(request, response) {
 				}; // end for site
 				console.log("User: " + $settingsVar.awsS3Key);
 				response.json($settingsVar); 
-				$settingsVar.awsS3Key = {};
+				$settingsVar.awsS3Key = [];
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.send('Login Failed');
