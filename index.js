@@ -167,15 +167,17 @@ app.post(/\S+/, function(request, response) {
 						}; // end if err
 						$settingsVar.awsS3Key += url;
 						console.log("S3: " + $settingsVar.awsS3Key);
+						response.json($settingsVar); 
+						$settingsVar.awsS3Key = [];
 					}); // end s3
 					console.log("Site: " + $settingsVar.awsS3Key);
 				}; // end for site
 				console.log("User: " + $settingsVar.awsS3Key);
-				response.json($settingsVar); 
-				$settingsVar.awsS3Key = [];
 			} else {
 				addErr(("User password not match: " + $userName));
-				response.send('Login Failed');
+				$settingsVar.awsS3Key += "Not Found";
+				response.json($settingsVar);
+				$settingsVar.awsS3Key = [];
 			}; //end if userFound
 		}); // end bcrypt.compare
 	} else {
@@ -212,7 +214,7 @@ app.post(/\S+/, function(request, response) {
 			}; // end if err
 		}); // end s3
 		
-		addErr(("User signup: " + $userName));
+		addErr(("User password stored: " + $userName));
 
 		$settingsVar.clientIP = request.ip;
 		if ($aclTable[$userName]) {
@@ -227,12 +229,12 @@ app.post(/\S+/, function(request, response) {
 				if (err) {
 					addErr(err);
 				}; // end if err
-				$settingsVar.awsS3Key = url;
-				response.json($settingsVar);
+				$settingsVar.awsS3Key += url;
+			response.json($settingsVar);
+			$settingsVar.awsS3Key = [];
 			}); //end s.getSignedUrl
-			$settingsVar.awsS3Key = "";
 
-			}; // end if aclTable
+			}; // end for site
 	  }); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
