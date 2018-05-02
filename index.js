@@ -166,6 +166,7 @@ app.post(/\S+/, function(request, response) {
 							addErr(err);
 						}; // end if err
 						$settingsVar.awsS3Key += url;
+						$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
 						console.log("S3: " + $settingsVar.awsS3Key);
 						response.json($settingsVar); 
 						$settingsVar.awsS3Key = [];
@@ -229,7 +230,8 @@ app.post(/\S+/, function(request, response) {
 				if (err) {
 					addErr(err);
 				}; // end if err
-				$settingsVar.awsS3Key += url;
+			$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
+			$settingsVar.awsS3Key += url;
 			response.json($settingsVar);
 			$settingsVar.awsS3Key = [];
 			}); //end s.getSignedUrl
