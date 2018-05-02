@@ -47,6 +47,21 @@ try {
 }	catch(e){console.log(e)};
 }); // end s3 getObject
 
+$settingsVar = {
+    userName: "Login",
+    deviceType: "null",
+    apiVersion: "291", 
+    googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
+    chatGeneral: "", 
+    errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
+    awsS3Key: "",
+    session: "",
+    clientIP: "",
+    fruitbotwin:0,
+    fruitbotloss:0,
+    fruitbottie:0
+};
+
 var $serverParams = {
 	Bucket: $privateBucket, 
 	Key: 'settings.json'
