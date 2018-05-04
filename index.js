@@ -243,6 +243,15 @@ request.session.regenerate(function(err) {
 	}; // end if userPWHTable
 }); // end app post login 
 
+app.post('/logout', function(request, response) {
+    var $userName = request.query.username;
+request.session.destroy(function(err) {
+						console.log("User Logout: " + $userName);
+						response.json("You have been logged out."); 
+  // cannot access session here
+})
+});
+
 // Error capture
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
