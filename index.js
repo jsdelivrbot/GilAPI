@@ -100,6 +100,8 @@ var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
+app.use(cookieParser(process.env.PASSPORT_SECRET || 'aSecretToEverybody'));
+app.use(cookieSession());
 app.use(require('express-session')({
 	secret: process.env.PASSPORT_SECRET || 'aSecretToEverybody', 
 	resave: true, 
