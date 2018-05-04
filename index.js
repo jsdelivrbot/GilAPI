@@ -152,6 +152,7 @@ app.post('/login', function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
+req.session.regenerate(function(err) {
 				addErr(("User password matches: " + $userName));
 				$settingsVar.clientIP = request.ip;
 				if ($aclTable[$userName]) {
@@ -174,6 +175,7 @@ app.post('/login', function(request, response) {
 					console.log("Site: " + $settingsVar.awsS3Key);
 				}; // end for site
 				console.log("User: " + $settingsVar.awsS3Key);
+})
 			} else {
 				addErr(("User password not match: " + $userName));
 				$settingsVar.awsS3Key += "Not Found";
