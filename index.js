@@ -156,6 +156,9 @@ app.post('/login', function(request, response) {
 			if ($userFound) {
 request.session.regenerate(function(err) {
 				addErr(("User password matches: " + $userName));
+				request.session.userName = $userName;
+				console.log(request.session.userName);
+				$settingsVar.userName = request.session.userName;
 				$settingsVar.clientIP = request.ip;
 				if ($aclTable[$userName]) {
 					var $urlParams = {
