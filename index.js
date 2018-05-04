@@ -152,7 +152,7 @@ app.post('/login', function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
-req.session.regenerate(function(err) {
+request.session.regenerate(function(err) {
 				addErr(("User password matches: " + $userName));
 				$settingsVar.clientIP = request.ip;
 				if ($aclTable[$userName]) {
