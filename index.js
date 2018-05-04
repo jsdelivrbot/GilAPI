@@ -262,7 +262,7 @@ app.post('/bar', function (req, res, next) {
   res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
 });
 
-app.get('/test', function(req, res){
+app.post('/test', function(req, res){
    if(req.session.page_views){
       req.session.page_views++;
       res.send("You visited this page " + req.session.page_views + " times");
