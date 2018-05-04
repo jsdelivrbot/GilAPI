@@ -252,6 +252,13 @@ request.session.destroy(function(err) {
 })
 });
 
+app.post('/foo', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/foo'] + ' times')
+})
+ 
+app.post('/bar', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
+})
 // Error capture
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
