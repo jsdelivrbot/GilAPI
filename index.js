@@ -249,7 +249,7 @@ request.session.regenerate(function(err) {
 }); // end app post login 
 
 app.post('/logout', function(request, response) {
-    var $userName = request.query.username;
+    var $userName = request.session.userName;;
 request.session.destroy(function(err) {
 						console.log("User Logout: " + $userName);
 						response.json("You have been logged out."); 
@@ -257,21 +257,13 @@ request.session.destroy(function(err) {
 })
 });
 
-app.post('/foo', function (req, res, next) {
-  res.send('you viewed this page ' + req.session.views['/foo'] + ' times')
-});
- 
-app.post('/bar', function (req, res, next) {
-  res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
-});
-
 app.post('/test', function(req, res){
    if(req.session.page_views){
       req.session.page_views++;
-      res.send("You visited this page " + req.session.page_views + " times");
+      res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
    } else {
       req.session.page_views = 1;
-      res.send("Welcome to this page for the first time!");
+      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
    }
 });
 
