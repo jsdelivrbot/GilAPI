@@ -140,7 +140,6 @@ app.get(/\S+/, function(request, response) {
 });
 
 app.post('/login', function(request, response) {
-	$settingsVar.awsS3Key = [];
     var $userName = request.query.username;
     var $enteredPassword = request.query.password;
 	addErr(("Login for user: " + $userName));
@@ -160,32 +159,12 @@ request.session.regenerate(function(err) {
 				console.log(request.session.userName);
 				$settingsVar.userName = request.session.userName;
 				$settingsVar.clientIP = request.ip;
-				if ($aclTable[$userName]) {
-					var $urlParams = {
-						ContentType: "text/plain;charset=UTF-8",
-						ACL: 'public-read',
-						Bucket: $publicBucket, 
-						Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-					};
-					$s3.getSignedUrl('putObject', $urlParams, function(err, url){
-						if (err) {
-							addErr(err);
-						}; // end if err
-						$settingsVar.awsS3Key += url;
-						$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
-						console.log("S3: " + $settingsVar.awsS3Key);
-						response.json($settingsVar); 
-						$settingsVar.awsS3Key = [];
-					}); // end s3
-					console.log("Site: " + $settingsVar.awsS3Key);
-				}; // end for site
-				console.log("User: " + $settingsVar.awsS3Key);
+				$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
+				response.json($settingsVar); 
 })
 			} else {
 				addErr(("User password not match: " + $userName));
-				$settingsVar.awsS3Key += "Not Found";
-				response.json($settingsVar);
-				$settingsVar.awsS3Key = [];
+				response.json("User password not match.");
 			}; //end if userFound
 		}); // end bcrypt.compare
 	} else {
@@ -225,25 +204,9 @@ request.session.regenerate(function(err) {
 		addErr(("User password stored: " + $userName));
 
 		$settingsVar.clientIP = request.ip;
-		if ($aclTable[$userName]) {
-			
-			var $urlParams = {
-				ContentType: "text/plain;charset=UTF-8",
-				ACL: 'public-read',
-				Bucket: $publicBucket, 
-				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-			}; //end urlParams
-			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
-				if (err) {
-					addErr(err);
-				}; // end if err
-			$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
-			$settingsVar.awsS3Key += url;
-			response.json($settingsVar);
-			$settingsVar.awsS3Key = [];
-			}); //end s.getSignedUrl
+		$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
+		response.json($settingsVar);
 
-			}; // end for site
 	  }); // end bcrypt.hash
 	}; // end if userPWHTable
 }); // end app post login 
