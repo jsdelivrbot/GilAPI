@@ -294,11 +294,8 @@ app.post('/s3url', function(request, response){
 			}); // end s3
 			
 		}
-		req.session.page_views++;
-		res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
 	} else {
-		req.session.page_views = 1;
-		res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+		response.json("Please login."); 
 	}
 });
 
