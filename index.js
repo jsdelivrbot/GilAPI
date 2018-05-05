@@ -257,6 +257,73 @@ request.session.destroy(function(err) {
 })
 });
 
+app.post('/s3upload', function(req, res){
+   if(req.session.page_views){
+      req.session.page_views++;
+      res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
+   } else {
+      req.session.page_views = 1;
+      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+   }
+});
+
+app.post('/s3url', function(request, response){
+	var $userName = request.session.userName;
+    //var $siteName = request.query.siteName;
+	// If logged in
+	if($userName){
+		addErr(("S3url - user found: " + $userName));
+		console.log(("S3url - user found: " + $userName));
+		//If you have an ACL
+		if ($aclTable[$userName]) {
+			addErr(("S3url for user: " + $userName));
+			console.log(("S3url for user: " + $userName));
+
+			var $urlParams = {
+				ContentType: "text/plain;charset=UTF-8",
+				ACL: 'public-read',
+				Bucket: $publicBucket, 
+				Key: $site + "/" + $site + ".json"
+			};
+			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+				if (err) {
+					addErr(err);
+				}; // end if err
+				console.log("S3url: " + url);
+				response.json(url); 
+			}); // end s3
+			
+		}
+		req.session.page_views++;
+		res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
+	} else {
+		req.session.page_views = 1;
+		res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+	}
+});
+
+//for ($site in $aclTable.users[$userName].userSites) {}; // end for site
+
+app.post('/fruitbot', function(req, res){
+   if(req.session.page_views){
+      req.session.page_views++;
+      res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
+   } else {
+      req.session.page_views = 1;
+      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+   }
+});
+
+app.post('/chat', function(req, res){
+   if(req.session.page_views){
+      req.session.page_views++;
+      res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
+   } else {
+      req.session.page_views = 1;
+      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+   }
+});
+
 app.post('/test', function(req, res){
    if(req.session.page_views){
       req.session.page_views++;
