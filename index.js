@@ -263,7 +263,7 @@ app.post('/s3upload', function(req, res){
       res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
    } else {
       req.session.page_views = 1;
-      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+      res.send("Welcome to this page for the first time, "+req.session.userName+"!");
    }
 });
 
@@ -307,7 +307,7 @@ app.post('/fruitbot', function(req, res){
       res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
    } else {
       req.session.page_views = 1;
-      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+      res.send("Welcome to this page for the first time, "+req.session.userName+"!");
    }
 });
 
@@ -317,7 +317,7 @@ app.post('/chat', function(req, res){
       res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
    } else {
       req.session.page_views = 1;
-      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+      res.send("Welcome to this page for the first time, "+req.session.userName+"!");
    }
 });
 
@@ -327,7 +327,7 @@ app.post('/test', function(req, res){
       res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
    } else {
       req.session.page_views = 1;
-      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
+      res.send("Welcome to this page for the first time, "+req.session.userName+"!");
    }
 });
 
