@@ -283,7 +283,7 @@ app.post('/s3url', function(request, response){
 				ContentType: "text/plain;charset=UTF-8",
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
-				Key: $site + "/" + $site + ".json"
+				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
 			};
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
