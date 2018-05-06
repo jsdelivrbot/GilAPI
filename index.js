@@ -216,12 +216,11 @@ request.session.regenerate(function(err) {
 }); // end app post login 
 
 app.post('/logout', function(request, response) {
-    var $userName = request.session.userName;;
-request.session.destroy(function(err) {
-						console.log("User Logout: " + $userName);
-						response.json("You have been logged out."); 
-  // cannot access session here
-})
+    var $userName = request.session.userName;
+	request.session.destroy(function(err) {
+		console.log("User Logout: " + $userName);
+		response.json("You have been logged out."); 
+	})
 });
 
 app.post('/s3upload', function(req, res){
