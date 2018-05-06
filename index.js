@@ -142,21 +142,25 @@ function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
 
-function newSite() {
-	var $siteName = getBadPW();
-	$aclTable.users[$userName].userSites[$siteName] = {"permission":"write"};
-	var $putParams = {
-		Bucket: $privateBucket,
-		Key: "ACL.json", 
-		Body: JSON.stringify($aclTable),
-		ContentType: "application/json"
-	};
-	$s3.putObject($putParams, function(err, data) {
-		if (err) {
-			addErr(err);
-		}; // end if err
-	}); // end s3
-	return $siteName
+function newSite($userName) {
+	if($userName){
+		var $siteName = getBadPW();
+		$aclTable.users[$userName].userSites[$siteName] = {"permission":"write"};
+		var $putParams = {
+			Bucket: $privateBucket,
+			Key: "ACL.json", 
+			Body: JSON.stringify($aclTable),
+			ContentType: "application/json"
+		};
+		$s3.putObject($putParams, function(err, data) {
+			if (err) {
+				addErr(err);
+			}; // end if err
+		}); // end s3
+		return $siteName
+	} else {
+		return("Please login."); 
+	}
 };
 
 function sendS3Url($userName,$siteName)	{
@@ -287,7 +291,7 @@ app.post('/newSite', function(request, response){
 	var $userName = request.session.userName;
 		console.log("New site: " + $userName);
 	if(request.session.userName){
-		$siteName = newSite();
+		$siteName = newSite($userName);
 		console.log("New site name: " + $siteName);
 		response.json(sendS3Url($userName,$siteName));
    }
