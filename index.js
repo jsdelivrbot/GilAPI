@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 296, 
+    apiVersion: 297, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -99,7 +99,7 @@ var $publicBucket = "gilpublic";
 var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
-$settingsVar.apiVersion= 296; 
+$settingsVar.apiVersion= 297; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 app.use(cookieParser(process.env.PASSPORT_SECRET || 'aSecretToEverybody'));
 app.use(session());
@@ -130,6 +130,21 @@ function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
 
+function newSite() {
+	var $siteName = getBadPW();
+	$aclTable.users[$userName].userSites[$siteName] = {"permission":"write"};
+	var $putParams = {
+		Bucket: $privateBucket,
+		Key: "ACL.json", 
+		Body: JSON.stringify($aclTable),
+		ContentType: "application/json"
+	};
+	$s3.putObject($putParams, function(err, data) {
+		if (err) {
+			addErr(err);
+		}; // end if err
+	}); // end s3
+};
 // Page calls
 app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
