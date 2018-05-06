@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 302, 
+    apiVersion: 304, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 302; 
+$settingsVar.apiVersion= 304; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -294,8 +294,9 @@ app.post('/newSite', function(request, response){
 		$siteName = newSite($userName);
 		console.log("New site name: " + $siteName);
 		response.json(sendS3Url($userName,$siteName));
+   } else {
+		response.json(sendS3Url($userName,$siteName));
    }
-	
 });
 
 app.post('/s3upload', function(request, response){
@@ -310,8 +311,6 @@ app.post('/s3upload', function(request, response){
 
 app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
-    //var $siteName = request.query.siteName;
-	// If logged in
 	if($userName){
 		addErr(("S3url - user found: " + $userName));
 		console.log(("S3url - user found: " + $userName));
