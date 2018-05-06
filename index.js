@@ -148,6 +148,37 @@ function newSite() {
 	}); // end s3
 	return $siteName
 };
+
+function sendS3Url($userName,$siteName)	{
+	
+	if($userName){
+		addErr(("S3url - user found: " + $userName));
+		console.log(("S3url - user found: " + $userName));
+		//If you have an ACL
+		if ($aclTable[$userName] = $siteName) {
+			addErr(("S3url site "+$siteName+" for user: " + $userName));
+			console.log(("S3url site "+$siteName+" for user: " + $userName));
+
+			var $urlParams = {
+				ContentType: "text/plain;charset=UTF-8",
+				ACL: 'public-read',
+				Bucket: $publicBucket, 
+				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
+				//Key: $site + "/" + $site + ".json"
+			};
+			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
+				if (err) {
+					addErr(err);
+				}; // end if err
+				console.log("S3url: " + url);
+				return(url); 
+			}); // end s3
+			
+		}
+	} else {
+		return("Please login."); 
+	}
+}
 // Page calls
 app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
