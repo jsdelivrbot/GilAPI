@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 311, 
+    apiVersion: 313, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 311; 
+$settingsVar.apiVersion= 313; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -293,9 +293,7 @@ app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
     var $siteName = request.query.siteName;
 	var $retVal
-	sendS3Url($userName,$siteName,function(url){$retVal = url});
-	console.log("return val:"+$retVal)
-	response.json($retValh);
+	sendS3Url($userName,$siteName,function(url){response.json(url)});
 });
 
 app.post('/automation', function(request, res){
