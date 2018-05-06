@@ -189,7 +189,7 @@ function sendS3Url($userName,$siteName,$callback)	{
 			
 		}; // end if site
 	} else {
-		return("Please login."); 
+		$callback("Please login."); 
 	}
 }
 // Page calls
