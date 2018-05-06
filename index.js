@@ -292,7 +292,9 @@ app.post('/s3upload', function(request, response){
 app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
     var $siteName = request.query.siteName;
-	response.json(sendS3Url($userName,$siteName));
+	var $retVal = sendS3Url($userName,$siteName);
+	console.log($retVal)
+	response.json($retVal);
 });
 
 app.post('/automation', function(request, res){
