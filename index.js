@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 315, 
+    apiVersion: 316, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 315; 
+$settingsVar.apiVersion= 316; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -196,12 +196,15 @@ function sendS3Url($userName,$siteName,$callback)	{
 // Page calls
 app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
+	var $userName = request.session.userName;
 	var $queryString = request.path
 	if ($queryString == "/") {
 		$queryString += $rootPage
 	}; //end if siteName
-	$settingsVar.userACLTable = [];
-	for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site}
+   if($userName){
+		$settingsVar.userACLTable = [];
+		for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site}
+	}// end if userName
 	$settingsVar.clientIP = request.ip;
 	$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
 
