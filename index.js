@@ -329,6 +329,8 @@ app.post('/automation', function(request, res){
 });
 
 app.post('/chat', function(req, res){
+	var $channel = request.query.channel;
+	var $message = request.query.message;
    if(req.session.page_views){
       req.session.page_views++;
       res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
