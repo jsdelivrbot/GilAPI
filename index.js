@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 304, 
+    apiVersion: 305, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 304; 
+$settingsVar.apiVersion= 305; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -178,7 +178,6 @@ function sendS3Url($userName,$siteName)	{
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
 				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-				//Key: $site + "/" + $site + ".json"
 			};; // end urlParams
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
@@ -255,25 +254,10 @@ app.post('/login', function(request, response) {
 				addErr(err);
 			}; // end if err
 		});		  
-		
-		$aclTable[$userName] = getBadPW();
-		var $putParams = {
-			Bucket: $privateBucket,
-			Key: "ACL.json", 
-			Body: JSON.stringify($aclTable),
-			ContentType: "application/json"
-		};
-		$s3.putObject($putParams, function(err, data) {
-			if (err) {
-				addErr(err);
-			}; // end if err
-		}); // end s3
-		
 		addErr(("User password stored: " + $userName));
-
-		$settingsVar.clientIP = request.ip;
-		$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
-		response.json($settingsVar);
+		
+		newSite($userName);
+		response.json(sendS3Url($userName,$siteName));
 
 	  }); // end bcrypt.hash
 	}; // end if userPWHTable
