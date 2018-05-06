@@ -239,13 +239,13 @@ app.post('/logout', function(request, response) {
 	})
 });
 
-app.post('/s3upload', function(req, res){
-   if(req.session.page_views){
-      req.session.page_views++;
-      res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
+app.post('/s3upload', function(request, response){
+   if(request.session.page_views){
+      request.session.page_views++;
+      response.send("Hi " + request.session.userName+ ", You visited this page " + request.session.page_views + " times");
    } else {
-      req.session.page_views = 1;
-      res.send("Welcome to this page for the first time, "+req.session.userName+"!");
+      request.session.page_views = 1;
+      response.send("Welcome to this page for the first time, "+request.session.userName+"!");
    }
 });
 
