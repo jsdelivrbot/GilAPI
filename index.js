@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 309, 
+    apiVersion: 311, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 309; 
+$settingsVar.apiVersion= 311; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -163,7 +163,7 @@ function newSite($userName) {
 	}
 };
 
-function sendS3Url($userName,$siteName)	{
+function sendS3Url($userName,$siteName,$callback)	{
 	
 	if($userName){
 		addErr(("S3url - user found: " + $userName));
@@ -183,8 +183,8 @@ function sendS3Url($userName,$siteName)	{
 				if (err) {
 					addErr(err);
 				}; // end if err
+				$callback(url);
 				console.log("S3url: " + url);
-				return(url); 
 			}); // end s3
 			
 		}; // end if site
@@ -276,7 +276,7 @@ app.post('/newSite', function(request, response){
 	console.log("New site: " + $userName);
 	$siteName = newSite($userName);
 	console.log("New site name: " + $siteName);
-	response.json(sendS3Url($userName,$siteName));
+	sendS3Url($userName,$siteName,function(url){response.json(url)});
 });
 
 app.post('/s3upload', function(request, response){
@@ -292,9 +292,10 @@ app.post('/s3upload', function(request, response){
 app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
     var $siteName = request.query.siteName;
-	var $retVal = sendS3Url($userName,$siteName);
-	console.log($retVal)
-	response.json($retVal);
+	var $retVal
+	sendS3Url($userName,$siteName,function(url){$retVal = url});
+	console.log("return val:"+$retVal)
+	response.json($retValh);
 });
 
 app.post('/automation', function(request, res){
