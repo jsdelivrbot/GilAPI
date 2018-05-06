@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 308, 
+    apiVersion: 309, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 308; 
+$settingsVar.apiVersion= 309; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -169,7 +169,7 @@ function sendS3Url($userName,$siteName)	{
 		addErr(("S3url - user found: " + $userName));
 		console.log(("S3url - user found: " + $userName));
 		//If you have an ACL
-		if ($aclTable.users[$userName].userSites[$siteName] == {"permission":"write"}) {
+		if ($aclTable.users[$userName].userSites[$siteName].permission == "write") {
 			addErr(("S3url site "+$siteName+" for user: " + $userName));
 			console.log(("S3url site "+$siteName+" for user: " + $userName));
 
@@ -183,9 +183,9 @@ function sendS3Url($userName,$siteName)	{
 				if (err) {
 					addErr(err);
 				}; // end if err
-					console.log("S3url: " + url);
-					return(url); 
-				}); // end s3
+				console.log("S3url: " + url);
+				return(url); 
+			}); // end s3
 			
 		}; // end if site
 	} else {
