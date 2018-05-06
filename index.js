@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 314, 
+    apiVersion: 315, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 314; 
+$settingsVar.apiVersion= 315; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -200,6 +200,8 @@ app.get(/\S+/, function(request, response) {
 	if ($queryString == "/") {
 		$queryString += $rootPage
 	}; //end if siteName
+	$settingsVar.userACLTable = [];
+	for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site}
 	$settingsVar.clientIP = request.ip;
 	$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
 
