@@ -285,8 +285,10 @@ app.post('/logout', function(request, response) {
 
 app.post('/newSite', function(request, response){
 	var $userName = request.session.userName;
+		console.log("New site: " + $userName);
 	if(request.session.userName){
-		$sitename = newSite();
+		$siteName = newSite();
+		console.log("New site name: " + $siteName);
 		response.json(sendS3Url($userName,$siteName));
    }
 	
