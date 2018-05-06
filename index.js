@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 297, 
+    apiVersion: 299, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -99,7 +99,9 @@ var $publicBucket = "gilpublic";
 var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
-$settingsVar.apiVersion= 297; 
+$settingsVar.userName= "null";
+$settingsVar.deviceType= "null";
+$settingsVar.apiVersion= 299; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 app.use(cookieParser(process.env.PASSPORT_SECRET || 'aSecretToEverybody'));
 app.use(session());
@@ -144,6 +146,7 @@ function newSite() {
 			addErr(err);
 		}; // end if err
 	}); // end s3
+	return $siteName
 };
 // Page calls
 app.get(/\S+/, function(request, response) {
