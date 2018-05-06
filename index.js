@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 301, 
+    apiVersion: 302, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 301; 
+$settingsVar.apiVersion= 302; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -283,6 +283,15 @@ app.post('/logout', function(request, response) {
 	})
 });
 
+app.post('/newSite', function(request, response){
+	var $userName = request.session.userName;
+	if(request.session.userName){
+		$sitename = newSite();
+		response.json(sendS3Url($userName,$siteName));
+   }
+	
+});
+
 app.post('/s3upload', function(request, response){
    if(request.session.page_views){
       request.session.page_views++;
@@ -324,8 +333,6 @@ app.post('/s3url', function(request, response){
 		response.json("Please login."); 
 	}
 });
-
-//for ($site in $aclTable.users[$userName].userSites) {}; // end for site
 
 app.post('/automation', function(request, res){
 	var $score = request.query.score;
