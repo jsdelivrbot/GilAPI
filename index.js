@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 299, 
+    apiVersion: 301, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,8 +101,18 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 299; 
+$settingsVar.apiVersion= 301; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
+$settingsVar.aclTable= []; 
+$settingsVar.chatGeneral= ""; 
+$settingsVar.errgoLogic= "--- Err and Log Output --- " + lineBreak + lineBreak;
+$settingsVar.awsS3Key= "";
+$settingsVar.session= "";
+$settingsVar.clientIP= "";
+$settingsVar.fruitbotwin=0;
+$settingsVar.fruitbotloss=0;
+$settingsVar.fruitbottie=0;
+
 app.use(cookieParser(process.env.PASSPORT_SECRET || 'aSecretToEverybody'));
 app.use(session());
 app.use(require('express-session')({
@@ -165,16 +175,16 @@ function sendS3Url($userName,$siteName)	{
 				Bucket: $publicBucket, 
 				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
 				//Key: $site + "/" + $site + ".json"
-			};
+			};; // end urlParams
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
 					addErr(err);
 				}; // end if err
-				console.log("S3url: " + url);
-				return(url); 
-			}); // end s3
+					console.log("S3url: " + url);
+					return(url); 
+				}); // end s3
 			
-		}
+		}; // end if site
 	} else {
 		return("Please login."); 
 	}
