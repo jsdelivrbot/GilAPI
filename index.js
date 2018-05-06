@@ -317,13 +317,14 @@ app.post('/s3url', function(request, response){
 
 //for ($site in $aclTable.users[$userName].userSites) {}; // end for site
 
-app.post('/fruitbot', function(req, res){
-   if(req.session.page_views){
-      req.session.page_views++;
-      res.send("Hi " + req.session.userName+ ", You visited this page " + req.session.page_views + " times");
+app.post('/automation', function(request, res){
+	var $score = request.query.score;
+   if($score = "teal"){
+      request.session.page_views++;
+      res.send("Hi " + request.session.userName+ ", You visited this page " + request.session.page_views + " times");
    } else {
-      req.session.page_views = 1;
-      res.send("Welcome to this page for the first time, "+req.session.userName+"!");
+      request.session.page_views = 1;
+      res.send("Welcome to this page for the first time, "+request.session.userName+"!");
    }
 });
 
