@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 306, 
+    apiVersion: 307, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 306; 
+$settingsVar.apiVersion= 307; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -291,32 +291,8 @@ app.post('/s3upload', function(request, response){
 
 app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
-	if($userName){
-		addErr(("S3url - user found: " + $userName));
-		console.log(("S3url - user found: " + $userName));
-		//If you have an ACL
-		if ($aclTable[$userName]) {
-			addErr(("S3url for user: " + $userName));
-			console.log(("S3url for user: " + $userName));
-
-			var $urlParams = {
-				ContentType: "text/plain;charset=UTF-8",
-				ACL: 'public-read',
-				Bucket: $publicBucket, 
-				Key: $aclTable[$userName] + "/" + $aclTable[$userName] + ".json"
-			};
-			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
-				if (err) {
-					addErr(err);
-				}; // end if err
-				console.log("S3url: " + url);
-				response.json(url); 
-			}); // end s3
-			
-		}
-	} else {
-		response.json("Please login."); 
-	}
+    var $siteName = request.query.siteName;
+	response.json(sendS3Url($userName,$siteName));
 });
 
 app.post('/automation', function(request, res){
