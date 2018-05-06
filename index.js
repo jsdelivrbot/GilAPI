@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 313, 
+    apiVersion: 314, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 313; 
+$settingsVar.apiVersion= 314; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -189,6 +189,7 @@ function sendS3Url($userName,$siteName,$callback)	{
 			
 		}; // end if site
 	} else {
+		console.log("Bad ACL");
 		$callback("Please login."); 
 	}
 }
@@ -291,8 +292,9 @@ app.post('/s3upload', function(request, response){
 
 app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
+	console.log("Existing site: " + $userName);
     var $siteName = request.query.siteName;
-	var $retVal
+	console.log("Existing site name: " + $siteName);
 	sendS3Url($userName,$siteName,function(url){response.json(url)});
 });
 
