@@ -172,15 +172,16 @@ app.post('/login', function(request, response) {
 					addErr($err);
 			}; //end if err
 			if ($userFound) {
-request.session.regenerate(function(err) {
-				addErr(("User password matches: " + $userName));
-				request.session.userName = $userName;
-				console.log(request.session.userName);
-				$settingsVar.userName = request.session.userName;
-				$settingsVar.clientIP = request.ip;
-				$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
-				response.json($settingsVar); 
-})
+				request.session.regenerate(function(err) {
+					addErr(("User password matches: " + $userName));
+					request.session.userName = $userName;
+					console.log(request.session.userName);
+					
+					$settingsVar.userName = request.session.userName;
+					$settingsVar.clientIP = request.ip;
+					$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
+					response.json($settingsVar); 
+				})
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.json("User password not match.");
