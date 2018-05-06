@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: "293", 
+    apiVersion: 296, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -99,6 +99,7 @@ var $publicBucket = "gilpublic";
 var $siteBase = "https://s3.amazonaws.com/" + $publicBucket
 var $publicParams = {Bucket: $publicBucket};
 
+$settingsVar.apiVersion= 296; 
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 app.use(cookieParser(process.env.PASSPORT_SECRET || 'aSecretToEverybody'));
 app.use(session());
