@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 317, 
+    apiVersion: 321, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 320;
+$settingsVar.apiVersion= 321;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -334,6 +334,26 @@ app.post('/newSite', function(request, response){
 	$siteName = newSite($userName);
 	console.log("New site name: " + $siteName);
 	sendS3Url($userName,$siteName,function(url){response.json(url)});
+});
+
+app.post('/deleteSite', function(request, response){
+	var $userName = request.session.userName;
+    var $siteName = request.query.siteName;
+	console.log("Delete site: " + $siteName);
+	deleteSite($userName,$siteName);
+	console.log("Delete site name: " + $siteName);
+	response.send("Site "+$siteName+" deleted")
+});
+
+app.post('/deleteAccount', function(request, response){
+	var $userName = request.session.userName;
+	console.log("Delete account: " + $userName);
+	deleteAccount($userName);
+	console.log("Delete account name: " + $userName);
+	request.session.destroy(function(err) {
+		console.log("User Logout: " + $userName);
+		response.send("Account "+$userName+" deleted. You have been logged out.");
+	})
 });
 
 app.post('/s3upload', function(request, response){
