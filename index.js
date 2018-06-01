@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 317; 
+$settingsVar.apiVersion= 318;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -138,6 +138,15 @@ function getBadPW() {
 	return Math.random().toString(36).slice(-20);
  }
 
+function taskScheduler() {
+	var $now = Date().toLocaleString();
+	for ($task in $taskList) {
+		if ($now == $taskList[$task].execTime){
+			exec($taskList[$task].scriptBlock);
+		};
+	};
+ };
+
 function addErr(err) {
   $settingsVar.errgoLogic += err + "<br>"// lineBreak
 };
@@ -161,6 +170,46 @@ function newSite($userName) {
 	} else {
 		return("Please login."); 
 	}
+};
+
+function deleteSite($userName,$siteName) {
+	if($userName){
+		delete $aclTable.users[$userName].userSites[$siteName];
+		var $putParams = {
+			Bucket: $privateBucket,
+			Key: "ACL.json", 
+			Body: JSON.stringify($aclTable),
+			ContentType: "application/json"
+		};
+		$s3.putObject($putParams, function(err, data) {
+			if (err) {
+				addErr(err);
+			};// end if err
+		});// end s3
+		return($siteName + " deleted");
+	} else {
+		return("Please login.");
+	};
+};
+
+function deleteAccount($userName) {
+	if($userName){
+		delete $aclTable.users[$userName];
+		var $putParams = {
+			Bucket: $privateBucket,
+			Key: "ACL.json", 
+			Body: JSON.stringify($aclTable),
+			ContentType: "application/json"
+		};
+		$s3.putObject($putParams, function(err, data) {
+			if (err) {
+				addErr(err);
+			};// end if err
+		});// end s3
+		return($userName + " deleted");
+	} else {
+		return("Please login.");
+	};
 };
 
 function sendS3Url($userName,$siteName,$callback)	{
