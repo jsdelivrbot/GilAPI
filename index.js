@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 318;
+$settingsVar.apiVersion= 319;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= []; 
 $settingsVar.chatGeneral= ""; 
@@ -212,8 +212,10 @@ function deleteAccount($userName) {
 	};
 };
 
-function sendS3Url($userName,$siteName,$callback)	{
-	
+function sendS3Url($userName,$siteName,$fileName,$callback)	{
+	if(!$fileName){
+		$fileName = $siteName
+	};//end if fileName
 	if($userName){
 		addErr(("S3url - user found: " + $userName));
 		console.log(("S3url - user found: " + $userName));
@@ -349,7 +351,7 @@ app.post('/s3url', function(request, response){
 	console.log("Existing site: " + $userName);
     var $siteName = request.query.siteName;
 	console.log("Existing site name: " + $siteName);
-	sendS3Url($userName,$siteName,function(url){response.json(url)});
+	sendS3Url($userName,$siteName,$fileName,function(url){response.json(url)});
 });
 
 app.post('/automation', function(request, res){
