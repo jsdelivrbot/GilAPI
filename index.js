@@ -29,7 +29,7 @@ var $s3 = new $AWS.S3({
 $s3.createBucket($privateParams);
 
 var $userPWHTable;
-var $settingsVar; 
+var $settingsVar;
 var $aclTable;
 
 var $urlPWHParams = {
@@ -43,9 +43,9 @@ try {
 	//addErr(JSON.stringify($userPWHTable));
 	if (err) {
 		addErr(err);
-	}; // end if err
+	};// end if err
 }	catch(e){console.log(e)};
-}); // end s3 getObject
+});// end s3 getObject
 
 $settingsVar = {
     userName: "Login",
@@ -73,9 +73,9 @@ try {
 	addErr(JSON.stringify($settingsVar));
 	if (err) {
 		addErr(err);
-	}; // end if err
+	};// end if err
 }	catch(e){console.log(e)};
-}); // end s3 getObject
+});// end s3 getObject
 
 var $aclParams = {
 	Bucket: $privateBucket, 
@@ -88,9 +88,9 @@ try {
 	//addErr(JSON.stringify($aclTable));
 	if (err) {
 		addErr(err);
-	}; // end if err
+	};// end if err
 }	catch(e){console.log(e)};
-}); // end s3 getObject
+});// end s3 getObject
 
 var lineBreak = "\r\n"
 var $basePrice = (Math.random()*10)
@@ -101,10 +101,10 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 319;
+$settingsVar.apiVersion= 320;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
-$settingsVar.aclTable= []; 
-$settingsVar.chatGeneral= ""; 
+$settingsVar.aclTable= [];
+$settingsVar.chatGeneral= "";
 $settingsVar.errgoLogic= "--- Err and Log Output --- " + lineBreak + lineBreak;
 $settingsVar.awsS3Key= "";
 $settingsVar.session= "";
@@ -127,8 +127,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
-app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({ extended: true }));// get information from html forms
+app.use(cookieParser());// read cookies (needed for auth)
 
 $s3.getSignedUrl('getObject', $urlPWHParams, function(err, url){
     addErr('the url is ' + url);
@@ -164,11 +164,11 @@ function newSite($userName) {
 		$s3.putObject($putParams, function(err, data) {
 			if (err) {
 				addErr(err);
-			}; // end if err
-		}); // end s3
+			};// end if err
+		});// end s3
 		return $siteName
 	} else {
-		return("Please login."); 
+		return("Please login.");
 	}
 };
 
@@ -229,19 +229,19 @@ function sendS3Url($userName,$siteName,$fileName,$callback)	{
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
 				Key: $siteName + "/" + $siteName + ".json"
-			};; // end urlParams
+			};;// end urlParams
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
 					addErr(err);
-				}; // end if err
+				};// end if err
 				$callback(url);
 				console.log("S3url: " + url);
-			}); // end s3
+			});// end s3
 			
-		}; // end if site
+		};// end if site
 	} else {
 		console.log("Bad ACL");
-		$callback("Please login."); 
+		$callback("Please login.");
 	}
 }
 // Page calls
@@ -251,7 +251,7 @@ app.get(/\S+/, function(request, response) {
 	var $queryString = request.path
 	if ($queryString == "/") {
 		$queryString += $rootPage
-	}; //end if siteName
+	};//end if siteName
    if($userName){
 		$settingsVar.userACLTable = [];
 		for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site+","}
@@ -274,7 +274,7 @@ app.post('/login', function(request, response) {
 		bcrypt.compare($enteredPassword, $pwhash, function($err, $userFound) {
 			if ($err) {
 					addErr($err);
-			}; //end if err
+			};//end if err
 			if ($userFound) {
 				request.session.regenerate(function(err) {
 					addErr(("User password matches: " + $userName));
@@ -284,20 +284,20 @@ app.post('/login', function(request, response) {
 					$settingsVar.userName = request.session.userName;
 					$settingsVar.clientIP = request.ip;
 					$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
-					response.json($settingsVar); 
+					response.json($settingsVar);
 				})
 			} else {
 				addErr(("User password not match: " + $userName));
 				response.json("User password not match.");
-			}; //end if userFound
-		}); // end bcrypt.compare
+			};//end if userFound
+		});// end bcrypt.compare
 	} else {
 		//Signup
 		addErr(("User not found: " + $userName + " - starting signup."));
 		bcrypt.hash($enteredPassword, null, null, function($err, $hash){
 		if ($err) {
 				addErr($err);
-		}; //end if err
+		};//end if err
 		  
 		$userPWHTable[$userName] = $hash
 		var $putParams = {
@@ -309,22 +309,22 @@ app.post('/login', function(request, response) {
 		$s3.putObject($putParams, function(err, data) {
 			if (err) {
 				addErr(err);
-			}; // end if err
+			};// end if err
 		});		  
 		addErr(("User password stored: " + $userName));
 		
 		newSite($userName);
 		response.json(sendS3Url($userName,$siteName));
 
-	  }); // end bcrypt.hash
-	}; // end if userPWHTable
-}); // end app post login 
+	  });// end bcrypt.hash
+	};// end if userPWHTable
+});// end app post login 
 
 app.post('/logout', function(request, response) {
     var $userName = request.session.userName;
 	request.session.destroy(function(err) {
 		console.log("User Logout: " + $userName);
-		response.json("You have been logged out."); 
+		response.json("You have been logged out.");
 	})
 });
 
