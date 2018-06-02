@@ -410,18 +410,18 @@ app.post('/test', function(req, res){
 // Error capture
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
-    err.status = 404;
+    res.status(err.status || 404);
 	addErr((req + err));
-    next(err);
+    res.send('error: '+ err.message)
+	next(err);
 });
 
-app.use(function(err, req, res, next) {
-	addErr(err);
+app.use(function(req, res, next) {
+    var err = new Error('Not Working');
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+	addErr((req + err));
+    res.send('error: '+ err.message)
+	next(err);
 });
 
 app.listen(app.get('port'), function() {
