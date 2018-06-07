@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 321, 
+    apiVersion: 323, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 321;
+$settingsVar.apiVersion= 323;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -228,7 +228,7 @@ function sendS3Url($userName,$siteName,$fileName,$callback)	{
 				ContentType: "text/plain;charset=UTF-8",
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
-				Key: $siteName + "/" + $siteName + ".json"
+				Key: $siteName + "/" + $fileName + ".json"
 			};;// end urlParams
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
@@ -370,6 +370,7 @@ app.post('/s3url', function(request, response){
 	var $userName = request.session.userName;
 	console.log("Existing site: " + $userName);
     var $siteName = request.query.siteName;
+    var $fileName = request.query.fileName;
 	console.log("Existing site name: " + $siteName);
 	sendS3Url($userName,$siteName,$fileName,function(url){response.json(url)});
 });
