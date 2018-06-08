@@ -214,7 +214,7 @@ function deleteAccount($userName) {
 
 function sendS3Url($userName,$siteName,$fileName,$callback)	{
 	if(!$fileName){
-		$fileName = $siteName
+		$fileName = $siteName + ".json"
 	};//end if fileName
 	if($userName){
 		addErr(("S3url - user found: " + $userName));
@@ -228,7 +228,7 @@ function sendS3Url($userName,$siteName,$fileName,$callback)	{
 				ContentType: "text/plain;charset=UTF-8",
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
-				Key: $siteName + "/" + $fileName + ".json"
+				Key: $siteName + "/" + $fileName
 			};;// end urlParams
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
