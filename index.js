@@ -241,6 +241,7 @@ function sendS3Url($userName,$siteName,$fileName,$callback)	{
 		};// end if site
 	} else {
 		console.log("Bad ACL");
+		$callback("Please login.");
 	}
 }
 // Page calls
