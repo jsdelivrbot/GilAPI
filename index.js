@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 323, 
+    apiVersion: 324, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 323;
+$settingsVar.apiVersion= 324;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -258,6 +258,8 @@ app.get(/\S+/, function(request, response) {
 	}// end if userName
 	$settingsVar.clientIP = request.ip;
 	$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
+	addErr(("Page load "+$queryString+" for user: " + $userName));
+	console.log(("Page load "+$queryString+" for user: " + $userName));
 
 	response.send('<!DOCTYPE html><html lang="en"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="shortcut icon" href="' + $siteBase + '/favicon.ico" type="image/x-icon"><link href="' + $siteBase + '' + $queryString + $queryString + '.css" rel="stylesheet" type="text/css"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><div id="deleteme" hidden><p1>Page requires Javascript and load files (XHR) to function.</p1><br><p3>This page composes itself entirely from Javascript -  a true single-page application, not only is it entirely one page in the browser. Where most websites use HTML for structure, CSS for style, and Javascript for operations, this page uses JSON to express every element. This uses a small (less than 500 lines) Javascript engine to interpret the JSON. To see this in action, please permit the site to run Javascript, and load files from the data source: </p3><br><div id="pageSettingsJson" >' + $siteBase + '' + $queryString + $queryString + '.json</div></div></body></html><script src="' + $siteBase + '/Gilgamech.js"></script><script>$settingsVar='+JSON.stringify($settingsVar)+'</script> ');
 });
@@ -333,7 +335,7 @@ app.post('/newSite', function(request, response){
 	console.log("New site: " + $userName);
 	$siteName = newSite($userName);
 	console.log("New site name: " + $siteName);
-	sendS3Url($userName,$siteName,function(url){response.json(url)});
+	sendS3Url($userName,$siteName,'',function(url){response.json(url)});
 });
 
 app.post('/deleteSite', function(request, response){
