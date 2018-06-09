@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 326, 
+    apiVersion: 327, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 326;
+$settingsVar.apiVersion= 327;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -215,6 +215,9 @@ function deleteAccount($userName) {
 function sendS3Url($userName,$siteName,$fileName,$callback,$contentType) {
 	if(!$fileName){
 		$fileName = $siteName + ".json"
+	};//end if fileName
+	if(!$contentType){
+		$contentType = "text/plain;charset=UTF-8"
 	};//end if fileName
 	if($userName){
 		addErr(("S3url - user found: " + $userName));
