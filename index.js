@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 327, 
+    apiVersion: 328, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 327;
+$settingsVar.apiVersion= 328;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -229,7 +229,6 @@ function sendS3Url($userName,$siteName,$fileName,$callback,$contentType) {
 
 			var $urlParams = {
 				ContentType: $contentType,
-				//ContentType: "text/plain;charset=UTF-8",
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
 				Key: $siteName + "/" + $fileName
@@ -378,8 +377,8 @@ app.post('/s3url', function(request, response){
     var $siteName = request.query.siteName;
     var $fileName = request.query.fileName;
     var $contentType = request.query.contentType;
-	console.log("Existing site name: " + $siteName);
-	sendS3Url($userName,$siteName,$fileName,function(url){response.json(url)});
+	console.log("Existing site name: " + $siteName+" & file name: " + $fileName+" & content name: " + $contentType);
+	sendS3Url($userName,$siteName,$fileName,function(url){response.json(url)},$contentType);
 });
 
 app.post('/automation', function(request, res){
