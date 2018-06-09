@@ -50,7 +50,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 325, 
+    apiVersion: 326, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -101,7 +101,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 325;
+$settingsVar.apiVersion= 326;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -212,7 +212,7 @@ function deleteAccount($userName) {
 	};
 };
 
-function sendS3Url($userName,$siteName,$fileName,$callback)	{
+function sendS3Url($userName,$siteName,$fileName,$callback,$contentType) {
 	if(!$fileName){
 		$fileName = $siteName + ".json"
 	};//end if fileName
@@ -225,11 +225,12 @@ function sendS3Url($userName,$siteName,$fileName,$callback)	{
 			console.log(("S3url site "+$siteName+" for user: " + $userName));
 
 			var $urlParams = {
-				ContentType: "text/plain;charset=UTF-8",
+				ContentType: $contentType,
+				//ContentType: "text/plain;charset=UTF-8",
 				ACL: 'public-read',
 				Bucket: $publicBucket, 
 				Key: $siteName + "/" + $fileName
-			};;// end urlParams
+			};// end urlParams
 			$s3.getSignedUrl('putObject', $urlParams, function(err, url){
 				if (err) {
 					addErr(err);
@@ -373,6 +374,7 @@ app.post('/s3url', function(request, response){
 	console.log("Existing site: " + $userName);
     var $siteName = request.query.siteName;
     var $fileName = request.query.fileName;
+    var $contentType = request.query.contentType;
 	console.log("Existing site name: " + $siteName);
 	sendS3Url($userName,$siteName,$fileName,function(url){response.json(url)});
 });
