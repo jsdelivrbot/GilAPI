@@ -15,6 +15,8 @@ var pg = require('pg').native;
 var pghstore = require('pg-hstore');
 
 var app = express();
+var User = sequelize.import('./User');
+User.sync();
 
 var $privateBucket = "gilprivate";
 var $privateParams = {Bucket: $privateBucket};
@@ -54,7 +56,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 329, 
+    apiVersion: 330, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -125,7 +127,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 329;
+$settingsVar.apiVersion= 330;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
