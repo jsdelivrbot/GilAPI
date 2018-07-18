@@ -11,8 +11,10 @@ var $AWS = require('aws-sdk');
 var stripe = require("stripe")(process.env.STRIPE_KEY || 'sk_test_abcdef1234567890');
 const { Client } = require('pg');
 
+var Sequelize = require('sequelize');
 var pg = require('pg').native;
 var pghstore = require('pg-hstore');
+var sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://dbuser:dbpasswd@dbhost:5432/dbname');
 
 var app = express();
 var User = sequelize.import('./User');
