@@ -9,6 +9,10 @@ var bcrypt = require('bcrypt-nodejs');
 var session = require("express-session");
 var $AWS = require('aws-sdk');
 var stripe = require("stripe")(process.env.STRIPE_KEY || 'sk_test_abcdef1234567890');
+const { Client } = require('pg');
+
+var pg = require('pg').native;
+var pghstore = require('pg-hstore');
 
 var app = express();
 
@@ -50,7 +54,7 @@ try {
 $settingsVar = {
     userName: "Login",
     deviceType: "null",
-    apiVersion: 328, 
+    apiVersion: 329, 
     googleApiKey: process.env.GOOGLE_API_KEY || 'aSecretToEverybody',
     chatGeneral: "", 
     errgoLogic: "--- Err and Log Output --- " + lineBreak + lineBreak,
@@ -61,6 +65,26 @@ $settingsVar = {
     fruitbotloss:0,
     fruitbottie:0
 };
+
+// PostGre SQL stuff.
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+client.connect();
+client.query('SELECT table_name FROM information_schema.tables;', (err, queryOutput) => {
+  $settingsVar.chatGeneral = $settingsVar.chatGeneral + "Connected successfully to server" + lineBreak;
+  if (err) addErr((err));
+  addErr(("Connected successfully to DB server"));
+  // for (let row of queryOutput.rows) {
+    // addErr((row.table_name));
+  // }
+});
+
+User.findAll().then(users => {
+  $settingsVar.chatGeneral = $settingsVar.chatGeneral + 'SELECT FROM Users\n\r';
+  addErr((users));
+});
 
 var $serverParams = {
 	Bucket: $privateBucket, 
@@ -101,7 +125,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 328;
+$settingsVar.apiVersion= 329;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
