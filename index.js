@@ -288,7 +288,7 @@ app.get(/\S+/, function(request, response) {
 	};//end if siteName
 	if ($requestPath.indexOf("ipynb") > -1 ) {
 		$pagename = $requestPath;
-		$pageSettingsJson = JSON.stringify(request.query);
+		$pageSettingsJson = request.query;
 		console.log($pageSettingsJson);
 	} else {
 		$pagename = $requestPath + '.spa';
