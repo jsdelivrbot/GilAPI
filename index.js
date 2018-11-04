@@ -287,6 +287,7 @@ app.get(/\S+/, function(request, response) {
 	};//end if siteName
 	if ($queryString.indexOf("ipynb") > -1 ) {
 		$pagename = $queryString.split("?")[0] + '.ipynb';
+		$settingsVar.ipynbSite = $queryString.split("?")[1];
 	} else {
 		$pagename = $queryString + '.spa';
 	};//end if siteName
@@ -295,7 +296,6 @@ app.get(/\S+/, function(request, response) {
 		for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site+","}
 	}// end if userName
 	$settingsVar.clientIP = request.ip;
-	$settingsVar.ipynbSite = $queryString.split("?")[1];
 	$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
 	addErr(("Page load "+$queryString+" for user: " + $userName));
 	console.log(("Page load "+$queryString+" for user: " + $userName));
