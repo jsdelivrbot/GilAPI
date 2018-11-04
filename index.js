@@ -289,10 +289,11 @@ app.get(/\S+/, function(request, response) {
 	if ($requestPath.indexOf("ipynb") > -1 ) {
 		$pagename = $requestPath;
 		$pageSettingsJson = request.query;
+		console.log(JSON.stringify($pageSettingsJson));
 	} else {
 		$pagename = $requestPath + '.spa';
 		$pageSettingsJson = $siteBase + $requestPath + $pagename;
-	};//end if siteName
+	};//end if requestPath.indexOf
    if($userName){
 		$settingsVar.userACLTable = [];
 		for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site+","}
