@@ -280,14 +280,15 @@ app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
 	var $userName = request.session.userName;
 	var $queryString = request.path
+	var $directoryPath = $queryString
 	var $pagename
 	if ($queryString == "/") {
 		$queryString += $rootPage
 	};//end if siteName
 	if ($queryString.indexOf("ipynb") > -1 ) {
-		$pagename += $queryString + '.ipynb'
+		$pagename = $queryString + '.ipynb';
 		} else {
-		$pagename += $queryString + '.spa'			
+		$pagename = $queryString + '.spa';
 	};//end if siteName
    if($userName){
 		$settingsVar.userACLTable = [];
