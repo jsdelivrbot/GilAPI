@@ -288,7 +288,8 @@ app.get(/\S+/, function(request, response) {
 	if ($queryString.indexOf("ipynb") > -1 ) {
 		$pagename = $queryString.split("?")[0] + '.ipynb';
 		$settingsVar.ipynbSite = $queryString.split("?")[1];
-		console.log($settingsVar.ipynbSite)
+		console.log("IPYNB query: "+$queryString.split("?")[1]);
+		console.log("IPYNB site: "+$settingsVar.ipynbSite);
 	} else {
 		$pagename = $queryString + '.spa';
 	};//end if siteName
