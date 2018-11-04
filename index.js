@@ -283,6 +283,11 @@ app.get(/\S+/, function(request, response) {
 	if ($queryString == "/") {
 		$queryString += $rootPage
 	};//end if siteName
+	if ($queryString.indexOf("/ipynb") > -1 ) {
+		$pagename += $queryString + '.ipynb'
+		} else {
+		$pagename += $queryString + '.spa'			
+	};//end if siteName
    if($userName){
 		$settingsVar.userACLTable = [];
 		for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site+","}
