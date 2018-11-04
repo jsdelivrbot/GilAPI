@@ -280,6 +280,7 @@ app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
 	var $userName = request.session.userName;
 	var $queryString = request.path
+	var $pagename
 	if ($queryString == "/") {
 		$queryString += $rootPage
 	};//end if siteName
