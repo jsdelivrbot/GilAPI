@@ -37,6 +37,7 @@ var $s3 = new $AWS.S3({
 $s3.createBucket($privateParams);
 
 var $userPWHTable;
+var $pageSettingsJson;
 var $settingsVar;
 var $aclTable;
 
