@@ -284,7 +284,7 @@ app.get(/\S+/, function(request, response) {
 	if ($queryString == "/") {
 		$queryString += $rootPage
 	};//end if siteName
-	if ($queryString.indexOf("/ipynb") > -1 ) {
+	if ($queryString.indexOf("ipynb") > -1 ) {
 		$pagename += $queryString + '.ipynb'
 		} else {
 		$pagename += $queryString + '.spa'			
