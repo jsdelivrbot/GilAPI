@@ -279,19 +279,17 @@ function sendS3Url($userName,$siteName,$fileName,$callback,$contentType) {
 app.get(/\S+/, function(request, response) {
 	//https://gil-api.herokuapp.com/?p=giltech
 	var $userName = request.session.userName;
-	var $queryString = request.path
-	var $directoryPath = $queryString
+	var $requestPath = request.path
+	var $directoryPath = $requestPath
 	var $pagename
-	if ($queryString == "/") {
-		$queryString += $rootPage
+	if ($requestPath == "/") {
+		$requestPath += $rootPage
 	};//end if siteName
-	if ($queryString.indexOf("ipynb") > -1 ) {
-		$pagename = $queryString.split("?")[0] + '.ipynb';
+	if ($requestPath.indexOf("ipynb") > -1 ) {
+		$pagename = $requestPath;
 		$settingsVar.ipynbSite = request.query;
-		console.log("IPYNB query: "+request.query);
-		console.log("IPYNB site: "+$settingsVar.ipynbSite);
 	} else {
-		$pagename = $queryString + '.spa';
+		$pagename = $requestPath + '.spa';
 	};//end if siteName
    if($userName){
 		$settingsVar.userACLTable = [];
@@ -299,11 +297,9 @@ app.get(/\S+/, function(request, response) {
 	}// end if userName
 	$settingsVar.clientIP = request.ip;
 	$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
-	addErr(("Page load "+$queryString+" for user: " + $userName));
-	console.log(("Page load "+$queryString+" for user: " + $userName));
-	console.log("IPYNB site: "+$settingsVar.ipynbSite);
+	addErr(("Page load "+$requestPath+" for user: " + $userName));
 
-	response.send('<!DOCTYPE html><html lang="en"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="shortcut icon" href="' + $siteBase + '/favicon.ico" type="image/x-icon"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><div id="deleteme" hidden><p1>Page requires Javascript and load files (XHR) to function.</p1><br><p3>This page composes itself entirely from Javascript -  a true single-page application, not only is it entirely one page in the browser. Where most websites use HTML for structure, CSS for style, and Javascript for operations, this page uses JSON to express every element. This uses a small (less than 500 lines) Javascript engine to interpret the JSON. To see this in action, please permit the site to run Javascript, and load files from the data source: </p3><br><div id="pageSettingsJson" >' + $siteBase + '' + $queryString + $pagename + '</div></div></body></html><script src="' + $siteBase + '/Gilgamech.js"></script><script>$settingsVar='+JSON.stringify($settingsVar)+'</script> ');
+	response.send('<!DOCTYPE html><html lang="en"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="shortcut icon" href="' + $siteBase + '/favicon.ico" type="image/x-icon"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><div id="deleteme" hidden><p1>Page requires Javascript and load files (XHR) to function.</p1><br><p3>This page composes itself entirely from Javascript -  a true single-page application, not only is it entirely one page in the browser. Where most websites use HTML for structure, CSS for style, and Javascript for operations, this page uses JSON to express every element. This uses a small (less than 500 lines) Javascript engine to interpret the JSON. To see this in action, please permit the site to run Javascript, and load files from the data source: </p3><br><div id="pageSettingsJson" >' + $siteBase + '' + $requestPath + $pagename + '</div></div></body></html><script src="' + $siteBase + '/Gilgamech.js"></script><script>$settingsVar='+JSON.stringify($settingsVar)+'</script> ');
 });
 
 app.post('/login', function(request, response) {
