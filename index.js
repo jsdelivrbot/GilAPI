@@ -129,7 +129,7 @@ var $publicParams = {Bucket: $publicBucket};
 
 $settingsVar.userName= "null";
 $settingsVar.deviceType= "null";
-$settingsVar.apiVersion= 331;
+$settingsVar.apiVersion= 334;
 $settingsVar.googleApiKey= process.env.GOOGLE_API_KEY || 'aSecretToEverybody';
 $settingsVar.aclTable= [];
 $settingsVar.chatGeneral= "";
@@ -286,8 +286,8 @@ app.get(/\S+/, function(request, response) {
 		$queryString += $rootPage
 	};//end if siteName
 	if ($queryString.indexOf("ipynb") > -1 ) {
-		$pagename = $queryString + '.ipynb';
-		} else {
+		$pagename = $queryString.split("?")[0] + '.ipynb';
+	} else {
 		$pagename = $queryString + '.spa';
 	};//end if siteName
    if($userName){
@@ -295,6 +295,7 @@ app.get(/\S+/, function(request, response) {
 		for ($site in $aclTable.users[$userName].userSites) {$settingsVar.userACLTable += $site+","}
 	}// end if userName
 	$settingsVar.clientIP = request.ip;
+	$settingsVar.ipynbSite = $queryString.split("?")[1];
 	$settingsVar.googleApiKey= process.env.GOOGLE_API_KEY;
 	addErr(("Page load "+$queryString+" for user: " + $userName));
 	console.log(("Page load "+$queryString+" for user: " + $userName));
